@@ -31,7 +31,7 @@
       extraSpecialArgs = {inherit inputs;};
 
       modules = [
-        ./mac-home.nix
+        ./macos-home.nix
         ./common-home.nix
       ];
     };
