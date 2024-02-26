@@ -119,7 +119,7 @@ in {
           format = "󰐥";
         };
         clock = {
-          format = "{:%H:%M}";
+          format = "{:%H\n%M}";
           tooltip-format = ''
             <big>{:%Y %B}</big>
             <tt><small>{calendar}</small></tt>'';
