@@ -4,7 +4,7 @@
   ...
 }:
 let
-	fontSize = (if pkgs.stdenv.isDarwin then 24 else 8.5);
+	fontSize = (if pkgs.stdenv.isDarwin then 16 else 8.5);
 in
 {
   programs.alacritty = {
