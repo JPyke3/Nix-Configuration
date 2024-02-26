@@ -2,7 +2,11 @@
   config,
   pkgs,
   ...
-}: {
+}:
+let
+	fontSixe = (if pkgs.stdenv.isDarwin then 24 else 8.5);
+in
+{
   programs.alacritty = {
     enable = true;
     settings = {
