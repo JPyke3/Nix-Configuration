@@ -4,13 +4,13 @@
   ...
 }:
 let
-	fontSixe = (if pkgs.stdenv.isDarwin then 24 else 8.5);
+	fontSize = (if pkgs.stdenv.isDarwin then 24 else 8.5);
 in
 {
   programs.alacritty = {
     enable = true;
     settings = {
-      font.size = 8.5;
+      font.size = fontSize;
       colors = with config.colorScheme.colors; {
         bright = {
           black = "0x${base00}";
