@@ -21,13 +21,19 @@
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
       extraSpecialArgs = {inherit inputs;};
 
-      modules = [./linux-home.nix];
+      modules = [
+        ./linux-home.nix
+        ./common-home.nix
+      ];
     };
     homeConfigurations."jacobpyke-macos" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.aarch64-darwin;
       extraSpecialArgs = {inherit inputs;};
 
-      modules = [./mac-home.nix];
+      modules = [
+        ./mac-home.nix
+        ./common-home.nix
+      ];
     };
   };
 }
