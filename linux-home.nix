@@ -32,5 +32,9 @@ in {
     ./programs/firefox.nix
     ./programs/hyprland.nix
     ./programs/waybar/main.nix
+    ./programs/zsh.nix
+    ./programs/tmux.nix
+    ./programs/alacritty.nix
+    ./programs/git.nix
   ];
 }

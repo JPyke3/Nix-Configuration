@@ -11,5 +11,12 @@ in {
 
   home.stateVersion = "23.11";
 
+  imports = [
+    ./programs/zsh.nix
+    ./programs/tmux.nix
+    ./programs/alacritty.nix
+    ./programs/git.nix
+  ];
+
   nixpkgs.config.allowUnfree = true;
 }
