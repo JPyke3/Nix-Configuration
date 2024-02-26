@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 CURRENT_DIR=$(echo $PWD)
+OS=$(uname -s)
 cd ~/.config/home-manager/
 nvim .
 for file in $(find . -name "*.nix"); do
@@ -7,7 +8,11 @@ for file in $(find . -name "*.nix"); do
 done
 git diff -U0 *.nix
 echo "Home-Manager Rebuilding..."
-home-manager build switch &>~/.logs/home-manager-rebuild.log || (cat ~/.logs/home-manager-rebuild.log | grep --color=error && false)
+if [ $OS = "Darwin" ]; then
+	home-manager build switch --flake .#jacobpyke-macos &>~/.logs/home-manager-rebuild.log || (cat ~/.logs/home-manager-rebuild.log | grep --color=error && false)
+else
+	home-manager build switch &>~/.logs/home-manager-rebuild.log || (cat ~/.logs/home-manager-rebuild.log | grep --color=error && false)
+fi
 gen=$(home-manager generations | sed -n '1p' | awk '{print $5}')
 git commit -am "Home-Manager Rebuild: $gen"
 cd $CURRENT_DIR
