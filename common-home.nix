@@ -38,6 +38,13 @@ in {
     inputs.nix-colors.homeManagerModules.default
   ];
 
+  imports = [
+    ./programs/zsh.nix
+    ./programs/tmux.nix
+    ./programs/alacritty.nix
+    ./programs/git.nix
+  ];
+
   programs.direnv = {
     enable = true;
     enableZshIntegration = true;

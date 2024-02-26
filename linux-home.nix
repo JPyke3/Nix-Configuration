@@ -30,11 +30,7 @@ in {
 
   imports = [
     ./programs/firefox.nix
-    ./programs/zsh.nix
-    ./programs/tmux.nix
     ./programs/hyprland.nix
-    ./programs/alacritty.nix
     ./programs/waybar/main.nix
-    ./programs/git.nix
   ];
 }
