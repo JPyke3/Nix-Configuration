@@ -12,5 +12,4 @@ in {
   home.stateVersion = "23.11"
 
   nixpkgs.config.allowUnfree = true;
-
 }

@@ -27,21 +27,23 @@
       prompt pure
     '';
     initExtra = ''
-      if [[ "$OSTYPE" == "darwin"* ]]; then
-      	export PATH="$PATH:/Library/TeX/texbin"
-      	export PATH="$PATH:/Users/jacobpyke/bin/local/scripts"
-      	export PATH="$PATH:/Users/jacobpyke/bin/local/applications"
-      	export PATH="$PATH:/Users/jacobpyke/.cargo/bin"
-      else
-      	export PATH="$PATH:/home/jacobpyke/bin/local/scripts"
-      	export PATH="$PATH:/home/jacobpyke/.cargo/bin"
-      fi
+         if [[ "$OSTYPE" == "darwin"* ]]; then
+         	export PATH="$PATH:/Library/TeX/texbin"
+         	export PATH="$PATH:/Users/jacobpyke/bin/local/scripts"
+         	export PATH="$PATH:/Users/jacobpyke/bin/local/applications"
+         	export PATH="$PATH:/Users/jacobpyke/.cargo/bin"
+         else
+         	export PATH="$PATH:/home/jacobpyke/bin/local/scripts"
+         	export PATH="$PATH:/home/jacobpyke/.cargo/bin"
+         fi
 
-      bindkey -s ^f "tmux-sessionizer\n"
+      export PATH="$PATH:$HOME/.config/home-manager/"
 
-      eval "$(direnv hook zsh)"
+         bindkey -s ^f "tmux-sessionizer\n"
 
-      source "$HOME/.secrets.sh"
+         eval "$(direnv hook zsh)"
+
+         source "$HOME/.secrets.sh"
     '';
   };
 }
