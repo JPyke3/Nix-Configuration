@@ -21,7 +21,6 @@ in {
     pkgs.steam
     pkgs.armcord
     pkgs.runelite
-    pkgs.steam
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -37,5 +36,6 @@ in {
     ./programs/tmux.nix
     ./programs/alacritty.nix
     ./programs/git.nix
+    ./programs/steam.nix
   ];
 }
