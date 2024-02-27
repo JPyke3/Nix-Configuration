@@ -8,7 +8,7 @@
   pkgs_unstable = inputs.nixpkgs_unstable.legacyPackages.${system};
   fontSize =
     if pkgs.stdenv.isDarwin
-    then 14
+    then 16
     else 8.5;
 in {
   home.packages = with pkgs; [
