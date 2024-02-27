@@ -22,7 +22,7 @@ in {
     pkgs.tldr
     pkgs.jq
     pkgs.cargo
-    pkgs.rustc
+    pkgs.rustup
   ];
 
   home.sessionVariables = {
