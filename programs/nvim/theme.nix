@@ -1,5 +1,7 @@
 {config, ...}:
 with config.colorScheme.colors; ''
+  vim.opt.termguicolors = true
+
   require('base16-colorscheme').setup({
   	base00 = '#${base00}', base01 = '#${base01}', base02 = '#${base02}', base03 = '#${base03}',
   	base04 = '#${base04}', base05 = '#${base05}', base06 = '#${base06}', base07 = '#${base07}',
