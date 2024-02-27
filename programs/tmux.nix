@@ -60,6 +60,8 @@
                unbind C-Down
                unbind C-Left
                unbind C-Right
+
+      set-option -g status-position top
     '';
   };
 }
