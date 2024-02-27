@@ -36,10 +36,10 @@
           "$mod, RETURN, exec, alacritty"
           "$mod SHIFT, Q, killactive"
           "$mod SHIFT, N, exec, swaync-client -t -sw"
-          "$mainMod, $left, exec, vim-hypr-nav l"
-          "$mainMod, $right, exec, vim-hypr-nav r"
-          "$mainMod, $up, exec, vim-hypr-nav u"
-          "$mainMod, $down, exec, vim-hypr-nav d"
+          "$mod, $left, exec, vim-hypr-nav l"
+          "$mod, $right, exec, vim-hypr-nav r"
+          "$mod, $up, exec, vim-hypr-nav u"
+          "$mod, $down, exec, vim-hypr-nav d"
         ]
         ++ (
           # workspaces
