@@ -17,9 +17,11 @@
     nixpkgs,
 	nixpkgs_unstable,
     home-manager,
-	system,
     ...
   } @ inputs:
+  let
+	system = builtins.currentSystem;
+  in
   {
     homeConfigurations."jacobpyke" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
