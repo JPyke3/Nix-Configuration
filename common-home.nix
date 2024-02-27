@@ -2,9 +2,11 @@
   config,
   pkgs,
   inputs,
+  system,
   ...
 }: let
   nix-colors = import <nix-colors> {};
+  pkgs_unstable = inputs.nixpkgs_unstable.legacyPackages.${system};
 in {
   nixpkgs.config.allowUnfree = true;
 
@@ -15,7 +17,7 @@ in {
     pkgs.tmux
     pkgs.nodejs_20 # LTS and Needed for Copilot
     pkgs.direnv
-	pkgs.alacritty
+	pkgs_unstable.alacritty
     pkgs.git
     pkgs.gh
     pkgs.fzf
