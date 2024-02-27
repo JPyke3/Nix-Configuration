@@ -17,13 +17,8 @@
     nixpkgs,
 	nixpkgs_unstable,
     home-manager,
-	system,
     ...
   } @ inputs:
-let
-	inherit system;
-
-in
   {
     homeConfigurations."jacobpyke" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
