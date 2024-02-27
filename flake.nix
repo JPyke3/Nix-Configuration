@@ -17,6 +17,7 @@
     nixpkgs,
 	nixpkgs_unstable,
     home-manager,
+	system,
     ...
   } @ inputs:
   {
