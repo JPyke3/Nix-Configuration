@@ -19,7 +19,7 @@ in {
 	package = pkgs_unstable.alacritty;
     settings = {
       font.size = fontSize;
-	  font.family = "Mononoki Nerd Font";
+	  font.normal.family = "Mononoki Nerd Font";
       env.TERM = "xterm-256color";
       colors = with config.colorScheme.colors; {
         bright = {
