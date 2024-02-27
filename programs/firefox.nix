@@ -15,6 +15,7 @@
           bitwarden
           ublock-origin
           darkreader
+          aria2c-integration
         ];
         settings = {
           "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
