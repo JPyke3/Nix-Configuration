@@ -23,13 +23,13 @@
     ];
 
     extraConfig = ''
-          set -g default-terminal "xterm-256color"
+           set -g default-terminal "xterm-256color"
 
-              set-window-option -g mode-keys vi
-              bind-key -T copy-mode-vi v send -X begin-selection
-              bind-key -T copy-mode-vi V send -X select-line
+               set-window-option -g mode-keys vi
+               bind-key -T copy-mode-vi v send -X begin-selection
+               bind-key -T copy-mode-vi V send -X select-line
 
-              set-environment -g COLORTERM "truecolor"
+               set-environment -g COLORTERM "truecolor"
 
       # Vim Status bar in tmux
       set -g focus-events on
@@ -38,30 +38,28 @@
       set -g status-right-length 90
       set -g status-justify centre
 
-              # vim-like pane resizing
-              bind -r C-k resize-pane -U
-              bind -r C-j resize-pane -D
-              bind -r C-h resize-pane -L
-              bind -r C-l resize-pane -R
+               # vim-like pane resizing
+               bind -r C-k resize-pane -U
+               bind -r C-j resize-pane -D
+               bind -r C-h resize-pane -L
+               bind -r C-l resize-pane -R
 
-              # vim-like pane switching
-              bind -r k select-pane -U
-              bind -r j select-pane -D
-              bind -r h select-pane -L
-              bind -r l select-pane -R
+               # vim-like pane switching
+               bind -r k select-pane -U
+               bind -r j select-pane -D
+               bind -r h select-pane -L
+               bind -r l select-pane -R
 
-              # and now unbind keys
-              unbind Up
-              unbind Down
-              unbind Left
-              unbind Right
+               # and now unbind keys
+               unbind Up
+               unbind Down
+               unbind Left
+               unbind Right
 
-              unbind C-Up
-              unbind C-Down
-              unbind C-Left
-              unbind C-Right
-
-              set-option -g status-position top
+               unbind C-Up
+               unbind C-Down
+               unbind C-Left
+               unbind C-Right
     '';
   };
 }
