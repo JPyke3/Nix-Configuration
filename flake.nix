@@ -20,6 +20,7 @@
     ...
   } @ inputs: {
     homeConfigurations."jacobpyke" = home-manager.lib.homeManagerConfiguration {
+	  inputs.system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
       extraSpecialArgs = {inherit inputs;};
 
@@ -29,6 +30,7 @@
       ];
     };
     homeConfigurations."jacobpyke-macos" = home-manager.lib.homeManagerConfiguration {
+	  inputs.system = "aarch64-darwin";
       pkgs = nixpkgs.legacyPackages.aarch64-darwin;
       extraSpecialArgs = {inherit inputs;};
 
