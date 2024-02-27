@@ -12,7 +12,7 @@ in {
   home.stateVersion = "23.11";
 
   home.packages = with pkgs; [
-	];
+  ];
 
   imports = [
     ./programs/zsh.nix
