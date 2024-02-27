@@ -8,12 +8,11 @@
     settings = {
       general = with config.colorScheme.colors; {
         exec-once = ["waybar" "swww init" "swaync"];
-        follow_mouse = 1;
-        mouse_refocus = false;
         windowrulev2 = [
           "float, title:^(Picture-in-Picture|Firefox)$"
           "size 800 450, title:^(Picture-in-Picture|Firefox)$"
           "pin, title:^(Picture-in-Picture|Firefox)$"
+          "stayfocused, title:^()$,class:^(steam)$"
         ];
         exec = "swww img ~/Pictures/Wallpapers/gruvbox-dark-rainbow.png";
         "col.active_border" = "rgba(${base0E}ff) rgba(${base09}ff) 60deg";
