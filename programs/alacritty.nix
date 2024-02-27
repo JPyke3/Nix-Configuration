@@ -12,6 +12,7 @@ in {
     enable = true;
     settings = {
       font.size = fontSize;
+      env.term = "xterm-256color";
       colors = with config.colorScheme.colors; {
         bright = {
           black = "0x${base00}";
