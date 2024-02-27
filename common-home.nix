@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  pkgs_unstable,
   inputs,
   ...
 }: let
@@ -15,7 +16,7 @@ in {
     pkgs.tmux
     pkgs.nodejs_20 # LTS and Needed for Copilot
     pkgs.direnv
-    pkgs.alacritty
+	pkgs_unstable.alacritty
     pkgs.git
     pkgs.gh
     pkgs.fzf

@@ -4,6 +4,7 @@
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+	nixpkgs_unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/nur";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -14,11 +15,13 @@
 
   outputs = {
     nixpkgs,
+	nixpkgs_unstable,
     home-manager,
     ...
   } @ inputs: {
     homeConfigurations."jacobpyke" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
+	  pkgs_unstable = nixpkgs_unstable.legacyPackages.x86_64-linux;
       extraSpecialArgs = {inherit inputs;};
 
       modules = [
@@ -28,6 +31,7 @@
     };
     homeConfigurations."jacobpyke-macos" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+	  pkgs_unstable = nixpkgs_unstable.legacyPackages.x86_64-linux;
       extraSpecialArgs = {inherit inputs;};
 
       modules = [
