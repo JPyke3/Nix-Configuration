@@ -36,6 +36,5 @@ in {
     ./programs/tmux.nix
     ./programs/alacritty.nix
     ./programs/git.nix
-    ./programs/steam.nix
   ];
 }
