@@ -12,7 +12,7 @@
     else 9;
 in {
   home.packages = with pkgs; [
-    (nerdfonts.override {fonts = ["Fira Code"];})
+    (nerdfonts.override {fonts = ["FiraCode"];})
   ];
   programs.alacritty = {
     enable = true;
