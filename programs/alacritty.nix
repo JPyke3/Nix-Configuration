@@ -2,11 +2,12 @@
   config,
   pkgs,
   ...
-}:
-let
-	fontSize = (if pkgs.stdenv.isDarwin then 14 else 8.5);
-in
-{
+}: let
+  fontSize =
+    if pkgs.stdenv.isDarwin
+    then 14
+    else 8.5;
+in {
   programs.alacritty = {
     enable = true;
     settings = {
