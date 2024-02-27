@@ -16,7 +16,7 @@ in {
   ];
   programs.alacritty = {
     enable = true;
-	package = pkgs_unstable.alacritty;
+	package = pkgs_unstable.alacritty; #Currently necessary as Alacritty doesn't produce TOML in stable
     settings = {
       font.size = fontSize;
 	  font.normal.family = "Mononoki Nerd Font";
