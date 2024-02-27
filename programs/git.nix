@@ -6,5 +6,9 @@
     };
     userEmail = "github@pyk.ee";
     userName = "JPyke3";
+    rerere = {
+      enabled = true;
+      autoUpdate = true;
+    };
   };
 }
