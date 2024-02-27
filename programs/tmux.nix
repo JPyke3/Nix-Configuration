@@ -42,9 +42,6 @@
       bind-key -T copy-mode-vi v send -X begin-selection
       bind-key -T copy-mode-vi V send -X select-line
 
-      set -g default-terminal "xterm-256color"
-      set -ga terminal-overrides ",*256col*:Tc"
-      set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
       set-environment -g COLORTERM "truecolor"
 
       # vim-like pane resizing
