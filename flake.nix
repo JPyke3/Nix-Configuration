@@ -19,13 +19,10 @@
     home-manager,
     ...
   } @ inputs:
-  let
-	system = builtins.currentSystem;
-  in
   {
     homeConfigurations."jacobpyke" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      extraSpecialArgs = {inherit inputs system;};
+      extraSpecialArgs = {inherit inputs;};
 
       modules = [
         ./linux-home.nix

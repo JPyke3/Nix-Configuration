@@ -2,11 +2,9 @@
   config,
   pkgs,
   inputs,
-  system ? builtins.currentSystem,
   ...
 }: let
   nix-colors = import <nix-colors> {};
-  pkgs_unstable = inputs.nixpkgs_unstable.legacyPackages.${inputs.system};
 in {
   nixpkgs.config.allowUnfree = true;
 
