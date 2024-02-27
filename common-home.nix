@@ -26,6 +26,10 @@ in {
     pkgs.jq
   ];
 
+  disabledModules = [
+	"programs/alacritty.nix"
+  ];
+
   home.sessionVariables = {
     EDITOR = "nvim";
   };
