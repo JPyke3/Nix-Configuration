@@ -12,14 +12,14 @@
     else 9;
 in {
   home.packages = with pkgs; [
-    (nerdfonts.override {fonts = ["Mononoki"];})
+    (nerdfonts.override {fonts = ["Fira Code"];})
   ];
   programs.alacritty = {
     enable = true;
     package = pkgs_unstable.alacritty; #Currently necessary as Alacritty doesn't produce TOML in stable
     settings = {
       font.size = fontSize;
-      font.normal.family = "Mononoki Nerd Font";
+      font.normal.family = "Fira Code Nerd Font";
       env.TERM = "xterm-256color";
       colors = with config.colorScheme.colors; {
         bright = {
