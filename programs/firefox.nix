@@ -16,6 +16,7 @@
           ublock-origin
           darkreader
           aria2-integration
+          vimium
         ];
         settings = {
           "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
