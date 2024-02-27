@@ -15,7 +15,7 @@ in {
     pkgs.tmux
     pkgs.nodejs_20 # LTS and Needed for Copilot
     pkgs.direnv
-	pkgs_unstable.alacritty
+	pkgs.alacritty
     pkgs.git
     pkgs.gh
     pkgs.fzf
