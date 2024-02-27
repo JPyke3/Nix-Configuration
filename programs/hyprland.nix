@@ -44,14 +44,6 @@
           "$mod ALT, $down, resizeactive, 0, 160"
           "$mod ALT, $up, resizeactive, 0, -160"
           "$mod ALT, $right, resizeactive, 160, 0"
-          "$mod, SHIFT, $left, movewindow, l"
-          "$mod, SHIFT, $down, movewindow, d"
-          "$mod, SHIFT, $up, movewindow, u"
-          "$mod, SHIFT, $right, movewindow, r"
-          "$mod, SHIFT, $left, resizeactive, -10, 0"
-          "$mod, SHIFT, $down, resizeactive, 0, 10"
-          "$mod, SHIFT, $up, resizeactive, 0, -10"
-          "$mod, SHIFT, $right, resizeactive, 10, 0"
         ]
         ++ (
           # workspaces
