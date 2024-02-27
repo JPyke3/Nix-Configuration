@@ -16,6 +16,7 @@
     shellAliases = {
       aria2c = "aria2c --split=32 --min-split-size=4M --max-connection-per-server=16 --max-concurrent-downloads=16";
       vim = "nvim";
+      ls = "${pkgs.eza} --icons --git";
     };
     oh-my-zsh = {
       enable = true;
