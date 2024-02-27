@@ -20,7 +20,7 @@ in {
     package = pkgs_unstable.alacritty; #Currently necessary as Alacritty doesn't produce TOML in stable
     settings = {
       font.size = fontSize;
-      font.normal.family = "Fira Mono Nerd Font";
+      font.normal.family = "FiraMono Nerd Font";
       env.TERM = "xterm-256color";
       colors = with config.colorScheme.colors; {
         bright = {
