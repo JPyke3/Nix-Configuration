@@ -1,8 +1,11 @@
 {
   config,
   pkgs,
+  system,
+  inputs,
   ...
 }: let
+  pkgs_unstable = inputs.nixpkgs_unstable.legacyPackages.${system};
   fontSize =
     if pkgs.stdenv.isDarwin
     then 14
@@ -13,6 +16,7 @@ in {
   ];
   programs.alacritty = {
     enable = true;
+	package = pkgs_unstable.alacritty;
     settings = {
       font.size = fontSize;
 	  font.family = "Mononoki Nerd Font";
