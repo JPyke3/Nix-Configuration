@@ -11,7 +11,7 @@
     then 16
     else 9;
 in {
-  home.packages = with pkgs; [
+  fonts.packages = with pkgs; [
     (nerdfonts.override {fonts = ["FiraMono"];})
   ];
   programs.alacritty = {
