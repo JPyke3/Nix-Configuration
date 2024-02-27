@@ -9,7 +9,7 @@
   fontSize =
     if pkgs.stdenv.isDarwin
     then 16
-    else 9;
+    else 10;
 in {
   home.packages = with pkgs; [
     (nerdfonts.override {fonts = ["FiraMono"];})
