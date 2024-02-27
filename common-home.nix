@@ -32,7 +32,7 @@ in {
     inputs.nur.overlay
   ];
 
-  colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark;
+  colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-medium;
 
   imports = [
     inputs.nix-colors.homeManagerModules.default
