@@ -38,7 +38,7 @@
     ];
 
     extraConfig = ''
-      set -g default-terminal "alacritty"
+      set -g default-terminal "xterm-256color"
 
           set-window-option -g mode-keys vi
           bind-key -T copy-mode-vi v send -X begin-selection
