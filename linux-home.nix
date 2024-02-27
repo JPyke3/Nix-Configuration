@@ -21,6 +21,7 @@ in {
     pkgs.steam
     pkgs.armcord
     pkgs.runelite
+    pkgs.obsidian
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
