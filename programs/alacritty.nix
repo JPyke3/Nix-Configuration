@@ -8,10 +8,14 @@
     then 14
     else 8.5;
 in {
+  home.packages = with pkgs; [
+	  (nerdfonts.override { fonts = [ "Mononoki" ]; })
+  ];
   programs.alacritty = {
     enable = true;
     settings = {
       font.size = fontSize;
+	  font.family = "Mononoki Nerd Font";
       env.TERM = "xterm-256color";
       colors = with config.colorScheme.colors; {
         bright = {
