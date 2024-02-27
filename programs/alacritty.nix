@@ -14,7 +14,7 @@ in {
   home.packages = with pkgs; [
     (nerdfonts.override {fonts = ["FiraMono"];})
   ];
-  fonts.fontconfig.enable = true
+  fonts.fontconfig.enable = true;
   programs.alacritty = {
     enable = true;
     package = pkgs_unstable.alacritty; #Currently necessary as Alacritty doesn't produce TOML in stable
