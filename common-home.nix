@@ -21,7 +21,6 @@ in {
     pkgs.ripgrep
     pkgs.tldr
     pkgs.jq
-    pkgs.cargo
     pkgs.rustup
   ];
 
