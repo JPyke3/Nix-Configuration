@@ -8,6 +8,8 @@
     settings = {
       general = with config.colorScheme.colors; {
         exec-once = ["waybar" "swww init" "swaync"];
+        follow_mouse = 1;
+        mouse_refocus = false;
         windowrulev2 = [
           "float, title:^(Picture-in-Picture|Firefox)$"
           "size 800 450, title:^(Picture-in-Picture|Firefox)$"
