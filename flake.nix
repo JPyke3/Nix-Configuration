@@ -17,12 +17,17 @@
     nixpkgs,
 	nixpkgs_unstable,
     home-manager,
+	system,
     ...
-  } @ inputs: {
+  } @ inputs:
+let
+	inherit system;
+
+in
+  {
     homeConfigurations."jacobpyke" = home-manager.lib.homeManagerConfiguration {
-	  inputs.system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      extraSpecialArgs = {inherit inputs;};
+      extraSpecialArgs = {inherit inputs system;};
 
       modules = [
         ./linux-home.nix
@@ -30,7 +35,6 @@
       ];
     };
     homeConfigurations."jacobpyke-macos" = home-manager.lib.homeManagerConfiguration {
-	  inputs.system = "aarch64-darwin";
       pkgs = nixpkgs.legacyPackages.aarch64-darwin;
       extraSpecialArgs = {inherit inputs;};
 
