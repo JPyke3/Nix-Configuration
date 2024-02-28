@@ -21,6 +21,7 @@ in {
     pkgs.ripgrep
     pkgs.tldr
     pkgs.jq
+    pkgs.fd
   ];
 
   home.sessionVariables = {
