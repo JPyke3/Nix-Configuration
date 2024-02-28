@@ -23,6 +23,7 @@ in {
     pkgs.jq
     pkgs.fd
     pkgs.eza
+    (import ./scripts/tmux-sessionizer.nix {inherit pkgs;})
   ];
 
   home.sessionVariables = {
