@@ -22,6 +22,7 @@ in {
     pkgs.tldr
     pkgs.jq
     pkgs.fd
+    pkgs.eza
   ];
 
   home.sessionVariables = {
