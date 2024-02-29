@@ -40,23 +40,35 @@
       prompt pure
     '';
     initExtra = ''
-         if [[ "$OSTYPE" == "darwin"* ]]; then
-         	export PATH="$PATH:/Library/TeX/texbin"
-         	export PATH="$PATH:/Users/jacobpyke/bin/local/scripts"
-         	export PATH="$PATH:/Users/jacobpyke/bin/local/applications"
-         	export PATH="$PATH:/Users/jacobpyke/.cargo/bin"
-         else
-         	export PATH="$PATH:/home/jacobpyke/bin/local/scripts"
-         	export PATH="$PATH:/home/jacobpyke/.cargo/bin"
-         fi
+             if [[ "$OSTYPE" == "darwin"* ]]; then
+             	export PATH="$PATH:/Library/TeX/texbin"
+             	export PATH="$PATH:/Users/jacobpyke/bin/local/scripts"
+             	export PATH="$PATH:/Users/jacobpyke/bin/local/applications"
+             	export PATH="$PATH:/Users/jacobpyke/.cargo/bin"
+             else
+             	export PATH="$PATH:/home/jacobpyke/bin/local/scripts"
+             	export PATH="$PATH:/home/jacobpyke/.cargo/bin"
+             fi
 
-      export PATH="$PATH:$HOME/.config/home-manager/"
+          export PATH="$PATH:$HOME/.config/home-manager/"
 
-         bindkey -s ^f "tmux-sessionizer\n"
+             bindkey -s ^f "tmux-sessionizer\n"
 
-         eval "$(direnv hook zsh)"
+             eval "$(direnv hook zsh)"
 
-         source "$HOME/.secrets.sh"
+             source "$HOME/.secrets.sh"
+
+       function tmux_sessionizer() {
+      	  tmux-sessionizer
+       }
+
+       function zvm_after_lazy_keybindings() {
+        # Here we define the custom widget
+        zvm_define_widget tmux_sessionizer
+
+        # In normal mode, press Ctrl-E to invoke this widget
+        zvm_bindkey vicmd '^f' tmux_sessionizer
+      }
     '';
   };
 }
