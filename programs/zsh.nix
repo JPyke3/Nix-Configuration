@@ -22,6 +22,18 @@
       enable = true;
       theme = "";
     };
+    plugins = [
+      {
+        #zsh vi mode
+        name = "zsh-vi-mode";
+        src = pkgs.fetchFromGitHub {
+          owner = "jeffreytse";
+          repo = "zsh-vi-mode";
+          rev = "v0.11.0";
+          sha256 = "";
+        };
+      }
+    ];
     initExtraBeforeCompInit = ''
       fpath+=($HOME/.zsh/pure)
       autoload -U promptinit; promptinit
