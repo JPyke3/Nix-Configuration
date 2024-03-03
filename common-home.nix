@@ -23,8 +23,6 @@ in {
     pkgs.jq
     pkgs.fd
     pkgs.eza
-    pkgs.cargo
-    pkgs.rustc
     (import ./scripts/tmux-sessionizer.nix {inherit pkgs;})
   ];
 
