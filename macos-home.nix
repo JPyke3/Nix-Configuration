@@ -12,8 +12,8 @@ in {
   home.stateVersion = "23.11";
 
   home.packages = with pkgs; [
-  	rectangle
-	darwin.apple_sdk.frameworks.Foundation
+    rectangle
+    darwin.apple_sdk.frameworks.Foundation
   ];
 
   imports = [
