@@ -16,6 +16,10 @@ in {
     darwin.apple_sdk.frameworks.Foundation
   ];
 
+  nixpkgs.overlays = [
+	  inputs.nixpkgs-firefox-darwin.overlay
+  ];
+
   imports = [
     ./programs/zsh.nix
     ./programs/tmux.nix
