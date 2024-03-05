@@ -11,12 +11,6 @@
     then 16
     else 10;
 in {
-  imports = [
-    "${inputs.home-manager-unstable}/modules/programs/alacritty.nix"
-  ];
-  disabledModules = [
-    "programs/alacritty.nix"
-  ];
   home.packages = with pkgs; [
     (nerdfonts.override {fonts = ["FiraMono"];})
   ];
