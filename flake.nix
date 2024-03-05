@@ -17,7 +17,6 @@
     nixpkgs,
     nixpkgs_unstable,
     home-manager,
-    home-manager-unstable,
     ...
   } @ inputs: let
   in {

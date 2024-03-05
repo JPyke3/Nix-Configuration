@@ -42,9 +42,5 @@ in {
     ./programs/alacritty.nix
     ./programs/git.nix
     ./programs/nvim/nvim.nix
-    "${inputs.home-manager-unstable}/modules/programs/alacritty.nix"
-  ];
-  disabledModules = [
-    "programs/alacritty.nix"
   ];
 }
