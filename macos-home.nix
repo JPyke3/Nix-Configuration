@@ -14,7 +14,6 @@ in {
   home.packages = with pkgs; [
     rectangle
     darwin.apple_sdk.frameworks.Foundation
-	firefox-bin
   ];
 
   imports = [
@@ -22,6 +21,7 @@ in {
     ./programs/tmux.nix
     ./programs/alacritty.nix
     ./programs/git.nix
+	./programs/firefox.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

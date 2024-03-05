@@ -21,6 +21,7 @@
     ...
   } @ inputs: let
   in {
+    nixpkgs.overlays = [ inputs.nixpkgs-firefox-darwin.overlay ];
     homeConfigurations."jacobpyke" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
       extraSpecialArgs = {
@@ -33,7 +34,6 @@
         ./common-home.nix
       ];
     };
-    nixpkgs.overlays = [ inputs.nixpkgs-firefox-darwin.overlay ];
     homeConfigurations."jacobpyke-macos" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.aarch64-darwin;
       extraSpecialArgs = {
