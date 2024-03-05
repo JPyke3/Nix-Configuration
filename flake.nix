@@ -11,6 +11,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-colors.url = "github:misterio77/nix-colors";
+	nixpkgs-firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
   };
 
   outputs = {
@@ -34,6 +35,7 @@
     };
     homeConfigurations."jacobpyke-macos" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+	  nixpkgs.overlays = [ inputs.nixpkgs-firefox-darwin.overlay ];
       extraSpecialArgs = {
         inherit inputs;
         system = "aarch64-darwin";

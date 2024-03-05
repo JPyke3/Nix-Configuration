@@ -14,6 +14,7 @@ in {
   home.packages = with pkgs; [
     rectangle
     darwin.apple_sdk.frameworks.Foundation
+	firefox-bin
   ];
 
   imports = [
