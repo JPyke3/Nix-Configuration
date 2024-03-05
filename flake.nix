@@ -33,9 +33,9 @@
         ./common-home.nix
       ];
     };
+    nixpkgs.overlays = [ inputs.nixpkgs-firefox-darwin.overlay ];
     homeConfigurations."jacobpyke-macos" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-	  nixpkgs.overlays = [ inputs.nixpkgs-firefox-darwin.overlay ];
       extraSpecialArgs = {
         inherit inputs;
         system = "aarch64-darwin";
