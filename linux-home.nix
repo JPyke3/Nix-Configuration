@@ -42,5 +42,6 @@ in {
     ./programs/alacritty.nix
     ./programs/git.nix
     ./programs/nvim/nvim.nix
+    ./programs/alacritty.nix
   ];
 }
