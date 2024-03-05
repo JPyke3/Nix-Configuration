@@ -11,13 +11,18 @@
     then 16
     else 10;
 in {
+  imports = [
+    "${inputs.home-manager-unstable}/modules/programs/alacritty.nix"
+  ];
+  disabledModules = [
+    "programs/alacritty.nix"
+  ];
   home.packages = with pkgs; [
     (nerdfonts.override {fonts = ["FiraMono"];})
   ];
   fonts.fontconfig.enable = true;
   programs.alacritty = {
     enable = true;
-    package = pkgs_unstable.alacritty; #Currently necessary as Alacritty doesn't produce TOML in stable
     settings = {
       font.size = fontSize;
       font.normal.family = "FiraMono Nerd Font";
