@@ -17,7 +17,7 @@ in {
   ];
 
   nixpkgs.overlays = [
-	  inputs.nixpkgs-firefox-darwin.overlay
+    inputs.nixpkgs-firefox-darwin.overlay
   ];
 
   imports = [
@@ -25,7 +25,7 @@ in {
     ./programs/tmux.nix
     ./programs/alacritty.nix
     ./programs/git.nix
-	./programs/firefox.nix
+    ./programs/firefox.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
