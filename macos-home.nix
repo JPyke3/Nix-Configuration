@@ -26,6 +26,7 @@ in {
     ./programs/alacritty.nix
     ./programs/git.nix
     ./programs/firefox.nix
+    ./programs/nvim/nvim.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
