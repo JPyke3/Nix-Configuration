@@ -23,6 +23,7 @@ in {
     pkgs.armcord
     pkgs.runelite
     pkgs.obsidian
+    inputs.llama-cpp
   ];
 
   # Override for Obisidian, Electron 25 is EOL

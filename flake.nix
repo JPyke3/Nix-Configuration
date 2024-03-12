@@ -12,12 +12,17 @@
     };
     nix-colors.url = "github:misterio77/nix-colors";
     nixpkgs-firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
+	llama-cpp = {
+		url = "github:ggerganov/llama.cpp";
+		inputs.nixpkgs.follows = "nixpkgs";
+	}
   };
 
   outputs = {
     nixpkgs,
     nixpkgs_unstable,
     home-manager,
+	llama-cpp,
     ...
   } @ inputs: let
   in {
