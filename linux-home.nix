@@ -23,7 +23,7 @@ in {
     pkgs.armcord
     pkgs.runelite
     pkgs.obsidian
-    inputs.llama-cpp.apps.x86_64-linux.llama
+    inputs.llama-cpp.rocm
   ];
 
   # Override for Obisidian, Electron 25 is EOL
