@@ -13,7 +13,7 @@ in {
 			size = fontSize;
 		};
 		settings = {
-			theme = "Jacobs Nix Theme";
+			include = "current-theme.conf";
 		};
 		shellIntegration.enableZshIntegration = true;
 	};
