@@ -8,7 +8,7 @@
     then 16
     else 10;
 in {
-  xdg.configFile."kitty/themes/JacobsTheme.conf".text = import ./Jacobs-Theme.nix {inherit config;};
+  xdg.configFile."kitty/themes/JacobsTheme.conf".text = import ./Jacobs-theme.nix {inherit config;};
   programs.kitty = {
     enable = true;
     font = {
