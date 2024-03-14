@@ -11,5 +11,6 @@ in {
 			name = "FiraMono Nerd Font";
 			size = fontSize;
 		};
+		shellIntegration.enableZshIntegration = true;
 	};
 }
