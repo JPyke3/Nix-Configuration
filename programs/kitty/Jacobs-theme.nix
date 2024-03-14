@@ -30,8 +30,8 @@ cursor_text_color               #${base06}
 
 #: OS Window titlebar colors
 
-wayland_titlebar_color          system
-macos_titlebar_color            system
+wayland_titlebar_color          #${base00}
+macos_titlebar_color            #${base00}
 
 
 #: Tab bar colors
@@ -57,7 +57,7 @@ macos_titlebar_color            system
 #: The basic 16 colors
 
 #: black
-color0 #${base08}
+color0 #${base00}
 color8 #${base08}
 
 #: red
@@ -85,6 +85,6 @@ color6  #${base0C}
 color14 #${base0C}
 
 #: white
-color7  #${base0E}
-color15 #${base0E}
+color7  #${base07}
+color15 #${base07}
 ''
