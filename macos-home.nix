@@ -28,6 +28,7 @@ in {
     ./programs/firefox.nix
     ./programs/nvim/nvim.nix
 	./programs/kitty/kitty.nix
+	./programs/lf.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
