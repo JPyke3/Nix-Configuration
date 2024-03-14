@@ -61,30 +61,30 @@ color0 #${base08}
 color8 #${base08}
 
 #: red
-color1 #${base09}
-color9 #${base09}
+color1 #${base08}
+color9 #${base08}
 
 #: green
-color2  #${base0A}
-color10 #${base0A}
+color2  #${base09}
+color10 #${base09}
 
 #: yellow
-color3  #${base0B}
-color11 #${base0B}
+color3  #${base0A}
+color11 #${base0A}
 
 #: blue
-color4  #${base0C}
-color12 #${base0C}
+color4  #${base0B}
+color12 #${base0B}
 
 #: magenta
-color5  #${base0D}
-color13 #${base0D}
+color5  #${base0C}
+color13 #${base0C}
 
 #: cyan
-color6  #${base0E}
-color14 #${base0E}
+color6  #${base0D}
+color14 #${base0D}
 
 #: white
-color7  #${base0F}
-color15 #${base0F}
+color7  #${base0E}
+color15 #${base0E}
 ''
