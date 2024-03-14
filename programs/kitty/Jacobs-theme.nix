@@ -57,34 +57,34 @@ macos_titlebar_color            system
 #: The basic 16 colors
 
 #: black
-color0 #${base00}
+color0 #${base08}
 color8 #${base08}
 
 #: red
-color1 #${base01}
+color1 #${base09}
 color9 #${base09}
 
 #: green
-color2  #${base02}
+color2  #${base0A}
 color10 #${base0A}
 
 #: yellow
-color3  #${base03}
+color3  #${base0B}
 color11 #${base0B}
 
 #: blue
-color4  #${base04}
+color4  #${base0C}
 color12 #${base0C}
 
 #: magenta
-color5  #${base05}
+color5  #${base0D}
 color13 #${base0D}
 
 #: cyan
-color6  #${base06}
+color6  #${base0E}
 color14 #${base0E}
 
 #: white
-color7  #${base07}
+color7  #${base0F}
 color15 #${base0F}
 ''
