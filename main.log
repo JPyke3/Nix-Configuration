@@ -1,0 +1,10 @@
+[1710207373] Log start
+[1710207373] Cmd: llama
+[1710207373] main: build = 0 (unknown)
+[1710207373] main: built with HIP version: 5.7.31921- for x86_64-unknown-linux-gnu
+[1710207373] main: seed  = 1710207373
+[1710207373] main: llama backend init
+[1710207375] main: load the model and apply lora adapter, if any
+[1710207375] llama_model_load: error loading model: failed to open models/7B/ggml-model-f16.gguf: No such file or directory
+[1710207375] llama_load_model_from_file: failed to load model
+[1710207375] main: error: unable to load model
