@@ -12,6 +12,9 @@ in {
 			name = "FiraMono Nerd Font";
 			size = fontSize;
 		};
+		settings = {
+			theme = "Jacobs Nix Theme";
+		};
 		shellIntegration.enableZshIntegration = true;
 	};
 }
