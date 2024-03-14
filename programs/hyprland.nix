@@ -33,7 +33,7 @@
         [
           "$mod, D, exec, wofi --show=run"
           "$mod, F, fullscreen"
-          "$mod, RETURN, exec, alacritty"
+          "$mod, RETURN, exec, kitty"
           "$mod SHIFT, Q, killactive"
           "$mod SHIFT, N, exec, swaync-client -t -sw"
           "$mod, $left, movefocus, l"
