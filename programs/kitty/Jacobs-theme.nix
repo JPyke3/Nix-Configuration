@@ -58,7 +58,7 @@ macos_titlebar_color            #${base00}
 
 #: black
 color0 #${base00}
-color8 #${base08}
+color8 #${base00}
 
 #: red
 color1 #${base08}
