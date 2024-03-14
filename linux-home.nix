@@ -43,6 +43,6 @@ in {
     ./programs/alacritty.nix
     ./programs/git.nix
     ./programs/nvim/nvim.nix
-	./programs/kitty/kitty.nix
+    ./programs/kitty/kitty.nix
   ];
 }
