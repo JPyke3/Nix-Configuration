@@ -4,7 +4,6 @@
 		enable = true;
 		previewer = {
 			source = pkgs.writeShellScriptBin "pv.sh" ''
-					#!/usr/bin/env bash
 					case "$1" in
 						*.tar*) tar tf "$1" ;;
 						*.zip) ${pkgs.unzip}/bin/unzip -l "$1" ;;
