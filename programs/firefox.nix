@@ -18,6 +18,7 @@
           darkreader
           aria2-integration
           vimium
+          sponsorblock
         ];
         settings = {
           "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
