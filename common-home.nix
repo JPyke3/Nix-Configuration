@@ -46,7 +46,7 @@ in {
   sops = {
     defaultSopsFile = ./secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
-    age.keyFile = "~/.config/sops/age/keys.txt";
+    age.keyFile = "/home/jacobpyke/.config/sops/age/keys.txt";
 
     secrets = {
       hello = {};
