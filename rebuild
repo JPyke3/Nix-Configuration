@@ -7,11 +7,11 @@ nvim .
 for file in $(find . -name "*.nix"); do
 	alejandra $file &>/dev/null
 done
-git diff -U0 *.nix
+git diff *.nix
 echo "Home-Manager Rebuilding..."
 if [ $OS = "Darwin" ]; then
 	home-manager build switch --flake .#jacobpyke-macos &>~/.logs/home-manager-rebuild.log || (cat ~/.logs/home-manager-rebuild.log | grep --color error && false)
-elif [$SUBOS = "nixos" ]; then
+elif [ $SUBOS = "nixos" ]; then
 	sudo nixos-rebuild switch --flake .#jacob-singapore --show-trace
 else 
 	home-manager build switch &>~/.logs/home-manager-rebuild.log || (cat ~/.logs/home-manager-rebuild.log | grep --color error && false)
