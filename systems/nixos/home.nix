@@ -39,14 +39,15 @@ in {
   '';
 
   imports = [
-    ./programs/firefox.nix
-    ./programs/hyprland.nix
-    ./programs/waybar/main.nix
-    ./programs/zsh.nix
-    ./programs/tmux.nix
-    ./programs/alacritty.nix
-    ./programs/git.nix
-    ./programs/nvim/nvim.nix
-    ./programs/kitty/kitty.nix
+  	../../users/jacob/common-home.nix
+    ../../programs/firefox.nix
+    ../../programs/hyprland.nix
+    ../../programs/waybar/main.nix
+    ../../programs/zsh.nix
+    ../../programs/tmux.nix
+    ../../programs/alacritty.nix
+    ../../programs/git.nix
+    ../../programs/nvim/nvim.nix
+    ../../programs/kitty/kitty.nix
   ];
 }

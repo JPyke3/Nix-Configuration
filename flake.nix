@@ -30,18 +30,19 @@
     ...
   } @ inputs: let
   in {
-    homeConfigurations."jacobpyke" = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      extraSpecialArgs = {
-        inherit inputs;
-        system = "x86_64-linux";
-      };
-
-      modules = [
-        ./linux-home.nix
-        ./common-home.nix
-      ];
-    };
+  	nixosConfigurations.jacob-singapore = nixpkgs.lib.nixosSystem {
+	  system = "x86_64-linux";
+	  pkgs = nixpkgs;
+	  specialArgs = { inherit inputs; };
+	  modules = [
+	  	./systems/nixos/singapore/configuration.nix
+		home-manager.nixosModule.home-manager
+		{
+			home-manager.useGlobalPkgs = true;
+			home-manager.users.jacobpyke = ./systems/nixos/home.nix;
+		}
+	  ];
+	};
     homeConfigurations."jacobpyke-macos" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.aarch64-darwin;
       extraSpecialArgs = {
@@ -50,8 +51,8 @@
       };
 
       modules = [
-        ./macos-home.nix
-        ./common-home.nix
+        ./systems/darwin/home.nix
+        ./users/jacob/common-home.nix
       ];
     };
   };
