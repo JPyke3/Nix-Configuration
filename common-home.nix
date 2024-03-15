@@ -48,9 +48,9 @@ in {
     defaultSopsFormat = "yaml";
     age.keyFile = "~/.config/sops/age/keys.txt";
 
-	secrets = {
-		hello = { };
-	}
+    secrets = {
+      hello = {};
+    };
   };
 
   programs.direnv = {
