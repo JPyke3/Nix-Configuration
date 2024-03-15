@@ -54,7 +54,7 @@
             export PATH="$PATH:/home/jacobpyke/.cargo/bin"
          fi
 
-         export OPENAI_API_KEY="$(cat $SECRETS_DIR/openai_api_key)"
+         export OPENAI_API_KEY="$(cat $SECRETS_DIR/llms/openai_api_key)"
 
          export PATH="$PATH:$HOME/.config/home-manager/"
 
