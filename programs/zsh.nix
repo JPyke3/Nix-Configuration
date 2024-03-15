@@ -41,37 +41,40 @@
       prompt pure
     '';
     initExtra = ''
-      export OPENAI_API_KEY="$(cat ${config.sops.secrets."openai_api_key".path})"
 
-      if [[ "$OSTYPE" == "darwin"* ]]; then
-         export PATH="$PATH:/Library/TeX/texbin"
-         export PATH="$PATH:/Users/jacobpyke/bin/local/scripts"
-         export PATH="$PATH:/Users/jacobpyke/bin/local/applications"
-         export PATH="$PATH:/Users/jacobpyke/.cargo/bin"
-      else
-         export PATH="$PATH:/home/jacobpyke/bin/local/scripts"
-         export PATH="$PATH:/home/jacobpyke/.cargo/bin"
-      fi
+         if [[ "$OSTYPE" == "darwin"* ]]; then
+      export SECRETS_DIR="$(getconf DARWIN_USER_TEMP_DIR)/secrets"
+            export PATH="$PATH:/Library/TeX/texbin"
+            export PATH="$PATH:/Users/jacobpyke/bin/local/scripts"
+            export PATH="$PATH:/Users/jacobpyke/bin/local/applications"
+            export PATH="$PATH:/Users/jacobpyke/.cargo/bin"
+         else
+      	 export SECRETS_DIR="$XDG_RUNTIME_DIR/secrets"
+            export PATH="$PATH:/home/jacobpyke/bin/local/scripts"
+            export PATH="$PATH:/home/jacobpyke/.cargo/bin"
+         fi
 
-      export PATH="$PATH:$HOME/.config/home-manager/"
+         export OPENAI_API_KEY="$(cat $SECRETS_DIR/openai-api-key)"
 
-      bindkey -s ^f "tmux-sessionizer\n"
+         export PATH="$PATH:$HOME/.config/home-manager/"
 
-      eval "$(direnv hook zsh)"
+         bindkey -s ^f "tmux-sessionizer\n"
 
-      source "$HOME/.secrets.sh"
+         eval "$(direnv hook zsh)"
 
-           function tmux_sessionizer() {
-          	  tmux-sessionizer
-           }
+         source "$HOME/.secrets.sh"
 
-           function zvm_after_lazy_keybindings() {
-            # Here we define the custom widget
-            zvm_define_widget tmux_sessionizer
+              function tmux_sessionizer() {
+             	  tmux-sessionizer
+              }
 
-            # In normal mode, press Ctrl-E to invoke this widget
-            zvm_bindkey vicmd '^f' tmux_sessionizer
-          }
+              function zvm_after_lazy_keybindings() {
+               # Here we define the custom widget
+               zvm_define_widget tmux_sessionizer
+
+               # In normal mode, press Ctrl-E to invoke this widget
+               zvm_bindkey vicmd '^f' tmux_sessionizer
+             }
     '';
   };
 }
