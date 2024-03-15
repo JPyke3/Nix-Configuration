@@ -21,14 +21,9 @@ in {
   ];
 
   imports = [
-    ../../programs/zsh.nix
-    ../../programs/tmux.nix
-    ../../programs/alacritty.nix
-    ../../programs/git.nix
-    ../../programs/firefox.nix
-    ../../programs/nvim/nvim.nix
-    ../../programs/kitty/kitty.nix
-    ../../programs/lf.nix
+    ../../programs/desktop/alacritty.nix
+    ../../programs/desktop/firefox.nix
+    ../../programs/desktop/kitty/kitty.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

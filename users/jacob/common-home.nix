@@ -40,6 +40,12 @@ in {
   imports = [
     inputs.nix-colors.homeManagerModules.default
     inputs.sops-nix.homeManagerModules.sops
+
+    ../../programs/cli/zsh.nix
+    ../../programs/cli/tmux.nix
+    ../../programs/cli/git.nix
+    ../../programs/cli/nvim/nvim.nix
+    ../../programs/cli/lf.nix
   ];
 
   sops = {
