@@ -35,8 +35,8 @@ in {
   '';
 
   imports = [
-  	../../users/jacob/common-home.nix
-#    ../../programs/firefox.nix
+    ../../users/jacob/common-home.nix
+    ../../programs/firefox.nix
     ../../programs/hyprland.nix
     ../../programs/waybar/main.nix
     ../../programs/zsh.nix
