@@ -23,23 +23,24 @@
   };
 
   outputs = {
+  	self,
     nixpkgs,
     nixpkgs_unstable,
     home-manager,
     llama-cpp,
     ...
-  } @ inputs: let
-  in {
+  } @ inputs: {
   	nixosConfigurations.jacob-singapore = nixpkgs.lib.nixosSystem {
 	  system = "x86_64-linux";
-	  pkgs = nixpkgs;
 	  specialArgs = { inherit inputs; };
 	  modules = [
 	  	./systems/nixos/singapore/configuration.nix
-		home-manager.nixosModule.home-manager
+
+		home-manager.nixosModules.home-manager
 		{
 			home-manager.useGlobalPkgs = true;
-			home-manager.users.jacobpyke = ./systems/nixos/home.nix;
+			home-manager.useUserPackages = true;
+			home-manager.users.jacobpyke = import ./systems/nixos/home.nix;
 		}
 	  ];
 	};

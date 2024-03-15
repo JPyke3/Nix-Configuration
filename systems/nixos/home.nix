@@ -8,6 +8,7 @@
   nix-colors = import <nix-colors> {};
 in {
   home.username = "jacobpyke";
+
   home.homeDirectory = "/home/jacobpyke";
 
   home.stateVersion = "23.11"; # Please read the comment before changing.
