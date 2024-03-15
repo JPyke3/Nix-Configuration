@@ -52,6 +52,7 @@ in {
   accounts.email.accounts = {
     carex = {
       address = "jacob@carex.life";
+      primary = true;
       neomutt = {
         enable = true;
       };
