@@ -10,13 +10,13 @@ done
 git diff *.nix
 echo "Home-Manager Rebuilding..."
 if [ $OS = "Darwin" ]; then
-	home-manager build switch --flake .#jacobpyke-macos &>~/.logs/home-manager-rebuild.log || (cat ~/.logs/home-manager-rebuild.log | grep --color error && false)
+	home-manager build switch --flake .#jacobpyke-macos &>~/.logs/latest-rebuild.log || (cat ~/.logs/home-manager-rebuild.log | grep --color error && false)
 	gen="Home Manager: $(home-manager generations | sed -n '1p' | awk '{print $5}')"
 elif [ $SUBOS = "nixos" ]; then
-	sudo nixos-rebuild switch --flake .#jacob-singapore --show-trace
+	sudo nixos-rebuild switch --flake .#jacob-singapore --show-trace &>~/.logs/latest-rebuild.log || (cat ~/.logs/home-manager-rebuild.log | grep --color error && false)
 	gen="NixOS: $(nix-env --list-generations | sed -n '$p' | awk '{print $1}')"
 else
-	home-manager build switch &>~/.logs/home-manager-rebuild.log || (cat ~/.logs/home-manager-rebuild.log | grep --color error && false)
+	home-manager build switch &>~/.logs/home-manager-rebuild.log || (cat ~/.logs/latest-rebuild.log | grep --color error && false)
 	gen="Home Manager: $(home-manager generations | sed -n '1p' | awk '{print $5}')"
 fi
 git commit -am "Rebuild: $gen"
