@@ -48,4 +48,13 @@ in {
   };
 
   programs.home-manager.enable = true;
+
+  accounts.email.accounts = {
+    carex = {
+      address = "jacob@carex.life";
+      neomutt = {
+        enable = true;
+      };
+    };
+  };
 }
