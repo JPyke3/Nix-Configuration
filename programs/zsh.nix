@@ -62,8 +62,6 @@
 
          eval "$(direnv hook zsh)"
 
-         source "$HOME/.secrets.sh"
-
               function tmux_sessionizer() {
              	  tmux-sessionizer
               }
