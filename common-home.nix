@@ -50,6 +50,7 @@ in {
 
     secrets = {
       "openai_api_key" = {
+	  	path = "%r/openai_api_key"
       };
     };
   };
