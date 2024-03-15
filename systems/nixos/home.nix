@@ -30,18 +30,13 @@ in {
   # Override for Obisidian, Electron 25 is EOL
   nixpkgs.config.permittedInsecurePackages = lib.optional (pkgs.obsidian.version == "1.4.16") "electron-25.9.0";
 
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
-  home.file = {
-  };
-
   home.activation.setupEtc = config.lib.dag.entryAfter ["writeBoundary"] ''
     /run/current-system/sw/bin/systemctl start --user sops-nix
   '';
 
   imports = [
   	../../users/jacob/common-home.nix
-    ../../programs/firefox.nix
+#    ../../programs/firefox.nix
     ../../programs/hyprland.nix
     ../../programs/waybar/main.nix
     ../../programs/zsh.nix

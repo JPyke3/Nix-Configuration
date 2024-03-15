@@ -13,7 +13,6 @@ in {
     pkgs.neovim
     pkgs.aria
     pkgs.tmux
-    pkgs.nodejs_20 # LTS and Needed for Copilot
     pkgs.direnv
     pkgs.git
     pkgs.gh
@@ -44,7 +43,7 @@ in {
   ];
 
   sops = {
-    defaultSopsFile = ./secrets/secrets.yaml;
+    defaultSopsFile = ../../secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
     age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
 
@@ -58,8 +57,6 @@ in {
     enableZshIntegration = true;
     nix-direnv.enable = true;
   };
-
-  programs.home-manager.enable = true;
 
   accounts.email.accounts = {
     carex = {
