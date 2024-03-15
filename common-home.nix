@@ -40,7 +40,14 @@ in {
 
   imports = [
     inputs.nix-colors.homeManagerModules.default
+	inputs.sops-nix.homeManagerModules.sops
   ];
+
+  sops = {
+	defaultSopsFile = ./secrets/secrets.yaml;
+	defaultSopsFormat = "yaml";
+	age.keyFile = "~/.config/sops/age/keys.txt"
+  };
 
   programs.direnv = {
     enable = true;
