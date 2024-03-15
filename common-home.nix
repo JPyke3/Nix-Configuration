@@ -49,7 +49,7 @@ in {
     age.keyFile = "/home/jacobpyke/.config/sops/age/keys.txt";
 
     secrets = {
-      hello = {};
+      "openai_api_key" = {};
     };
   };
 
