@@ -24,6 +24,7 @@ in {
     pkgs.fd
     pkgs.eza
     pkgs.spotify-player
+    pkgs.sops
     (import ./scripts/tmux-sessionizer.nix {inherit pkgs;})
   ];
 
