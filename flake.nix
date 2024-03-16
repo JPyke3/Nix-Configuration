@@ -20,10 +20,10 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-	jovian = {
-	  url = "github:Jovian-Experiments/Jovian-NixOS";
-	  inputs.nixpkgs.follows = "unstable";
-	};
+    jovian = {
+      url = "github:Jovian-Experiments/Jovian-NixOS";
+      inputs.nixpkgs.follows = "unstable";
+    };
   };
 
   outputs = {
@@ -32,7 +32,7 @@
     unstable,
     home-manager,
     llama-cpp,
-	jovian,
+    jovian,
     ...
   } @ inputs: {
     # Desktop PC
@@ -41,7 +41,7 @@
       specialArgs = {inherit inputs;};
       modules = [
         ./systems/nixos/configuration.nix
-		./systems/nixos/singapore/configuration.nix
+        ./systems/nixos/singapore/configuration.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.users.jacobpyke = import ./systems/nixos/singapore/home.nix;
@@ -52,24 +52,24 @@
         }
       ];
     };
-	# Steam Deck
-	nixosConfigurations.jacob-switzerland = nixpkgs.lib.nixosSystem {
-	  system = "x86_64-linux";
-	  specialArgs = {inherit inputs jovian;};
-	  modules = [
-	  	./systems/nixos/configuration.nix
-		./systems/nixos/switzerland/configuration.nix
-		home-manager.nixosModules.home-manager
-		{
-		  home-manager.users.jacobpyke = import ./systems/nixos/switzerland/home.nix;
-		  home-manager.extraSpecialArgs = {
-			inherit inputs;
-			system = "x86_64-linux";
-		  };
-		}
-	  ];
-	};
-	# Macbook Pro
+    # Steam Deck
+    nixosConfigurations.jacob-switzerland = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = {inherit inputs jovian;};
+      modules = [
+        ./systems/nixos/configuration.nix
+        ./systems/nixos/switzerland/configuration.nix
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.users.jacobpyke = import ./systems/nixos/switzerland/home.nix;
+          home-manager.extraSpecialArgs = {
+            inherit inputs;
+            system = "x86_64-linux";
+          };
+        }
+      ];
+    };
+    # Macbook Pro
     homeConfigurations."jacobpyke-macos" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.aarch64-darwin;
       extraSpecialArgs = {

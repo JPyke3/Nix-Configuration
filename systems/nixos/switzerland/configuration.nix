@@ -1,27 +1,25 @@
 {
-unstable,
-jovian,
-nixpkgs,
-...
-}:
-let
-	overlay-unstable = final: prev: {
-		unstable = unstable.legacyPackages.86_64-linux;
-	};
-in
-{
+  unstable,
+  jovian,
+  nixpkgs,
+  ...
+}: let
+  overlay-unstable = final: prev: {
+    unstable = unstable.legacyPackages .86 _64-linux;
+  };
+in {
   imports = [
-  	../singapore/hardware-configuration.nix
+    ../singapore/hardware-configuration.nix
   ];
 
-  nixpkgs.overlays = [ overlay-unstable ]; 
+  nixpkgs.overlays = [overlay-unstable];
 
   jovian.steam = {
-	enable = true;
-	autoStart = true;
-	desktopSession = "plasma";
+    enable = true;
+    autoStart = true;
+    desktopSession = "plasma";
   };
-  
+
   networking.hostName = "nixos-switzerland"; # Define your hostname.
   networking.networkmanager.wifi.powersave = true;
 

@@ -81,7 +81,6 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-
   # Automatic system upgrades
   system.autoUpgrade = {
     enable = true;

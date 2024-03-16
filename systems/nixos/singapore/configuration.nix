@@ -1,10 +1,8 @@
-{
-...
-}: {
+{...}: {
   imports = [
     ./hardware-configuration.nix
   ];
-  
+
   networking.hostName = "nixos-singapore"; # Define your hostname.
   networking.networkmanager.wifi.powersave = false;
 

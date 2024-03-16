@@ -1,14 +1,11 @@
-{
-pkgs,
-...
-}: {
+{pkgs, ...}: {
   home.packages = [
-	pkgs.steam
-	pkgs.armcord
-	pkgs.runelite
+    pkgs.steam
+    pkgs.armcord
+    pkgs.runelite
   ];
 
   imports = [
-	../home.nix
+    ../home.nix
   ];
 }

@@ -1,7 +1,4 @@
-{
-pkgs,
-...
-}: {
+{pkgs, ...}: {
   home.packages = [
     pkgs.swaynotificationcenter
     pkgs.swww
@@ -17,7 +14,7 @@ pkgs,
   nixpkgs.config.permittedInsecurePackages = lib.optional (pkgs.obsidian.version == "1.4.16") "electron-25.9.0";
 
   imports = [
-	../home.nix
+    ../home.nix
     ../../../programs/desktop/hyprland.nix
     ../../../programs/desktop/waybar/main.nix
   ];
