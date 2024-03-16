@@ -1,10 +1,20 @@
 {
+unstable,
 jovian,
+nixpkgs,
 ...
-}: {
+}:
+let
+	overlay-unstable = final: prev: {
+		unstable = unstable.legacyPackages.86_64-linux;
+	};
+in
+{
   imports = [
   	../singapore/hardware-configuration.nix
   ];
+
+  nixpkgs.overlays = [ overlay-unstable ]; 
 
   jovian.steam = {
 	enable = true;
