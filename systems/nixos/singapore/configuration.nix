@@ -23,6 +23,7 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
   networking.networkmanager.wifi.powersave = false;
+  networking.nameservers = ["1.1.1.1" "1.0.0.1"]; # Cloudflare DNS
 
   # Set your time zone.
   time.timeZone = "Australia/Brisbane";
