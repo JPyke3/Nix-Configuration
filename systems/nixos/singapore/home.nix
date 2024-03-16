@@ -1,4 +1,9 @@
-{pkgs, lib, inputs, ...}: {
+{
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   home.packages = [
     pkgs.swaynotificationcenter
     pkgs.swww
@@ -9,6 +14,8 @@
     pkgs.obsidian
     inputs.llama-cpp.packages.x86_64-linux.rocm
   ];
+
+  home.stateVersion = "23.11"; # Please read the comment before changing.
 
   # Override for Obisidian, Electron 25 is EOL
   nixpkgs.config.permittedInsecurePackages = lib.optional (pkgs.obsidian.version == "1.4.16") "electron-25.9.0";

@@ -5,20 +5,20 @@
 }: {
   imports = [
     ../singapore/hardware-configuration.nix
-	inputs.jovian.nixosModules.jovian
+    inputs.jovian.nixosModules.jovian
   ];
 
   jovian.steam = {
     enable = true;
     autoStart = true;
     desktopSession = "plasma";
+    user = "jacobpyke";
   };
 
   networking.hostName = "nixos-switzerland"; # Define your hostname.
   networking.networkmanager.wifi.powersave = true;
 
   services.xserver.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
   services.pipewire.enable = true;

@@ -10,6 +10,10 @@
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "unstable";
+    };
     nix-colors.url = "github:misterio77/nix-colors";
     nixpkgs-firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
     llama-cpp = {
@@ -31,6 +35,7 @@
     nixpkgs,
     unstable,
     home-manager,
+    home-manager-unstable,
     llama-cpp,
     jovian,
     ...
@@ -53,13 +58,13 @@
       ];
     };
     # Steam Deck
-    nixosConfigurations.jacob-switzerland = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.jacob-switzerland = unstable.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {inherit inputs;};
       modules = [
         ./systems/nixos/configuration.nix
         ./systems/nixos/switzerland/configuration.nix
-        home-manager.nixosModules.home-manager
+        home-manager-unstable.nixosModules.home-manager
         {
           home-manager.users.jacobpyke = import ./systems/nixos/switzerland/home.nix;
           home-manager.extraSpecialArgs = {
