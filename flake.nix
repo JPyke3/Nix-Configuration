@@ -4,7 +4,7 @@
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-    nixpkgs_unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/nur";
     home-manager = {
       url = "github:nix-community/home-manager/release-23.11";
@@ -20,25 +20,31 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+	jovian = {
+	  url = "github:Jovian-Experiments/Jovian-NixOS";
+	  inputs.nixpkgs.follows = "unstable";
+	};
   };
 
   outputs = {
     self,
     nixpkgs,
-    nixpkgs_unstable,
+    unstable,
     home-manager,
     llama-cpp,
+	jovian,
     ...
   } @ inputs: {
+    # Desktop PC
     nixosConfigurations.jacob-singapore = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {inherit inputs;};
       modules = [
-        ./systems/nixos/singapore/configuration.nix
-
+        ./systems/nixos/configuration.nix
+		./systems/nixos/singapore/configuration.nix
         home-manager.nixosModules.home-manager
         {
-          home-manager.users.jacobpyke = import ./systems/nixos/home.nix;
+          home-manager.users.jacobpyke = import ./systems/nixos/singapore/home.nix;
           home-manager.extraSpecialArgs = {
             inherit inputs;
             system = "x86_64-linux";
@@ -46,6 +52,24 @@
         }
       ];
     };
+	# Steam Deck
+	nixosConfigurations.jacob-switzerland = nixpkgs.lib.nixosSystem {
+	  system = "x86_64-linux";
+	  specialArgs = {inherit inputs jovian;};
+	  modules = [
+	  	./systems/nixos/configuration.nix
+		./systems/nixos/switzerland/configuration.nix
+		home-manager.nixosModules.home-manager
+		{
+		  home-manager.users.jacobpyke = import ./systems/nixos/switzerland/home.nix;
+		  home-manager.extraSpecialArgs = {
+			inherit inputs;
+			system = "x86_64-linux";
+		  };
+		}
+	  ];
+	};
+	# Macbook Pro
     homeConfigurations."jacobpyke-macos" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.aarch64-darwin;
       extraSpecialArgs = {

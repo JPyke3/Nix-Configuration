@@ -1,15 +1,23 @@
 {
+jovian,
 ...
 }: {
   imports = [
-    ./hardware-configuration.nix
+  	../singapore/hardware-configuration.nix
   ];
+
+  jovian.steam = {
+	enable = true;
+	autoStart = true;
+	desktopSession = "plasma";
+  };
   
-  networking.hostName = "nixos-singapore"; # Define your hostname.
-  networking.networkmanager.wifi.powersave = false;
+  networking.hostName = "nixos-switzerland"; # Define your hostname.
+  networking.networkmanager.wifi.powersave = true;
 
   services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
 
   services.printing.enable = true;
 
@@ -30,10 +38,6 @@
   environment.systemPackages = with pkgs; [
     amdgpu_top
   ];
-
-  programs.hyprland = {
-    enable = true;
-  };
 
   programs.steam = {
     enable = true;
