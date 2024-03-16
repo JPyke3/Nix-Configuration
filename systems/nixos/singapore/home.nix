@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, lib, inputs, ...}: {
   home.packages = [
     pkgs.swaynotificationcenter
     pkgs.swww

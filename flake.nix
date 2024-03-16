@@ -55,7 +55,7 @@
     # Steam Deck
     nixosConfigurations.jacob-switzerland = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = {inherit inputs jovian;};
+      specialArgs = {inherit inputs;};
       modules = [
         ./systems/nixos/configuration.nix
         ./systems/nixos/switzerland/configuration.nix

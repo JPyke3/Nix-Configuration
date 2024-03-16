@@ -1,18 +1,12 @@
 {
-  unstable,
-  jovian,
-  nixpkgs,
+  inputs,
+  pkgs,
   ...
-}: let
-  overlay-unstable = final: prev: {
-    unstable = unstable.legacyPackages .86 _64-linux;
-  };
-in {
+}: {
   imports = [
     ../singapore/hardware-configuration.nix
+	inputs.jovian.nixosModules.jovian
   ];
-
-  nixpkgs.overlays = [overlay-unstable];
 
   jovian.steam = {
     enable = true;
@@ -27,11 +21,9 @@ in {
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
-  services.printing.enable = true;
+  services.pipewire.enable = true;
 
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  services.printing.enable = true;
 
   hardware.opengl = {
     enable = true;
