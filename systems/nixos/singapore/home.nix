@@ -12,7 +12,7 @@
     pkgs.armcord
     pkgs.runelite
     pkgs.obsidian
-    inputs.llama-cpp.packages.x86_64-linux.rocm
+    # inputs.llama-cpp.packages.x86_64-linux.rocm
   ];
 
   home.stateVersion = "23.11"; # Please read the comment before changing.
