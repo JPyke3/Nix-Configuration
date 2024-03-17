@@ -1,5 +1,6 @@
 { config, pkgs, ... }:
 {
+  nixpkgs.hostPlatform = "aarch64-darwin";
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
 #  environment.systemPackages =

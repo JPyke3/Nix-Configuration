@@ -5,7 +5,10 @@
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nur.url = "github:nix-community/nur";
+	nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-23.11-darwin";
+    nur = {
+		url = "github:nix-community/nur";
+	};
     home-manager = {
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -18,8 +21,12 @@
 		url = "github:LnL7/nix-darwin";
 		inputs.nixpkgs.follows = "nixpkgs";
 	};
-    nix-colors.url = "github:misterio77/nix-colors";
-    nixpkgs-firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
+    nix-colors = {
+		url = "github:misterio77/nix-colors";
+	};
+    nixpkgs-firefox-darwin = {
+		url = "github:bandithedoge/nixpkgs-firefox-darwin";
+	};
     llama-cpp = {
       url = "github:ggerganov/llama.cpp";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -43,6 +50,7 @@
     llama-cpp,
     jovian,
 	nix-darwin,
+	nixpkgs-darwin,
     ...
   } @ inputs: {
     # Desktop PC
@@ -93,7 +101,8 @@
       ];
     };
 	# Nix-Darwin Macbook Pro
-	darwinConfigurations."Jacobs-MacBook" = nix-darwin.lib.darwinSystem {
+	darwinConfigurations."Jacobs-Laptop" = nix-darwin.lib.darwinSystem {
+	  system = "aarch64-darwin";
 	  specialArgs = {inherit inputs;};
 	  modules = [
 		./systems/darwin/configuration.nix

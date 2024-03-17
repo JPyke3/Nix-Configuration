@@ -194,6 +194,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-darwin": {
+      "locked": {
+        "lastModified": 1710655087,
+        "narHash": "sha256-3AG/CvZYYZuSsUfJwCsQ2jV5tqVPNUeW37xI9FkDFxg=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "a9e89799905f4f7518944aa4bd33300f6fdba287",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-23.11-darwin",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-firefox-darwin": {
       "inputs": {
         "nixpkgs": "nixpkgs_2"
@@ -301,6 +317,7 @@
         "nix-colors": "nix-colors",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-darwin": "nixpkgs-darwin",
         "nixpkgs-firefox-darwin": "nixpkgs-firefox-darwin",
         "nur": "nur",
         "sops-nix": "sops-nix",
