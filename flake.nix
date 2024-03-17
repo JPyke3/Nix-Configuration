@@ -14,6 +14,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "unstable";
     };
+	nix-darwin = {
+		url = "github:LnL7/nix-darwin";
+		inputs.nixpkgs.follows = "nixpkgs";
+	};
     nix-colors.url = "github:misterio77/nix-colors";
     nixpkgs-firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
     llama-cpp = {
@@ -38,6 +42,7 @@
     home-manager-unstable,
     llama-cpp,
     jovian,
+	nix-darwin,
     ...
   } @ inputs: {
     # Desktop PC
@@ -87,5 +92,20 @@
         ./users/jacob/common-home.nix
       ];
     };
+	# Nix-Darwin Macbook Pro
+	darwinConfigurations."Jacobs-MacBook" = nix-darwin.lib.darwinSystem {
+	  specialArgs = {inherit inputs;};
+	  modules = [
+		./systems/darwin/configuration.nix
+		home-manager.darwinModules.home-manager
+		{
+			home-manager.users.jacobpyke = import ./systems/darwin/home.nix;
+			home-manager.extraSpecialArgs = {
+				inherit inputs;
+				system = "aarch64-darwin";
+			};
+		}
+	  ];
+	};
   };
 }
