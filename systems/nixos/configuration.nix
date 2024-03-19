@@ -2,10 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
-  config,
-  lib,
   pkgs,
-  inputs,
   ...
 }: {
   nixpkgs.config.allowUnfree = true;
@@ -76,6 +73,13 @@
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
+  };
+
+  system.autoUpgrade = {
+    enable = true;
+    allowReboot = true;
+    dates = "03:00";
+    flake = "github:JPyke3/Nix-Configuration";
   };
 
   # Enable the OpenSSH daemon.
