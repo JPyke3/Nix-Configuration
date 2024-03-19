@@ -2,6 +2,7 @@
 CURRENT_DIR=$(echo $PWD)
 OS=$(uname -s)
 SUBOS=$(uname -a | awk '{ print $2 }')
+HOST=$(hostname)
 cd ~/.config/home-manager/
 nvim .
 for file in $(find . -name "*.nix"); do
