@@ -10,8 +10,8 @@ done
 git diff *.nix
 if [ $OS = "Darwin" ]; then
 	echo "Home-Manager Rebuilding..."
-	home-manager build switch --flake .#jacobpyke-macos &>~/.logs/latest-rebuild.log || (cat ~/.logs/home-manager-rebuild.log | grep --color error && false)
-	gen="Home Manager: $(home-manager generations | sed -n '1p' | awk '{print $5}')"
+	darwin-rebuild switch --flake .#Jacobs-Laptop &>~/.logs/latest-rebuild.log || (cat ~/.logs/home-manager-rebuild.log | grep --color error && false)
+	gen="Home Manager: $(darwin-rebuild --list-generations | sed -n '1p' | awk '{print $1}')"
 elif [ $SUBOS = "nixos" ]; then
 	echo "NixOS Rebuilding..."
 	sudo nixos-rebuild switch --flake .#jacob-singapore --show-trace &>~/.logs/latest-rebuild.log || (cat ~/.logs/home-manager-rebuild.log | grep --color error && false)

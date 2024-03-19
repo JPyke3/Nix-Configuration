@@ -106,7 +106,10 @@
 		./systems/darwin/configuration.nix
 		home-manager.darwinModules.home-manager
 		{
-			home-manager.users.jacobpyke.imports = [ ./systems/darwin/home.nix ];
+			home-manager.users.jacobpyke.imports = [ 
+				./users/jacob/common-home.nix
+				./systems/darwin/home.nix 
+			];
 			home-manager.extraSpecialArgs = {
 				inherit inputs;
 				system = "aarch64-darwin";
