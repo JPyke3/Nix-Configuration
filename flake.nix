@@ -85,19 +85,6 @@
         }
       ];
     };
-    # Macbook Pro
-    homeConfigurations."jacobpyke-macos" = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-      extraSpecialArgs = {
-        inherit inputs;
-        system = "aarch64-darwin";
-      };
-
-      modules = [
-        ./systems/darwin/home.nix
-        ./users/jacob/common-home.nix
-      ];
-    };
 	# Nix-Darwin Macbook Pro
 	darwinConfigurations."Jacobs-Laptop" = nix-darwin.lib.darwinSystem {
 	  system = "aarch64-darwin";
