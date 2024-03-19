@@ -1,8 +1,6 @@
 {
   description = "Home Manager configuration of jacobpyke";
-
   inputs = {
-    # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 	nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-23.11-darwin";
@@ -108,7 +106,7 @@
 		./systems/darwin/configuration.nix
 		home-manager.darwinModules.home-manager
 		{
-			home-manager.users.jacobpyke = import ./systems/darwin/home.nix;
+			home-manager.users.jacobpyke.imports = [ ./systems/darwin/home.nix ];
 			home-manager.extraSpecialArgs = {
 				inherit inputs;
 				system = "aarch64-darwin";
