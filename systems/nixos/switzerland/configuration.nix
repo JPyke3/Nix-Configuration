@@ -17,7 +17,7 @@
     user = "jacobpyke";
   };
 
-  networking.hostName = "nixos-switzerland"; # Define your hostname.
+  networking.hostName = "jacob-switzerland"; # Define your hostname.
   networking.networkmanager.wifi.powersave = true;
 
   services.xserver.enable = true;
