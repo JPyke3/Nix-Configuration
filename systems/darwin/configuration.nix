@@ -1,25 +1,28 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   nixpkgs.hostPlatform = "aarch64-darwin";
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-#  environment.systemPackages =
-#    [ pkgs.vim
-#    ];
+  #  environment.systemPackages =
+  #    [ pkgs.vim
+  #    ];
 
   users.users.jacobpyke = {
-  	name = "jacobpyke";
-	home = "/Users/jacobpyke";
+    name = "jacobpyke";
+    home = "/Users/jacobpyke";
   };
 
   services.nix-daemon.enable = true;
 
   homebrew = {
-	enable = true;
-	brews = [];
-	casks = [
-		"aerospace"
-	];
+    enable = true;
+    brews = [];
+    casks = [
+      "aerospace"
+    ];
   };
 
   # Use a custom configuration.nix location.
@@ -31,7 +34,7 @@
   # nix.package = pkgs.nix;
 
   # Create /etc/zshrc that loads the nix-darwin environment.
-  programs.zsh.enable = true;  # default shell on catalina
+  programs.zsh.enable = true; # default shell on catalina
   # programs.fish.enable = true;
 
   # Used for backwards compatibility, please read the changelog before changing.

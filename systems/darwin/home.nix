@@ -18,10 +18,10 @@ in {
   ];
 
   programs.zsh.initExtra = ''
-  	#make sure brew is on the path for M1 
-	if [[ $(uname -m) == 'arm64' ]]; then
-		 eval "$(/opt/homebrew/bin/brew shellenv)"
-	fi
+     	#make sure brew is on the path for M1
+    if [[ $(uname -m) == 'arm64' ]]; then
+    	 eval "$(/opt/homebrew/bin/brew shellenv)"
+    fi
   '';
 
   imports = [
