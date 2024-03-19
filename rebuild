@@ -9,7 +9,7 @@ for file in $(find . -name "*.nix"); do
 done
 git diff *.nix
 if [ $OS = "Darwin" ]; then
-	echo "Home-Manager Rebuilding..."
+	echo "Nix Darwin Rebuilding..."
 	darwin-rebuild switch --flake .#Jacobs-Laptop &>~/.logs/latest-rebuild.log || (cat ~/.logs/home-manager-rebuild.log | grep --color error && false)
 	gen="Home Manager: $(darwin-rebuild --list-generations | sed -n '1p' | awk '{print $1}')"
 elif [ $SUBOS = "nixos" ]; then
