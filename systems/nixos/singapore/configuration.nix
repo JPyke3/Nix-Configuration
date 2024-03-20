@@ -33,6 +33,14 @@
     enable = true;
   };
 
+  system.autoUpgrade = {
+    enable = true;
+    allowReboot = true;
+    dates = "03:00";
+    flake = "github:JPyke3/Nix-Configuration";
+    persistent = true;
+  };
+
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;

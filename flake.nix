@@ -68,7 +68,7 @@
         }
       ];
     };
-    # Steam Deck
+    # Steam Deck LCD
     nixosConfigurations.jacob-switzerland = unstable.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {inherit inputs;};
@@ -78,6 +78,23 @@
         home-manager-unstable.nixosModules.home-manager
         {
           home-manager.users.jacobpyke = import ./systems/nixos/switzerland/home.nix;
+          home-manager.extraSpecialArgs = {
+            inherit inputs;
+            system = "x86_64-linux";
+          };
+        }
+      ];
+    };
+    # Steam Deck OLED
+    nixosConfigurations.jacob-japan = unstable.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = {inherit inputs;};
+      modules = [
+        ./systems/nixos/configuration.nix
+        ./systems/nixos/japan/configuration.nix
+        home-manager-unstable.nixosModules.home-manager
+        {
+          home-manager.users.jacobpyke = import ./systems/nixos/japan/home.nix;
           home-manager.extraSpecialArgs = {
             inherit inputs;
             system = "x86_64-linux";
