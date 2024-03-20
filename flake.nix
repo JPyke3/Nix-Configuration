@@ -106,9 +106,9 @@
       system = "x86_64-linux";
       specialArgs = {inherit inputs;};
       modules = [
-	    (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
-		./systems/nixos/configuration.nix
-		./systems/nixos/japan/configuration.nix
+        (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
+        ./systems/nixos/configuration.nix
+        ./systems/nixos/japan/configuration.nix
       ];
     };
     # Nix-Darwin Macbook Pro

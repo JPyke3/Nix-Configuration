@@ -19,11 +19,11 @@
   boot.kernelPackages = pkgs.linuxPackages_jovian;
 
   networking.hostName = "jacob-japan"; # Define your hostname.
-#  networking.networkmanager.wifi.powersave = true;
+  #  networking.networkmanager.wifi.powersave = true;
 
   services.xserver.enable = true;
   services.xserver.desktopManager.plasma6.enable = true;
-#  services.xserver.desktopManager.gnome.enable = true;
+  #  services.xserver.desktopManager.gnome.enable = true;
 
   services.pipewire.enable = true;
 
