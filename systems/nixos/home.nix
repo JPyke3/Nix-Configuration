@@ -17,9 +17,9 @@ in {
     pkgs.firefox-unwrapped
   ];
 
-  home.activation.setupEtc = config.lib.dag.entryAfter ["writeBoundary"] ''
-    /run/current-system/sw/bin/systemctl start --user sops-nix
-  '';
+  #  home.activation.setupEtc = config.lib.dag.entryAfter ["writeBoundary"] ''
+  #    /run/current-system/sw/bin/systemctl start --user sops-nix
+  #  '';
 
   imports = [
     ../../users/jacob/common-home.nix

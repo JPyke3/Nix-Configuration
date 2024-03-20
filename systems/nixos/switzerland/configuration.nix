@@ -4,11 +4,11 @@
   ...
 }: {
   imports = [
-    ../singapore/hardware-configuration.nix
+    ./hardware-configuration.nix
     inputs.jovian.nixosModules.jovian
   ];
 
-  jovian.devices.steamdeck.enable = true;
+  # jovian.devices.steamdeck.enable = true;
 
   jovian.steam = {
     enable = true;
