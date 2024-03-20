@@ -17,6 +17,11 @@
   # Set your time zone.
   time.timeZone = "Australia/Brisbane";
 
+  nix.settings.trusted-users = [
+    "root"
+    "jacobpyke"
+  ];
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -67,10 +72,10 @@
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
+  #  programs.gnupg.agent = {
+  #    enable = true;
+  #    enableSSHSupport = true;
+  #  };
 
   system.autoUpgrade = {
     enable = true;
