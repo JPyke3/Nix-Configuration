@@ -4,8 +4,10 @@
   ...
 }: {
   imports = [
-    inputs.jovian.nixosModules.jovian
+  	inputs.jovian.nixosModules.jovian
   ];
+
+  boot.kernelPackages = pkgs.linuxPackages_jovian;
 
   jovian.devices.steamdeck.enable = true;
 
@@ -15,8 +17,6 @@
     desktopSession = "plasma";
     user = "jacobpyke";
   };
-
-  boot.kernelPackages = pkgs.linuxPackages_jovian;
 
   networking.hostName = "jacob-japan"; # Define your hostname.
   #  networking.networkmanager.wifi.powersave = true;

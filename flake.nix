@@ -102,15 +102,16 @@
         }
       ];
     };
-    nixosConfigurations.steam-deck-live = unstable.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = {inherit inputs;};
-      modules = [
-        (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
-        ./systems/nixos/configuration.nix
-        ./systems/nixos/japan/configuration.nix
-      ];
-    };
+	# Jovian Installer Image
+#    nixosConfigurations.steam-deck-live = unstable.lib.nixosSystem {
+#      system = "x86_64-linux";
+#      specialArgs = {inherit inputs;};
+#      modules = [
+#        (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
+#        ./systems/nixos/configuration.nix
+#        ./systems/nixos/japan/configuration.nix
+#      ];
+#    };
     # Nix-Darwin Macbook Pro
     darwinConfigurations."Jacobs-Laptop" = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";
