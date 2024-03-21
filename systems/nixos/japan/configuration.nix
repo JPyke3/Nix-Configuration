@@ -7,8 +7,6 @@
     inputs.jovian.nixosModules.jovian
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_jovian;
-
   jovian.devices.steamdeck.enable = true;
 
   jovian.steam = {
@@ -18,12 +16,15 @@
     user = "jacobpyke";
   };
 
+  hardware.pulseaudio.enable = pkgs.lib.mkForce false;
+
+  hardware.enableRedistributableFirmware = true;
+
   networking.hostName = "jacob-japan"; # Define your hostname.
-  #  networking.networkmanager.wifi.powersave = true;
+  networking.networkmanager.wifi.powersave = true;
 
   services.xserver.enable = true;
   services.xserver.desktopManager.plasma6.enable = true;
-  #  services.xserver.desktopManager.gnome.enable = true;
 
   services.pipewire.enable = true;
 
