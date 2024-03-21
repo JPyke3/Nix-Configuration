@@ -4,7 +4,7 @@
   ...
 }: {
   imports = [
-  	inputs.jovian.nixosModules.jovian
+    inputs.jovian.nixosModules.jovian
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_jovian;
