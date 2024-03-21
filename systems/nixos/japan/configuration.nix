@@ -4,6 +4,7 @@
   ...
 }: {
   imports = [
+    ./hardware-configuration.nix
     inputs.jovian.nixosModules.jovian
   ];
 
