@@ -39,7 +39,7 @@ in {
           on-click = "activate";
           format = "{icon}";
           active-only = false;
-		  format-icons = {
+          format-icons = {
             "1" = "一";
             "2" = "二";
             "3" = "三";
@@ -50,7 +50,7 @@ in {
             "8" = "八";
             "9" = "九";
             "10" = "十";
-          }
+          };
         };
         "custom/search" = {
           format = " ";
