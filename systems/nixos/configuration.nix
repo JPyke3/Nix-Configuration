@@ -35,7 +35,7 @@
     defaultSopsFile = ../../secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
     age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
-    secrets.users.jacobpyke.password.neededForUsers = true;
+    secrets."users/jacobpyke/password".neededForUsers = true;
   };
 
   # Configure network proxy if necessary
@@ -71,7 +71,7 @@
     packages = with pkgs; [
       tree
     ];
-    hashedPasswordFile = config.sops.secrets.users.jacobpyke.password.path;
+    hashedPasswordFile = config.sops.secrets."users/jacobpyke/password".path;
   };
 
   # List packages installed in system profile. To search, run:
