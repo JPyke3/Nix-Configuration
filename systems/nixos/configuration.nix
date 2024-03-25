@@ -70,7 +70,7 @@
     packages = with pkgs; [
       tree
     ];
-    hashedPasswordFile = config.sops.secrets."users/jacobpyke/password".path;
+    hashedPasswordFile = config.sops.secrets.users.jacobpyke.password.path;
   };
 
   # List packages installed in system profile. To search, run:
