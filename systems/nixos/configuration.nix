@@ -4,6 +4,10 @@
 {pkgs, ...}: {
   nixpkgs.config.allowUnfree = true;
 
+  imports = [
+	inputs.sops-nix.nixosModules.sops
+  ]
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -21,6 +25,12 @@
     "root"
     "jacobpyke"
   ];
+
+  sops = {
+    defaultSopsFile = ../../secrets/secrets.yaml;
+    defaultSopsFormat = "yaml";
+    age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+  };
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -55,6 +65,7 @@
     packages = with pkgs; [
       tree
     ];
+	hashedPasswordFile = sops.secrets."users/jacobpyke/password".path;
   };
 
   # List packages installed in system profile. To search, run:
