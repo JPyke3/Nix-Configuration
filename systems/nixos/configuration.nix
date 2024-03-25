@@ -38,6 +38,23 @@
     secrets."users/jacobpyke/password".neededForUsers = true;
   };
 
+    fonts = {
+    fonts = with pkgs; [
+      noto-fonts
+      noto-fonts-cjk
+      noto-fonts-emoji
+      source-code-pro
+      source-han-mono
+      source-han-sans
+      source-han-serif
+      wqy_zenhei
+    ];
+
+    fontDir.enable = true;
+    fontconfig.enable = true;
+	};
+
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";

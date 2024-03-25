@@ -17,10 +17,6 @@
     user = "jacobpyke";
   };
 
-  hardware.pulseaudio.enable = pkgs.lib.mkForce false;
-
-  hardware.enableRedistributableFirmware = true;
-
   networking.hostName = "jacob-japan"; # Define your hostname.
   networking.networkmanager.wifi.powersave = true;
 
@@ -28,7 +24,6 @@
   services.xserver.desktopManager.plasma6.enable = true;
 
   services.pipewire.enable = true;
-
   services.printing.enable = true;
 
   environment.systemPackages = with pkgs; [
