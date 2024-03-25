@@ -4,6 +4,7 @@
 {
   pkgs,
   inputs,
+  config,
   ...
 }: {
   nixpkgs.config.allowUnfree = true;
@@ -69,7 +70,7 @@
     packages = with pkgs; [
       tree
     ];
-    hashedPasswordFile = sops.secrets."users/jacobpyke/password".path;
+    hashedPasswordFile = config.sops.secrets."users/jacobpyke/password".path;
   };
 
   # List packages installed in system profile. To search, run:
