@@ -5,8 +5,8 @@
   nixpkgs.config.allowUnfree = true;
 
   imports = [
-	inputs.sops-nix.nixosModules.sops
-  ]
+    inputs.sops-nix.nixosModules.sops
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -65,7 +65,7 @@
     packages = with pkgs; [
       tree
     ];
-	hashedPasswordFile = sops.secrets."users/jacobpyke/password".path;
+    hashedPasswordFile = sops.secrets."users/jacobpyke/password".path;
   };
 
   # List packages installed in system profile. To search, run:
