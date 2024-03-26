@@ -36,19 +36,19 @@
   };
 
   fonts = {
-  	fonts = with pkgs; [
-  	  noto-fonts
-  	  noto-fonts-cjk
-  	  noto-fonts-emoji
-  	  source-code-pro
-  	  source-han-mono
-  	  source-han-sans
-  	  source-han-serif
-  	  wqy_zenhei
-  	];
-  
-  	fontDir.enable = true;
-  	fontconfig.enable = true;
+    fonts = with pkgs; [
+      noto-fonts
+      noto-fonts-cjk
+      noto-fonts-emoji
+      source-code-pro
+      source-han-mono
+      source-han-sans
+      source-han-serif
+      wqy_zenhei
+    ];
+
+    fontDir.enable = true;
+    fontconfig.enable = true;
   };
 
   nix.settings.experimental-features = "nix-command flakes";
@@ -70,8 +70,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim 
-	wget
+    vim
+    wget
     kitty
     wofi
     blueman

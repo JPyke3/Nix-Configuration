@@ -1,4 +1,8 @@
-{pkgs, config, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   home.packages = [
     pkgs.steam
     pkgs.armcord
