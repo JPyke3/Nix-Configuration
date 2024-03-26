@@ -11,6 +11,7 @@
 
   imports = [
     inputs.sops-nix.nixosModules.sops
+    ../../programs/daemon/tailscale.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
