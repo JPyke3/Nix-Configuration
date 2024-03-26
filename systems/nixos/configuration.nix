@@ -49,7 +49,10 @@
     ];
 
     fontDir.enable = true;
-    fontconfig.enable = true;
+    fontconfig = { 
+		antialias = true;
+		enable = true;
+	}
   };
 
   nix.settings.experimental-features = "nix-command flakes";
