@@ -8,6 +8,6 @@
   ];
 
   sops.secrets."emulation/switch" = {
-    path = "${config.home.homeDirectory}/.config/Ryujinx/system/Prod.keys";
+    path = "${config.home.homeDirectory}/.config/Ryujinx/system/prod.keys";
   };
 }
