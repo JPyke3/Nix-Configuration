@@ -12,6 +12,7 @@
   imports = [
     inputs.sops-nix.nixosModules.sops
     ../../programs/daemon/tailscale.nix
+    ../../programs/daemon/syncthing.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
