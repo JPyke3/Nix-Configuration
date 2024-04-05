@@ -1,13 +1,12 @@
 {
   config,
   pkgs,
-  networking,
   ...
 }: {
   services = {
     syncthing = {
       enable = true;
-      user = "${networking.hostName}";
+      user = "${builtins.getEnv "HOSTNAME"}";
       dataDir = "${config.home.homeDirectory}/data";
       configDir = "${config.home.homeDirectory}/.config/syncthing";
     };
