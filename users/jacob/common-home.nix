@@ -47,6 +47,7 @@ in {
     ../../programs/cli/git.nix
     ../../programs/cli/nvim/nvim.nix
     ../../programs/cli/lf.nix
+    ../../programs/cli/nix-index.nix
   ];
 
   sops = {
