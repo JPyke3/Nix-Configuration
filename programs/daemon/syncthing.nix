@@ -4,6 +4,10 @@
   sops,
   ...
 }: {
+  sops.secrets."programs/syncthing/guiusername" = { };
+  sops.secrets."programs/syncthing/guipassword" = { };
+  sops.secrets."programs/syncthing/encryptedPasswords/singapore" = { };
+
   services = {
     syncthing = {
       enable = true;
@@ -13,6 +17,9 @@
       overrideDevices = true; # overrides any devices added or deleted through the WebUI
       overrideFolders = true; # overrides any folders added or deleted through the WebUI
       settings = {
+	    gui = {
+			user = ""
+		}
         devices = {
           # Desktop
           "singapore" = {id = "CNOEUAD-NAKEO7K-VFEOW3J-GYDKRJL-VQTCJDX-VHKDQUP-HHVIGNW-U5QY5AW";};
