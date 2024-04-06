@@ -35,9 +35,5 @@ in {
 	enable = true;
   };
 
-  homebrew = {
-	enable = true;
-  };
-
   nixpkgs.config.allowUnfree = true;
 }
