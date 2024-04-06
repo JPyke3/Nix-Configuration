@@ -31,5 +31,9 @@ in {
     ../../programs/desktop/kitty/kitty.nix
   ];
 
+  services.syncthing = {
+	enable = true;
+  };
+
   nixpkgs.config.allowUnfree = true;
 }
