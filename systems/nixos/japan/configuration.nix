@@ -6,6 +6,7 @@
   imports = [
     ./hardware-configuration.nix
     inputs.jovian.nixosModules.jovian
+    ./syncthing.nix
   ];
 
   jovian.devices.steamdeck.enable = true;
@@ -34,11 +35,4 @@
     enable = true;
     remotePlay.openFirewall = true;
   };
-
-  # Syncthing Folders
-  imports = with ../../../programs/daemon/syncthing/folders [
-	/gamesaves.nix
-	/gameroms.nix
-	/gamefirmware.nix
-  ];
 }
