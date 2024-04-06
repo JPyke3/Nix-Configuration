@@ -34,4 +34,11 @@
     enable = true;
     remotePlay.openFirewall = true;
   };
+
+  # Syncthing Folders
+  imports = with ../../../programs/daemon/syncthing/folders [
+	/gamesaves.nix
+	/gameroms.nix
+	/gamefirmware.nix
+  ];
 }
