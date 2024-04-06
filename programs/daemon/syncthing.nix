@@ -63,10 +63,6 @@
             path = "/home/jacobpyke/data/Games/Firmware";
             devices = ["singapore"];
           };
-          "Test New Folder" = {
-            path = "/home/jacobpyke/data/Test";
-            devices = ["singapore"];
-          };
         };
       };
     };
