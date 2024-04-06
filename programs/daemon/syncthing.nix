@@ -47,7 +47,7 @@
             path = "/home/jacobpyke/data/Downloads";
             devices = ["singapore" "netherlands" "korea"];
             encryptedPasswordFiles = {
-              netherlands = config.sops.secrets."programs/syncthing/encryptedPasswords/Downloads/netherlands".path;
+              "netherlands" = config.sops.secrets."programs/syncthing/encryptedPasswords/Downloads/netherlands".path;
             };
           };
           "Game Saves" = {
