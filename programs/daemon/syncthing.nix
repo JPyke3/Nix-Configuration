@@ -5,7 +5,6 @@
   ...
 }: {
   sops.secrets."programs/syncthing/guipassword" = {};
-  sops.secrets."programs/syncthing/encryptedPasswords/Downloads/netherlands" = {};
 
   services = {
     syncthing = {
@@ -43,9 +42,6 @@
           "Documents" = {
             path = "/home/jacobpyke/data/Documents";
             devices = ["singapore" "netherlands" "korea"];
-            encryptedPasswordFiles = {
-              netherlands = config.sops.secrets."programs/syncthing/encryptedPasswords/Downloads/netherlands".path;
-            };
           };
           "Downloads" = {
             path = "/home/jacobpyke/data/Downloads";
