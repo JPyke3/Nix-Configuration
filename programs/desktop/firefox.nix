@@ -50,8 +50,6 @@
           	background-color: #${base01} !important;
           }
 
-          .titlebar-buttonbox{ display: none !important; }
-
           .subviewbutton-iconic > .toolbarbutton-icon{ fill: blue !important; }
 
           #urlbar-background, #searchbar {
