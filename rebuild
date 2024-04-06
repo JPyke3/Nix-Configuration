@@ -10,7 +10,7 @@ done
 git diff *.nix
 if [ "$OS" = "Darwin" ]; then
 	echo "Nix Darwin Rebuilding..."
-	darwin-rebuild switch --flake .#Jacobs-Laptop &>~/.logs/latest-rebuild.log || (cat ~/.logs/latest-rebuild.log | grep --color error && false)
+	darwin-rebuild switch --flake .#jacob-germany &>~/.logs/latest-rebuild.log || (cat ~/.logs/latest-rebuild.log | grep --color error && false)
 	gen="Nix Darwin: $(darwin-rebuild --list-generations | sed -n '$p' | awk '{print $1}')"
 elif [ "$HOST" = "jacob-singapore" ]; then
 	echo "NixOS Rebuilding..."
