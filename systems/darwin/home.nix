@@ -32,7 +32,7 @@ in {
   ];
 
   services.syncthing = {
-	enable = true;
+    enable = true;
   };
 
   nixpkgs.config.allowUnfree = true;
