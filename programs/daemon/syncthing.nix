@@ -28,7 +28,7 @@
           # iPhone
           "korea" = {
             id = "O44PLCJ-GQFQP2Z-WCQ5LWY-5AVPXQX-NV5CU3T-DYKD3D2-VVCZSZN-ORRTRQD";
-            autoAcceptFolders = "true";
+            autoAcceptFolders = true;
           };
         };
         folders = {
