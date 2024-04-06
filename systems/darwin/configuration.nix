@@ -21,7 +21,7 @@
     enable = true;
     brews = [];
     casks = [
-      "aerospace"
+      "nikitabobko/tap/aerospace"
 	  "steam"
 	  "crossover"
     ];
