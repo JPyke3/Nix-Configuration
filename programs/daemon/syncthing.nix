@@ -49,7 +49,7 @@
           };
           "Game Saves" = {
             path = "/home/jacobpyke/data/Games/Saves";
-            devices = ["singapore" "korea"];
+            devices = ["singapore"];
           };
           "Game Roms" = {
             path = "/home/jacobpyke/data/Games/Roms";
