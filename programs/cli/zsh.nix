@@ -3,6 +3,12 @@
   pkgs,
   ...
 }: {
+  home.file.".zsh/pure".source = pkgs.fetchFromGitHub {
+	owner = "sindresorhus";
+	repo = "pure";
+	rev = "a02209d36c8509c0e62f44324127632999c9c0cf";
+	hash = "sha256-BmQO4xqd/3QnpLUitD2obVxL0UulpboT8jGNEh4ri8k=";
+  };
   programs.zsh = {
     enable = true;
     enableCompletion = true;
