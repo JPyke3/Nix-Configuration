@@ -42,14 +42,14 @@
         folders = {
           "Documents" = {
             path = "/home/jacobpyke/data/Documents";
-            devices = ["singapore" "korea"];
+            devices = ["singapore" "netherlands" "korea"];
+            encryptedPasswordFiles = {
+              netherlands = config.sops.secrets."programs/syncthing/encryptedPasswords/Downloads/netherlands".path;
+            };
           };
           "Downloads" = {
             path = "/home/jacobpyke/data/Downloads";
             devices = ["singapore" "korea"];
-            encryptedPasswordFiles = {
-              "netherlands" = config.sops.secrets."programs/syncthing/encryptedPasswords/Downloads/netherlands".path;
-            };
           };
           "Game Saves" = {
             path = "/home/jacobpyke/data/Games/Saves";
