@@ -22,7 +22,6 @@
     brews = [];
     casks = [
       "aerospace"
-	  "armcord"
 	  "steam"
 	  "crossover"
     ];
