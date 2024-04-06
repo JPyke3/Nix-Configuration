@@ -22,8 +22,8 @@
     brews = [];
     casks = [
       "nikitabobko/tap/aerospace"
-	  "steam"
-	  "crossover"
+      "steam"
+      "crossover"
     ];
   };
 
