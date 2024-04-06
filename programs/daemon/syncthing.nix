@@ -15,7 +15,12 @@
       settings = {
         devices = {
           "singapore" = {id = "CNOEUAD-NAKEO7K-VFEOW3J-GYDKRJL-VQTCJDX-VHKDQUP-HHVIGNW-U5QY5AW";};
-          "netherlands" = {id = "XQ4QCNY-G22ANRR-JBSR3SX-ODBHINE-OFS5NNF-IQQOAKW-KMSVRNA-OZLA5AQ";};
+          "netherlands" = {
+            addresses = [
+              "tcp://merlion-direct.usbx.me:14568"
+            ];
+            id = "XQ4QCNY-G22ANRR-JBSR3SX-ODBHINE-OFS5NNF-IQQOAKW-KMSVRNA-OZLA5AQ";
+          };
         };
         folders = {
           "Documents" = {
