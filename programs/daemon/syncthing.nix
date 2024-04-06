@@ -40,6 +40,9 @@
           "Downloads" = {
             path = "/home/jacobpyke/data/Downloads";
             devices = ["singapore" "netherlands" "korea"];
+            encryptedPasswordFiles = {
+              singapore = config.sops.secrets."programs/syncthing/encryptedPasswords/singapore".path;
+            };
           };
           "Game Saves" = {
             path = "/home/jacobpyke/data/Games/Saves";
