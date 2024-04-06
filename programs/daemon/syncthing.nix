@@ -37,6 +37,9 @@
             id = "O44PLCJ-GQFQP2Z-WCQ5LWY-5AVPXQX-NV5CU3T-DYKD3D2-VVCZSZN-ORRTRQD";
             autoAcceptFolders = true;
           };
+
+          # Steam Deck OLED
+          "japan" = {id = "ULJ5XZI-BGAEGK6-LXGRBAA-LIZY5OK-SXGVZZT-6VIXHSW-SH2F5HR-ECT7CQ4";};
         };
         folders = {
           "Documents" = {
@@ -49,15 +52,15 @@
           };
           "Game Saves" = {
             path = "/home/jacobpyke/data/Games/Saves";
-            devices = ["singapore"];
+            devices = ["singapore" "japan"];
           };
           "Game Roms" = {
             path = "/home/jacobpyke/data/Games/Roms";
-            devices = ["singapore"];
+            devices = ["singapore" "japan"];
           };
           "Game Firmware" = {
             path = "/home/jacobpyke/data/Games/Firmware";
-            devices = ["singapore"];
+            devices = ["singapore" "japan"];
           };
         };
       };
