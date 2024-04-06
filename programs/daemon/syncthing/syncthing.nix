@@ -40,6 +40,9 @@
 
           # Steam Deck OLED
           "japan" = {id = "ULJ5XZI-BGAEGK6-LXGRBAA-LIZY5OK-SXGVZZT-6VIXHSW-SH2F5HR-ECT7CQ4";};
+
+		  # MacBook Pro
+		  "germany" = {id = "5RBBP7J-SAIYHFG-YJKU5JF-NHS67IE-5KYSAI6-XQSL5OM-SHIKE24-NOYXFQF";};
         };
       };
     };
