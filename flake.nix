@@ -103,7 +103,7 @@
       ];
     };
     # Nix-Darwin Macbook Pro
-    darwinConfigurations."Jacobs-Laptop" = nix-darwin.lib.darwinSystem {
+    darwinConfigurations."jacob-germany" = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       specialArgs = {inherit inputs;};
       modules = [
