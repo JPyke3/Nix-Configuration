@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
+    ./syncthing.nix
   ];
 
   networking.hostName = "jacob-singapore"; # Define your hostname.
@@ -45,13 +46,4 @@
     enable = true;
     remotePlay.openFirewall = true;
   };
-
-  # Syncthing Folders
-  imports = with ../../../programs/daemon/syncthing/folders; [
-    /documents.nix
-    /downloads.nix
-    /gamesaves.nix
-    /gameroms.nix
-    /gamefirmware.nix
-  ];
 }
