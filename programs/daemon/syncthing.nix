@@ -6,6 +6,7 @@
 }: {
   sops.secrets."programs/syncthing/guipassword" = {};
   sops.secrets."programs/syncthing/encryptedPasswords/Downloads/netherlands" = {};
+
   services = {
     syncthing = {
       enable = true;
@@ -45,22 +46,22 @@
           };
           "Downloads" = {
             path = "/home/jacobpyke/data/Downloads";
-            devices = ["singapore" "netherlands" "korea"];
+            devices = ["singapore" "korea"];
             encryptedPasswordFiles = {
               "netherlands" = config.sops.secrets."programs/syncthing/encryptedPasswords/Downloads/netherlands".path;
             };
           };
           "Game Saves" = {
             path = "/home/jacobpyke/data/Games/Saves";
-            devices = ["singapore" "netherlands"];
+            devices = ["singapore"];
           };
           "Game Roms" = {
             path = "/home/jacobpyke/data/Games/Roms";
-            devices = ["singapore" "netherlands"];
+            devices = ["singapore"];
           };
           "Game Firmware" = {
             path = "/home/jacobpyke/data/Games/Firmware";
-            devices = ["singapore" "netherlands"];
+            devices = ["singapore"];
           };
         };
       };
