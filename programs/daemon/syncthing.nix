@@ -6,7 +6,7 @@
   services = {
     syncthing = {
       enable = true;
-      user = "${builtins.getEnv "HOSTNAME"}";
+      user = "jacobpyke";
       dataDir = "/home/jacobpyke/data";
       configDir = "/home/jacobpyke/.config/syncthing";
     };
