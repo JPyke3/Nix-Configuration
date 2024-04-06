@@ -23,6 +23,7 @@
               "tcp://merlion-direct.usbx.me:14568"
             ];
             id = "XQ4QCNY-G22ANRR-JBSR3SX-ODBHINE-OFS5NNF-IQQOAKW-KMSVRNA-OZLA5AQ";
+            untrusted = true;
           };
 
           # iPhone
