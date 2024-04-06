@@ -1,8 +1,6 @@
-{...}:
-{
+{...}: {
   services.syncthing.settings.folders."Downloads" = {
-		path = "/home/jacobpyke/data/Downloads";
-		devices = ["singapore" "korea"];
-	  };
+    path = "/home/jacobpyke/data/Downloads";
+    devices = ["singapore" "korea"];
   };
 }
