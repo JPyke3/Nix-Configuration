@@ -29,7 +29,7 @@ in {
   #    /run/current-system/sw/bin/systemctl start --user sops-nix
   #  '';
 
-  home.folder."Development".source = config.lib.file.mkOutOfStoreSymlink "/home/jacobpyke/data/Development";
+  home.file."Development".source = config.lib.file.mkOutOfStoreSymlink "/home/jacobpyke/data/Development";
 
   imports = [
     ../../users/jacob/common-home.nix
