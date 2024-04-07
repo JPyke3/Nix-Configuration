@@ -11,8 +11,8 @@
   #    ];
 
   environment.systemPackages = with pkgs; [
-	coreutils
-	parallel
+    coreutils
+    parallel
   ];
 
   users.users.jacobpyke = {
