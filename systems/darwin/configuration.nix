@@ -10,6 +10,10 @@
   #    [ pkgs.vim
   #    ];
 
+  environment.systemPackages = with pkgs; [
+	coreutils
+  ];
+
   users.users.jacobpyke = {
     name = "jacobpyke";
     home = "/Users/jacobpyke";
