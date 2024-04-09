@@ -1,5 +1,5 @@
-{inputs, ...}: {
+{config, ...}: {
   home.packages = [
-    inputs.nur.repos.chigyutendies.suyu
+    config.nur.repos.chigyutendies.suyu
   ];
 }

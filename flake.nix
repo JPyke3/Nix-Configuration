@@ -56,6 +56,7 @@
       system = "x86_64-linux";
       specialArgs = {inherit inputs;};
       modules = [
+        nur.nixosModules.nur
         ./systems/nixos/configuration.nix
         ./systems/nixos/singapore/configuration.nix
         home-manager.nixosModules.home-manager
@@ -73,6 +74,7 @@
       system = "x86_64-linux";
       specialArgs = {inherit inputs;};
       modules = [
+        nur.nixosModules.nur
         ./systems/nixos/configuration.nix
         ./systems/nixos/switzerland/configuration.nix
         home-manager-unstable.nixosModules.home-manager
@@ -90,6 +92,7 @@
       system = "x86_64-linux";
       specialArgs = {inherit inputs;};
       modules = [
+        nur.nixosModules.nur
         ./systems/nixos/configuration.nix
         ./systems/nixos/japan/configuration.nix
         home-manager-unstable.nixosModules.home-manager
