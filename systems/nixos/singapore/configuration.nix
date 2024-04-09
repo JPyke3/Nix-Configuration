@@ -2,6 +2,7 @@
   imports = [
     ./hardware-configuration.nix
     ./syncthing.nix
+    ../../../programs/daemon/altserver.nix
   ];
 
   networking.hostName = "jacob-singapore"; # Define your hostname.
