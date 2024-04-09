@@ -1,5 +1,5 @@
 {config, ...}: {
-  home.packages = [
+  environment.systemPackages = [
     config.nur.repos.chigyutendies.suyu
   ];
 }
