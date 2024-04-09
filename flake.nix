@@ -49,6 +49,7 @@
     jovian,
     nix-darwin,
     nixpkgs-darwin,
+    nur,
     ...
   } @ inputs: {
     # Desktop PC
