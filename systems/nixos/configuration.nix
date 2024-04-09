@@ -82,6 +82,7 @@
     blueman
     htop
     alejandra
+    parallel
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
