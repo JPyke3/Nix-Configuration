@@ -1,5 +1,5 @@
-{pkgs, ...}: {
-  home.packages = with pkgs.nur.repos.chigyutendies; [
-    suyu
+{inputs, ...}: {
+  home.packages = [
+    inputs.nur.repos.chigyutendies.suyu
   ];
 }
