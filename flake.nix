@@ -47,10 +47,6 @@
       url = "github:Jovian-Experiments/Jovian-NixOS";
       inputs.nixpkgs.follows = "unstable";
     };
-    jpyke3-suyu = {
-      url = "github:JPyke3/JPyke3-Nur";
-      inputs.nixpkgs.follows = "unstable";
-    };
   };
 
   outputs = {
