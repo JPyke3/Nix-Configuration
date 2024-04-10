@@ -1,5 +1,15 @@
 {
   description = "Home Manager configuration of jacobpyke";
+
+  nixConfig = {
+	extra-substituters = [
+		"https://jpyke3.cachix.org"
+	];
+	extra-trusted-public-keys = [
+		"jpyke3.cachix.org-1:SkUkQoQ6WbhSs7SGsMZ22H/DyJ7VNpT4/BaEvTCEQZY="
+	];
+  }
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
