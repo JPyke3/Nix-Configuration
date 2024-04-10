@@ -13,7 +13,7 @@
   jovian.steam = {
     enable = true;
     autoStart = true;
-    desktopSession = "gnome";
+    desktopSession = "plasma";
     user = "jacobpyke";
   };
 
@@ -21,7 +21,7 @@
   networking.networkmanager.wifi.powersave = true;
 
   services.xserver.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   services.pipewire.enable = true;
 
