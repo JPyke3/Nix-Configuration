@@ -3,7 +3,6 @@
     ./hardware-configuration.nix
     ./syncthing.nix
     ../../../programs/daemon/altserver.nix
-    ../../../programs/desktop/gaming/suyu.nix
   ];
 
   networking.hostName = "jacob-singapore"; # Define your hostname.
