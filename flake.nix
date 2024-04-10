@@ -49,7 +49,7 @@
     };
     jpyke3-suyu = {
       url = "github:JPyke3/JPyke3-Nur";
-	  inputs.nixpkgs.follows = "unstable";
+      inputs.nixpkgs.follows = "unstable";
     };
   };
 
