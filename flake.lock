@@ -101,11 +101,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1712708345,
-        "narHash": "sha256-Izh/LRuKenbEmJHuSRzE8dpz9JgH8e1KiBUv+i+XP/8=",
+        "lastModified": 1712709108,
+        "narHash": "sha256-wSx2y3Dqs6PFLVxePTVbsE3sLxs1EYjjhMLJGosRe/Y=",
         "owner": "JPyke3",
         "repo": "JPyke3-Nur",
-        "rev": "7a60817490d4a4fb09a9556dd355db1ae7ea7f56",
+        "rev": "c91542f40a3bc55b1257889ba8c0c2367a56e56b",
         "type": "github"
       },
       "original": {
