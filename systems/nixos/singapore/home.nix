@@ -25,6 +25,5 @@
     ../../../programs/desktop/hyprland.nix
     ../../../programs/desktop/waybar/main.nix
     ../../../programs/desktop/gaming/suyu.nix
-    ../../../programs/desktop/gaming/ryujinx.nix
   ];
 }
