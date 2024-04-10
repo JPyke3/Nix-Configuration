@@ -37,6 +37,9 @@
       url = "github:Jovian-Experiments/Jovian-NixOS";
       inputs.nixpkgs.follows = "unstable";
     };
+	jpyke3-suyu = {
+	  url = "github:JPyke3/JPyke3-Nur"
+	}
   };
 
   outputs = {
@@ -50,6 +53,7 @@
     nix-darwin,
     nixpkgs-darwin,
     nur,
+	jpyke3-suyu,
     ...
   } @ inputs: {
     # Desktop PC

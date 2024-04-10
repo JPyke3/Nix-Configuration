@@ -1,5 +1,5 @@
-{config, ...}: {
+{inputs, ...}: {
   environment.systemPackages = [
-    config.nur.repos.chigyutendies.suyu-dev
+    inputs.jpyke3-suyu.suyu-dev
   ];
 }
