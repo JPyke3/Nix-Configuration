@@ -1,5 +1,5 @@
 {inputs, ...}: {
   environment.systemPackages = [
-    inputs.jpyke3-suyu.packages.suyu-dev
+    inputs.jpyke3-suyu.packages.x86_64-linux.suyu-dev
   ];
 }
