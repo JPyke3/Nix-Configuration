@@ -4,7 +4,7 @@
   ...
 }: {
   home.packages = [
-    inputs.jpyke3-suyu.suyu-dev
+    inputs.jpyke3-suyu.packages.x86_64-linux.suyu-dev
   ];
 
   sops.secrets."emulation/switch" = {
