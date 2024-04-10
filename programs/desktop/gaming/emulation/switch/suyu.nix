@@ -8,7 +8,7 @@
   ];
 
   home.packages = [
-    inputs.jpyke3-suyu.packages.x86_64-linux.suyu-dev
+    pkgs.nur.repos.jpyke3.suyu-dev
   ];
 
   home.file."${config.home.homeDirectory}/.local/share/suyu/keys/prod.keys".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.local/emulation/keys/prod.keys";
