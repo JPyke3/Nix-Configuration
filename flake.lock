@@ -96,26 +96,6 @@
         "type": "github"
       }
     },
-    "jpyke3-suyu": {
-      "inputs": {
-        "nixpkgs": [
-          "unstable"
-        ]
-      },
-      "locked": {
-        "lastModified": 1712723180,
-        "narHash": "sha256-2V0Ps2NYlVZwzKengbV0SYtVYBf2zSpKXPocK/D6wnk=",
-        "owner": "JPyke3",
-        "repo": "JPyke3-Nur",
-        "rev": "6f7360767b1b9f7cb4bb06ad129f4a768ec65abc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "JPyke3",
-        "repo": "JPyke3-Nur",
-        "type": "github"
-      }
-    },
     "llama-cpp": {
       "inputs": {
         "flake-parts": "flake-parts",
@@ -333,7 +313,6 @@
         "home-manager": "home-manager",
         "home-manager-unstable": "home-manager-unstable",
         "jovian": "jovian",
-        "jpyke3-suyu": "jpyke3-suyu",
         "llama-cpp": "llama-cpp",
         "nix-colors": "nix-colors",
         "nix-darwin": "nix-darwin",

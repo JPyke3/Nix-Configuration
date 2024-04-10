@@ -60,7 +60,6 @@
     nix-darwin,
     nixpkgs-darwin,
     nur,
-    jpyke3-suyu,
     ...
   } @ inputs: {
     # Desktop PC
