@@ -25,6 +25,7 @@ in {
     pkgs.spotify-player
     pkgs.sops
     pkgs.nodejs_20
+    pkgs.zathura
     (import ../../scripts/tmux-sessionizer.nix {inherit pkgs;})
   ];
 
