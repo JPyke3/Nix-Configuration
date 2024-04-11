@@ -36,10 +36,6 @@ in {
     inputs.nur.overlay
   ];
 
-  unstable.oberlays = [
-    inputs.nur.overlay
-  ];
-
   colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-medium;
 
   imports = [

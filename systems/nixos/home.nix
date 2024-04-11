@@ -15,6 +15,7 @@ in {
 
   home.packages = [
     pkgs.firefox-unwrapped
+    pkgs.texliveSmall
   ];
 
   # Japanese Language Support
