@@ -53,6 +53,8 @@
       source-han-sans
       source-han-serif
       wqy_zenhei
+      corefonts
+      vistafonts
     ];
 
     fontDir.enable = true;
