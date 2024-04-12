@@ -3,6 +3,7 @@
   inputs,
   config,
   system,
+  nixpkgs,
   ...
 }: let
   pkgs_unstable = inputs.unstable.legacyPackages.${system};
