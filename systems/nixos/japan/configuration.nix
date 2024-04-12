@@ -19,8 +19,6 @@
     user = "jacobpyke";
   };
 
-  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
-
   # Small Hack for the SD Card
   systemd.services.mount-games = {
     description = "Mount /dev/mmcblk0p1 to /games";
@@ -32,8 +30,8 @@
     };
     script = ''
       if [ -b /dev/mmcblk0p1 ]; then
-        mkdir -p /games
-        mount /dev/mmcblk0p1 /games
+        /run/current-system/sw/bin/mkdir -p /games
+        /run/wrappers/bin/mount /dev/mmcblk0p1 /games
       fi
     '';
   };
