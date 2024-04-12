@@ -7,6 +7,7 @@
 }: let
   nur-no-pkgs = import inputs.nur {
     nurpkgs = import inputs.nixpkgs {system = "x86_64-linux";};
+	inherit inputs.nixpkgs
   };
 in {
   imports = [
