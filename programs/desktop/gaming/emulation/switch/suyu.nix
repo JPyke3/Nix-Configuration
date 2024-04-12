@@ -6,7 +6,7 @@
   ...
 }: let
   pkgs_unstable = inputs.unstable.legacyPackages.${system};
-  nur-no-pkgs = import nur {
+  nur-no-pkgs = import inputs.nur {
     nurpkgs = import nixpkgs {system = "x86_64-linux";};
   };
 in {
