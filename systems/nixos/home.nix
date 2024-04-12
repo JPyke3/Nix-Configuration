@@ -13,8 +13,6 @@ in {
 
   nixpkgs.config.allowUnfree = true;
 
-  home-manager.useGlobalPkgs = true;
-
   home.packages = [
     pkgs.firefox-unwrapped
     pkgs.texliveFull
