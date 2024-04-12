@@ -17,6 +17,7 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.configurationLimit = 10;
   networking.networkmanager.enable = true;
   networking.nameservers = ["1.1.1.1" "1.0.0.1"]; # Cloudflare DNS
   networking.networkmanager.dns = "none";
