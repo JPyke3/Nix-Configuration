@@ -2,8 +2,13 @@
   pkgs,
   inputs,
   config,
+  system,
   ...
-}: {
+}: let
+  nur-no-pkgs = import inputs.ur {
+    nurpkgs = import inputs.unstable {system = "${system}";};
+  };
+in {
   imports = [
     ./secrets/prodkeys.nix
   ];
