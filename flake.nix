@@ -91,7 +91,6 @@
         home-manager-unstable.nixosModules.home-manager
         {
           home-manager.users.jacobpyke = import ./systems/nixos/switzerland/home.nix;
-          home-manager.useGlobalPkgs = true;
           home-manager.extraSpecialArgs = {
             inherit inputs;
             system = "x86_64-linux";
