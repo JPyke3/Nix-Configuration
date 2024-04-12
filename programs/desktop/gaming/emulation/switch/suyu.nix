@@ -4,9 +4,8 @@
   system,
   ...
 }: let
-  pkgs = import inputs.unstable { inherit system; };
+  pkgs = import inputs.unstable {inherit system;};
   nur-no-pkgs = import inputs.nur {
-    nurpkgs = import inputs.nixpkgs {system = "x86_64-linux";};
     pkgs = pkgs;
   };
 in {
