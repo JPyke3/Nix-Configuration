@@ -5,7 +5,9 @@
   system,
   ...
 }: let
-  nur-no-pkgs = import inputs.nur;
+  nur-no-pkgs = import inputs.nur {
+    nurpkgs = import nixpkgs {system = "${system}";};
+  };
 in {
   imports = [
     ./secrets/prodkeys.nix
