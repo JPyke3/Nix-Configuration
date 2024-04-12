@@ -5,9 +5,8 @@
   system,
   ...
 }: let
-  pkgs_unstable = inputs.unstable.legacyPackages.${system};
   nur-no-pkgs = import inputs.nur {
-    pkgs = import pkgs_unstable;
+    pkgs = inputs.unstable;
   };
 in {
   imports = [
