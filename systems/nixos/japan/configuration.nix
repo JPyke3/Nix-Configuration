@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  lib,
   ...
 }: {
   imports = [
@@ -16,6 +17,25 @@
     autoStart = true;
     desktopSession = "plasma";
     user = "jacobpyke";
+  };
+
+  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
+
+  # Small Hack for the SD Card
+  systemd.services.mount-games = {
+    description = "Mount /dev/mmcblk0p1 to /games";
+    wantedBy = ["multi-user.target"];
+    after = ["multi-user.target"];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+    script = ''
+      if [ -b /dev/mmcblk0p1 ]; then
+        mkdir -p /games
+        mount /dev/mmcblk0p1 /games
+      fi
+    '';
   };
 
   networking.hostName = "jacob-japan"; # Define your hostname.
