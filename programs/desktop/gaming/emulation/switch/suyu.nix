@@ -14,7 +14,7 @@ in {
   ];
 
   home.packages = [
-    config.nur.repos.jpyke3.suyu-dev
+    nur-no-pkgs.repos.jpyke3.suyu-dev
   ];
 
   home.file."${config.home.homeDirectory}/.local/share/suyu/keys/prod.keys".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.local/emulation/keys/prod.keys";
