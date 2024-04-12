@@ -3,12 +3,11 @@
   inputs,
   config,
   system,
-  nixpkgs,
   ...
 }: let
   pkgs_unstable = inputs.unstable.legacyPackages.${system};
   nur-no-pkgs = import inputs.nur {
-    nurpkgs = import nixpkgs {system = "x86_64-linux";};
+    nurpkgs = import pkgs {system = "x86_64-linux";};
   };
 in {
   imports = [
