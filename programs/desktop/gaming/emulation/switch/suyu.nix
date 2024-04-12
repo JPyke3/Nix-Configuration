@@ -5,10 +5,7 @@
   system,
   ...
 }: let
-  pkgs_unstable = inputs.unstable.legacyPackages.${system};
-  nur-no-pkgs = import inputs.nur {
-    nurpkgs = import pkgs {system = "x86_64-linux";};
-  };
+  nur-no-pkgs = import inputs.nur;
 in {
   imports = [
     ./secrets/prodkeys.nix
