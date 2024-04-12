@@ -12,6 +12,7 @@
     pkgs.armcord
     pkgs.runelite
     pkgs.obsidian
+    pkgs.texliveFull
     # inputs.llama-cpp.packages.x86_64-linux.rocm
   ];
 
