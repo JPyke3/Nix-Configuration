@@ -16,6 +16,7 @@
     nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-23.11-darwin";
     nur = {
       url = "github:nix-community/nur";
+      inputs.nixpkgs.follows = "unstable";
     };
     home-manager = {
       url = "github:nix-community/home-manager/release-23.11";
