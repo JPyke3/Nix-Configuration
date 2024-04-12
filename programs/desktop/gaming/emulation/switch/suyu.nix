@@ -5,7 +5,7 @@
   system,
   ...
 }: let
-  nur-no-pkgs = import inputs.ur {
+  nur-no-pkgs = import inputs.nur {
     nurpkgs = import inputs.unstable {system = "${system}";};
   };
 in {
