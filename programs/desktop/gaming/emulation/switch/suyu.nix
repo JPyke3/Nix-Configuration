@@ -4,7 +4,7 @@
   system,
   ...
 }: let
-  nur-no-pkgs = import inputs.nur {
+  nur = import inputs.nur {
     nurpkgs = import inputs.unstable {inherit system;};
     pkgs = import inputs.unstable {inherit system;};
   };
@@ -14,7 +14,7 @@ in {
   ];
 
   home.packages = [
-    nur-no-pkgs.repos.jpyke3.suyu-dev
+    nur.repos.jpyke3.suyu-dev
   ];
 
   home.file."${config.home.homeDirectory}/.local/share/suyu/keys/prod.keys".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.local/emulation/keys/prod.keys";
