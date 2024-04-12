@@ -6,7 +6,7 @@
 }: let
   nur-no-pkgs = import inputs.nur {
     nurpkgs = import inputs.unstable {inherit system;};
-    pkgs = import inputs.unstable {inherit system;};;
+    pkgs = import inputs.unstable {inherit system;};
   };
 in {
   imports = [
