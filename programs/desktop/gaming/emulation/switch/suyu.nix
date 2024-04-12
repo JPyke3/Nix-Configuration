@@ -1,13 +1,13 @@
 {
-  pkgs,
   inputs,
   config,
   system,
   ...
 }: let
+  pkgs = import inputs.unstable {system = "x86_64-linux";};
   nur-no-pkgs = import inputs.nur {
     nurpkgs = import inputs.nixpkgs {system = "x86_64-linux";};
-    pkgs = inputs.unstable;
+    pkgs = pkgs;
   };
 in {
   imports = [
