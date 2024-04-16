@@ -13,9 +13,9 @@
   jovian.devices.steamdeck.enable = true;
 
   jovian.decky-loader = {
-	enable = true;
-	user = "jacobpyke";
-	};
+    enable = true;
+    user = "jacobpyke";
+  };
 
   jovian.steam = {
     enable = true;
