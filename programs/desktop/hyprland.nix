@@ -13,6 +13,11 @@
           "size 800 450, title:^(Picture-in-Picture|Firefox)$"
           "pin, title:^(Picture-in-Picture|Firefox)$"
           "stayfocused, title:^()$,class:^(steam)$"
+          "opacity 0.0 override,class:^(xwaylandvideobridge)$"
+          "noanim,class:^(xwaylandvideobridge)$"
+          "noinitialfocus,class:^(xwaylandvideobridge)$"
+          "maxsize 1 1,class:^(xwaylandvideobridge)$"
+          "noblur,class:^(xwaylandvideobridge)$"
         ];
         exec = "swww img ~/Pictures/Wallpapers/gruvbox-dark-rainbow.png";
         "col.active_border" = "rgba(${base0E}ff) rgba(${base09}ff) 60deg";
