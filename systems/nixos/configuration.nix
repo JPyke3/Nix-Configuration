@@ -95,6 +95,7 @@
     xwaylandvideobridge
     nom
     nvd
+    nh
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
