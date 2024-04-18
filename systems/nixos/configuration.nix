@@ -93,6 +93,8 @@
     alejandra
     parallel
     xwaylandvideobridge
+    nom
+    nvd
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
