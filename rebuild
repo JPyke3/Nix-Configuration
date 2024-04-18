@@ -14,11 +14,11 @@ if [ "$OS" = "Darwin" ]; then
 	gen="Nix Darwin: $(darwin-rebuild --list-generations | sed -n '$p' | awk '{print $1}')"
 elif [ "$HOST" = "jacob-singapore" ]; then
 	echo "NixOS Rebuilding..."
-	sudo nixos-rebuild switch --flake .#jacob-singapore --show-trace &>~/.logs/latest-rebuild.log || (cat ~/.logs/latest-rebuild.log | grep --color error && false)
+	nh os switch .#jacob-singapore 
 	gen="NixOS: $(nix-env --list-generations | sed -n '$p' | awk '{print $1}')"
 elif [ "$HOST" = "jacob-switzerland" ]; then
 	echo "NixOS Rebuilding..."
-	sudo nixos-rebuild switch --flake .#jacob-switzerland --show-trace &>~/.logs/latest-rebuild.log || (cat ~/.logs/latest-rebuild.log | grep --color error && false)
+	nh os switch .#jacob-switzerland
 	gen="NixOS: $(nix-env --list-generations | sed -n '$p' | awk '{print $1}')"
 else
 	echo "Home-Manager Rebuilding..."
