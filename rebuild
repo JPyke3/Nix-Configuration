@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 CURRENT_DIR=$(echo $PWD)
 OS=$(uname -s)
-SUBOS=$(uname -a | awk '{ print $2 }')
+SUBOS=$(cat /etc/*-release | grep DISTRIB_ID | sed s/DISTRIB_ID=//)
 HOST=$(hostname)
 nvim .
 for file in $(find . -name "*.nix"); do
@@ -12,13 +12,9 @@ if [ "$OS" = "Darwin" ]; then
 	echo "Nix Darwin Rebuilding..."
 	darwin-rebuild switch --flake .#jacob-germany &>~/.logs/latest-rebuild.log || (cat ~/.logs/latest-rebuild.log | grep --color error && false)
 	gen="Nix Darwin: $(darwin-rebuild --list-generations | sed -n '$p' | awk '{print $1}')"
-elif [ "$HOST" = "jacob-singapore" ]; then
+elif [ "$SUBOS" = nixos ]; then
 	echo "NixOS Rebuilding..."
-	nh os switch .#jacob-singapore 
-	gen="NixOS: $(nix-env --list-generations | sed -n '$p' | awk '{print $1}')"
-elif [ "$HOST" = "jacob-switzerland" ]; then
-	echo "NixOS Rebuilding..."
-	nh os switch .#jacob-switzerland
+	nh os switch . 
 	gen="NixOS: $(nix-env --list-generations | sed -n '$p' | awk '{print $1}')"
 else
 	echo "Home-Manager Rebuilding..."
