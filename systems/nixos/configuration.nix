@@ -5,6 +5,7 @@
   pkgs,
   inputs,
   config,
+  system,
   ...
 }: {
   nixpkgs.config.allowUnfree = true;
@@ -13,6 +14,7 @@
     inputs.sops-nix.nixosModules.sops
     ../../programs/daemon/tailscale.nix
     ../../programs/daemon/syncthing/syncthing.nix
+    ./unstable-packages.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -95,7 +97,6 @@
     xwaylandvideobridge
     nom
     nvd
-    nh
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
