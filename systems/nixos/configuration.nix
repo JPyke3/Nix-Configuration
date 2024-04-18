@@ -97,7 +97,6 @@
     xwaylandvideobridge
     nom
     nvd
-    neofetch
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
