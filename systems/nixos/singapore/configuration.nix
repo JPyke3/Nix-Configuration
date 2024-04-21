@@ -29,6 +29,7 @@
 
   environment.systemPackages = with pkgs; [
     amdgpu_top
+    nur.repos.ataraxiasjel.waydroid-script
   ];
 
   programs.hyprland = {
