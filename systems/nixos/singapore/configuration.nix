@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ./syncthing.nix
@@ -27,9 +31,9 @@
     ];
   };
 
-  environment.systemPackages = with pkgs; [
-    amdgpu_top
-    nur.repos.ataraxiasjel.waydroid-script
+  environment.systemPackages = [
+    pkgs.amdgpu_top
+    config.nur.repos.ataraxiasjel.waydroid-script
   ];
 
   programs.hyprland = {
