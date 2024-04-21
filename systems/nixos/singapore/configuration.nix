@@ -36,6 +36,8 @@
   };
   services.xserver.desktopManager.plasma5.enable = true;
 
+  virtualisation.waydroid.enable = true;
+
   system.autoUpgrade = {
     enable = true;
     allowReboot = true;
