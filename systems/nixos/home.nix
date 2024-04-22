@@ -17,6 +17,7 @@ in {
     pkgs.firefox-unwrapped
     pkgs.lutris
     pkgs.vlc
+    pkgs.anki
   ];
 
   # Japanese Language Support
