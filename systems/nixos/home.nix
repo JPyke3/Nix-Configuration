@@ -17,7 +17,6 @@ in {
     pkgs.firefox-unwrapped
     pkgs.lutris
     pkgs.vlc
-    pkgs.hypnotix
   ];
 
   # Japanese Language Support
