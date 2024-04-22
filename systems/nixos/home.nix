@@ -16,6 +16,7 @@ in {
   home.packages = [
     pkgs.firefox-unwrapped
     pkgs.lutris
+    pkgs.vlc
   ];
 
   # Japanese Language Support
