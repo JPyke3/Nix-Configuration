@@ -25,7 +25,7 @@ in {
             pname = "toggl-button-time-tracker";
             version = "3.0.29";
             addonId = "{5546ad8c-16eb-4c07-b7ca-10df9781793e}";
-            url = "https://addons.mozilla.org/firefox/downloads/file/4220023/toggl_button_time_tracker-3.0.29.xpi=";
+            url = "https://addons.mozilla.org/firefox/downloads/file/4220023/toggl_button_time_tracker-3.0.29.xpi";
             sha256 = "";
             # set `devtools.jsonview.enabled: false`
             meta = {};
