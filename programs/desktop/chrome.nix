@@ -1,6 +1,6 @@
 {...}: {
   programs.chromium = {
-    enabled = true;
+    enable = true;
     extensions = [
       {id = "nngceckbapebfimnlniiiahkandclblb";} #Bitwarden
       {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} #uBlock Origin
