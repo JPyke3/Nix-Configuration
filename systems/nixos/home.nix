@@ -39,6 +39,7 @@ in {
   imports = [
     ../../users/jacob/common-home.nix
     ../../programs/desktop/firefox.nix
+    ../../programs/desktop/chrome.nix
     ../../programs/desktop/kitty/kitty.nix
     ../../programs/desktop/gaming/emulation/switch/suyu.nix
     ../../programs/desktop/gaming/emulation/switch/ryujinx.nix
