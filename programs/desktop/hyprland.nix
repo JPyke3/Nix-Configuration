@@ -18,7 +18,7 @@
           "noinitialfocus,class:^(xwaylandvideobridge)$"
           "maxsize 1 1,class:^(xwaylandvideobridge)$"
           "noblur,class:^(xwaylandvideobridge)$"
-          "workspace 9, title:^(.*steam.*)$"
+          "workspace 9, class:^(steam)$"
         ];
         exec = "swww img ~/Pictures/Wallpapers/gruvbox-dark-rainbow.png";
         "col.active_border" = "rgba(${base0E}ff) rgba(${base09}ff) 60deg";
