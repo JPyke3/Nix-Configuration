@@ -14,6 +14,7 @@
     pkgs.obsidian
     pkgs.texliveFull
     pkgs.slack
+    pkgs.jellyfin-mpv-shim
     # inputs.llama-cpp.packages.x86_64-linux.rocm
   ];
 
