@@ -18,6 +18,7 @@ in {
     pkgs.lutris
     pkgs.vlc
     pkgs.anki
+    pkgs.mpv
   ];
 
   # Japanese Language Support
