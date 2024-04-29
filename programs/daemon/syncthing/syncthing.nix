@@ -38,6 +38,12 @@
             autoAcceptFolders = true;
           };
 
+          # iPad Mini
+          "italy" = {
+            id = "2FBCKZE-EB6KHXB-UFOGFQT-7WGVNJW-R4PVEMR-5U4QXSW-RVHKO6V-HZ2WUQ6";
+            autoAcceptFolders = true;
+          };
+
           # Steam Deck OLED
           "japan" = {id = "ULJ5XZI-BGAEGK6-LXGRBAA-LIZY5OK-SXGVZZT-6VIXHSW-SH2F5HR-ECT7CQ4";};
 
