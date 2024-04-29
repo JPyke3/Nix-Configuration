@@ -14,9 +14,7 @@
           "noinitialfocus,class:^(xwaylandvideobridge)$"
           "maxsize 1 1,class:^(xwaylandvideobridge)$"
           "noblur,class:^(xwaylandvideobridge)$"
-          "workspace 9 silent, class:^([Ss]team)$, title:^([Ss]team)$"
-          "workspace 9 silent float, class:^([Ss]team)$, title:^((?![Ss]team).*)$"
-          "workspace 9 silent tile, class:^([Ss]team)$, title:^([Ss]team)$"
+          "workspace 9 silent, class:^([Ss]team)$"
           "workspace 10, class:^(mpv)$"
         ];
         exec = "swww img ~/Pictures/Wallpapers/gruvbox-dark-rainbow.png";
