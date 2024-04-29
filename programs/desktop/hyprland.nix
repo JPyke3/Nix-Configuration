@@ -7,7 +7,7 @@
     enable = true;
     settings = {
       general = with config.colorScheme.colors; {
-        exec-once = ["waybar" "swww init" "swaync"];
+        exec-once = ["waybar" "swww init" "swaync" "[workspace 1 silent] firefox"];
         windowrulev2 = [
           "float, title:^(Picture-in-Picture|Firefox)$"
           "size 800 450, title:^(Picture-in-Picture|Firefox)$"
