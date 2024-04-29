@@ -40,7 +40,7 @@
 
           # iPad Mini
           "italy" = {
-            id = "2FBCKZE-EB6KHXB-UFOGFQT-7WGVNJW-R4PVEMR-5U4QXSW-RVHKO6V-HZ2WUQ6";
+            id = "UDBRW67-QVOS2BW-UZ3VV6W-X4AAOUQ-5LPOPOF-UBGJVL5-T7BAOES-WGHTGQV";
             autoAcceptFolders = true;
           };
 
