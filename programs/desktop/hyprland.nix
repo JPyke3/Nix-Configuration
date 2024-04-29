@@ -1,13 +1,9 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{config, ...}: {
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
       general = with config.colorScheme.colors; {
-        exec-once = ["waybar" "swww init" "swaync" "[workspace 1 silent] firefox" "[workspace 2 silent] firefox" "[workspace 3 silent] kitty" "[workspace 4 silent] obsidian" "[workspace 5 silent] slack" "[workspace 6 silent] kitty spotify_player" "[workspace 9 silent] steam"];
+        exec-once = ["waybar" "swww init" "swaync" "jellyfin-mpv-shim" "[workspace 1 silent] firefox" "[workspace 2 silent] firefox" "[workspace 3 silent] kitty" "[workspace 4 silent] obsidian" "[workspace 5 silent] slack" "[workspace 6 silent] kitty spotify_player" "[workspace 9 silent] steam"];
         windowrulev2 = [
           "float, title:^(Picture-in-Picture|Firefox)$"
           "size 800 450, title:^(Picture-in-Picture|Firefox)$"
@@ -21,6 +17,7 @@
           "workspace 9 silent, class:^([Ss]team)$, title:^([Ss]team)$"
           "float, class:^([Ss]team)$, title:^((?![Ss]team).*)$"
           "tile, class:^([Ss]team)$, title:^([Ss]team)$"
+          "workspace 10, class:^(mpv)$"
         ];
         exec = "swww img ~/Pictures/Wallpapers/gruvbox-dark-rainbow.png";
         "col.active_border" = "rgba(${base0E}ff) rgba(${base09}ff) 60deg";
