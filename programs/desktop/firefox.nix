@@ -37,6 +37,7 @@ in {
           "gfx.webrender.all" = true;
           "gfx.webrender.force-legacy-layers" = true;
           "browser.fullscreen.autohide" = false;
+          "browser.sessionstore.max_resumed_crashes" = 0;
         };
         userChrome = with config.colorScheme.colors; ''
           toolbar#TabsToolbar
