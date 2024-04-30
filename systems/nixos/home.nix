@@ -19,6 +19,7 @@ in {
     pkgs.vlc
     pkgs.anki
     pkgs.mpv
+    pkgs.themechanger
   ];
 
   # Japanese Language Support
