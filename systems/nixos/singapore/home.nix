@@ -15,7 +15,7 @@
     pkgs.texliveFull
     pkgs.slack
     pkgs.jellyfin-mpv-shim
-    pkgs.telegram
+    pkgs.telegram-desktop
     # inputs.llama-cpp.packages.x86_64-linux.rocm
   ];
 
