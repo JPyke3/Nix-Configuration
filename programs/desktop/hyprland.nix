@@ -14,6 +14,7 @@
           "noinitialfocus,class:^(xwaylandvideobridge)$"
           "maxsize 1 1,class:^(xwaylandvideobridge)$"
           "noblur,class:^(xwaylandvideobridge)$"
+          "workspace 7 silent, class:^([Aa]rm[Cc]ord)$"
           "workspace 9 silent, class:^([Ss]team)$"
           "workspace 10, class:^(mpv)$"
         ];
