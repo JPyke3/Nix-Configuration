@@ -45,7 +45,7 @@
 
   system.autoUpgrade = {
     enable = true;
-    allowReboot = true;
+    allowReboot = false;
     dates = "03:00";
     flake = "github:JPyke3/Nix-Configuration";
     persistent = true;
