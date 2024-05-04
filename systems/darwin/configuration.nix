@@ -32,7 +32,7 @@
 	  "koekeishiya/formulae/yabai"
     ];
 	masApps = {
-		Infuse = "1136220934";
+		Infuse = 1136220934;
 	};
   };
 
