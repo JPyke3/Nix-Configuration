@@ -48,7 +48,7 @@
           "japan" = {id = "ULJ5XZI-BGAEGK6-LXGRBAA-LIZY5OK-SXGVZZT-6VIXHSW-SH2F5HR-ECT7CQ4";};
 
           # MacBook Pro
-          "germany" = {id = "IBP7QMX-VLVOLK2-S4EUMDH-DP5OAGL-BZCG5PZ-U6CMSLD-LHKRYIA-3T4I4AO";};
+          "germany" = {id = "H233TH5-BV5EEES-ERKRY5R-WKMO53V-PIQRUEA-JJULILI-HOZBFWC-GJPKFQX";};
         };
       };
     };
