@@ -12,6 +12,7 @@ in {
     rectangle
     darwin.apple_sdk.frameworks.Foundation
 	jellyfin-mpv-shim
+	mpv
   ];
 
   nixpkgs.overlays = [
