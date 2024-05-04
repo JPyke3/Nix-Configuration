@@ -12,7 +12,7 @@ in {
     rectangle
     darwin.apple_sdk.frameworks.Foundation
 	mpv
-	anki
+	anki-bin
   ];
 
   nixpkgs.overlays = [
