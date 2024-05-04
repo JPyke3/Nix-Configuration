@@ -31,6 +31,7 @@
       "crossover"
 	  "tailscale"
 	  "koekeishiya/formulae/yabai"
+	  "raycast"
     ];
 	masApps = {
 		Infuse = 1136220934;
