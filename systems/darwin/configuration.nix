@@ -13,7 +13,7 @@
   environment.systemPackages = with pkgs; [
     coreutils
     parallel
-	anki
+	anki-bin
   ];
 
   users.users.jacobpyke = {
