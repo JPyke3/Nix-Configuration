@@ -29,6 +29,7 @@
       "nikitabobko/tap/aerospace"
       "steam"
       "crossover"
+	  "tailscale"
 	  "koekeishiya/formulae/yabai"
     ];
 	masApps = {
