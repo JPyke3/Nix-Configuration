@@ -32,6 +32,7 @@
 	  "tailscale"
 	  "koekeishiya/formulae/yabai"
 	  "raycast"
+	  "anki"
     ];
 	masApps = {
 		Infuse = 1136220934;
