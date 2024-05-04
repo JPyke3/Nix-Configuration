@@ -13,6 +13,7 @@
   environment.systemPackages = with pkgs; [
     coreutils
     parallel
+	anki
   ];
 
   users.users.jacobpyke = {
@@ -34,6 +35,7 @@
     ];
 	masApps = {
 		Infuse = 1136220934;
+		"Timery for Toggl" = 1425368544;
 	};
   };
 
