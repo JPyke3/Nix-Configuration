@@ -31,6 +31,9 @@
       "crossover"
 	  "koekeishiya/formulae/yabai"
     ];
+	masApps = {
+		Infuse = "1136220934";
+	};
   };
 
   # Use a custom configuration.nix location.
