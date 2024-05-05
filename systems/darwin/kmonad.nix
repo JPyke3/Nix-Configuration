@@ -1,8 +1,8 @@
 { kmonad, config, lib, pkgs, ... }:
 
-let cfg = config.mtoohey.kmonad; in
+let cfg = config.jpyke3.kmonad; in
 {
-  options.mtoohey.kmonad = {
+  options.jpyke3.kmonad = {
     enable = lib.mkEnableOption "kmonad";
 
     config = lib.mkOption {
