@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: {
   nixpkgs.hostPlatform = "aarch64-darwin";
