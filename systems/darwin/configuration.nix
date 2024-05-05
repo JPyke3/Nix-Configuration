@@ -14,7 +14,6 @@
   environment.systemPackages = with pkgs; [
     coreutils
     parallel
-	inputs.kmonad
   ];
 
   users.users.jacobpyke = {
