@@ -64,6 +64,7 @@
     nix-darwin,
     nixpkgs-darwin,
     nur,
+	kmonad,
     ...
   } @ inputs: {
     # Desktop PC
