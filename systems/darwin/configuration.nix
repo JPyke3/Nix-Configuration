@@ -24,13 +24,14 @@
 
   homebrew = {
     enable = true;
-    brews = [];
+    brews = [
+		"koekeishiya/formulae/yabai"
+	];
     casks = [
       "nikitabobko/tap/aerospace"
       "steam"
       "crossover"
 	  "tailscale"
-	  "koekeishiya/formulae/yabai"
 	  "raycast"
 	  "anki"
     ];
