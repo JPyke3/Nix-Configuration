@@ -13,6 +13,7 @@
   environment.systemPackages = with pkgs; [
     coreutils
     parallel
+	inputs.kmonad.aarch64-darwin.kmonad
   ];
 
   users.users.jacobpyke = {
