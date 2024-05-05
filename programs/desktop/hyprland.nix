@@ -48,8 +48,8 @@
           "$mod ALT, $down, resizeactive, 0, 160"
           "$mod ALT, $up, resizeactive, 0, -160"
           "$mod ALT, $right, resizeactive, 160, 0"
-          "$mod, C, movetoworkspace, special"
-          "$mod SHIFT, C, togglespecialworkspace"
+          "$mod, C, togglespecialworkspace"
+          "$mod SHIFT, C, movetoworkspace, special"
         ]
         ++ (
           # workspaces
