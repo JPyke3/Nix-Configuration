@@ -47,6 +47,10 @@
       url = "github:Jovian-Experiments/Jovian-NixOS";
       inputs.nixpkgs.follows = "unstable";
     };
+	kmonad = {
+	  url = "git+https://github.com/kmonad/kmonad?submodules=1&dir=nix";
+	  inputs.nixpkgs.follows = "nixpkgs";
+	};
   };
 
   outputs = {

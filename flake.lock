@@ -96,6 +96,30 @@
         "type": "github"
       }
     },
+    "kmonad": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "nix",
+        "lastModified": 1714145921,
+        "narHash": "sha256-QguoNl/+GcvkksVUpuxbLvejTgDMY5EgxKqv+NG3Q/0=",
+        "ref": "refs/heads/master",
+        "rev": "1a229b1a2a2d8077123e23c7c2c2866a97fe10d7",
+        "revCount": 787,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/kmonad/kmonad?dir=nix"
+      },
+      "original": {
+        "dir": "nix",
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/kmonad/kmonad?dir=nix"
+      }
+    },
     "llama-cpp": {
       "inputs": {
         "flake-parts": "flake-parts",
@@ -313,6 +337,7 @@
         "home-manager": "home-manager",
         "home-manager-unstable": "home-manager-unstable",
         "jovian": "jovian",
+        "kmonad": "kmonad",
         "llama-cpp": "llama-cpp",
         "nix-colors": "nix-colors",
         "nix-darwin": "nix-darwin",
