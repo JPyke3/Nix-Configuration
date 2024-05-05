@@ -125,6 +125,7 @@
       system = "aarch64-darwin";
       specialArgs = {inherit inputs;};
       modules = [
+        ./systems/darwin/kmonad.nix
         ./systems/darwin/configuration.nix
         home-manager.darwinModules.home-manager
         {
