@@ -16,7 +16,7 @@
     parallel
   ];
 
-  config.jpyke3.kmonad = {
+  jpyke3.kmonad = {
 	enable = true;
   };
 
