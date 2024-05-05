@@ -26,6 +26,7 @@
     enable = true;
     brews = [
 		"koekeishiya/formulae/yabai"
+		"koekeishiya/formulae/skhd"
 	];
     casks = [
       "nikitabobko/tap/aerospace"
