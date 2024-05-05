@@ -16,6 +16,10 @@
     parallel
   ];
 
+  config.jpyke3.kmonad = {
+	enable = true;
+  };
+
   users.users.jacobpyke = {
     name = "jacobpyke";
     home = "/Users/jacobpyke";
