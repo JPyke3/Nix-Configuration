@@ -1,5 +1,5 @@
 {...}: {
-  import = [
+  imports = [
     ./skhd.nix
   ];
   services.yabai = {
