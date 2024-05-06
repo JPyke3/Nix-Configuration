@@ -1,6 +1,6 @@
 {...}: {
   services.sketchybar = {
     enable = true;
-	config = builtins.readFile ./sketchybarrc;
+    config = builtins.readFile ./sketchybarrc;
   };
 }
