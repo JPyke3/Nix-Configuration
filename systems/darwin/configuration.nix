@@ -12,6 +12,7 @@
   environment.systemPackages = with pkgs; [
     coreutils
     parallel
+	alejandra
   ];
 
   users.users.jacobpyke = {
