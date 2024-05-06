@@ -3,16 +3,12 @@
   inputs,
   system,
   ...
-}: let
-  nur = import inputs.nur {
-    nurpkgs = pkgs;
-    pkgs = pkgs;
-  };
-in {
+}: {
   imports = [
     ./mac-defaults.nix
     ../../programs/cli/homebrew.nix
     ../../programs/daemon/yabai.nix
+    ../../programs/daemon/kanata.nix
   ];
 
   nixpkgs.hostPlatform = "aarch64-darwin";
@@ -25,7 +21,6 @@ in {
     coreutils
     parallel
     alejandra
-    nur.repos.jpyke3.kanata-bin
   ];
 
   users.users.jacobpyke = {
