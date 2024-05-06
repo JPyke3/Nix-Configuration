@@ -18,7 +18,7 @@ in {
   };
 
   launchd.daemons.kanata = {
-    command = "exec ${nur.repos.jpyke3.kanata-bin}/bin/kanata --cfg /etc/keyboard.kbd";
+    command = "${nur.repos.jpyke3.kanata-bin}/bin/kanata --cfg /etc/keyboard.kbd";
     serviceConfig = {
       KeepAlive = true;
       RunAtLoad = true;
