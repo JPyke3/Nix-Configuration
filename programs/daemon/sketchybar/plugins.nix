@@ -10,7 +10,7 @@
       # Function to convert day of the week to Japanese Kanji
       function day_to_japanese() {
           local day="$1"
-          case "$day" in
+          case $day in
               "Mon") echo "月";;
               "Tue") echo "火";;
               "Wed") echo "水";;
