@@ -10,8 +10,6 @@
     parallel
   ];
 
-  jpyke3.kmonad.enable = true;
-
   users.users.jacobpyke = {
     name = "jacobpyke";
     home = "/Users/jacobpyke";
@@ -36,6 +34,29 @@
 	masApps = {
 		Infuse = 1136220934;
 		"Timery for Toggl" = 1425368544;
+	};
+  };
+
+  system.defaults = { 
+  	# Dock Settings
+  	dock = {
+		autoHide = true;
+		mineffect = "scale";
+		orientation = "left";
+		minimize-to-application = true;
+		persistent-apps = [
+			"${pkgs.firefox-bin}/Applications/Firefox.app"
+			"${pkgs.kitty}/Applications/Kitty.app"
+			"/Applications/Messages.app"
+			"/Applications/System Settings.app"
+		];
+		show-recents = false;
+
+		# Disable Hover actions
+		wvous-bl-corner = "1";
+		wvous-br-corner = "1";
+		wvous-tl-corner = "1";
+		wvous-tr-corner = "1";
 	};
   };
 
