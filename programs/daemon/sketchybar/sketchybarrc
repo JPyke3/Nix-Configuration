@@ -3,7 +3,7 @@
 # For a (much) more advanced configuration example see my dotfiles:
 # https://github.com/FelixKratz/dotfiles
 
-PLUGIN_DIR="$CONFIG_DIR/plugins"
+PLUGIN_DIR="/Users/jacobpyke/.config/sketchybar/plugins"
 
 ##### Bar Appearance #####
 # Configuring the general appearance of the bar.
