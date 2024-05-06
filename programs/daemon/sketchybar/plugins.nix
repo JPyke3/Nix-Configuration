@@ -36,7 +36,7 @@
       	ICON_PADDING_RIGHT=7
       	;;
       4)
-      	INCON=四
+      	ICON=四
       	ICON_PADDING_LEFT=7
       	ICON_PADDING_RIGHT=7
       	;;
