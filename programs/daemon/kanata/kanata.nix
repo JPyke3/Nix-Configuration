@@ -25,6 +25,7 @@ in {
       StandardErrorPath = "/var/log/kanata.err.log";
       StandardOutPath = "/var/log/kanata.out.log";
       ProcessType = "Interactive";
+      Nice = -30;
     };
   };
 
