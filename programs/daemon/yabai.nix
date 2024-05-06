@@ -11,7 +11,7 @@ in {
   ];
   services.yabai = {
     enable = true;
-    package = pkgs.yabai;
+    package = pkgs_unstable.yabai;
     enableScriptingAddition = true;
     config = {
       layout = "bsp";
