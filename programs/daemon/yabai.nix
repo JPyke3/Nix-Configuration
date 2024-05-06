@@ -10,7 +10,6 @@ in {
     config = {
       # General
       layout = "bsp";
-      window_gap = "10";
 
       # Focus follows mouse
       focus_follows_mouse = "autoraise";
