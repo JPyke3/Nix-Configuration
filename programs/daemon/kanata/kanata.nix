@@ -28,6 +28,6 @@ in {
   };
 
   security.sudo.extraConfig = ''
-    jacobpyke ALL = (ALL) NOPASSWD: ${nur.repos.jpyke3.kanata-bin}/bin/kanata
+    %admin ALL=(root) NOPASSWD: ${nur.repos.jpyke3.kanata-bin}/bin/kanata --cfg /etc/keyboard.kbd
   '';
 }
