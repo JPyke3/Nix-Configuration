@@ -51,8 +51,8 @@
 			persistent-apps = [
 				"${pkgs.firefox-bin}/Applications/Firefox.app"
 				"${pkgs.kitty}/Applications/Kitty.app"
-				"/Applications/Messages.app"
-				"/Applications/System Settings.app"
+				"/System/Applications/Messages.app"
+				"/System/Applications/System Settings.app"
 			];
 			show-recents = false;
 
