@@ -2,7 +2,6 @@
   homebrew = {
     enable = true;
     brews = [
-      "koekeishiya/formulae/skhd"
     ];
     casks = [
       "nikitabobko/tap/aerospace"
