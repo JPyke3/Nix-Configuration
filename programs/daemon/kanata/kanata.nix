@@ -26,4 +26,8 @@ in {
       StandardOutPath = "/var/log/kanata.out.log";
     };
   };
+
+  security.sudo.extraConfig = ''
+    jacobpyke ALL = (ALL) NOPASSWD: ${nur.repos.jpyke3.kanata-bin}/bin/kanata
+  '';
 }
