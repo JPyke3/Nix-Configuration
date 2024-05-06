@@ -99,85 +99,85 @@
 
   xdg.configFile."sketchybar/plugins/front_app.sh" = {
     text = ''
-          #!/usr/bin/env zsh
+             #!/usr/bin/env zsh
 
-          ICON_PADDING_RIGHT=5
+             ICON_PADDING_RIGHT=5
 
-          case $INFO in
-          "Firefox")
-          	ICON_PADDING_RIGHT=5
-          	ICON=
-          	;;
-          "Code")
-          	ICON_PADDING_RIGHT=4
-          	ICON=󰨞
-          	;;
-          "Calendar")
-          	ICON_PADDING_RIGHT=3
-          	ICON=
-          	;;
-          "Discord")
-          	ICON=󰙯
-          	;;
-          "FaceTime")
-          	ICON_PADDING_RIGHT=5
-          	ICON=
-          	;;
-          "Finder")
-          	ICON=󰀶
-          	;;
-          "Google Chrome")
-          	ICON_PADDING_RIGHT=7
-          	ICON=
-          	;;
-          "IINA")
-          	ICON_PADDING_RIGHT=4
-          	ICON=󰕼
-          	;;
-          "kitty")
-          	ICON=󰄛
-          	;;
-          "Messages")
-          	ICON=󰍦
-          	;;
-          "Notion")
-          	ICON_PADDING_RIGHT=6
-          	ICON=󰈄
-          	;;
-          "Preview")
-          	ICON_PADDING_RIGHT=3
-          	ICON=
-          	;;
-          "Spotify")
-          	ICON=
-          	;;
-          "TextEdit")
-          	ICON_PADDING_RIGHT=4
-          	ICON=
-          	;;
-          "Transmission")
-          	ICON_PADDING_RIGHT=3
-          	ICON=󰶘
-          	;;
+             case $INFO in
+             "Firefox")
+             	ICON_PADDING_RIGHT=5
+             	ICON=
+             	;;
+             "Code")
+             	ICON_PADDING_RIGHT=4
+             	ICON=󰨞
+             	;;
+             "Calendar")
+             	ICON_PADDING_RIGHT=3
+             	ICON=
+             	;;
+             "Discord")
+             	ICON=󰙯
+             	;;
+             "FaceTime")
+             	ICON_PADDING_RIGHT=5
+             	ICON=
+             	;;
+             "Finder")
+             	ICON=󰀶
+             	;;
+             "Google Chrome")
+             	ICON_PADDING_RIGHT=7
+             	ICON=
+             	;;
+             "IINA")
+             	ICON_PADDING_RIGHT=4
+             	ICON=󰕼
+             	;;
+             "kitty")
+             	ICON=󰄛
+             	;;
+             "Messages")
+             	ICON=󰍦
+             	;;
+             "Notion")
+             	ICON_PADDING_RIGHT=6
+             	ICON=󰈄
+             	;;
+             "Preview")
+             	ICON_PADDING_RIGHT=3
+             	ICON=
+             	;;
+             "Spotify")
+             	ICON=
+             	;;
+             "TextEdit")
+             	ICON_PADDING_RIGHT=4
+             	ICON=
+             	;;
+             "Transmission")
+             	ICON_PADDING_RIGHT=3
+             	ICON=󰶘
+             	;;
        "Steam")
-      ICON_PADDING_RIGHT=5
-       	ICON=
+         ICON_PADDING_RIGHT=5
+          	    ICON=
        "Anki")
-       	ICON_PADDING_RIGHT=5
-       	ICON=
-       "Infuse")
-       	ICON_PADDING_RIGHT=5
-      ICON=
+      ICON_PADDING_RIGHT=5
+      ICON=
+             "Infuse")
+      ICON_PADDING_RIGHT=5
+         ICON=
        "mpv")
-       	ICON_PADDING_RIGHT=5
+      ICON_PADDING_RIGHT=5
       ICON=
-          *)
-          	ICON=﯂
-          	;;
-          esac
+             *)
+             	ICON=﯂
+             	;;
+             esac
 
-          sketchybar --set $NAME icon=$ICON icon.padding_right=$ICON_PADDING_RIGHT
-          sketchybar --set $NAME.name label="$INFO"
+             sketchybar --set $NAME icon=$ICON icon.padding_right=$ICON_PADDING_RIGHT
+             sketchybar --set $NAME.name label="$INFO"
     '';
     executable = true;
   };
