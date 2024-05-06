@@ -40,7 +40,7 @@
 	system.defaults = {
 		# Dock Settings
 		dock = {
-			autoHide = true;
+			autohide = true;
 			mineffect = "scale";
 			orientation = "left";
 			minimize-to-application = true;
