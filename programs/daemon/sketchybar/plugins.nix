@@ -18,7 +18,7 @@
               "Fri") echo "金";;
               "Sat") echo "土";;
               "Sun") echo "日";;
-              *) echo "Error: Invalid day";;
+              *) echo "Error: Invalid day: $day";;
           esac
       }
 
