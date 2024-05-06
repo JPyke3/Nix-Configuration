@@ -1,4 +1,7 @@
 {...}: {
+  import = [
+    ./skhd.nix
+  ];
   services.yabai = {
     enable = true;
     enableScriptingAddition = true;
