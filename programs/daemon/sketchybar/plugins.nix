@@ -7,7 +7,30 @@
     text = ''
       #!/usr/bin/env zsh
 
-      sketchybar --set $NAME label="$(date '+%a %b %-d %-H:%M')"
+      # Function to convert day of the week to Japanese Kanji
+      function day_to_japanese() {
+          local day="$1"
+          case "$day" in
+              "Mon") echo "月";;
+              "Tue") echo "火";;
+              "Wed") echo "水";;
+              "Thu") echo "木";;
+              "Fri") echo "金";;
+              "Sat") echo "土";;
+              "Sun") echo "日";;
+              *) echo "Error: Invalid day";;
+          esac
+      }
+
+      # Function to get the date and day of the week in Japanese
+      function get_date_japanese() {
+          local date_format="%b %-d %-H:%M"
+          local date="$(date "+$(day_to_japanese %a) $date_format")"
+          echo "$date"
+      }
+
+      # Set the sketchybar label with the date in Japanese
+      sketchybar --set $NAME label="$(get_date_japanese)"
     '';
     executable = true;
   };
