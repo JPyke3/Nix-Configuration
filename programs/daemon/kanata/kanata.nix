@@ -19,7 +19,7 @@ in {
 
   launchd.daemons.kanata = {
     # command = "sudo ${nur.repos.jpyke3.kanata-bin}/bin/kanata --cfg /etc/keyboard.kbd";
-	command = "echo $USER"
+    command = "echo $USER";
     serviceConfig = {
       KeepAlive = true;
       RunAtLoad = true;
