@@ -17,7 +17,7 @@ in {
     source = ./keyboard.kbd;
   };
 
-  launchd.daemons.kanata = {
+  launchd.agents.kanata = {
     command = "${nur.repos.jpyke3.kanata-bin}/bin/kanata --cfg /etc/keyboard.kbd";
     serviceConfig = {
       KeepAlive = true;
