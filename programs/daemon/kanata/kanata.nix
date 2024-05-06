@@ -22,6 +22,8 @@ in {
     serviceConfig = {
       KeepAlive = true;
       RunAtLoad = true;
+      StandardErrorPath = "/var/log/kanata.err.log";
+      StandardOutPath = "/var/log/kanata.out.log";
     };
   };
 }
