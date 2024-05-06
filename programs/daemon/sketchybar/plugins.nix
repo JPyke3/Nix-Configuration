@@ -24,7 +24,7 @@
 
            # Function to get the date and day of the week in Japanese
            function get_date_japanese() {
-               local date_format="%b %-d %-H:%M"
+               local date_format="+%d-%m-%Y %H:%M"
       local day="$(date +%u)" # Get the day of the week as a decimal number
       local day_japanese="$(day_to_japanese "$day")" # Convert the day to Japanese Kanji
       local date="$day_japanese $(date $date_format)"
