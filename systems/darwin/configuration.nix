@@ -49,8 +49,8 @@
 			orientation = "left";
 			minimize-to-application = true;
 			persistent-apps = [
-				"${pkgs.firefox-bin}/Applications/Firefox.app"
-				"${pkgs.kitty}/Applications/Kitty.app"
+				"/Users/jacobpyke/Applications/Home Manager Apps/Firefox.app"
+				"/Users/jacobpyke/Applications/Home Manager Apps/Kitty.app"
 				"/System/Applications/Messages.app"
 				"/System/Applications/System Settings.app"
 			];
