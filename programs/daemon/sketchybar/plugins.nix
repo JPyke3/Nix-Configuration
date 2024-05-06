@@ -63,36 +63,42 @@
     executable = true;
   };
 
-  xdg.configFile."sketchybar/plugins/space.sh".text = ''
-    #!/bin/sh
+  xdg.configFile."sketchybar/plugins/space.sh" = {
+    text = ''
+      #!/bin/sh
 
-    # The $SELECTED variable is available for space components and indicates if
-    # the space invoking this script (with name: $NAME) is currently selected:
-    # https://felixkratz.github.io/SketchyBar/config/components#space----associate-mission-control-spaces-with-an-item
+      # The $SELECTED variable is available for space components and indicates if
+      # the space invoking this script (with name: $NAME) is currently selected:
+      # https://felixkratz.github.io/SketchyBar/config/components#space----associate-mission-control-spaces-with-an-item
 
-    sketchybar --set "$NAME" background.drawing="$SELECTED"
-  '';
+      sketchybar --set "$NAME" background.drawing="$SELECTED"
+    '';
+    executable = true;
+  };
 
-  xdg.configFile."sketchybar/plugins/volume.sh".text = ''
-    #!/bin/sh
+  xdg.configFile."sketchybar/plugins/volume.sh" = {
+    text = ''
+      #!/bin/sh
 
-    # The volume_change event supplies a $INFO variable in which the current volume
-    # percentage is passed to the script.
+      # The volume_change event supplies a $INFO variable in which the current volume
+      # percentage is passed to the script.
 
-    if [ "$SENDER" = "volume_change" ]; then
-      VOLUME="$INFO"
+      if [ "$SENDER" = "volume_change" ]; then
+        VOLUME="$INFO"
 
-      case "$VOLUME" in
-    	[6-9][0-9]|100) ICON="󰕾"
-    	;;
-    	[3-5][0-9]) ICON="󰖀"
-    	;;
-    	[1-9]|[1-2][0-9]) ICON="󰕿"
-    	;;
-    	*) ICON="󰖁"
-      esac
+        case "$VOLUME" in
+      	[6-9][0-9]|100) ICON="󰕾"
+      	;;
+      	[3-5][0-9]) ICON="󰖀"
+      	;;
+      	[1-9]|[1-2][0-9]) ICON="󰕿"
+      	;;
+      	*) ICON="󰖁"
+        esac
 
-      sketchybar --set "$NAME" icon="$ICON" label="$VOLUME%"
-    fi
-  '';
+        sketchybar --set "$NAME" icon="$ICON" label="$VOLUME%"
+      fi
+    '';
+    executable = true;
+  };
 }
