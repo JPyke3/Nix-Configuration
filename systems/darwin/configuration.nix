@@ -37,7 +37,6 @@
 	};
   };
 
-  system.defaults = { 
   	# Dock Settings
   	dock = {
 		autoHide = true;
@@ -58,7 +57,6 @@
 		wvous-tl-corner = "1";
 		wvous-tr-corner = "1";
 	};
-  };
 
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
