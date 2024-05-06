@@ -1,7 +1,7 @@
 {...}: {
   imports = [
     ./skhd.nix
-    ./sketchybar.nix
+    ./sketchybar/sketchybar.nix
   ];
   services.yabai = {
     enable = true;
