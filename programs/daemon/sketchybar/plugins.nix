@@ -14,117 +14,170 @@
 
   xdg.configFile."sketchybar/plugins/current_space.sh" = {
     text = ''
-      #!/usr/bin/env zsh
+          #!/usr/bin/env zsh
 
-      update_space() {
-      	SPACE_ID=$(echo "$INFO" | jq -r '."display-1"')
+          update_space() {
+          	SPACE_ID=$(echo "$INFO" | jq -r '."display-1"')
 
-      	case $SPACE_ID in
-      	1)
-      		ICON=󰅶
-      		ICON_PADDING_LEFT=7
-      		ICON_PADDING_RIGHT=7
-      		;;
-      	*)
-      		ICON=$SPACE_ID
-      		ICON_PADDING_LEFT=9
-      		ICON_PADDING_RIGHT=10
-      		;;
-      	esac
-
-      	sketchybar --set $NAME \
-      		icon=$ICON \
-      		icon.padding_left=$ICON_PADDING_LEFT \
-      		icon.padding_right=$ICON_PADDING_RIGHT
-      }
-
-      case "$SENDER" in
-      "mouse.clicked")
-      	# Reload sketchybar
-      	sketchybar --remove '/.*/'
-      	source $HOME/.config/sketchybar/sketchybarrc
+          	case $SPACE_ID in
+          	1)
+          		ICON=一
+          		ICON_PADDING_LEFT=7
+          		ICON_PADDING_RIGHT=7
+          		;;
+          	2)
+          		ICON=二
+          		ICON_PADDING_LEFT=7
+          		ICON_PADDING_RIGHT=7
+          		;;
+      3)
+       		ICON=三
+       		ICON_PADDING_LEFT=7
+       		ICON_PADDING_RIGHT=7
+       		;;
+      4)
+      	INCON=四
+      	ICON_PADDING_LEFT=7
+      	ICON_PADDING_RIGHT=7
       	;;
-      *)
-      	update_space
+      5)
+      	ICON=五
+      	ICON_PADDING_LEFT=7
+      	ICON_PADDING_RIGHT=7
       	;;
-      esac
+      6)
+      	ICON=六
+      	ICON_PADDING_LEFT=7
+      	ICON_PADDING_RIGHT=7
+      	;;
+      7)
+      	ICON=七
+      	ICON_PADDING_LEFT=7
+      	ICON_PADDING_RIGHT=7
+      	;;
+      8)
+      	ICON=八
+      	ICON_PADDING_LEFT=7
+      	ICON_PADDING_RIGHT=7
+      	;;
+      9)
+      	ICON=九
+      	ICON_PADDING_LEFT=7
+      	ICON_PADDING_RIGHT=7
+      	;;
+      10)
+      	ICON=十
+      	ICON_PADDING_LEFT=7
+      	ICON_PADDING_RIGHT=7
+      	;;
+          	*)
+          		ICON=$SPACE_ID
+          		ICON_PADDING_LEFT=9
+          		ICON_PADDING_RIGHT=10
+          		;;
+          	esac
+
+          	sketchybar --set $NAME \
+          		icon=$ICON \
+          		icon.padding_left=$ICON_PADDING_LEFT \
+          		icon.padding_right=$ICON_PADDING_RIGHT
+          }
+
+          case "$SENDER" in
+          "mouse.clicked")
+          	# Reload sketchybar
+          	sketchybar --remove '/.*/'
+          	source $HOME/.config/sketchybar/sketchybarrc
+          	;;
+          *)
+          	update_space
+          	;;
+          esac
     '';
     executable = true;
   };
 
   xdg.configFile."sketchybar/plugins/front_app.sh" = {
     text = ''
-      #!/usr/bin/env zsh
+          #!/usr/bin/env zsh
 
+          ICON_PADDING_RIGHT=5
+
+          case $INFO in
+          "Firefox")
+          	ICON_PADDING_RIGHT=5
+          	ICON=
+          	;;
+          "Code")
+          	ICON_PADDING_RIGHT=4
+          	ICON=󰨞
+          	;;
+          "Calendar")
+          	ICON_PADDING_RIGHT=3
+          	ICON=
+          	;;
+          "Discord")
+          	ICON=󰙯
+          	;;
+          "FaceTime")
+          	ICON_PADDING_RIGHT=5
+          	ICON=
+          	;;
+          "Finder")
+          	ICON=󰀶
+          	;;
+          "Google Chrome")
+          	ICON_PADDING_RIGHT=7
+          	ICON=
+          	;;
+          "IINA")
+          	ICON_PADDING_RIGHT=4
+          	ICON=󰕼
+          	;;
+          "kitty")
+          	ICON=󰄛
+          	;;
+          "Messages")
+          	ICON=󰍦
+          	;;
+          "Notion")
+          	ICON_PADDING_RIGHT=6
+          	ICON=󰈄
+          	;;
+          "Preview")
+          	ICON_PADDING_RIGHT=3
+          	ICON=
+          	;;
+          "Spotify")
+          	ICON=
+          	;;
+          "TextEdit")
+          	ICON_PADDING_RIGHT=4
+          	ICON=
+          	;;
+          "Transmission")
+          	ICON_PADDING_RIGHT=3
+          	ICON=󰶘
+          	;;
+       "Steam")
       ICON_PADDING_RIGHT=5
+       	ICON=
+       "Anki")
+       	ICON_PADDING_RIGHT=5
+       	ICON=
+       "Infuse")
+       	ICON_PADDING_RIGHT=5
+      ICON=
+       "mpv")
+       	ICON_PADDING_RIGHT=5
+      ICON=
+          *)
+          	ICON=﯂
+          	;;
+          esac
 
-      case $INFO in
-      "Arc")
-      	ICON_PADDING_RIGHT=5
-      	ICON=󰞍
-      	;;
-      "Code")
-      	ICON_PADDING_RIGHT=4
-      	ICON=󰨞
-      	;;
-      "Calendar")
-      	ICON_PADDING_RIGHT=3
-      	ICON=
-      	;;
-      "Discord")
-      	ICON=󰙯
-      	;;
-      "FaceTime")
-      	ICON_PADDING_RIGHT=5
-      	ICON=
-      	;;
-      "Finder")
-      	ICON=
-      	;;
-      "Google Chrome")
-      	ICON_PADDING_RIGHT=7
-      	ICON=
-      	;;
-      "IINA")
-      	ICON_PADDING_RIGHT=4
-      	ICON=󰕼
-      	;;
-      "kitty")
-      	ICON=󰄛
-      	;;
-      "Messages")
-      	ICON=󰍦
-      	;;
-      "Notion")
-      	ICON_PADDING_RIGHT=6
-      	ICON=󰈄
-      	;;
-      "Preview")
-      	ICON_PADDING_RIGHT=3
-      	ICON=
-      	;;
-      "PS Remote Play")
-      	ICON_PADDING_RIGHT=3
-      	ICON=
-      	;;
-      "Spotify")
-      	ICON=
-      	;;
-      "TextEdit")
-      	ICON_PADDING_RIGHT=4
-      	ICON=
-      	;;
-      "Transmission")
-      	ICON_PADDING_RIGHT=3
-      	ICON=󰶘
-      	;;
-      *)
-      	ICON=﯂
-      	;;
-      esac
-
-      sketchybar --set $NAME icon=$ICON icon.padding_right=$ICON_PADDING_RIGHT
-      sketchybar --set $NAME.name label="$INFO"
+          sketchybar --set $NAME icon=$ICON icon.padding_right=$ICON_PADDING_RIGHT
+          sketchybar --set $NAME.name label="$INFO"
     '';
     executable = true;
   };
