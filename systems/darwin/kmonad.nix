@@ -1,7 +1,12 @@
-{ kmonad, config, lib, pkgs, ... }:
-
-let cfg = config.jpyke3.kmonad; in
 {
+  kmonad,
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  cfg = config.jpyke3.kmonad;
+in {
   options.jpyke3.kmonad = {
     enable = lib.mkEnableOption "kmonad";
 
@@ -11,7 +16,7 @@ let cfg = config.jpyke3.kmonad; in
   };
 
   config = lib.mkIf cfg.enable {
-    nixpkgs.overlays = [ kmonad.overlays.default ];
+    nixpkgs.overlays = [kmonad.overlays.default];
 
     launchd.daemons.kmonad-default.serviceConfig = {
       EnvironmentVariables.PATH = "${pkgs.kmonad}/bin:${pkgs.Karabiner-DriverKit-VirtualHIDDevice}/Library/Application Support/org.pqrs/Karabiner-DriverKit-VirtualHIDDevice/Applications/Karabiner-DriverKit-VirtualHIDDeviceClient.app/Contents/MacOS:${config.environment.systemPath}";

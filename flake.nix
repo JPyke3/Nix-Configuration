@@ -47,9 +47,9 @@
       url = "github:Jovian-Experiments/Jovian-NixOS";
       inputs.nixpkgs.follows = "unstable";
     };
-	kmonad = {
-	  url = "git+https://github.com/kmonad/kmonad?submodules=1&dir=nix";
-	};
+    kmonad = {
+      url = "git+https://github.com/kmonad/kmonad?submodules=1&dir=nix";
+    };
   };
 
   outputs = {
@@ -63,7 +63,7 @@
     nix-darwin,
     nixpkgs-darwin,
     nur,
-	kmonad,
+    kmonad,
     ...
   } @ inputs: {
     # Desktop PC
