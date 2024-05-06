@@ -6,6 +6,7 @@
   imports = [
     ./mac-defaults.nix
     ../../programs/cli/homebrew.nix
+    ../../programs/daemon/yabai.nix
   ];
 
   nixpkgs.hostPlatform = "aarch64-darwin";
