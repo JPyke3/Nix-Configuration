@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  inputs,
+  ...
+}: let
   nur = import inputs.nur {
     nurpkgs = pkgs;
     pkgs = pkgs;
@@ -10,7 +14,7 @@ in {
 
   environment.etc."keyboard.kbd" = {
     enable = true;
-    source = builtins.readFile ./keyboard.kbd;
+    source = ./keyboard.kbd;
   };
 
   environment.launchDaemons."com.jpyke3.kanata" = {
