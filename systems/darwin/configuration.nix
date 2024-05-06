@@ -5,6 +5,10 @@
 }: {
   nixpkgs.hostPlatform = "aarch64-darwin";
 
+  nixpkgs.overlays = [
+    inputs.nixpkgs-firefox-darwin.overlay
+  ];
+
   environment.systemPackages = with pkgs; [
     coreutils
     parallel
