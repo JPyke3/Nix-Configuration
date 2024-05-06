@@ -5,34 +5,34 @@
 
   xdg.configFile."sketchybar/plugins/clock.sh" = {
     text = ''
-        #!/usr/bin/env zsh
+           #!/usr/bin/env zsh
 
-        # Function to convert day of the week to Japanese Kanji
-        function day_to_japanese() {
-            local day="$1"
-            case $day in
-                1) echo "月";;
-                2) echo "火";;
-                3) echo "水";;
-                4) echo "木";;
-                5) echo "金";;
-                6) echo "土";;
-                7) echo "日";;
-                *) echo "Error: Invalid day: '$day'";;
-            esac
-        }
+           # Function to convert day of the week to Japanese Kanji
+           function day_to_japanese() {
+               local day="$1"
+               case $day in
+                   1) echo "月";;
+                   2) echo "火";;
+                   3) echo "水";;
+                   4) echo "木";;
+                   5) echo "金";;
+                   6) echo "土";;
+                   7) echo "日";;
+                   *) echo "Error: Invalid day: '$day'";;
+               esac
+           }
 
-        # Function to get the date and day of the week in Japanese
-        function get_date_japanese() {
-            local date_format="%b %-d %-H:%M"
+           # Function to get the date and day of the week in Japanese
+           function get_date_japanese() {
+               local date_format="%b %-d %-H:%M"
       local day="$(date +%u)" # Get the day of the week as a decimal number
       local day_japanese="$(day_to_japanese "$day")" # Convert the day to Japanese Kanji
-      local date="$day_japanese $date_format"
-            echo "$date"
-        }
+      local date="$day_japanese $(date $date_format)"
+               echo "$date"
+           }
 
-        # Set the sketchybar label with the date in Japanese
-        sketchybar --set $NAME label="$(get_date_japanese)"
+           # Set the sketchybar label with the date in Japanese
+           sketchybar --set $NAME label="$(get_date_japanese)"
     '';
     executable = true;
   };
