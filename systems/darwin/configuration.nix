@@ -1,20 +1,16 @@
 {
-  config,
   pkgs,
   inputs,
   ...
 }: {
   nixpkgs.hostPlatform = "aarch64-darwin";
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
-  #  environment.systemPackages =
-  #    [ pkgs.vim
-  #    ];
 
   environment.systemPackages = with pkgs; [
     coreutils
     parallel
   ];
+
+  jpyke3.kmonad.enable = true;
 
   users.users.jacobpyke = {
     name = "jacobpyke";
