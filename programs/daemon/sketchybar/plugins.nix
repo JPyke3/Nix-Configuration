@@ -507,7 +507,7 @@
 
       read ENTRY_DESCRIPTION PROJECT_ID WORKSPACE_ID < <(echo $(curl -s https://api.track.toggl.com/api/v9/me/time_entries/current \
       	-H "Content-Type: application/json" \
-      	-u $TOGGL_USERNAME:$TOGGL_PASSWORD | ${pkgs.jq}/bin/jq -r '.data.description, .data.pid, .data.wid'))
+      	-u $TOGGL_USERNAME:$TOGGL_PASSWORD | ${pkgs.jq}/bin/jq -r '.description, .pid, .wid'))
 
       echo $ENTRY_DESCRIPTION
       echo $PROJECT_ID
