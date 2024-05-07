@@ -18,7 +18,7 @@ in {
   };
 
   launchd.daemons.kanata = {
-    command = "sudo ${nur.repos.jpyke3.kanata-bin}/bin/kanata --cfg /etc/keyboard.kbd";
+    command = "sudo ${nur.repos.jpyke3.kanata-bin}/bin/kanata -n --cfg /etc/keyboard.kbd";
     environment = {
       PATH = "/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin";
       SHELL = "/bin/bash";
@@ -34,6 +34,6 @@ in {
   };
 
   security.sudo.extraConfig = ''
-    %admin ALL=(root) NOPASSWD: ${nur.repos.jpyke3.kanata-bin}/bin/kanata --cfg /etc/keyboard.kbd
+    %admin ALL=(root) NOPASSWD: ${nur.repos.jpyke3.kanata-bin}/bin/kanata -n --cfg /etc/keyboard.kbd
   '';
 }
