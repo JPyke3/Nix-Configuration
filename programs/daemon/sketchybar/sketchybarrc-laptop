@@ -68,7 +68,7 @@ sketchybar --add item front_app left \
     background.padding_left=-3 \
     icon= \
     icon.color=0xffa6da95 \
-    icon.font="$FONT_FACE:Bold:20.0" \
+    icon.font="$FONT_FACE:Bold:22.0" \
     icon.padding_left=0 \
     icon.padding_right=0 \
     icon.y_offset=1 \
