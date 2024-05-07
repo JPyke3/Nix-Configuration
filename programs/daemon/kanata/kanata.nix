@@ -23,7 +23,7 @@ in {
       RunAtLoad = true;
       StandardErrorPath = "/var/log/kanata.err.log";
       StandardOutPath = "/var/log/kanata.out.log";
-      ProcessType = "Background";
+      ProcessType = "Standard";
       Nice = -30;
     };
   };
