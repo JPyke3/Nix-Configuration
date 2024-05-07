@@ -507,9 +507,7 @@
 
       curl https://api.track.toggl.com/api/v9/me/time_entries/current \
       	-H "Content-Type: application/json" \
-      	-u $TOGGL_USERNAME:$TOGGL_PASSWORD
-
-      ${pkgs.jq}/bin/jq
+      	-u $TOGGL_USERNAME:$TOGGL_PASSWORD | ${pkgs.jq}/bin/jq
     '';
     executable = true;
   };
