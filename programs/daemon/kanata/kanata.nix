@@ -21,6 +21,10 @@ in {
     command = "${nur.repos.jpyke3.kanata-bin}/bin/kanata --cfg /etc/keyboard.kbd";
     serviceConfig = {
       RunAtLoad = true;
+      KeepAlive = {
+        SuccessfulExit = false;
+        Crashed = true;
+      };
       StandardErrorPath = "/var/log/kanata.err.log";
       StandardOutPath = "/var/log/kanata.out.log";
       ProcessType = "Interactive";
