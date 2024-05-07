@@ -1,5 +1,5 @@
 # Note, this is to be used as a home-manager module
-{...}: {
+{pkgs, ...}: {
   xdg.configFile."sketchybar/sketchybarrc-laptop".source = ./sketchybarrc-laptop;
   xdg.configFile."sketchybar/sketchybarrc-desktop".source = ./sketchybarrc-desktop;
 
@@ -502,6 +502,14 @@
     text = ''
       #!/usr/bin/env zsh
 
+      TOGGL_USERNAME=$(cat ~/.secrets/toggl/username.txt)
+      TOGGL_PASSWORD=$(cat ~/.secrets/toggl/password.txt)
+
+      curl https://api.track.toggl.com/api/v9/me/time_entries/current \
+      	-H "Content-Type: application/json" \
+      	-u $TOGGL_USERNAME:$TOGGL_PASSWORD
+
+      ${pkgs.jq}/bin/jq
     '';
     executable = true;
   };
