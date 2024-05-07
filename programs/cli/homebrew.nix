@@ -2,6 +2,7 @@
   homebrew = {
     enable = true;
     brews = [
+      "maccy"
     ];
     casks = [
       "nikitabobko/tap/aerospace"
