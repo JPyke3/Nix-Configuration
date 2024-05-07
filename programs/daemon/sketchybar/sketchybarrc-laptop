@@ -126,6 +126,13 @@ sketchybar --add item volume right \
     script="$PLUGIN_SHARED_DIR/volume.sh" \
     --subscribe volume volume_change
 
+sketchybar --add item toggl right \
+	--set toggl \
+	icon.color=0xff8aadf4 \
+	icon= \
+	script="$PLUGIN_DIR/toggl.sh" \
+	update_freq=60 \
+
 # osascript -e 'quit app "Rectangle"'
 # open -a Rectangle
 

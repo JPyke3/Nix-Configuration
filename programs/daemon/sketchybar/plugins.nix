@@ -498,7 +498,7 @@
     path = "/Users/jacobpyke/.secrets/toggl/password.txt";
   };
 
-  xdg.configFile."sketchybar/plugins-desktop/toggl.sh" = {
+  xdg.configFile."sketchybar/plugins/toggl.sh" = {
     text = ''
       #!/usr/bin/env zsh
 
@@ -513,7 +513,7 @@
       	-H "Content-Type: application/json" \
       	-u $TOGGL_USERNAME:$TOGGL_PASSWORD | ${pkgs.jq}/bin/jq -r '.name')
 
-      echo "$PROJECT_NAME - $ENTRY_DESCRIPTION"
+      sketchybar --set $NAME label="$PROJECT_NAME - $ENTRY_DESCRIPTION"
     '';
     executable = true;
   };
