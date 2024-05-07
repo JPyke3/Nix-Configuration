@@ -10,6 +10,7 @@
       "tailscale"
       "raycast"
       "anki"
+      "launchcontrol"
     ];
     masApps = {
       Infuse = 1136220934;
