@@ -505,7 +505,7 @@
       TOGGL_USERNAME=$(cat ~/.secrets/toggl/username.txt)
       TOGGL_PASSWORD=$(cat ~/.secrets/toggl/password.txt)
 
-      read ENTRY_DESCRIPTION PROJECT_ID WORKSPACE_ID < <(echo $(curl https://api.track.toggl.com/api/v9/me/time_entries/current \
+      read ENTRY_DESCRIPTION PROJECT_ID WORKSPACE_ID < <(echo $(curl -s https://api.track.toggl.com/api/v9/me/time_entries/current \
       	-H "Content-Type: application/json" \
       	-u $TOGGL_USERNAME:$TOGGL_PASSWORD | ${pkgs.jq}/bin/jq -r '.data.description, .data.pid, .data.wid'))
 
@@ -513,7 +513,7 @@
       echo $PROJECT_ID
       echo $WORKSPACE_ID
 
-      curl https://api.track.toggl.com/api/v9/workspaces/$WORKSPACE_ID/projects/$PROJECT_ID \
+      curl -s https://api.track.toggl.com/api/v9/workspaces/$WORKSPACE_ID/projects/$PROJECT_ID \
       	-H "Content-Type: application/json" \
       	-u $TOGGL_USERNAME:$TOGGL_PASSWORD | ${pkgs.jq}/bin/jq
     '';
