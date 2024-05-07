@@ -509,13 +509,11 @@
       	-H "Content-Type: application/json" \
       	-u $TOGGL_USERNAME:$TOGGL_PASSWORD | ${pkgs.jq}/bin/jq -r '.description, .pid, .wid'))
 
-      echo $ENTRY_DESCRIPTION
-      echo $PROJECT_ID
-      echo $WORKSPACE_ID
-
-      curl -s https://api.track.toggl.com/api/v9/workspaces/$WORKSPACE_ID/projects/$PROJECT_ID \
+      PROJECT_NAME = $(curl -s https://api.track.toggl.com/api/v9/workspaces/$WORKSPACE_ID/projects/$PROJECT_ID \
       	-H "Content-Type: application/json" \
-      	-u $TOGGL_USERNAME:$TOGGL_PASSWORD | ${pkgs.jq}/bin/jq
+      	-u $TOGGL_USERNAME:$TOGGL_PASSWORD | ${pkgs.jq}/bin/jq -r '.name' )
+
+      echo "$PROJECT_NAME - $ENTRY_DESCRIPTION"
     '';
     executable = true;
   };
