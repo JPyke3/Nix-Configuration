@@ -492,10 +492,10 @@
   };
 
   sops.secrets."programs/toggl/username" = {
-    path = "%r/.secrets/toggl/username";
+    path = "%r/toggl-username.txt";
   };
   sops.secrets."programs/toggl/password" = {
-    path = "%r/.secrets/toggl/password";
+    path = "%r/toggl-password.txt";
   };
 
   xdg.configFile."sketchybar/plugins-desktop/toggl.sh" = {
