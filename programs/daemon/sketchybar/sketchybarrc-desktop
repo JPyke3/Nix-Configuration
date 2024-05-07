@@ -19,11 +19,11 @@ sketchybar --bar \
 sketchybar --default \
     background.height=32 \
     icon.color=0xff24273a \
-    icon.font="$FONT_FACE:Medium:20.0" \
+    icon.font="$FONT_FACE:Medium:18.0" \
     icon.padding_left=5 \
     icon.padding_right=5 \
     label.color=0xff24273a \
-    label.font="$FONT_FACE:Bold:14.0" \
+    label.font="$FONT_FACE:Bold:12.0" \
     label.y_offset=1 \
     label.padding_left=0 \
     label.padding_right=5
