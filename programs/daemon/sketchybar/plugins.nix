@@ -490,4 +490,19 @@
     '';
     executable = true;
   };
+
+  sops.secrets."programs/toggl/username" = {
+    path = "%r/.secrets/toggl/username";
+  };
+  sops.secrets."programs/toggl/password" = {
+    path = "%r/.secrets/toggl/password";
+  };
+
+  xdg.configFile."sketchybar/plugins-desktop/toggl.sh" = {
+    text = ''
+      #!/usr/bin/env zsh
+
+    '';
+    executable = true;
+  };
 }
