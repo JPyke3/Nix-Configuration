@@ -12,6 +12,7 @@ in {
     rectangle
     darwin.apple_sdk.frameworks.Foundation
     mpv
+    slack
   ];
 
   nixpkgs.overlays = [
