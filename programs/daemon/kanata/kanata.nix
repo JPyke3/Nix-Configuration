@@ -17,8 +17,8 @@ in {
     source = ./keyboard.kbd;
   };
 
-  launchd.daemons.kanata = {
-    command = "${nur.repos.jpyke3.kanata-bin}/bin/kanata --cfg /etc/keyboard.kbd";
+  launchd.agents.kanata = {
+    command = "sudo ${nur.repos.jpyke3.kanata-bin}/bin/kanata --cfg /etc/keyboard.kbd";
     serviceConfig = {
       RunAtLoad = true;
       StandardErrorPath = "/var/log/kanata.err.log";
