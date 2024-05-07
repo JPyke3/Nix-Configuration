@@ -7,7 +7,7 @@ PLUGIN_SHARED_DIR="$HOME/.config/sketchybar/plugins"
 SPOTIFY_EVENT="com.spotify.client.PlaybackStateChanged"
 
 sketchybar --bar \
-    height=18 \
+    height=20 \
     color=0x66494d64 \
     margin=0 \
     sticky=on \
