@@ -20,7 +20,6 @@ in {
   launchd.daemons.kanata = {
     command = "${nur.repos.jpyke3.kanata-bin}/bin/kanata --cfg /etc/keyboard.kbd";
     serviceConfig = {
-      KeepAlive = true;
       RunAtLoad = true;
       StandardErrorPath = "/var/log/kanata.err.log";
       StandardOutPath = "/var/log/kanata.out.log";
