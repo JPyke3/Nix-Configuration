@@ -2,7 +2,6 @@
   homebrew = {
     enable = true;
     brews = [
-      "maccy"
     ];
     casks = [
       "nikitabobko/tap/aerospace"
@@ -12,6 +11,7 @@
       "raycast"
       "anki"
       "launchcontrol"
+      "maccy"
     ];
     masApps = {
       Infuse = 1136220934;
