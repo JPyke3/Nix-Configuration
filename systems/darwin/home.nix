@@ -13,6 +13,7 @@ in {
     darwin.apple_sdk.frameworks.Foundation
     mpv
     slack
+    spotify
   ];
 
   nixpkgs.overlays = [
