@@ -513,7 +513,7 @@
       	-H "Content-Type: application/json" \
       	-u $TOGGL_USERNAME:$TOGGL_PASSWORD | ${pkgs.jq}/bin/jq -r '.name')
 
-      sketchybar --set $NAME label="$PROJECT_NAME - $ENTRY_DESCRIPTION"
+      sketchybar --set toggl label="$PROJECT_NAME - $ENTRY_DESCRIPTION"
     '';
     executable = true;
   };
