@@ -133,7 +133,7 @@ sketchybar --add item toggl right \
 	update_freq=5 \
 	updates=on \
 	drawing=off \
-	script="$PLUGIN_DIR/toggl.sh" \
+	script="$PLUGIN_SHARED_DIR/toggl.sh" \
 
 # osascript -e 'quit app "Rectangle"'
 # open -a Rectangle
