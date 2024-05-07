@@ -19,6 +19,10 @@ in {
 
   launchd.daemons.kanata = {
     command = "sudo ${nur.repos.jpyke3.kanata-bin}/bin/kanata --cfg /etc/keyboard.kbd";
+    environment = {
+      PATH = "/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin";
+      SHELL = "/usr/local/bin/dash";
+    };
     serviceConfig = {
       KeepAlive = true;
       RunAtLoad = true;
