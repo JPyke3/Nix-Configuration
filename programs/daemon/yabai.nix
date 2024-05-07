@@ -13,6 +13,7 @@ in {
 
       # Focus follows mouse
       focus_follows_mouse = "autoraise";
+      mouse_follows_focus = true;
 
       window_shadow = "float";
 
