@@ -26,8 +26,8 @@ in {
         SuccessfulExit = false;
         Crashed = true;
       };
-      StandardErrorPath = "/var/log/kanata.err.log";
-      StandardOutPath = "/var/log/kanata.out.log";
+      StandardErrorPath = "/Users/jacobpyke/.logs/kanata.err.log";
+      StandardOutPath = "/Users/jacobpyke/.logs/kanata.out.log";
       ProcessType = "Interactive";
       Nice = -30;
     };

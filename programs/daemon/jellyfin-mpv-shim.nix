@@ -5,8 +5,8 @@
       UserName = "jacobpyke";
       KeepAlive = true;
       RunAtLoad = true;
-      StandardErrorPath = "/tmp/jellyfin-mpv-shim.err";
-      StandardOutPath = "/tmp/jellyfin-mpv-shim.out";
+      StandardErrorPath = "/Users/jacobpyke/.logs/jellyfin-mpv-shim.err";
+      StandardOutPath = "/Users/jacobpyke/.logs/jellyfin-mpv-shim.out";
       ProcessType = "Interactive";
     };
   };
