@@ -17,16 +17,16 @@ in {
     source = ./keyboard.kbd;
   };
 
-  launchd.agents.kanata = {
-    command = "sudo ${nur.repos.jpyke3.kanata-bin}/bin/kanata --cfg /etc/keyboard.kbd";
-    serviceConfig = {
-      RunAtLoad = true;
-      StandardErrorPath = "/var/log/kanata.err.log";
-      StandardOutPath = "/var/log/kanata.out.log";
-      ProcessType = "Standard";
-      Nice = -30;
-    };
-  };
+  # launchd.agents.kanata = {
+  #  command = "sudo ${nur.repos.jpyke3.kanata-bin}/bin/kanata --cfg /etc/keyboard.kbd";
+  #  serviceConfig = {
+  #    RunAtLoad = true;
+  #    StandardErrorPath = "/var/log/kanata.err.log";
+  #    StandardOutPath = "/var/log/kanata.out.log";
+  #    ProcessType = "Standard";
+  #    Nice = -30;
+  #  };
+  # };
 
   security.sudo.extraConfig = ''
     %admin ALL=(root) NOPASSWD: ${nur.repos.jpyke3.kanata-bin}/bin/kanata --cfg /etc/keyboard.kbd
