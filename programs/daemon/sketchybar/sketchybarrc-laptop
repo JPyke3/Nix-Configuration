@@ -131,7 +131,7 @@ sketchybar --add item toggl right \
 	icon.color=0xff8aadf4 \
 	icon= \
 	script="$PLUGIN_DIR/toggl.sh" \
-	update_freq=60 \
+	update_freq=5 \
 
 # osascript -e 'quit app "Rectangle"'
 # open -a Rectangle

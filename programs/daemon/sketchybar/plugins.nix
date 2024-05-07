@@ -509,11 +509,16 @@
       	-H "Content-Type: application/json" \
       	-u $TOGGL_USERNAME:$TOGGL_PASSWORD | ${pkgs.jq}/bin/jq -r '.description, .pid, .wid'))
 
+      if [ $ENTRY_DESCRIPTION = "null" ]; then
+      	sketchybar --set toggl drawing=off
+      	return
+      fi
+
       PROJECT_NAME=$(curl -s https://api.track.toggl.com/api/v9/workspaces/$WORKSPACE_ID/projects/$PROJECT_ID \
       	-H "Content-Type: application/json" \
       	-u $TOGGL_USERNAME:$TOGGL_PASSWORD | ${pkgs.jq}/bin/jq -r '.name')
 
-      sketchybar --set toggl label="$PROJECT_NAME - $ENTRY_DESCRIPTION"
+      sketchybar --set toggl label="$PROJECT_NAME - $ENTRY_DESCRIPTION" drawing=on
     '';
     executable = true;
   };
