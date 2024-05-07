@@ -1,6 +1,6 @@
 {...}: {
   launchd.agents.jellyfinmpvshim = {
-    command = "/Users/jacobpyke/Library/Python/3.9/bin/jellyfin-mpv-shim";
+    command = "/usr/bin/python3 /Users/jacobpyke/Library/Python/3.9/bin/jellyfin-mpv-shim";
     serviceConfig = {
       UserName = "jacobpyke";
       KeepAlive = true;
