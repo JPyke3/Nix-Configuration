@@ -9,6 +9,7 @@
     ../../programs/cli/homebrew.nix
     ../../programs/daemon/yabai.nix
     ../../programs/daemon/kanata/kanata.nix
+    ../../programs/daemon/jellyfin-mpv-shim.nix
   ];
 
   nixpkgs.hostPlatform = "aarch64-darwin";
