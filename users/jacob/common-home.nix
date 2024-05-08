@@ -37,7 +37,7 @@ in {
     inputs.nur.overlay
   ];
 
-  colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-medium;
+  colorScheme = inputs.nix-colors.colorSchemes.catppuccin-frappe;
 
   imports = [
     inputs.nix-colors.homeManagerModules.default
