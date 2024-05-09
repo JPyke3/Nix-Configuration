@@ -12,6 +12,7 @@
       "anki"
       "launchcontrol"
       "maccy"
+      "notion"
     ];
     masApps = {
       Infuse = 1136220934;
