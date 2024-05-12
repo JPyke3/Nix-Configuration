@@ -14,6 +14,7 @@ in {
     mpv
     slack
     spotify
+    discord
   ];
 
   nixpkgs.overlays = [
