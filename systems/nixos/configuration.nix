@@ -52,7 +52,7 @@
     xorg.libXext
     xorg.libXrandr
     freetype
-    libatomic_ops
+    libgccjit
   ];
 
   fonts = {
