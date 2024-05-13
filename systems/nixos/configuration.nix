@@ -48,6 +48,7 @@
     libz
     xorg.libxcb
     xorg.libSM
+    xorg.libICE
   ];
 
   fonts = {
