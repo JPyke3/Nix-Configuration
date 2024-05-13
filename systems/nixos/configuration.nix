@@ -49,6 +49,7 @@
     xorg.libxcb
     xorg.libSM
     xorg.libICE
+    xorg.libX11
   ];
 
   fonts = {
