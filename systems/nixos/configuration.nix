@@ -59,6 +59,7 @@
     gtk3
     pango
     at-spi2-atk
+    cairo
   ];
 
   fonts = {
