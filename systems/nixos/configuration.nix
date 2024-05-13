@@ -45,8 +45,6 @@
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
-    libz
-
     # Zelda Decomp
     xorg.libICE
     xorg.libX11
@@ -62,6 +60,7 @@
     cairo
     gdk-pixbuf
     glib
+    zlib
   ];
 
   fonts = {
