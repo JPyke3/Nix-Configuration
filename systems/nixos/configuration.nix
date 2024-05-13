@@ -51,6 +51,7 @@
     xorg.libSM
     xorg.libXext
     xorg.libXrandr
+    freetype
   ];
 
   fonts = {
