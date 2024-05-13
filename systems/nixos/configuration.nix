@@ -5,7 +5,7 @@
   pkgs,
   inputs,
   config,
-  system,
+  lib,
   ...
 }: {
   nixpkgs.config.allowUnfree = true;
@@ -21,6 +21,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.configurationLimit = 10;
   networking.networkmanager.enable = true;
+  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
   networking.nameservers = ["1.1.1.1" "1.0.0.1"]; # Cloudflare DNS
   networking.networkmanager.dns = "none";
   networking.dhcpcd.extraConfig = "nohook resolv.conf";
