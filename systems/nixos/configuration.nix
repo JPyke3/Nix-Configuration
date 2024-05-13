@@ -50,6 +50,7 @@
 
   fonts = {
     fonts = with pkgs; [
+      open-sans
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
@@ -66,6 +67,10 @@
     fontconfig = {
       antialias = true;
       enable = true;
+      defaultFonts = {
+        sansSerif = ["Open Sans" "Noto Sans"];
+        serif = ["Noto Serif"];
+      };
     };
   };
 
