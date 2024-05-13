@@ -46,7 +46,10 @@
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     libz
-    xorg
+    xorg.libICE
+    xorg.libX11
+    xorg.libSM
+    xorg.libXext
   ];
 
   fonts = {
