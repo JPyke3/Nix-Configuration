@@ -57,6 +57,7 @@
     libgccjit
     SDL2
     gtk3
+    pango
   ];
 
   fonts = {
