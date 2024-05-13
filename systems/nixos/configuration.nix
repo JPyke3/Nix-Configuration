@@ -53,6 +53,7 @@
     xorg.libXrandr
     freetype
     libgccjit
+    SDL2
   ];
 
   fonts = {
