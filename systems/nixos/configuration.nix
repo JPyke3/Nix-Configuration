@@ -58,6 +58,7 @@
     SDL2
     gtk3
     pango
+    at-spi2-atk
   ];
 
   fonts = {
