@@ -13,6 +13,7 @@
       "launchcontrol"
       "maccy"
       "notion"
+      "obsidian"
     ];
     masApps = {
       Infuse = 1136220934;
