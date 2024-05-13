@@ -1,7 +1,5 @@
 {
   inputs,
-  pkgs,
-  lib,
   ...
 }: {
   imports = [
@@ -10,18 +8,24 @@
     ./syncthing.nix
   ];
 
-  jovian.devices.steamdeck.enable = true;
+  jovian = {
+    devices.steamdeck = {
+      enable = true;
+      enableGyroDsuService = true;
+    };
 
-  jovian.decky-loader = {
-    enable = true;
-    user = "jacobpyke";
-  };
+   decky-loader = {
+     enable = true;
+     user = "jacobpyke";
+   };
 
-  jovian.steam = {
-    enable = true;
-    autoStart = true;
-    desktopSession = "plasma";
-    user = "jacobpyke";
+    steam = {
+      enable = true;
+      autoStart = true;
+      desktopSession = "gnome";
+      user = "jacobpyke";
+    };
+    steamos.useSteamOSConfig = true;
   };
 
   # Small Hack for the SD Card
@@ -44,19 +48,17 @@
   networking.hostName = "jacob-japan"; # Define your hostname.
   networking.networkmanager.wifi.powersave = true;
 
-  services.xserver.enable = true;
-  services.xserver.desktopManager.plasma6.enable = true;
+  services.xserver = {
+  enable = true;
+  desktopManager.gnome.enable = true;
+};
 
   services.pipewire.enable = true;
   services.printing.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    amdgpu_top
-  ];
-
-  programs.steam = {
-    enable = true;
-    extest.enable = true;
-    remotePlay.openFirewall = true;
-  };
+ # programs.steam = {
+ #   enable = true;
+ #   extest.enable = true;
+ #   remotePlay.openFirewall = true;
+ # };
 }
