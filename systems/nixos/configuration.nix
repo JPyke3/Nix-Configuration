@@ -61,6 +61,7 @@
     at-spi2-atk
     cairo
     gdk-pixbuf
+    glib
   ];
 
   fonts = {
