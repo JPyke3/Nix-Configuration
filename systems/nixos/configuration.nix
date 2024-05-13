@@ -47,6 +47,7 @@
   programs.nix-ld.libraries = with pkgs; [
     libz
     xorg.libxcb
+    xorg.libSM
   ];
 
   fonts = {

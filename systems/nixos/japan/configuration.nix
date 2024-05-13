@@ -1,7 +1,4 @@
-{
-  inputs,
-  ...
-}: {
+{inputs, ...}: {
   imports = [
     ./hardware-configuration.nix
     inputs.jovian.nixosModules.jovian
@@ -14,10 +11,10 @@
       enableGyroDsuService = true;
     };
 
-   decky-loader = {
-     enable = true;
-     user = "jacobpyke";
-   };
+    decky-loader = {
+      enable = true;
+      user = "jacobpyke";
+    };
 
     steam = {
       enable = true;
@@ -49,16 +46,16 @@
   networking.networkmanager.wifi.powersave = true;
 
   services.xserver = {
-  enable = true;
-  desktopManager.gnome.enable = true;
-};
+    enable = true;
+    desktopManager.gnome.enable = true;
+  };
 
   services.pipewire.enable = true;
   services.printing.enable = true;
 
- # programs.steam = {
- #   enable = true;
- #   extest.enable = true;
- #   remotePlay.openFirewall = true;
- # };
+  # programs.steam = {
+  #   enable = true;
+  #   extest.enable = true;
+  #   remotePlay.openFirewall = true;
+  # };
 }
