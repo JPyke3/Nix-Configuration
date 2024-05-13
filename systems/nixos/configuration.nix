@@ -60,6 +60,7 @@
     pango
     at-spi2-atk
     cairo
+    gdk-pixbuf
   ];
 
   fonts = {
