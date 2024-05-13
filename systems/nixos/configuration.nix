@@ -50,6 +50,7 @@
     xorg.libX11
     xorg.libSM
     xorg.libXext
+    xorg.libXrandr
   ];
 
   fonts = {
