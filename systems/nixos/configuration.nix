@@ -83,7 +83,7 @@
       antialias = true;
       enable = true;
       hinting.autohint = false;
-      hinting.style = "hintfull";
+      hinting.style = "full";
       defaultFonts = {
         sansSerif = ["Noto Sans CJK JP"];
         serif = ["Noto Serif"];
