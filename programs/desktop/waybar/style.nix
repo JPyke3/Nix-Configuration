@@ -93,9 +93,9 @@ in
     #custom-crypto,
     #volume,
     #pulseaudio {
-      border-radius: 8px;
+      border-radius: 4px;
       background-color: #${base00};
-      padding: 14px 0px 14px 0px;
+      padding: 4px 0px 4px 0px;
       margin: 3px 0px 3px 0px;
     }
 
@@ -107,7 +107,7 @@ in
       background-image: url("${snowflake}");
       background-size: 65%;
       background-position: center;
-      padding: 14px 0 0 0;
+      padding: 4px 0 0 0;
       background-repeat: no-repeat;
     }
     #backlight {
