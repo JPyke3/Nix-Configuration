@@ -83,7 +83,7 @@
       antialias = true;
       enable = true;
       defaultFonts = {
-        sansSerif = ["Noto Sans JP"];
+        sansSerif = ["Noto Sans CJK JP"];
         serif = ["Noto Serif"];
       };
     };
