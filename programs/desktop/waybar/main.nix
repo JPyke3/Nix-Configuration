@@ -125,8 +125,11 @@ in {
             '';
           format = "󰘻";
         };
-        "custom/power" = {
+        "custom/power" = let
+          wlogout = "${pkgs.wlogout}/bin/wlogout";
+        in {
           tooltip = false;
+          on-click = "${wlogout}";
           format = "󰐥";
         };
         clock = {
