@@ -82,7 +82,8 @@
     fontconfig = {
       antialias = true;
       enable = true;
-      hinting.autohint = true;
+      hinting.autohint = false;
+      hinting.style = "hintfull";
       defaultFonts = {
         sansSerif = ["Noto Sans CJK JP"];
         serif = ["Noto Serif"];
