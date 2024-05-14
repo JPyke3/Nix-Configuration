@@ -9,7 +9,7 @@ in
   with config.colorScheme.colors; ''
     * {
       /* `otf-font-awesome` is required to be installed for icons */
-      font-family: Material Design Icons, Lexend, Iosevka Nerd Font;
+      font-family: Noto Sans CJK JP, Material Design Icons, Lexend, Iosevka Nerd Font;
     }
 
     window#waybar {
