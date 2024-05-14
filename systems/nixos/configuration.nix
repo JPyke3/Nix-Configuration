@@ -80,7 +80,7 @@
 
     fontDir.enable = true;
     fontconfig = {
-      antialias = true;
+      antialias = false;
       enable = true;
       defaultFonts = {
         sansSerif = ["Noto Sans CJK JP"];
