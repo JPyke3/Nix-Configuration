@@ -17,7 +17,7 @@ in
       border-radius: 0px;
       color: #${base08};
       box-shadow: 2px 3px 2px 2px #151515;
-      font-size: 14px;
+      font-size: 16px;
       transition-property: background-color;
       transition-duration: 0.5s;
     }
@@ -45,7 +45,7 @@ in
 
     #clock {
       font-weight: 700;
-      font-family: "Iosevka Term";
+      font-family: "Noto Sans CJK JP";
       padding: 5px 0px 5px 0px;
     }
 
@@ -125,13 +125,13 @@ in
       color: #${base0A};
     }
     tooltip {
-      font-family: 'Lato', sans-serif;
+      font-family: 'Noto Sans CJK JP', sans-serif;
       border-radius: 15px;
       padding: 20px;
       margin: 30px;
     }
     tooltip label {
-      font-family: 'Lato', sans-serif;
+      font-family: 'Noto Sans CJK JP', sans-serif;
       padding: 20px;
     }
   ''
