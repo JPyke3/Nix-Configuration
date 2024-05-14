@@ -127,7 +127,6 @@ in {
         };
         "custom/power" = {
           tooltip = false;
-          # TODO
           format = "󰐥";
         };
         clock = {
