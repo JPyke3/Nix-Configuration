@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
@@ -50,6 +54,7 @@
           "$mod ALT, $right, resizeactive, 160, 0"
           "$mod, C, togglespecialworkspace"
           "$mod SHIFT, C, movetoworkspace, special"
+          "$mod SHIFT, E, exec, ${pkgs.wlogout}/bin/wlogout"
         ]
         ++ (
           # workspaces
