@@ -93,7 +93,6 @@ in
     #custom-crypto,
     #volume,
     #pulseaudio {
-      border-radius: 4px;
       background-color: #${base00};
       padding: 4px 0px 4px 0px;
       margin: 3px 0px 3px 0px;
