@@ -21,6 +21,7 @@ in {
           aria2-integration
           vimium
           sponsorblock
+          buster-captcha-solver
           (buildFirefoxXpiAddon {
             pname = "toggl-button-time-tracker";
             version = "3.0.29";
