@@ -49,7 +49,6 @@ in {
     ../../programs/cli/nvim/nvim.nix
     ../../programs/cli/lf.nix
     ../../programs/cli/nix-index.nix
-    ../../programs/daemon/download-cleaner.nix
   ];
 
   sops = {
