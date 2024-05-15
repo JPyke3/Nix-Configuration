@@ -44,7 +44,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     jovian = {
-      url = "github:Jovian-Experiments/Jovian-NixOS";
+      url = "github:Jovian-Experiments/Jovian-NixOS/c8af9ea43d928f1e1f2c0ac100e75519ea76565d";
       inputs.nixpkgs.follows = "unstable";
     };
     kmonad = {

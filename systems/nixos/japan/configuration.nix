@@ -19,10 +19,9 @@
     steam = {
       enable = true;
       autoStart = true;
-      desktopSession = "gnome";
+      desktopSession = "plasma";
       user = "jacobpyke";
     };
-    steamos.useSteamOSConfig = true;
   };
 
   # Small Hack for the SD Card
@@ -47,7 +46,7 @@
 
   services.xserver = {
     enable = true;
-    desktopManager.gnome.enable = true;
+    desktopManager.plasma6.enable = true;
   };
 
   services.pipewire.enable = true;
