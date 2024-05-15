@@ -15,8 +15,8 @@ pkgs.writeShellScriptBin "clean-downloads-folder" ''
    # Change to the downloads folder
    cd "''${DOWNLOADS_FOLDER}" || exit 1
 
-   # Remove all files that are older than 30 days
-   find . -type f -mtime +30 -exec rm -f {} \;
+   # Remove all files that are older than 30 days and ignroe the syncthing .stfolder
+   find . -type f -not -path "*/.stfolder/*" -mtime +30 -delete
 
    # Remove all empty directories
    find . -type d -empty -delete
