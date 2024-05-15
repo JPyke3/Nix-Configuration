@@ -14,7 +14,7 @@
       "maccy"
       "notion"
       "obsidian"
-      "cleanshot"
+      "shottr"
     ];
     masApps = {
       Infuse = 1136220934;
