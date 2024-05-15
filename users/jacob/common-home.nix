@@ -27,7 +27,6 @@ in {
     pkgs.nodejs_20
     pkgs.zathura
     (import ../../scripts/tmux-sessionizer.nix {inherit pkgs;})
-    (import ../../scripts/delete-downloads.nix {inherit pkgs;})
   ];
 
   home.sessionVariables = {
@@ -50,6 +49,7 @@ in {
     ../../programs/cli/nvim/nvim.nix
     ../../programs/cli/lf.nix
     ../../programs/cli/nix-index.nix
+    ../../programs/daemon/download-cleaner.nix
   ];
 
   sops = {
