@@ -19,6 +19,7 @@
     masApps = {
       Infuse = 1136220934;
       "Timery for Toggl" = 1425368544;
+      "Omnifocus 4" = 1542143627;
     };
   };
 }
