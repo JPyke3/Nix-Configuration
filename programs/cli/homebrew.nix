@@ -20,6 +20,7 @@
       Infuse = 1136220934;
       "Timery for Toggl" = 1425368544;
       "Omnifocus 4" = 1542143627;
+      "Flighty - Live Flight Tracker" = 1358823008;
     };
   };
 }
