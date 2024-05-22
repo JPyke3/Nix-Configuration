@@ -50,6 +50,10 @@
     kmonad = {
       url = "git+https://github.com/kmonad/kmonad?submodules=1&dir=nix";
     };
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -64,6 +68,7 @@
     nixpkgs-darwin,
     nur,
     kmonad,
+    stylix,
     ...
   } @ inputs: {
     # Desktop PC
