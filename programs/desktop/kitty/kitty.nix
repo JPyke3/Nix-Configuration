@@ -11,6 +11,6 @@ in {
   programs.kitty = {
     enable = true;
     shellIntegration.enableZshIntegration = true;
+    font.size = fontSize;
   };
-  font.size = fontSize;
 }
