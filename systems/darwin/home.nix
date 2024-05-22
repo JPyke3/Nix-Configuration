@@ -30,7 +30,6 @@ in {
 
   imports = [
     ../../users/jacob/common-home.nix
-    ../../programs/desktop/alacritty.nix
     ../../programs/desktop/firefox.nix
     ../../programs/daemon/sketchybar/plugins.nix
   ];
