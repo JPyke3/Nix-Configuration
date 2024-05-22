@@ -133,6 +133,7 @@
         ./systems/darwin/kmonad.nix
         ./systems/darwin/configuration.nix
         stylix.darwinModules.stylix
+        ./systems/stylix.nix
         home-manager.darwinModules.home-manager
         {
           home-manager.users.jacobpyke.imports = [
