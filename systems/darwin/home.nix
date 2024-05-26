@@ -15,6 +15,7 @@ in {
     slack
     spotify
     discord
+    speedtest-cli
   ];
 
   nixpkgs.overlays = [
