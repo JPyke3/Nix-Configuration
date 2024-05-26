@@ -15,6 +15,7 @@
       "notion"
       "obsidian"
       "shottr"
+      "deluge"
     ];
     masApps = {
       Infuse = 1136220934;
