@@ -303,11 +303,11 @@
       },
       "locked": {
         "dir": "nix",
-        "lastModified": 1717097552,
-        "narHash": "sha256-1DtwQrZgBZSvhvICUf5MjFQl/WEv3ISBHpnpN9aUk28=",
+        "lastModified": 1717741147,
+        "narHash": "sha256-VcGu0i6/2PVFHmyrnLivxEARX2bcPLxgkSFoUYjx3YY=",
         "ref": "refs/heads/master",
-        "rev": "9affc9f85e84e4648d097427aa9ed99ad4c0418f",
-        "revCount": 792,
+        "rev": "235b42610758355a664c153999c1ff03b4d918e6",
+        "revCount": 793,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/kmonad/kmonad?dir=nix"
@@ -327,11 +327,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1717740089,
-        "narHash": "sha256-daB0M1AzbooNeStZFx9lRvL3WI7JnB2VP6kDMBINsiQ=",
+        "lastModified": 1717782469,
+        "narHash": "sha256-XefXnaF5vcZrnzjSgr+F0cNSEiedhxz/jzGqcxGjWe0=",
         "owner": "ggerganov",
         "repo": "llama.cpp",
-        "rev": "c9ee7118d5644dd3df70ea6878b36a9761616aab",
+        "rev": "da799b41891e34aac86ce4e173f9c4c0afd4fab3",
         "type": "github"
       },
       "original": {
@@ -419,11 +419,11 @@
     },
     "nixpkgs-darwin": {
       "locked": {
-        "lastModified": 1717428950,
-        "narHash": "sha256-Pr3lhu2No1GHJarhjt+Jsfxye1wNLoY12E44p0b3VO0=",
+        "lastModified": 1717618704,
+        "narHash": "sha256-oESBjEgFld94OaplYFXaN5t0yO6DEXPND1q1g8CzYdI=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "4fad892a8f64635a55423e4acfefeefb6caf4d0d",
+        "rev": "3603f3ed7c4442e467b8f5064836b4445cac6f4d",
         "type": "github"
       },
       "original": {
@@ -438,11 +438,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1717721353,
-        "narHash": "sha256-Q+Plp4bM7rqAbHEl0NgizajHnvM70vnO59vwbg81omI=",
+        "lastModified": 1717807546,
+        "narHash": "sha256-I4SKTrIXYe3u/g2e0rzv2NildsAQjfakTF7dlhejaMY=",
         "owner": "bandithedoge",
         "repo": "nixpkgs-firefox-darwin",
-        "rev": "b82255d4782aeb88223f2821fe2140db94499b9e",
+        "rev": "d6306b99c3aee9c317199c6ac74e79cabb7cfd6e",
         "type": "github"
       },
       "original": {
@@ -528,11 +528,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1717737742,
-        "narHash": "sha256-elS2WJDhkkpI1SVUz1ZS2i8Uydaoubh07j83xI89z8A=",
+        "lastModified": 1717821758,
+        "narHash": "sha256-9iQreGkOPNBSMloULfv45dzAuaihK9ESR26bRs//tW0=",
         "owner": "nix-community",
         "repo": "nur",
-        "rev": "df0e3a2441cf158e7f9c91eeadefa142dec80f86",
+        "rev": "f4f3dcd9f8be9eee489df9ec268e395cbbd215f3",
         "type": "github"
       },
       "original": {
