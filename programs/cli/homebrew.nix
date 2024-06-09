@@ -22,6 +22,7 @@
       "Timery for Toggl" = 1425368544;
       "Omnifocus 4" = 1542143627;
       "Flighty - Live Flight Tracker" = 1358823008;
+      "Reeder 5." = 1529448980;
     };
   };
 }
