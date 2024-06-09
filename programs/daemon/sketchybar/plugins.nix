@@ -525,18 +525,19 @@
 
   xdg.configFile."sketchybar/plugins/bank_balance.sh" = {
     text = ''
-      #!/usr/bin/env zsh
+           #!/usr/bin/env zsh
 
-      RESPONSE=$(curl -s https://api.up.com.au/api/v1/accounts \
-        -H "Authorization: Bearer $UP_API_KEY" -G)
+           RESPONSE=$(curl -s https://api.up.com.au/api/v1/accounts \
+             -H "Authorization: Bearer $UP_API_KEY" -G)
 
-      SAVER_TOTAL=$(echo $RESPONSE | ${pkgs.jq}/bin/jq '[.data[] | select(.attributes.accountType == "SAVER") | .attributes.balance.value | tonumber] | add')
-      INDIVIDUAL_TRANSACTIONAL_TOTAL=$(echo $RESPONSE | ${pkgs.jq}/bin/jq '[.data[] | select(.attributes.ownershipType == "INDIVIDUAL" and .attributes.accountType == "TRANSACTIONAL") | .attributes.balance.value | tonumber] | add')
-      JOINT_TRANSACTIONAL_TOTAL=$(echo $RESPONSE | ${pkgs.jq}/bin/jq '[.data[] | select(.attributes.ownershipType == "JOINT" and .attributes.accountType == "TRANSACTIONAL") | .attributes.balance.value | tonumber] | add')
+      SAVER_TOTAL=$(echo $RESPONSE | ${pkgs.jq}/bin/jq '[.data[] | select(.attributes.accountType == "SAVER") | .attributes.balance.value | tonumber | floor] | add | floor')
+         INDIVIDUAL_TRANSACTIONAL_TOTAL=$(echo $RESPONSE | ${pkgs.jq}/bin/jq '[.data[] | select(.attributes.ownershipType == "INDIVIDUAL" and .attributes.accountType == "TRANSACTIONAL") | .attributes.balance.value | tonumber | floor] | add | floor')
+         JOINT_TRANSACTIONAL_TOTAL=$(echo $RESPONSE | ${pkgs.jq}/bin/jq '[.data[] | select(.attributes.ownershipType == "JOINT" and .attributes.accountType == "TRANSACTIONAL") | .attributes.balance.value | tonumber | floor] | add | floor')
 
-      sketchybar --set saver_accounts label="\$${SAVER_TOTAL}" drawing=on updates=on
-      sketchybar --set individual_transactional_accounts label="\$${INDIVIDUAL_TRANSACTIONAL_TOTAL}" drawing=on updates=on
-      sketchybar --set joint_transactional_accounts label="\$${JOINT_TRANSACTIONAL_TOTAL}" drawing=on updates=on
+
+           sketchybar --set saver_accounts label="\$${SAVER_TOTAL}" drawing=on updates=on
+           sketchybar --set individual_transactional_accounts label="\$${INDIVIDUAL_TRANSACTIONAL_TOTAL}" drawing=on updates=on
+           sketchybar --set joint_transactional_accounts label="\$${JOINT_TRANSACTIONAL_TOTAL}" drawing=on updates=on
     '';
     executable = true;
   };
