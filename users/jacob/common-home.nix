@@ -58,6 +58,7 @@ in {
 
     secrets = {
       "llms/openai_api_key" = {};
+      "programs/up/accesskey" = {};
     };
   };
 
