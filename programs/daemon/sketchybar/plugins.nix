@@ -530,7 +530,7 @@
        BALANCE=$(curl -s https://api.up.com.au/api/v1/accounts/2557ec9e-5e64-4cad-a1c6-4dfa3c1db423 \
       -H "Authorization: Bearer $UP_API_KEY" | ${pkgs.jq}/bin/jq -r '.data.attributes.balance.value')
 
-       sketchybar --set bank_balance label="Balance: \$${BALANCE}" drawing=on updates=on
+       sketchybar --set bank_balance label="\$${BALANCE}" drawing=on updates=on
     '';
     executable = true;
   };
