@@ -126,7 +126,7 @@ sketchybar --add item volume right \
     script="$PLUGIN_SHARED_DIR/volume.sh" \
     --subscribe volume volume_change
 
-sketchybar --add item individual_transactional_accounts left \
+sketchybar --add item individual_transactional_accounts e \
 	--set individual_transactional_accounts \
 	icon.color=0xffFE7864 \
 	icon=󰔶 \
@@ -135,14 +135,14 @@ sketchybar --add item individual_transactional_accounts left \
 	drawing=on \
 	script="$PLUGIN_SHARED_DIR/bank_balance.sh" \
 
-sketchybar --add item joint_transactional_accounts left \
+sketchybar --add item joint_transactional_accounts e \
 	--set joint_transactional_accounts \
 	icon.color=0xffFEED6E \
 	icon=󰔶 \
 	updates=on \
 	drawing=on \
 
-sketchybar --add item saver_accounts left \
+sketchybar --add item saver_accounts e \
 	--set saver_accounts \
 	icon.color=0xff03BB82 \
 	icon=󰔶 \
