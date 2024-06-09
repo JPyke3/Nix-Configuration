@@ -528,7 +528,7 @@
       #!/usr/bin/env zsh
 
       RESPONSE=$(curl -s https://api.up.com.au/api/v1/accounts \
-        -H "Authorization: Bearer $UP_API_KEY" -G')
+        -H "Authorization: Bearer $UP_API_KEY" -G)
 
       SAVER_ACCOUNTS=$(echo $RESPONSE | ${pkgs.jq}/bin/jq -r '.data[] | select(.attributes.accountType == "SAVER") | .attributes.displayName + ": $" + .attributes.balance.value')
       INDIVIDUAL_TRANSACTIONAL_ACCOUNTS=$(echo $RESPONSE | ${pkgs.jq}/bin/jq -r '.data[] | select(.attributes.ownershipType == "INDIVIDUAL" and .attributes.accountType == "TRANSACTIONAL") | .attributes.displayName + ": $" + .attributes.balance.value')
