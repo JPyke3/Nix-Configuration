@@ -126,6 +126,15 @@ sketchybar --add item volume right \
     script="$PLUGIN_SHARED_DIR/volume.sh" \
     --subscribe volume volume_change
 
+sketchybar --add item bank_balance right \
+	--set bank_balance \
+	icon.color=0xff89E051 \
+	icon= \
+	update_freq=10800 \
+	updates=on \
+	drawing=on \
+	script="$PLUGIN_SHARED_DIR/bank_balance.sh" \
+
 sketchybar --add item toggl right \
 	--set toggl \
 	icon.color=0xfff48a98 \
