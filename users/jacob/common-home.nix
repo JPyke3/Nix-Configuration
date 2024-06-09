@@ -57,7 +57,9 @@ in {
     age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
 
     secrets = {
-      "llms/openai_api_key" = {};
+      "llms/openai_api_key" = {
+        path = "${config.home.homeDirectory}/.secrets/llms/openai_api_key";
+      };
       "programs/up/accesskey" = {
         path = "${config.home.homeDirectory}/.secrets/up/accesskey";
       };
