@@ -58,7 +58,9 @@ in {
 
     secrets = {
       "llms/openai_api_key" = {};
-      "programs/up/accesskey" = {};
+      "programs/up/accesskey" = {
+        path = "~/.secrets/up/accesskey";
+      };
     };
   };
 
