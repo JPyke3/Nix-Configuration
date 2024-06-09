@@ -135,19 +135,19 @@ sketchybar --add item individual_transactional_accounts right \
 	drawing=on \
 	script="$PLUGIN_SHARED_DIR/bank_balance.sh" \
 
-sketchybar --add item joint_transactional_accounts right \
-	--set bank_balance \
-	icon.color=0xffFEED6E \
-	icon=󰔶 \
-	updates=on \
-	drawing=on \
-
-sketchybar --add item saver_accounts right \
-	--set bank_balance \
-	icon.color=0xff03BB82 \
-	icon=󰔶 \
-	updates=on \
-	drawing=on \
+# sketchybar --add item joint_transactional_accounts right \
+# 	--set bank_balance \
+# 	icon.color=0xffFEED6E \
+# 	icon=󰔶 \
+# 	updates=on \
+# 	drawing=on \
+# 
+# sketchybar --add item saver_accounts right \
+# 	--set bank_balance \
+# 	icon.color=0xff03BB82 \
+# 	icon=󰔶 \
+# 	updates=on \
+# 	drawing=on \
 
 sketchybar --add item toggl right \
 	--set toggl \
