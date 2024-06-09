@@ -127,7 +127,7 @@ sketchybar --add item volume right \
     --subscribe volume volume_change
 
 sketchybar --add item individual_transactional_accounts right \
-	--set bank_balance \
+	--set individual_transactional_accounts \
 	icon.color=0xffFE7864 \
 	icon=󰔶 \
 	update_freq=10800 \
@@ -135,19 +135,19 @@ sketchybar --add item individual_transactional_accounts right \
 	drawing=on \
 	script="$PLUGIN_SHARED_DIR/bank_balance.sh" \
 
-# sketchybar --add item joint_transactional_accounts right \
-# 	--set bank_balance \
-# 	icon.color=0xffFEED6E \
-# 	icon=󰔶 \
-# 	updates=on \
-# 	drawing=on \
-# 
-# sketchybar --add item saver_accounts right \
-# 	--set bank_balance \
-# 	icon.color=0xff03BB82 \
-# 	icon=󰔶 \
-# 	updates=on \
-# 	drawing=on \
+sketchybar --add item joint_transactional_accounts right \
+	--set joint_transactional_accounts \
+	icon.color=0xffFEED6E \
+	icon=󰔶 \
+	updates=on \
+	drawing=on \
+
+sketchybar --add item saver_accounts right \
+	--set saver_accounts \
+	icon.color=0xff03BB82 \
+	icon=󰔶 \
+	updates=on \
+	drawing=on \
 
 sketchybar --add item toggl right \
 	--set toggl \
