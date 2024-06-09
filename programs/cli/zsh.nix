@@ -62,7 +62,7 @@
                fi
 
                export OPENAI_API_KEY="$(cat ~/.secrets/llms/openai_api_key)"
-      export UP_API_KEY="$(cat ~/.secrets/programs/up/accesskey)"
+      export UP_API_KEY="$(cat ~/.secrets/up/accesskey)"
 
                export PATH="$PATH:$HOME/.config/home-manager/"
 
