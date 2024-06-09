@@ -59,7 +59,7 @@ in {
     secrets = {
       "llms/openai_api_key" = {};
       "programs/up/accesskey" = {
-        path = "~/.secrets/up/accesskey";
+        path = "/Users/jacobpyke/.secrets/up/accesskey";
       };
     };
   };
