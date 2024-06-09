@@ -50,6 +50,9 @@
     kmonad = {
       url = "git+https://github.com/kmonad/kmonad?submodules=1&dir=nix";
     };
+    base16 = {
+      url = "github:SenchoPens/base16.nix";
+    };
     stylix = {
       url = "github:danth/stylix/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";

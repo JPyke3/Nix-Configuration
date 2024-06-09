@@ -543,6 +543,7 @@
     },
     "root": {
       "inputs": {
+        "base16": "base16",
         "home-manager": "home-manager",
         "home-manager-unstable": "home-manager-unstable",
         "jovian": "jovian",
@@ -582,7 +583,9 @@
     },
     "stylix": {
       "inputs": {
-        "base16": "base16",
+        "base16": [
+          "base16"
+        ],
         "base16-fish": "base16-fish",
         "base16-foot": "base16-foot",
         "base16-helix": "base16-helix",
