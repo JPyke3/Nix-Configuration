@@ -525,12 +525,18 @@
 
   xdg.configFile."sketchybar/plugins/bank_balance.sh" = {
     text = ''
-       #!/usr/bin/env zsh
+      #!/usr/bin/env zsh
 
-       BALANCE=$(curl -s https://api.up.com.au/api/v1/accounts/2557ec9e-5e64-4cad-a1c6-4dfa3c1db423 \
-      -H "Authorization: Bearer $UP_API_KEY" | ${pkgs.jq}/bin/jq -r '.data.attributes.balance.value')
+      RESPONSE=$(curl -s https://api.up.com.au/api/v1/accounts \
+        -H "Authorization: Bearer $UP_API_KEY" -G')
 
-       sketchybar --set bank_balance label="\$${BALANCE}" drawing=on updates=on
+      SAVER_ACCOUNTS=$(echo $RESPONSE | ${pkgs.jq}/bin/jq -r '.data[] | select(.attributes.accountType == "SAVER") | .attributes.displayName + ": $" + .attributes.balance.value')
+      INDIVIDUAL_TRANSACTIONAL_ACCOUNTS=$(echo $RESPONSE | ${pkgs.jq}/bin/jq -r '.data[] | select(.attributes.ownershipType == "INDIVIDUAL" and .attributes.accountType == "TRANSACTIONAL") | .attributes.displayName + ": $" + .attributes.balance.value')
+      JOINT_TRANSACTIONAL_ACCOUNTS=$(echo $RESPONSE | ${pkgs.jq}/bin/jq -r '.data[] | select(.attributes.ownershipType == "JOINT" and .attributes.accountType == "TRANSACTIONAL") | .attributes.displayName + ": $" + .attributes.balance.value')
+
+      sketchybar --set saver_accounts label="$SAVER_ACCOUNTS" drawing=on updates=on
+      sketchybar --set individual_transactional_accounts label="$INDIVIDUAL_TRANSACTIONAL_ACCOUNTS" drawing=on updates=on
+      sketchybar --set joint_transactional_accounts label="$JOINT_TRANSACTIONAL_ACCOUNTS" drawing=on updates=on
     '';
     executable = true;
   };
