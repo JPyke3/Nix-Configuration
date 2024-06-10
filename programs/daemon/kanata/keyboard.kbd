@@ -6,9 +6,9 @@
 ;; - pressing another key on the same half of the keyboard
 ;;   as the home row mod will activate an early tap action
 
-(defcfg
-  process-unmapped-keys yes
-)
+;; (defcfg
+;;   process-unmapped-keys yes
+;; )
 (defsrc
   a   s   d   f   j   k   l   ;
 )
