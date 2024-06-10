@@ -11,7 +11,6 @@
       "raycast"
       "anki"
       "launchcontrol"
-      "maccy"
       "notion"
       "obsidian"
       "shottr"
