@@ -16,6 +16,7 @@
       "obsidian"
       "shottr"
       "deluge"
+      "setapp"
     ];
     masApps = {
       Infuse = 1136220934;
