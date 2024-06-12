@@ -2,6 +2,7 @@
   homebrew = {
     enable = true;
     brews = [
+      "neo4j"
     ];
     casks = [
       "nikitabobko/tap/aerospace"
@@ -16,6 +17,7 @@
       "shottr"
       "deluge"
       "setapp"
+      "neo4j"
     ];
     masApps = {
       Infuse = 1136220934;
