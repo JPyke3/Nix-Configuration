@@ -28,7 +28,7 @@
       alt - j : yabai -m window --warp south
       alt - k : yabai -m window --warp north
       alt - l : yabai -m window --warp east
-      alt - shift - r : yabai -m window --display recent
+      alt + shift - r : yabai -m window --display recent
     '';
   };
 }
