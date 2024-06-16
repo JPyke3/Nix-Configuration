@@ -3,6 +3,7 @@
     enable = true;
     brews = [
       "neo4j"
+      "pyenv"
     ];
     casks = [
       "nikitabobko/tap/aerospace"
