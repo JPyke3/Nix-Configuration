@@ -4,6 +4,7 @@
     brews = [
       "neo4j"
       "pyenv"
+      "zlib"
     ];
     casks = [
       "nikitabobko/tap/aerospace"
