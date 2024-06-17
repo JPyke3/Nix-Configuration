@@ -22,6 +22,7 @@
       "neo4j"
       "docker"
       "eloston-chromium"
+      "nordvpn"
     ];
     masApps = {
       Infuse = 1136220934;
