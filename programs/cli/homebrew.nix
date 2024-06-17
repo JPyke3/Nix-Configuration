@@ -20,6 +20,7 @@
       "deluge"
       "setapp"
       "neo4j"
+      "docker"
     ];
     masApps = {
       Infuse = 1136220934;
