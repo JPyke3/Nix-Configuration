@@ -15,6 +15,7 @@ in {
     slack
     spotify
     discord
+    teams
   ];
 
   nixpkgs.overlays = [

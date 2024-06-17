@@ -22,6 +22,7 @@
     coreutils
     parallel
     alejandra
+    docker
   ];
 
   users.users.jacobpyke = {
