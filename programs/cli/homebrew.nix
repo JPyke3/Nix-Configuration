@@ -21,6 +21,7 @@
       "setapp"
       "neo4j"
       "docker"
+      "eloston-chromium"
     ];
     masApps = {
       Infuse = 1136220934;
