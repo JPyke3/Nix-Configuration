@@ -23,6 +23,7 @@
       "docker"
       "eloston-chromium"
       "nordvpn"
+      "balenaetcher"
     ];
     masApps = {
       Infuse = 1136220934;
