@@ -99,6 +99,8 @@ sketchybar --add item individual_transactional_accounts right \
   background.color=0xffFE7864 \
   updates=on \
   drawing=on \
+  update_freq=10800 \
+  script="$PLUGIN_SHARED_DIR/bank_balance.sh" \
 
 sketchybar --add item joint_transactional_accounts right \
   --set joint_transactional_accounts \
@@ -106,6 +108,8 @@ sketchybar --add item joint_transactional_accounts right \
   background.color=0xffFEED6E \
   updates=on \
   drawing=on \
+  update_freq=10800 \
+  script="$PLUGIN_SHARED_DIR/bank_balance.sh" \
 
 
 sketchybar --add item toggl right \
