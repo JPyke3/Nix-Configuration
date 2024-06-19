@@ -139,15 +139,19 @@ sketchybar --add item joint_transactional_accounts e \
 	--set joint_transactional_accounts \
 	icon.color=0xffFEED6E \
 	icon=󰔶 \
+	update_freq=10800 \
 	updates=on \
 	drawing=on \
+	script="$PLUGIN_SHARED_DIR/bank_balance.sh" \
 
 sketchybar --add item saver_accounts e \
 	--set saver_accounts \
 	icon.color=0xff03BB82 \
 	icon=󰔶 \
+	update_freq=10800 \
 	updates=on \
 	drawing=on \
+	script="$PLUGIN_SHARED_DIR/bank_balance.sh" \
 
 sketchybar --add item toggl right \
 	--set toggl \
