@@ -111,8 +111,6 @@ sketchybar --add item individual_transactional_accounts q \
 	icon.color=0xffFE7864 \
 	icon=󰔶 \
 	update_freq=10800 \
-	updates=on \
-	drawing=on \
 	script="$PLUGIN_SHARED_DIR/bank_balance.sh" \
 
 sketchybar --add item joint_transactional_accounts q \
@@ -120,8 +118,6 @@ sketchybar --add item joint_transactional_accounts q \
 	icon.color=0xffFEED6E \
 	icon=󰔶 \
 	update_freq=10800 \
-	updates=on \
-	drawing=on \
 	script="$PLUGIN_SHARED_DIR/bank_balance.sh" \
 
 sketchybar --add item saver_accounts q \
@@ -129,8 +125,6 @@ sketchybar --add item saver_accounts q \
 	icon.color=0xff03BB82 \
 	icon=󰔶 \
 	update_freq=10800 \
-	updates=on \
-	drawing=on \
 	script="$PLUGIN_SHARED_DIR/bank_balance.sh" \
 
 sketchybar --add item toggl q \
