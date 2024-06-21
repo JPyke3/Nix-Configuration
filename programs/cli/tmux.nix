@@ -50,8 +50,6 @@
                unbind Left
                unbind Right
 
-      unbind C-j
-
       set-option -g status-position top
     '';
   };
