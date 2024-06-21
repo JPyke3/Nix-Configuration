@@ -16,6 +16,7 @@ in {
     spotify
     discord
     teams
+    python312Packages.jupytext
   ];
 
   nixpkgs.overlays = [
