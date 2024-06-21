@@ -38,12 +38,6 @@
       set -g status-right-length 90
       set -g status-justify centre
 
-               # vim-like pane resizing
-               bind -r C-k resize-pane -U
-               bind -r C-j resize-pane -D
-               bind -r C-h resize-pane -L
-               bind -r C-l resize-pane -R
-
                # vim-like pane switching
                bind -r k select-pane -U
                bind -r j select-pane -D
@@ -55,11 +49,6 @@
                unbind Down
                unbind Left
                unbind Right
-
-               unbind C-Up
-               unbind C-Down
-               unbind C-Left
-               unbind C-Right
 
       set-option -g status-position top
     '';
