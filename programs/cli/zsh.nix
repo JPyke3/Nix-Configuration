@@ -48,39 +48,45 @@
     '';
     initExtra = ''
 
-               if [[ "$OSTYPE" == "darwin"* ]]; then
-            export SECRETS_DIR="$(getconf DARWIN_USER_TEMP_DIR)secrets"
-                  export PATH="$PATH:/Library/TeX/texbin"
-                  export PATH="$PATH:/Users/jacobpyke/bin/local/scripts"
-                  export PATH="$PATH:/Users/jacobpyke/bin/local/applications"
-                  export PATH="$PATH:/Users/jacobpyke/.cargo/bin"
-         export PATH="$PATH:/Users/jacobpyke/Library/Python/3.9/bin"
-               else
-            	 export SECRETS_DIR="$XDG_RUNTIME_DIR/secrets"
-                  export PATH="$PATH:/home/jacobpyke/bin/local/scripts"
-                  export PATH="$PATH:/home/jacobpyke/.cargo/bin"
-               fi
+      # Amazon Q pre block. Keep at the top of this file.
+      [[ -f "$HOME/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 
-               export OPENAI_API_KEY="$(cat ~/.secrets/llms/openai_api_key)"
-      export UP_API_KEY="$(cat ~/.secrets/up/accesskey)"
+                     if [[ "$OSTYPE" == "darwin"* ]]; then
+                  export SECRETS_DIR="$(getconf DARWIN_USER_TEMP_DIR)secrets"
+                        export PATH="$PATH:/Library/TeX/texbin"
+                        export PATH="$PATH:/Users/jacobpyke/bin/local/scripts"
+                        export PATH="$PATH:/Users/jacobpyke/bin/local/applications"
+                        export PATH="$PATH:/Users/jacobpyke/.cargo/bin"
+               export PATH="$PATH:/Users/jacobpyke/Library/Python/3.9/bin"
+                     else
+                  	 export SECRETS_DIR="$XDG_RUNTIME_DIR/secrets"
+                        export PATH="$PATH:/home/jacobpyke/bin/local/scripts"
+                        export PATH="$PATH:/home/jacobpyke/.cargo/bin"
+                     fi
 
-               export PATH="$PATH:$HOME/.config/home-manager/"
+                     export OPENAI_API_KEY="$(cat ~/.secrets/llms/openai_api_key)"
+            export UP_API_KEY="$(cat ~/.secrets/up/accesskey)"
 
-               bindkey -s ^f "tmux-sessionizer\n"
+                     export PATH="$PATH:$HOME/.config/home-manager/"
 
-               eval "$(direnv hook zsh)"
+                     bindkey -s ^f "tmux-sessionizer\n"
 
-                    function tmux_sessionizer() {
-                   	  tmux-sessionizer
-                    }
+                     eval "$(direnv hook zsh)"
 
-                    function zvm_after_lazy_keybindings() {
-                     # Here we define the custom widget
-                     zvm_define_widget tmux_sessionizer
+                          function tmux_sessionizer() {
+                         	  tmux-sessionizer
+                          }
 
-                     # In normal mode, press Ctrl-E to invoke this widget
-                     zvm_bindkey vicmd '^f' tmux_sessionizer
-                   }
+                          function zvm_after_lazy_keybindings() {
+                           # Here we define the custom widget
+                           zvm_define_widget tmux_sessionizer
+
+                           # In normal mode, press Ctrl-E to invoke this widget
+                           zvm_bindkey vicmd '^f' tmux_sessionizer
+                         }
+
+      # Amazon Q post block. Keep at the bottom of this file.
+      [[ -f "$HOME/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "$HOME/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
     '';
   };
 }
