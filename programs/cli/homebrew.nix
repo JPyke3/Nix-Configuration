@@ -24,6 +24,7 @@
       "eloston-chromium"
       "nordvpn"
       "balenaetcher"
+      "amazon-q"
     ];
     masApps = {
       Infuse = 1136220934;
