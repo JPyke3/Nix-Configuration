@@ -25,6 +25,7 @@
       "nordvpn"
       "balenaetcher"
       "amazon-q"
+      "betterdisplay"
     ];
     masApps = {
       Infuse = 1136220934;
@@ -32,6 +33,7 @@
       "Omnifocus 4" = 1542143627;
       "Flighty - Live Flight Tracker" = 1358823008;
       "Reeder 5." = 1529448980;
+      "Xcode" = 497799835;
     };
   };
 }
