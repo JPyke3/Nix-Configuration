@@ -17,6 +17,7 @@ in {
     discord
     teams
     python312Packages.jupytext
+    cyberduck
   ];
 
   nixpkgs.overlays = [
