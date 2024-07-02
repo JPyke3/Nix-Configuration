@@ -26,6 +26,7 @@
       "balenaetcher"
       "amazon-q"
       "betterdisplay"
+      "azure-data-studio"
     ];
     masApps = {
       Infuse = 1136220934;
