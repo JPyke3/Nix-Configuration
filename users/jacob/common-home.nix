@@ -15,6 +15,7 @@ in {
     pkgs.tmux
     pkgs.direnv
     pkgs.git
+    pkgs.git-lfs
     pkgs.gh
     pkgs.fzf
     pkgs.ripgrep
