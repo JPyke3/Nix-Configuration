@@ -18,6 +18,7 @@ in {
     teams
     python312Packages.jupytext
     cyberduck
+    ollama
   ];
 
   nixpkgs.overlays = [
