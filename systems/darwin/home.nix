@@ -37,6 +37,7 @@ in {
     ../../programs/desktop/firefox.nix
     ../../programs/desktop/kitty/kitty.nix
     ../../programs/daemon/sketchybar/plugins.nix
+    ../../programs/desktop/vscode.nix
   ];
 
   services.syncthing = {
