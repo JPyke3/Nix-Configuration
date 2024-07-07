@@ -1,7 +1,6 @@
-{ pkgs, ... }:
-{
-	services.ollama = {
-		enable = true;
-		acceleration = "rocm";
-	};
+{pkgs, ...}: {
+  services.ollama = {
+    enable = true;
+    acceleration = "rocm";
+  };
 }

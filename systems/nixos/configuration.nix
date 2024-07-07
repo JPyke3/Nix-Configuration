@@ -14,7 +14,7 @@
     inputs.sops-nix.nixosModules.sops
     ../../programs/daemon/tailscale.nix
     ../../programs/daemon/syncthing/syncthing.nix
-	../../programs/cli/ollama.nix
+    ../../programs/cli/ollama.nix
     ./unstable-packages.nix
   ];
 
@@ -115,7 +115,7 @@
     xwaylandvideobridge
     nom
     nvd
-	oterm
+    oterm
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
