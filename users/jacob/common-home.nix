@@ -29,6 +29,8 @@ in {
     (import ../../scripts/tmux-sessionizer.nix {inherit pkgs;})
   ];
 
+  home-manager.backupFileExtension = "bak";
+
   home.sessionVariables = {
     EDITOR = "nvim";
   };
