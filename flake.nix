@@ -79,6 +79,7 @@
         nur.nixosModules.nur
         ./systems/nixos/configuration.nix
         ./systems/nixos/singapore/configuration.nix
+        ./systems/stylix.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.users.jacobpyke = import ./systems/nixos/singapore/home.nix;
