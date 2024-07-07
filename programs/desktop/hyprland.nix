@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   imports = [
@@ -26,7 +27,7 @@
           "workspace 10, class:^(mpv)$"
         ];
         exec = "swww img ~/Pictures/Wallpapers/catppuccin-japan.png";
-        "col.active_border" = "rgba(${base0E}ff) rgba(${base09}ff) 60deg";
+        "col.active_border" = lib.mkForce "rgba(${base0E}ff) rgba(${base09}ff) 60deg";
         "col.inactive_border" = "rgba(${base00}ff)";
         gaps_in = 0;
         gaps_out = 0;
