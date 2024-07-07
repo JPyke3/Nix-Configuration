@@ -79,6 +79,7 @@
         nur.nixosModules.nur
         ./systems/nixos/configuration.nix
         ./systems/nixos/singapore/configuration.nix
+        stylix.nixosModules.stylix
         ./systems/stylix.nix
         home-manager.nixosModules.home-manager
         {
