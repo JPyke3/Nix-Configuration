@@ -22,6 +22,7 @@
     coreutils
     parallel
     alejandra
+    pipx
   ];
 
   users.users.jacobpyke = {
