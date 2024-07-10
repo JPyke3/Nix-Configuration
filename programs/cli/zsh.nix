@@ -47,65 +47,72 @@
       prompt pure
     '';
     initExtra = ''
+      # Amazon Q pre block. Keep at the top of this file.
+      [[ -f "$HOME/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 
-             # Amazon Q pre block. Keep at the top of this file.
-             [[ -f "$HOME/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
+      if [[ "$OSTYPE" == "darwin"* ]]; then
+        export SECRETS_DIR="$(getconf DARWIN_USER_TEMP_DIR)secrets"
+        export PATH="$PATH:/Library/TeX/texbin"
+        export PATH="$PATH:/Users/jacobpyke/bin/local/scripts"
+        export PATH="$PATH:/Users/jacobpyke/bin/local/applications"
+        export PATH="$PATH:/Users/jacobpyke/.cargo/bin"
+        export PATH="$PATH:/Users/jacobpyke/Library/Python/3.9/bin"
+      else
+        export SECRETS_DIR="$XDG_RUNTIME_DIR/secrets"
+        export PATH="$PATH:/home/jacobpyke/bin/local/scripts"
+        export PATH="$PATH:/home/jacobpyke/.cargo/bin"
+      fi
 
-                            if [[ "$OSTYPE" == "darwin"* ]]; then
-                         export SECRETS_DIR="$(getconf DARWIN_USER_TEMP_DIR)secrets"
-                               export PATH="$PATH:/Library/TeX/texbin"
-                               export PATH="$PATH:/Users/jacobpyke/bin/local/scripts"
-                               export PATH="$PATH:/Users/jacobpyke/bin/local/applications"
-                               export PATH="$PATH:/Users/jacobpyke/.cargo/bin"
-                      export PATH="$PATH:/Users/jacobpyke/Library/Python/3.9/bin"
-                            else
-                         	 export SECRETS_DIR="$XDG_RUNTIME_DIR/secrets"
-                               export PATH="$PATH:/home/jacobpyke/bin/local/scripts"
-                               export PATH="$PATH:/home/jacobpyke/.cargo/bin"
-                            fi
+      export OPENAI_API_KEY="$(cat ~/.secrets/llms/openai_api_key)"
+      export UP_API_KEY="$(cat ~/.secrets/up/accesskey)"
+      export PATH="$PATH:$HOME/.config/home-manager/"
+      bindkey -s ^f "tmux-sessionizer\n"
+      eval "$(direnv hook zsh)"
 
-                            export OPENAI_API_KEY="$(cat ~/.secrets/llms/openai_api_key)"
-                   export UP_API_KEY="$(cat ~/.secrets/up/accesskey)"
+      function tmux_sessionizer() {
+        tmux-sessionizer
+      }
 
-                            export PATH="$PATH:$HOME/.config/home-manager/"
+      function zvm_after_lazy_keybindings() {
+        # Here we define the custom widget
+        zvm_define_widget tmux_sessionizer
 
-                            bindkey -s ^f "tmux-sessionizer\n"
+        # In normal mode, press Ctrl-E to invoke this widget
+        zvm_bindkey vicmd '^f' tmux_sessionizer
+      }
 
-                            eval "$(direnv hook zsh)"
+      # Amazon Q post block. Keep at the bottom of this file.
+      [[ -f "$HOME/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "$HOME/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
 
-                                 function tmux_sessionizer() {
-                                	  tmux-sessionizer
-                                 }
-
-                                 function zvm_after_lazy_keybindings() {
-                                  # Here we define the custom widget
-                                  zvm_define_widget tmux_sessionizer
-
-                                  # In normal mode, press Ctrl-E to invoke this widget
-                                  zvm_bindkey vicmd '^f' tmux_sessionizer
-                                }
-
-             # Amazon Q post block. Keep at the bottom of this file.
-             [[ -f "$HOME/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "$HOME/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
-
-
-         # >>> conda initialize >>>
-         # !! Contents within this block are managed by 'conda init' !!
-         __conda_setup="$('/Users/jacobpyke/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-         if [ $? -eq 0 ]; then
-         	eval "$__conda_setup"
-         else
-         	if [ -f "/Users/jacobpyke/miniconda3/etc/profile.d/conda.sh" ]; then
-         		. "/Users/jacobpyke/miniconda3/etc/profile.d/conda.sh"
-         	else
-         		export PATH="/Users/jacobpyke/miniconda3/bin:$PATH"
-         	fi
-         fi
-         unset __conda_setup
-         # <<< conda initialize <<<
+      # >>> conda initialize >>>
+      # !! Contents within this block are managed by 'conda init' !!
+      __conda_setup="$('/Users/jacobpyke/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+      if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+      else
+        if [ -f "/Users/jacobpyke/miniconda3/etc/profile.d/conda.sh" ]; then
+          . "/Users/jacobpyke/miniconda3/etc/profile.d/conda.sh"
+        else
+          export PATH="/Users/jacobpyke/miniconda3/bin:$PATH"
+        fi
+      fi
+      unset __conda_setup
+      # <<< conda initialize <<<
 
       if [ -f "/Users/jacobpyke/.config/fabric/fabric-bootstrap.inc" ]; then . "/Users/jacobpyke/.config/fabric/fabric-bootstrap.inc"; fi
 
+      # wrap the ollama command, if the parameter is pull with no other parameters pull all models
+      function ollama() {
+        if [[ $1 == "pull" ]] && [[ $# -eq 1 ]]; then
+          echo "pulling all models..."
+          ollama list | awk '$1 !~ /^registry.local/ {print $1}' | while read -r model; do
+            echo "Pulling $model"
+            ollama pull "$model"
+          done
+        else
+          command ollama "$@"
+        fi
+      }
     '';
   };
 }
