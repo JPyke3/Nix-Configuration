@@ -35,6 +35,7 @@
       "Flighty - Live Flight Tracker" = 1358823008;
       "Reeder 5." = 1529448980;
       "Xcode" = 497799835;
+      "Parcel - Delivery Tracker" = 639968404;
     };
   };
 }
