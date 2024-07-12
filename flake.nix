@@ -27,7 +27,7 @@
     };
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-colors = {
       url = "github:misterio77/nix-colors";
