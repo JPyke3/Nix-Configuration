@@ -1,3 +1,6 @@
 {...}: {
-  services.deluge.enable = true;
+  services.deluge = {
+    enable = true;
+    openFirewall = true;
+  };
 }
