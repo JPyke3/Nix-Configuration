@@ -46,6 +46,16 @@
     ];
   };
 
+  users.groups.media-server = {
+	members = [
+		sonarr
+		radarr
+		deluge
+		lidarr
+		jellyfin
+	];
+  }
+
   boot.supportedFilesystems = ["zfs"];
   boot.zfs.extraPools = ["mypool"];
 
