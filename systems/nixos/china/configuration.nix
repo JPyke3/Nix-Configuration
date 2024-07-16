@@ -10,8 +10,10 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../../programs/daemon/jellyfin.nix
+    ../../../programs/daemon/jellyseerr.nix
     ../../../programs/daemon/sonarr.nix
     ../../../programs/daemon/radarr.nix
+    ../../../programs/daemon/prowlarr.nix
     ../../../programs/daemon/deluge.nix
   ];
 
