@@ -11,7 +11,7 @@
     enable = true;
     settings = {
       general = with config.colorScheme.colors; {
-        exec-once = ["waybar" "swww init" "swaync" "jellyfin-mpv-shim" "[workspace 1 silent] firefox" "[workspace 2 silent] firefox" "[workspace 3 silent] kitty tmux" "[workspace 4 silent] obsidian" "[workspace 5 silent] slack" "[workspace 6 silent] kitty spotify_player" "[workspace 7 silent] armcord" "[workspace 9 silent] steam"];
+        exec-once = ["waybar" "swww init" "swaync" "jellyfin-mpv-shim" "[workspace 1 silent] firefox" "[workspace 2 silent] firefox" "[workspace 3 silent] kitty tmux" "[workspace 4 silent] obsidian" "[workspace 5 silent] slack" "[workspace 6 silent] kitty spotify_player" "[workspace 7 silent] armcord" "[workspace 9 silent] steam" "/usr/lib/polkit-kde-authentication-agent-1"];
         windowrulev2 = [
           "float, title:^(Picture-in-Picture|Firefox)$"
           "size 800 450, title:^(Picture-in-Picture|Firefox)$"

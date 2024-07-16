@@ -86,8 +86,8 @@
         ./systems/stylix.nix
         home-manager.nixosModules.home-manager
         {
-          home-manager.backupFileExtension = "bak";
           home-manager.users.jacobpyke = import ./systems/nixos/singapore/home.nix;
+          home-manager.backupFileExtension = "backup";
           home-manager.extraSpecialArgs = {
             inherit inputs;
             system = "x86_64-linux";

@@ -17,10 +17,6 @@
 
   services.printing.enable = true;
 
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-
   hardware.opengl = {
     enable = true;
     driSupport = true;
@@ -33,13 +29,14 @@
 
   environment.systemPackages = [
     pkgs.amdgpu_top
+    pkgs.alvr
+    pkgs.corectrl
     config.nur.repos.ataraxiasjel.waydroid-script
   ];
 
   programs.hyprland = {
     enable = true;
   };
-  services.xserver.desktopManager.plasma5.enable = true;
 
   virtualisation.waydroid.enable = true;
 
@@ -54,5 +51,30 @@
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
+  };
+
+  programs.adb.enable = true;
+  users.users.jacobpyke.extraGroups = ["adbusers"];
+
+  services.udev.packages = [
+    (
+      pkgs.writeTextFile {
+        name = "oculus-udev";
+        text = ''
+          SUBSYSTEM="usb", ATTR{idVendor}=="2833", ATTR{idProduct}=="0186", MODE="0660" group="plugdev", symlink+="ocuquest%n"
+        '';
+        destination = "/lib/udev/rules.d/50-oculus.rules";
+      }
+    )
+  ];
+
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
   };
 }
