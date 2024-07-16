@@ -39,10 +39,6 @@
   };
 
   boot.supportedFilesystems = ["zfs"];
-  services.zfs = {
-    enable = true;
-    autoScrub.enable = true;
-  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
