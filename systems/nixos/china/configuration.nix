@@ -16,7 +16,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "jacob-china"; # Define your hostname.
-  networking.hostId = "5187cdf5"
+  networking.hostId = "5187cdf5";
 
   # Enable networking
   networking.networkmanager.enable = true;
