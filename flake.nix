@@ -131,6 +131,24 @@
         }
       ];
     };
+    # Home Server / NAS
+    nixosConfigurations.jacob-china = unstable.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = {inherit inputs;};
+      modules = [
+        nur.nixosModules.nur
+        ./systems/nixos/configuration.nix
+        ./systems/nixos/china/configuration.nix
+        home-manager-unstable.nixosModules.home-manager
+        {
+          home-manager.users.jacobpyke = import ./systems/nixos/china/home.nix;
+          home-manager.extraSpecialArgs = {
+            inherit inputs;
+            system = "x86_64-linux";
+          };
+        }
+      ];
+    };
     # Nix-Darwin Macbook Pro
     darwinConfigurations."jacob-germany" = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";

@@ -18,6 +18,11 @@
     pkgs.telegram-desktop
     pkgs.deluge
     pkgs.sidequest
+    pkgs.anki
+    pkgs.vlc
+    pkgs.lutris
+    pkgs.themechanger
+    pkgs.mpv
     # inputs.llama-cpp.packages.x86_64-linux.rocm
   ];
 
@@ -30,5 +35,7 @@
     ../home.nix
     ../../../programs/desktop/hyprland.nix
     ../../../programs/desktop/waybar/main.nix
+    ../../../programs/desktop/gaming/emulation/switch/suyu.nix
+    ../../../programs/desktop/gaming/emulation/switch/ryujinx.nix
   ];
 }

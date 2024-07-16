@@ -15,11 +15,6 @@ in {
 
   home.packages = [
     pkgs.firefox-unwrapped
-    pkgs.lutris
-    pkgs.vlc
-    pkgs.anki
-    pkgs.mpv
-    pkgs.themechanger
   ];
 
   # Japanese Language Support
@@ -43,7 +38,5 @@ in {
     ../../programs/desktop/firefox.nix
     ../../programs/desktop/chrome.nix
     ../../programs/desktop/kitty/kitty.nix
-    ../../programs/desktop/gaming/emulation/switch/suyu.nix
-    ../../programs/desktop/gaming/emulation/switch/ryujinx.nix
   ];
 }
