@@ -48,11 +48,11 @@
 
   users.groups.media-server = {
     members = [
-      sonarr
-      radarr
-      deluge
-      lidarr
-      jellyfin
+      "sonarr"
+      "radarr"
+      "deluge"
+      "lidarr"
+      "jellyfin"
     ];
   };
 
