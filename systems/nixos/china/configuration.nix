@@ -15,6 +15,7 @@
     ../../../programs/daemon/radarr.nix
     ../../../programs/daemon/prowlarr.nix
     ../../../programs/daemon/deluge.nix
+    ../../../programs/daemon/ntfy-sh.nix
   ];
 
   # Bootloader.
