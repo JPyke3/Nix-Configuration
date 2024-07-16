@@ -38,8 +38,11 @@
     ];
   };
 
-  # Install firefox.
-  programs.firefox.enable = true;
+  boot.supportedFilesystems = ["zfs"];
+  services.zfs = {
+    enable = true;
+    autoScrub.enable = true;
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -47,5 +50,6 @@
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     git
+    zfs
   ];
 }
