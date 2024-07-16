@@ -40,6 +40,7 @@
   };
 
   boot.supportedFilesystems = ["zfs"];
+  boot.zfs.extraPools = ["mypool"];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
