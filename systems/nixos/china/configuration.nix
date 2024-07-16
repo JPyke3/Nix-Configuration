@@ -9,6 +9,10 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../../../../programs/daemon/jellyfin.nix
+    ../../../../programs/daemon/sonarr.nix
+    ../../../../programs/daemon/radarr.nix
+    ../../../../programs/daemon/deluge.nix
   ];
 
   # Bootloader.
