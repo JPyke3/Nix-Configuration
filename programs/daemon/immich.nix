@@ -1,6 +1,6 @@
 {pkgs, ...} @ args: {
   imports = [
-    "${args.inputs.immich}/services/web-apps/immich.nix"
+    "${args.inputs.immich}/nixos/modules/services/web-apps/immich.nix"
   ];
 
   services.immich = {
