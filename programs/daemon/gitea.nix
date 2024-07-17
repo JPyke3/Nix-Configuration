@@ -1,6 +1,6 @@
 {...}: {
   services.gitea = {
     enable = true;
-	stateDir = "/mypool/git/gitea"
+    stateDir = "/mypool/git/gitea";
   };
 }
