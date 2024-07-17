@@ -75,7 +75,14 @@
     kmonad,
     stylix,
     ...
-  } @ inputs: {
+  } @ inputs: let
+    immich = final: _prev: {
+      immich = import inputs.immich {
+        system = final.system;
+        config.allowUnfree = true;
+      };
+    };
+  in {
     # Desktop PC
     nixosConfigurations.jacob-singapore = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
