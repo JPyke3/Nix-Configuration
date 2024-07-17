@@ -13,6 +13,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    immich.url = "github:jvanbruegge/nixpkgs/immich";
     nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-24.05-darwin";
     nur = {
       url = "github:nix-community/nur";
