@@ -293,22 +293,6 @@
         "type": "github"
       }
     },
-    "immich": {
-      "locked": {
-        "lastModified": 1720272310,
-        "narHash": "sha256-9Iv85xTW4KRkHQnKakm25ct2Raxpji9kmdseLYLirgo=",
-        "owner": "jvanbruegge",
-        "repo": "nixpkgs",
-        "rev": "e26bdbbe9a6a73dcb897d1d4c206e95ddf5c1720",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jvanbruegge",
-        "ref": "immich",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "jovian": {
       "inputs": {
         "nix-github-actions": "nix-github-actions",
@@ -580,7 +564,6 @@
         "base16": "base16",
         "home-manager": "home-manager",
         "home-manager-unstable": "home-manager-unstable",
-        "immich": "immich",
         "jovian": "jovian",
         "kmonad": "kmonad",
         "llama-cpp": "llama-cpp",

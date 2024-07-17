@@ -16,7 +16,6 @@
     ../../../programs/daemon/prowlarr.nix
     ../../../programs/daemon/lidarr.nix
     ../../../programs/daemon/deluge.nix
-    ../../../programs/daemon/immich.nix
   ];
 
   # Bootloader.
