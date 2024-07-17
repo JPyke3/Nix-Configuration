@@ -1,5 +1,5 @@
 {...}: {
-  services.searxng = {
+  services.searx = {
     enable = true;
   };
 }
