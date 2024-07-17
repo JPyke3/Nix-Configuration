@@ -16,6 +16,7 @@
     ../../../programs/daemon/prowlarr.nix
     ../../../programs/daemon/lidarr.nix
     ../../../programs/daemon/deluge.nix
+    ../../../programs/daemon/gitea.nix
   ];
 
   # Bootloader.
@@ -43,6 +44,13 @@
     extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
       #  thunderbird
+    ];
+  };
+
+  users.groups.git = {
+    members = [
+      "jacobpyke"
+      "gitea"
     ];
   };
 
