@@ -1,0 +1,5 @@
+{...}: {
+  services.searxng = {
+    enable = true;
+  };
+}
