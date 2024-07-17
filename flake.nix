@@ -64,6 +64,7 @@
     self,
     nixpkgs,
     unstable,
+    immich,
     home-manager,
     home-manager-unstable,
     llama-cpp,
