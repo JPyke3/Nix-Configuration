@@ -1,0 +1,48 @@
+framework: crewai
+topic: 'Search for recent articles about the future of AI and write me a 500-word
+  essay on the findings
+
+  '
+roles:
+  Researcher:
+    backstory: Skilled in online research and information gathering, specializing
+      in finding relevant articles on emerging technologies.
+    goal: Identify and gather recent articles about the future of AI
+    role: Researcher
+    tasks:
+      article_collection:
+        description: Search the web for recent articles (published within the last
+          6 months) focusing on the future of AI. Prioritize articles from reputable
+          sources like academic journals, technology publications, and industry blogs.
+        expected_output: A curated list of article URLs and brief summaries.
+    tools:
+    - ''
+  Summarizer:
+    backstory: Proficient in information synthesis and summarizing complex topics
+      into concise and understandable summaries.
+    goal: Condense key findings from the collected articles
+    role: Summarizer
+    tasks:
+      key_finding_extraction:
+        description: Read the collected articles and extract the most important findings
+          and insights regarding the future of AI. Focus on trends, predictions, and
+          potential impacts.
+        expected_output: A document outlining the key findings and insights from the
+          articles, organized by theme.
+    tools:
+    - ''
+  EssayWriter:
+    backstory: Experienced writer with a strong command of language and the ability
+      to structure arguments effectively.
+    goal: Craft a 500-word essay based on the summarized findings
+    role: Essay Writer
+    tasks:
+      essay_composition:
+        description: Compose a well-structured 500-word essay that presents the key
+          findings about the future of AI. Include an introduction, body paragraphs
+          exploring different themes, and a conclusion that summarizes the overall
+          message.
+        expected_output: A 500-word essay on the findings about the future of AI.
+    tools:
+    - ''
+dependencies: []

@@ -57,6 +57,10 @@
       url = "github:danth/stylix/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+	spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -72,6 +76,7 @@
     nur,
     kmonad,
     stylix,
+	spicetify-nix,
     ...
   } @ inputs: {
     # Desktop PC
