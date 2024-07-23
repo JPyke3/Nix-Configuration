@@ -12,7 +12,6 @@ in {
     rectangle
     mpv
     slack
-    spotify
     discord
     teams
     python312Packages.jupytext
