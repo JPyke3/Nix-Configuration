@@ -43,7 +43,7 @@ in {
   imports = [
     inputs.nix-colors.homeManagerModules.default
     inputs.sops-nix.homeManagerModules.sops
-	inputs.spicetify-nix.homeManagerModules.default
+    inputs.spicetify-nix.homeManagerModules.default
 
     ../../programs/cli/zsh.nix
     ../../programs/cli/tmux.nix
@@ -51,7 +51,7 @@ in {
     ../../programs/cli/nvim/nvim.nix
     ../../programs/cli/lf.nix
     ../../programs/cli/nix-index.nix
-	../../programs/cli/spicetify.nix
+    ../../programs/cli/spicetify.nix
   ];
 
   sops = {
