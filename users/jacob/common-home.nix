@@ -27,6 +27,7 @@ in {
     pkgs.sops
     pkgs.nodejs_20
     pkgs.zathura
+    pkgs.gimp
     (import ../../scripts/tmux-sessionizer.nix {inherit pkgs;})
   ];
 
