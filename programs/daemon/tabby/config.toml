@@ -10,4 +10,4 @@
 kind = "ollama/completion"
 model_name = "codegemma:7b-code"
 api_endpoint = "http://localhost:11434"
-prompt_template = "<|fim_prefix|>{prefix}<|fim_suffix|>{suffix}<|fim_middle|>"  # Example prompt template for CodeLlama model series.
+prompt_template = "<|fim_prefix|> {prefix} <|fim_suffix|>{suffix} <|fim_middle|>"  # Example prompt template for CodeLlama model series.
