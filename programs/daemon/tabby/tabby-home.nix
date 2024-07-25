@@ -1,3 +1,3 @@
 {config, ...}: {
-  home.file."${config.home.homeDirectory}/.config/tabby/config.toml".source = ./config.toml;
+  home.file."${config.home.homeDirectory}/.tabby/config.toml".source = ./config.toml;
 }
