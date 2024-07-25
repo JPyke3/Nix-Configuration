@@ -29,6 +29,7 @@ in {
     pkgs.zathura
     pkgs.gimp
     pkgs.prusa-slicer
+    pkgs.dolphin
     (import ../../scripts/tmux-sessionizer.nix {inherit pkgs;})
   ];
 
