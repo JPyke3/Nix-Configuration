@@ -1,4 +1,4 @@
-{ config, ...}: {
+{config, ...}: {
   launchd.user.agents.tabby = {
     command = "/opt/homebrew/bin/tabby serve --device metal --port 53435";
     serviceConfig = {
@@ -8,6 +8,4 @@
       RunAtLoad = true;
     };
   };
-
-  home.file."${config.home.homeDirectory}/.config/tabby/config.toml".source = ./config.toml
 }
