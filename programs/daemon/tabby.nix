@@ -1,5 +1,5 @@
 {...}: {
-  launchd.daemons.kmonad-default.serviceConfig = {
+  launchd.daemons.tabby.serviceConfig = {
     KeepAlive = true;
     ProgramArguments = [
       "/opt/homebrew/bin/tabby"
