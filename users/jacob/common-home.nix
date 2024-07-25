@@ -28,6 +28,7 @@ in {
     pkgs.nodejs_20
     pkgs.zathura
     pkgs.gimp
+    pkgs.prusa-slicer
     (import ../../scripts/tmux-sessionizer.nix {inherit pkgs;})
   ];
 

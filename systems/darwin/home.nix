@@ -16,7 +16,6 @@ in {
     teams
     python312Packages.jupytext
     cyberduck
-    prusa-slicer
   ];
 
   nixpkgs.overlays = [
