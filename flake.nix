@@ -165,8 +165,8 @@
         ./systems/stylix.nix
         home-manager.darwinModules.home-manager
         {
-          home-manager.users.jacobpyke.imports = [
           home-manager.backupFileExtension = "backup";
+          home-manager.users.jacobpyke.imports = [
             ./users/jacob/common-home.nix
             ./systems/darwin/home.nix
           ];
