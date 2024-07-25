@@ -10,7 +10,7 @@
     ../../programs/daemon/yabai.nix
     ../../programs/daemon/kanata/kanata.nix
     ../../programs/daemon/jellyfin-mpv-shim.nix
-	../../programs/daemon/tabby.nix
+    ../../programs/daemon/tabby.nix
   ];
 
   nixpkgs.hostPlatform = "aarch64-darwin";
