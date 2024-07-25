@@ -9,7 +9,7 @@
       KeepAlive = true;
       RunAtLoad = true;
       StandardErrorPath = "/Users/jacobpyke/.logs/jellyfin-mpv-shim.err";
-      StandardOutPath = "/Users/jacobpyke/.logs/jellyfin-mpv-shim.out";
+      StandardOutPath = "/Users/jacobpyke/.logs/jellyfin-mpv-shim.out";jellyfin
       ProcessType = "Interactive";
     };
   };
