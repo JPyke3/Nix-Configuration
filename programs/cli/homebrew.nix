@@ -5,6 +5,7 @@
       "neo4j"
       "pyenv"
       "zlib"
+      "tabbyml/tabby/tabby"
     ];
     casks = [
       "nikitabobko/tap/aerospace"
