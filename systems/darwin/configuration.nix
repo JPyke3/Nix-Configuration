@@ -26,9 +26,11 @@
     pipx
   ];
 
+  # Alias for nh_darwin
+  environment.shellAliases.nh = "nh_darwin";
+
   programs.nh = {
     enable = true;
-    clean.enable = true;
     # Installation option once https://github.com/LnL7/nix-darwin/pull/942 is merged:
     # package = nh_darwin.packages.${pkgs.stdenv.hostPlatform.system}.default;
   };
