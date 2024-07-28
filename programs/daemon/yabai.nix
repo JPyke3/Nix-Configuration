@@ -1,5 +1,4 @@
-{inputs, ...}: let
-in {
+{ ...}: {
   imports = [
     ./skhd/skhd.nix
     ./sketchybar/sketchybar.nix

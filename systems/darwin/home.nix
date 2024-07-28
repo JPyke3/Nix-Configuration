@@ -3,9 +3,7 @@
   pkgs,
   inputs,
   ...
-}: let
-  nix-colors = import <nix-colors> {};
-in {
+}: {
   home.stateVersion = "23.11";
 
   home.packages = with pkgs; [

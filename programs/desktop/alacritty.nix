@@ -5,7 +5,6 @@
   inputs,
   ...
 }: let
-  pkgs_unstable = inputs.unstable.legacyPackages.${system};
   fontSize =
     if pkgs.stdenv.isDarwin
     then 16

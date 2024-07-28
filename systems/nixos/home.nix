@@ -1,12 +1,9 @@
 {
   config,
   pkgs,
-  inputs,
   lib,
   ...
-}: let
-  nix-colors = import <nix-colors> {};
-in {
+}: {
   home.username = "jacobpyke";
 
   home.homeDirectory = "/home/jacobpyke";

@@ -4,9 +4,7 @@
   config,
   ...
 }:
-with lib; let
-  cfg = config.jpyke3.cleanDownloadsFolder;
-in {
+with lib; {
   options.jpyke3.cleanDownloadsFolder = {
     enable = lib.mkEnableOption "Enable the clean downloads folder service";
   };

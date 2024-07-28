@@ -64,19 +64,13 @@
   };
 
   outputs = {
-    self,
     nixpkgs,
     unstable,
     home-manager,
     home-manager-unstable,
-    llama-cpp,
-    jovian,
     nix-darwin,
-    nixpkgs-darwin,
     nur,
-    kmonad,
     stylix,
-    spicetify-nix,
     ...
   } @ inputs: {
     # Desktop PC
