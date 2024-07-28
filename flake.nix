@@ -62,7 +62,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nh_darwin = {
-      url = "TheYoxy/nh_darwin";
+      url = "github:TheYoxy/nh_darwin";
     };
   };
 
