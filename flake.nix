@@ -163,10 +163,10 @@
       system = "aarch64-darwin";
       specialArgs = {inherit inputs;};
       modules = [
-        ./systems/darwin/kmonad.nix
-        ./systems/darwin/configuration.nix
         stylix.darwinModules.stylix
         nh_darwin.nixDarwinModules.default
+        ./systems/darwin/kmonad.nix
+        ./systems/darwin/configuration.nix
         ./systems/stylix.nix
         home-manager.darwinModules.home-manager
         {
