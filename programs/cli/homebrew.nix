@@ -28,6 +28,7 @@
       "amazon-q"
       "betterdisplay"
       "azure-data-studio"
+      "google-chrome"
     ];
     masApps = {
       Infuse = 1136220934;
