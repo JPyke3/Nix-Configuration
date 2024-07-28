@@ -24,6 +24,7 @@
     parallel
     alejandra
     pipx
+    nh
   ];
 
   users.users.jacobpyke = {
