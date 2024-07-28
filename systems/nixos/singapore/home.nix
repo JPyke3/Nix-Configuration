@@ -23,6 +23,7 @@
     pkgs.lutris
     pkgs.themechanger
     pkgs.mpv
+    pkgs.dolphin
     # inputs.llama-cpp.packages.x86_64-linux.rocm
   ];
 
