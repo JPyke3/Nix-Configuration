@@ -11,6 +11,7 @@
     ../../programs/daemon/kanata/kanata.nix
     ../../programs/daemon/jellyfin-mpv-shim.nix
     ../../programs/daemon/tabby/tabby.nix
+    inputs.nh_darwin.nixDarwinModules.prebuiltin
   ];
 
   nixpkgs.hostPlatform = "aarch64-darwin";
