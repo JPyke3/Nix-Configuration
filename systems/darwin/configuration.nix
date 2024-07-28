@@ -24,8 +24,14 @@
     parallel
     alejandra
     pipx
-    nh
   ];
+
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    # Installation option once https://github.com/LnL7/nix-darwin/pull/942 is merged:
+    # package = nh_darwin.packages.${pkgs.stdenv.hostPlatform.system}.default;
+  };
 
   users.users.jacobpyke = {
     name = "jacobpyke";

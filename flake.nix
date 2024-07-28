@@ -61,6 +61,9 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nh_darwin = {
+      url = "github:ToyVo/nh_darwin";
+    };
   };
 
   outputs = {
@@ -77,6 +80,7 @@
     kmonad,
     stylix,
     spicetify-nix,
+    nh_darwin,
     ...
   } @ inputs: {
     # Desktop PC
@@ -162,6 +166,7 @@
         ./systems/darwin/kmonad.nix
         ./systems/darwin/configuration.nix
         stylix.darwinModules.stylix
+        nh_darwin.nixDarwinModules.default
         ./systems/stylix.nix
         home-manager.darwinModules.home-manager
         {
