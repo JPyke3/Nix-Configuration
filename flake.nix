@@ -62,7 +62,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nh_darwin = {
-      url = "github:TheYoxy/nh_darwin";
+      url = "github:ToyVo/nh_darwin";
     };
   };
 
@@ -164,7 +164,7 @@
       specialArgs = {inherit inputs;};
       modules = [
         stylix.darwinModules.stylix
-        nh_darwin.darwinModules.default
+        nh_darwin.nixDarwinModules.default
         ./systems/darwin/kmonad.nix
         ./systems/darwin/configuration.nix
         ./systems/stylix.nix
