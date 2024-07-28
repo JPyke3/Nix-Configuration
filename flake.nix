@@ -164,7 +164,7 @@
       specialArgs = {inherit inputs;};
       modules = [
         stylix.darwinModules.stylix
-        nh_darwin.nixDarwinModules.default
+        nh_darwin.darwinModules.default
         ./systems/darwin/kmonad.nix
         ./systems/darwin/configuration.nix
         ./systems/stylix.nix
