@@ -61,9 +61,6 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nh_darwin = {
-      url = "github:ToyVo/nh_darwin";
-    };
   };
 
   outputs = {
@@ -80,7 +77,6 @@
     kmonad,
     stylix,
     spicetify-nix,
-    nh_darwin,
     ...
   } @ inputs: {
     # Desktop PC
