@@ -29,6 +29,8 @@ in {
     pkgs.zathura
     pkgs.gimp
     pkgs.prusa-slicer
+    pkgs.cargo
+    pkgs.rustc
     (import ../../scripts/tmux-sessionizer.nix {inherit pkgs;})
   ];
 
