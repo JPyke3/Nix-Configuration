@@ -17,4 +17,4 @@
 kind = "ollama/completion"
 model_name = "deepseek-coder-v2:lite"
 api_endpoint = "http://localhost:11434"
-prompt_template = "<|fim_begin|> {prefix} <|fim_hole|>{suffix} <|fim_end|>"  # Example prompt template for CodeLlama model series.
+prompt_template = """<｜fim▁begin｜>{prefix}<｜fim▁hole｜>{suffix}<｜fim▁end｜>"""  # Example prompt template for CodeLlama model series.
