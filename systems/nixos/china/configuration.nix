@@ -49,10 +49,10 @@
   };
 
   users.groups.documents = {
-	members = [
-		"jacobpyke"
-		"firefly"
-	];
+    members = [
+      "jacobpyke"
+      "firefly"
+    ];
   };
 
   users.groups.git = {
