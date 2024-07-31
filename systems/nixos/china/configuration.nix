@@ -48,6 +48,13 @@
     ];
   };
 
+  users.groups.documents = {
+	members = [
+		"jacobpyke"
+		"firefly"
+	];
+  };
+
   users.groups.git = {
     members = [
       "jacobpyke"
@@ -67,6 +74,14 @@
 
   boot.supportedFilesystems = ["zfs"];
   boot.zfs.extraPools = ["mypool"];
+
+  system.autoUpgrade = {
+    enable = true;
+    allowReboot = true;
+    dates = "03:00";
+    flake = "github:JPyke3/Nix-Configuration";
+    persistent = true;
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
