@@ -137,7 +137,7 @@
       ];
     };
     # Home Server / NAS
-    nixosConfigurations.jacob-china = unstable.lib.nixosSystem {
+    nixosConfigurations.jacob-china = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {inherit inputs;};
       modules = [
