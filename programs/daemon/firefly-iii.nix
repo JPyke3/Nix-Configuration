@@ -1,6 +1,7 @@
 {config, ...}: {
   sops.secrets."programs/firefly/appKey" = {
     path = "${config.users.users.jacobpyke.home}/.secrets/firefly/appkey.txt";
+	owner = "firefly-iii"
   };
 
   services.firefly-iii = {
