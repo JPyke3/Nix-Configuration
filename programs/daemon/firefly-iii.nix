@@ -1,4 +1,4 @@
-{...}: {
+{config, ...}: {
   sops.secrets."programs/firefly/appKey" = {
     path = "${config.home.homeDirectory}/.secrets/firefly/appkey.txt";
   };
