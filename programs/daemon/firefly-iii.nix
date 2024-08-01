@@ -6,8 +6,6 @@
   services.firefly-iii = {
     enable = true;
     dataDir = "/mypool/documents/firefly-iii";
-    user = "firefly";
-    group = "firefly";
     settings = {
       APP_KEY_FILE = "${config.users.users.jacobpyke.home}/.secrets/firefly/appkey.txt";
     };
