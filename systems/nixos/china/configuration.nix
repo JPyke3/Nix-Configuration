@@ -17,7 +17,6 @@
     ../../../programs/daemon/lidarr.nix
     ../../../programs/daemon/deluge.nix
     ../../../programs/daemon/gitea.nix
-    ../../../programs/daemon/searxng.nix
     ../../../programs/daemon/firefly-iii.nix
   ];
 
