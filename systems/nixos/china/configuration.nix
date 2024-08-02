@@ -16,6 +16,7 @@
     ../../../programs/daemon/prowlarr.nix
     ../../../programs/daemon/lidarr.nix
     ../../../programs/daemon/deluge.nix
+    ../../../programs/daemon/transmission.nix
     ../../../programs/daemon/gitea.nix
     ../../../programs/daemon/firefly-iii.nix
   ];
