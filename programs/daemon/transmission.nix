@@ -1,5 +1,5 @@
 {config, ...}: {
-  sops.secrets."programs/nord/wgConfig" = {
+  sops.secrets."programs/nord/wgConf" = {
     path = "${config.users.users.jacobpyke.home}/.secrets/nord/wg0.conf";
     owner = "jacobpyke";
   };
