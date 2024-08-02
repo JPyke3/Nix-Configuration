@@ -61,7 +61,10 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-	vpnconfinement = { url = "github:Maroka-chan/VPN-Confinement"; }; 
+    vpnconfinement = {
+      url = "github:Maroka-chan/VPN-Confinement";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -78,6 +81,7 @@
     kmonad,
     stylix,
     spicetify-nix,
+    vpnconfinement,
     ...
   } @ inputs: {
     # Desktop PC
