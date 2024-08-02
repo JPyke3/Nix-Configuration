@@ -4,31 +4,31 @@
     owner = "jacobpyke";
   };
 
-  vpnnamespaces.wg = {
-    enable = true;
-    wireguardConfigFile = /. + "${config.users.users.jacobpyke.home}/.secrets/nord/wg0.conf";
-    accessibleFrom = [
-      "192.168.0.0/24"
-    ];
-    portMappings = [
-      {
-        from = 9091;
-        to = 9091;
-      }
-    ];
-    openVPNPorts = [
-      {
-        port = 60729;
-        protocol = "both";
-      }
-    ];
-  };
+  # vpnnamespaces.wg = {
+  #   enable = true;
+  #   wireguardConfigFile = /. + "${config.users.users.jacobpyke.home}/.secrets/nord/wg0.conf";
+  #   accessibleFrom = [
+  #     "192.168.0.0/24"
+  #   ];
+  #   portMappings = [
+  #     {
+  #       from = 9091;
+  #       to = 9091;
+  #     }
+  #   ];
+  #   openVPNPorts = [
+  #     {
+  #       port = 60729;
+  #       protocol = "both";
+  #     }
+  #   ];
+  # };
 
-  # Add systemd service to VPN network namespace.
-  systemd.services.transmission.vpnconfinement = {
-    enable = true;
-    vpnnamespace = "wg";
-  };
+  # # Add systemd service to VPN network namespace.
+  # systemd.services.transmission.vpnconfinement = {
+  #   enable = true;
+  #   vpnnamespace = "wg";
+  # };
 
   services.transmission = {
     enable = true;
