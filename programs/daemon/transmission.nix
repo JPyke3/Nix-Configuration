@@ -37,7 +37,7 @@
     openRPCPort = true; #Open firewall for RPC
     settings = {
       #Override default settings
-      rpc-bind-address = "100.73.94.58"; #Bind to own IP
+      rpc-bind-address = "0.0.0.0"; #Bind to own IP
       rpc-whitelist = "127.0.0.1,100.114.95.59,192.168.*.*"; #Whitelist your remote machine (10.0.0.1 in this example)
       download-dir = "/mypool/downloads";
     };
