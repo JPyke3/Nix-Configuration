@@ -61,6 +61,7 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+	vpnconfinement = { url = "github:Maroka-chan/VPN-Confinement"; }; 
   };
 
   outputs = {
