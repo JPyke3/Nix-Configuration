@@ -39,6 +39,7 @@
     settings = {
       #Override default settings
       rpc-bind-address = "0.0.0.0"; #Bind to own IP
+      rpc-whitelist = "*.*.*.*";
       download-dir = "/mypool/downloads";
     };
   };
