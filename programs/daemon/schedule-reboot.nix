@@ -34,18 +34,5 @@ in {
         user = "jacobpyke";
       };
     };
-
-    launchd.agents.clean-downloads-folder = mkIf pkgs.stdenv.isDarwin {
-      command = "${pkgs.toybox}/bin/reboot";
-      serviceConfig = {
-        RunAtLoad = true;
-        StartCalendarInterval = {
-          Hour = cfg.hour;
-          Minute = cfg.minute;
-        };
-        StandardOutPath = "/Users/jacobpyke/.logs/clean-downloads-folder.log";
-        StandardErrorPath = "/Users/jacobpyke/.logs/clean-downloads-folder.log";
-      };
-    };
   };
 }
