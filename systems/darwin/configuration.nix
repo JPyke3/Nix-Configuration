@@ -11,6 +11,9 @@
     ../../programs/daemon/kanata/kanata.nix
     ../../programs/daemon/jellyfin-mpv-shim.nix
     ../../programs/daemon/tabby/tabby.nix
+
+	# TODO: Add
+	# ../../programs/daemon/download-cleaner.nix
   ];
 
   nixpkgs.hostPlatform = "aarch64-darwin";
