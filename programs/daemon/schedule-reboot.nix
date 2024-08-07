@@ -7,7 +7,7 @@
 with lib; let
   cfg = config.jpyke3.scheduleReboot;
 in {
-  options.jpyke3.cleanDownloadsFolder = {
+  options.jpyke3.scheduleReboot = {
     enable = lib.mkEnableOption "Enable a Scheduled Reboot";
     hour = "00";
     minute = "00";
