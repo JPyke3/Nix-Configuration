@@ -20,7 +20,7 @@
     ../../../programs/daemon/transmission.nix
     ../../../programs/daemon/gitea.nix
     ../../../programs/daemon/firefly-iii.nix
-	../../../programs/daemon/schedule-reboot.nix
+    ../../../programs/daemon/schedule-reboot.nix
   ];
 
   # Bootloader.

@@ -9,9 +9,9 @@ with lib; let
 in {
   options.jpyke3.cleanDownloadsFolder = {
     enable = lib.mkEnableOption "Enable a Scheduled Reboot";
-	hour = "00";
-	minute = "00";
-	second = "00";
+    hour = "00";
+    minute = "00";
+    second = "00";
   };
 
   config = {
@@ -39,10 +39,10 @@ in {
       command = "${pkgs.toybox}/bin/reboot";
       serviceConfig = {
         RunAtLoad = true;
-		StartCalendarInterval = {
-			Hour = cfg.hour;
-			Minute = cfg.minute;
-		};
+        StartCalendarInterval = {
+          Hour = cfg.hour;
+          Minute = cfg.minute;
+        };
         StandardOutPath = "/Users/jacobpyke/.logs/clean-downloads-folder.log";
         StandardErrorPath = "/Users/jacobpyke/.logs/clean-downloads-folder.log";
       };
