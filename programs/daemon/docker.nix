@@ -1,4 +1,4 @@
-{ ... }: {
+{...}: {
   virtualisation.docker.enable = true;
-  users.users.jacobpyke.extraGroups = [ "docker" ];
+  users.users.jacobpyke.extraGroups = ["docker"];
 }
