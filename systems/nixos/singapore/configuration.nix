@@ -7,6 +7,7 @@
     ./hardware-configuration.nix
     ./syncthing.nix
     ../../../programs/daemon/altserver.nix
+	../../../programs/deemon/docker.nix
   ];
 
   networking.hostName = "jacob-singapore"; # Define your hostname.
