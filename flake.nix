@@ -44,7 +44,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     jovian = {
-      url = "github:Jovian-Experiments/Jovian-NixOS/c8af9ea43d928f1e1f2c0ac100e75519ea76565d";
+      url = "github:Jovian-Experiments/Jovian-NixOS";
       inputs.nixpkgs.follows = "unstable";
     };
     kmonad = {
@@ -131,6 +131,8 @@
         nur.nixosModules.nur
         ./systems/nixos/configuration.nix
         ./systems/nixos/japan/configuration.nix
+        stylix.nixosModules.stylix
+        ./systems/stylix.nix
         home-manager-unstable.nixosModules.home-manager
         {
           home-manager.users.jacobpyke = import ./systems/nixos/japan/home.nix;
