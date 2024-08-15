@@ -76,6 +76,8 @@
       "deluge"
       "lidarr"
       "jellyfin"
+      "transmission"
+      "jacobpyke"
     ];
   };
 
