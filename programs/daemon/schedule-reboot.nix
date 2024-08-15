@@ -8,14 +8,26 @@ with lib; let
   cfg = config.jpyke3.scheduleReboot;
 in {
   options.jpyke3.scheduleReboot = {
-    enable = lib.mkEnableOption "Enable a Scheduled Reboot";
-    hour = "00";
-    minute = "00";
-    second = "00";
+    enable = mkEnableOption "Enable a Scheduled Reboot";
+    hour = mkOption {
+      type = types.str;
+      default = "00";
+      description = "Hour to schedule the reboot";
+    };
+    minute = mkOption {
+      type = types.str;
+      default = "00";
+      description = "Minute to schedule the reboot";
+    };
+    second = mkOption {
+      type = types.str;
+      default = "00";
+      description = "Second to schedule the reboot";
+    };
   };
 
-  config = {
-    systemd.timers.clean-downloads-folder = mkIf pkgs.stdenv.isLinux {
+  config = mkIf cfg.enable {
+    systemd.timers.reboot-machine = {
       description = "Schedule a reboot of the system";
       wantedBy = ["timers.target"];
       timerConfig = {
@@ -25,13 +37,12 @@ in {
       };
     };
 
-    systemd.services.clean-downloads-folder = mkIf pkgs.stdenv.isLinux {
-      description = "Schedule a reboot of the system";
+    systemd.services.reboot-machine = {
+      description = "Reboot the system";
       wantedBy = ["multi-user.target"];
       serviceConfig = {
         Type = "oneshot";
-        ExecStart = "${pkgs.toybox}/bin/reboot";
-        user = "jacobpyke";
+        ExecStart = "${pkgs.systemd}/bin/systemctl reboot";
       };
     };
   };

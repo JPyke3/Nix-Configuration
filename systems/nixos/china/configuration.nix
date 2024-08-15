@@ -23,6 +23,11 @@
     ../../../programs/daemon/schedule-reboot.nix
   ];
 
+  jpyke3.scheduleReboot = {
+	enable = true;
+	hour = "03";
+  }
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
