@@ -24,9 +24,9 @@
   ];
 
   jpyke3.scheduleReboot = {
-	enable = true;
-	hour = "03";
-  }
+    enable = true;
+    hour = "03";
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
