@@ -40,7 +40,7 @@
     settings = {
       #Override default settings
       rpc-bind-address = "192.168.15.1"; #Bind to own IP
-      rpc-whitelist = "192.168.*.*,127.0.0.1,100.114.95.59";
+      rpc-host-whitelist = "192.168.*.*,127.0.0.1,100.114.95.59";
       download-dir = "/mypool/downloads/transmission/complete";
       incomplete-dir = "/mypool/downloads/transmission/.incomplete";
     };
