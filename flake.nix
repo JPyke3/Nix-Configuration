@@ -149,7 +149,7 @@
         nur.nixosModules.nur
         ./systems/nixos/configuration.nix
         ./systems/nixos/china/configuration.nix
-        home-manager-unstable.nixosModules.home-manager
+        home-manager.nixosModules.home-manager
         {
           home-manager.users.jacobpyke = import ./systems/nixos/china/home.nix;
           home-manager.extraSpecialArgs = {
