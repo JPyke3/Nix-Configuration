@@ -72,7 +72,7 @@
     };
     pihole = {
       url = "github:mindsbackyard/pihole-flake";
-      inputs.nixpkgs.follow = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
       inputs.linger.follows = "linger";
     };

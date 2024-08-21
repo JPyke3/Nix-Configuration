@@ -219,6 +219,24 @@
         "type": "github"
       }
     },
+    "flake-utils": {
+      "inputs": {
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1710146030,
+        "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "b1d9ab70662946ef0850d488da1c9019f3a9752a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "fromYaml": {
       "flake": false,
       "locked": {
@@ -372,6 +390,26 @@
         "submodules": true,
         "type": "git",
         "url": "https://github.com/kmonad/kmonad?dir=nix"
+      }
+    },
+    "linger": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ]
+      },
+      "locked": {
+        "lastModified": 1670283645,
+        "narHash": "sha256-SuC/SuQ8RUaM6RthNAkNTSnlpRXJxEmuym2OyPLLpWk=",
+        "owner": "mindsbackyard",
+        "repo": "linger-flake",
+        "rev": "9f8632c0621dc562dd42e9eacfdb6dae82aebf8b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mindsbackyard",
+        "repo": "linger-flake",
+        "type": "github"
       }
     },
     "llama-cpp": {
@@ -596,13 +634,41 @@
         "type": "github"
       }
     },
+    "pihole": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "linger": [
+          "linger"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1670284048,
+        "narHash": "sha256-lNyJ7vrDAdsPVcNBXqDUXseBBL9Kf2q64/A8ntEKXWI=",
+        "owner": "mindsbackyard",
+        "repo": "pihole-flake",
+        "rev": "9daaf65415ad6d3f5a8daa617d8737bc405f9dd8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mindsbackyard",
+        "repo": "pihole-flake",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "base16": "base16",
+        "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "home-manager-unstable": "home-manager-unstable",
         "jovian": "jovian",
         "kmonad": "kmonad",
+        "linger": "linger",
         "llama-cpp": "llama-cpp",
         "nix-colors": "nix-colors",
         "nix-darwin": "nix-darwin",
@@ -610,6 +676,7 @@
         "nixpkgs-darwin": "nixpkgs-darwin",
         "nixpkgs-firefox-darwin": "nixpkgs-firefox-darwin",
         "nur": "nur",
+        "pihole": "pihole",
         "sops-nix": "sops-nix",
         "spicetify-nix": "spicetify-nix",
         "stylix": "stylix",
@@ -687,6 +754,21 @@
         "owner": "danth",
         "ref": "master",
         "repo": "stylix",
+        "type": "github"
+      }
+    },
+    "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
         "type": "github"
       }
     },
