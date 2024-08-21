@@ -1,5 +1,5 @@
 {inputs, ...}: {
-  import = [
+  imports = [
     inputs.linger.nixosModules.x86_64-linux.default
     inputs.pihole.nixosModules.x86_64-linux.default
   ];
