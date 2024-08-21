@@ -7,7 +7,7 @@
   users.users.pihole = {
     isSystemUser = true;
     extraGroups = ["networkmanager"];
-	group = "pihole"
+    group = "pihole";
   };
 
   users.groups.pihole = {};
