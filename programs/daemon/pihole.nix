@@ -21,6 +21,5 @@ in {
       "--dns=127.0.0.1"
       "--dns=1.1.1.1"
     ];
-    workdir = "/home/jacobpyke/pihole-config/";
   };
 }
