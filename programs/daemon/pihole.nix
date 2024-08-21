@@ -4,8 +4,8 @@
   ...
 }: {
   imports = with inputs; [
-    linger.nixosModules.default
-    pihole.nixosModules.default
+    linger.nixosModules.linger
+    pihole.nixosModules.pihole
   ];
 
   # required for stable restarts of the Pi-hole container (try to remove it to see the warning from the pihole-flake)
