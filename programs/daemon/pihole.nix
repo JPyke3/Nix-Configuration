@@ -4,6 +4,11 @@
     inputs.pihole.nixosModules.x86_64-linux.default
   ];
 
+  users.users.pihole = {
+    isSystemUser = true;
+    extraGroups = ["networkmanager"];
+  };
+
   # required for stable restarts of the Pi-hole container (try to remove it to see the warning from the pihole-flake)
   boot.cleanTmpDir = true;
 
@@ -12,7 +17,7 @@
     enable = true;
     hostConfig = {
       # define the service user for running the rootless Pi-hole container
-      user = "jacobpyke";
+      user = "pihole";
       enableLingeringForUser = true;
 
       # we want to persist change to the Pi-hole configuration & logs across service restarts
