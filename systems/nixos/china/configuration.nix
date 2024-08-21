@@ -8,6 +8,8 @@
 }: {
   imports = [
     inputs.vpnconfinement.nixosModules.default
+    inputs.linger.nixosModules.default
+    inputs.pihole.nixosModules.default
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../../programs/daemon/jellyfin.nix
