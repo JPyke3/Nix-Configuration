@@ -20,6 +20,7 @@
     ../../../programs/daemon/transmission.nix
     ../../../programs/daemon/gitea.nix
     ../../../programs/daemon/firefly-iii.nix
+    ../../../programs/daemon/pihole.nix
   ];
 
   # jpyke3.scheduleReboot = {
