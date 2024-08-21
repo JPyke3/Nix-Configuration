@@ -30,7 +30,7 @@
       # expose DNS & the web interface on unpriviledged ports on all IP addresses of the host
       # check the option descriptions for more information
       dnsPort = 5335;
-      webPort = 8080;
+      webPort = 69024;
     };
     piholeConfig.ftl = {
       # assuming that the host has this (fixed) IP and should resolve "pi.hole" to this address
