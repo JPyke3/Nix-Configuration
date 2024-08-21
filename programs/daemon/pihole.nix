@@ -5,7 +5,7 @@
   ];
 
   users.users.pihole = {
-    isSystemUser = true;
+    isNormalUser = true;
     home = "/home/pihole";
     extraGroups = ["networkmanager"];
     group = "pihole";
