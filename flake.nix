@@ -65,17 +65,6 @@
       url = "github:Maroka-chan/VPN-Confinement";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    flake-utils = {url = "github:numtide/flake-utils";};
-    linger = {
-      url = "github:mindsbackyard/linger-flake";
-      inputs.flake-utils.follows = "flake-utils";
-    };
-    pihole = {
-      url = "github:mindsbackyard/pihole-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.linger.follows = "linger";
-    };
   };
 
   outputs = {
@@ -93,8 +82,6 @@
     stylix,
     spicetify-nix,
     vpnconfinement,
-    linger,
-    pihole,
     ...
   } @ inputs: {
     # Desktop PC

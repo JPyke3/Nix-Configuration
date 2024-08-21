@@ -1,68 +1,24 @@
 {inputs, ...}: {
-  imports = [
-    inputs.linger.nixosModules.x86_64-linux.default
-    inputs.pihole.nixosModules.x86_64-linux.default
-  ];
-
-  users.users.pihole = {
-    isNormalUser = true;
-    home = "/home/pihole";
-    extraGroups = ["networkmanager"];
-    group = "pihole";
-    # Add subUidRanges configuration
-    subUidRanges = [
-      {
-        startUid = 100000;
-        count = 65536;
-      }
+  virtualisation.oci-containers.containers.pihole = {
+    image = "pihole/pihole:latest";
+    ports = [
+      "${serverIP}:53:53/tcp"
+      "${serverIP}:53:53/udp"
+      "3080:80"
+      "30443:443"
     ];
-    # Add subGidRanges configuration
-    subGidRanges = [
-      {
-        startGid = 100000;
-        count = 65536;
-      }
+    volumes = [
+      "/var/lib/pihole/:/etc/pihole/"
+      "/var/lib/dnsmasq.d:/etc/dnsmasq.d/"
     ];
-  };
-
-  users.groups.pihole = {};
-
-  # required for stable restarts of the Pi-hole container (try to remove it to see the warning from the pihole-flake)
-  boot.cleanTmpDir = true;
-
-  # the Pi-hole service configuration
-  services.pihole = {
-    enable = true;
-    hostConfig = {
-      # define the service user for running the rootless Pi-hole container
-      user = "pihole";
-      enableLingeringForUser = true;
-
-      # we want to persist change to the Pi-hole configuration & logs across service restarts
-      # check the option descriptions for more information
-      persistVolumes = true;
-      volumesPath = "/home/pihole/pihole-volume";
-
-      # expose DNS & the web interface on unpriviledged ports on all IP addresses of the host
-      # check the option descriptions for more information
-      dnsPort = 5335;
-      webPort = 37842;
+    environment = {
+      ServerIP = serverIP;
     };
-    piholeConfig.ftl = {
-      # assuming that the host has this (fixed) IP and should resolve "pi.hole" to this address
-      # check the option description & the FTLDNS documentation for more information
-      LOCAL_IPV4 = "192.168.0.3";
-    };
-    piholeConfig.web = {
-      virtualHost = "pi.hole";
-      password = "password";
-    };
-  };
-
-  # we need to open the ports in the firewall to make the service accessible beyond `localhost`
-  # assuming that Pi-hole is exposed on the host interface `eth0`
-  networking.firewall.interfaces.eth0 = {
-    allowedTCPPorts = [5335 8080];
-    allowedUDPPorts = [5335];
+    extraDockerOptions = [
+      "--cap-add=NET_ADMIN"
+      "--dns=127.0.0.1"
+      "--dns=1.1.1.1"
+    ];
+    workdir = "/var/lib/pihole/";
   };
 }
