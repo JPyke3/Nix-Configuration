@@ -8,6 +8,20 @@
     isSystemUser = true;
     extraGroups = ["networkmanager"];
     group = "pihole";
+    # Add subUidRanges configuration
+    subUidRanges = [
+      {
+        startUid = 100000;
+        count = 65536;
+      }
+    ];
+    # Add subGidRanges configuration
+    subGidRanges = [
+      {
+        startGid = 100000;
+        count = 65536;
+      }
+    ];
   };
 
   users.groups.pihole = {};
