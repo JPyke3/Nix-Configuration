@@ -10,8 +10,8 @@ in {
       "30443:443"
     ];
     volumes = [
-      "/var/lib/pihole/:/etc/pihole/"
-      "/var/lib/dnsmasq.d:/etc/dnsmasq.d/"
+      "/home/jacobpyke/pihole-config/pihole:/etc/pihole/"
+      "/home/jacobpyke/pihole-config/dnsmasq.d:/etc/dnsmasq.d/"
     ];
     environment = {
       ServerIP = serverIP;
@@ -21,6 +21,6 @@ in {
       "--dns=127.0.0.1"
       "--dns=1.1.1.1"
     ];
-    workdir = "/var/lib/pihole/";
+    workdir = "/home/jacobpyke/pihole-config/";
   };
 }
