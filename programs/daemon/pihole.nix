@@ -12,7 +12,7 @@
     enable = true;
     hostConfig = {
       # define the service user for running the rootless Pi-hole container
-      user = "pihole";
+      user = "jacobpyke";
       enableLingeringForUser = true;
 
       # we want to persist change to the Pi-hole configuration & logs across service restarts
