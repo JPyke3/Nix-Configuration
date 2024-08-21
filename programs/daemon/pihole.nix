@@ -6,7 +6,7 @@
 
   users.users.pihole = {
     isSystemUser = true;
-	home = "/home/pihole"
+    home = "/home/pihole";
     extraGroups = ["networkmanager"];
     group = "pihole";
     # Add subUidRanges configuration
@@ -41,7 +41,7 @@
       # we want to persist change to the Pi-hole configuration & logs across service restarts
       # check the option descriptions for more information
       persistVolumes = true;
-	  volumesPath = "/home/pihole/pihole-volume";
+      volumesPath = "/home/pihole/pihole-volume";
 
       # expose DNS & the web interface on unpriviledged ports on all IP addresses of the host
       # check the option descriptions for more information
