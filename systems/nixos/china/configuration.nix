@@ -14,6 +14,7 @@
     ../../../programs/daemon/sonarr.nix
     ../../../programs/daemon/radarr.nix
     ../../../programs/daemon/bazarr.nix
+    ../../../programs/daemon/tdarr.nix
     ../../../programs/daemon/prowlarr.nix
     ../../../programs/daemon/lidarr.nix
     ../../../programs/daemon/deluge.nix

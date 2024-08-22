@@ -1,11 +1,12 @@
-{ config, pkgs, ... }:
-
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   tdarrPort = 8265;
   tdarrServerPort = 8266;
   tdarrDataDir = "/var/lib/tdarr";
-in
-{
+in {
   virtualisation.podman = {
     enable = true;
     dockerCompat = true;
@@ -57,7 +58,7 @@ in
   users.users.tdarr = {
     isSystemUser = true;
     group = "tdarr";
-    extraGroups = [ "media-server" ];
+    extraGroups = ["media-server"];
     uid = 1000;
   };
   users.groups.tdarr.gid = 1000;
