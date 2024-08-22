@@ -38,6 +38,7 @@
       "Reeder 5." = 1529448980;
       "Xcode" = 497799835;
       "Parcel - Delivery Tracker" = 639968404;
+      "Amphetamine" = 937984704;
     };
   };
 }
