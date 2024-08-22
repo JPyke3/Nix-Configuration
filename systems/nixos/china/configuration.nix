@@ -79,6 +79,7 @@
       "jellyfin"
       "transmission"
       "jacobpyke"
+      "bazarr"
     ];
   };
 
