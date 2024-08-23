@@ -14,7 +14,6 @@
     inputs.sops-nix.nixosModules.sops
     ../../programs/daemon/tailscale.nix
     ../../programs/daemon/syncthing/syncthing.nix
-    ../../programs/cli/ollama.nix
     ./unstable-packages.nix
   ];
 
