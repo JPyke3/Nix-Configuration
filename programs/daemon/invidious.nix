@@ -10,8 +10,6 @@
   services.invidious = {
     enable = true;
     port = 4664;
-    settings.domain = "invidious.jacob-china";
-    nginx.enable = true;
     http3-ytproxy.enable = true;
     settings.db = {
       user = "invidious";
