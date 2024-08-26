@@ -41,13 +41,13 @@
 
   virtualisation.waydroid.enable = true;
 
-  system.autoUpgrade = {
-    enable = true;
-    allowReboot = false;
-    dates = "03:00";
-    flake = "github:JPyke3/Nix-Configuration";
-    persistent = true;
-  };
+  # system.autoUpgrade = {
+  #   enable = true;
+  #   allowReboot = false;
+  #   dates = "03:00";
+  #   flake = "github:JPyke3/Nix-Configuration";
+  #   persistent = true;
+  # };
 
   programs.steam = {
     enable = true;
