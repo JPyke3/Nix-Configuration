@@ -14,7 +14,7 @@ if [ "$OS" = "Darwin" ]; then
 	gen="Nix Darwin: $(darwin-rebuild --list-generations | sed -n '$p' | awk '{print $1}')"
 elif [ "$SUBOS" = nixos ]; then
 	echo "NixOS Rebuilding..."
-	nh os switch --show-trace . 
+	nh os switch . --show-trace
 	gen="NixOS: $(nix-env --list-generations | sed -n '$p' | awk '{print $1}')"
 else
 	echo "Home-Manager Rebuilding..."
