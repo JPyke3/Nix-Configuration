@@ -46,7 +46,7 @@
           sendfile off;
         '';
       };
-	  "~ (^/videoplayback|^/vi/|^/ggpht/|^/sb/)" = {
+      "~ (^/videoplayback|^/vi/|^/ggpht/|^/sb/)" = {
         proxyPass = "http://unix:/run/http3-ytproxy/socket/http-proxy.sock";
       };
       "/invidious" = {
@@ -58,10 +58,11 @@
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
           proxy_set_header X-Forwarded-Proto $scheme;
           proxy_set_header X-Forwarded-Prefix /invidious;
-          
+
           # Handle redirects
           proxy_redirect ~^/(.*)$ /invidious/$1;
         '';
+      };
       "~ \.php$" = {
         extraConfig = ''
           include ${config.services.nginx.package}/conf/fastcgi_params ;
