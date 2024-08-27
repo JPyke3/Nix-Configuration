@@ -46,12 +46,22 @@
           sendfile off;
         '';
       };
-      "/invidious" = {
-        priority = 9997;
-        extraConfig = ''
-          proxy_pass http://127.0.0.1:4664/;
-        '';
+	  "~ (^/videoplayback|^/vi/|^/ggpht/|^/sb/)" = {
+        proxyPass = "http://unix:/run/http3-ytproxy/socket/http-proxy.sock";
       };
+      "/invidious" = {
+        priority = 9998;
+        proxyPass = "http://127.0.0.1:4664";
+        extraConfig = ''
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+          proxy_set_header X-Forwarded-Prefix /invidious;
+          
+          # Handle redirects
+          proxy_redirect ~^/(.*)$ /invidious/$1;
+        '';
       "~ \.php$" = {
         extraConfig = ''
           include ${config.services.nginx.package}/conf/fastcgi_params ;
