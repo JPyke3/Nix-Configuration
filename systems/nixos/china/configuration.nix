@@ -66,7 +66,6 @@
       "jacobpyke"
       "firefly"
       "vaultwarden"
-      "nextcloud"
     ];
   };
 
