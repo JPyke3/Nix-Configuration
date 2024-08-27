@@ -64,6 +64,7 @@
     members = [
       "jacobpyke"
       "firefly"
+      "vaultwarden"
     ];
   };
 
