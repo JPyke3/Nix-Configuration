@@ -36,6 +36,12 @@
     forceSSL = true;
     sslCertificate = /mypool/documents/Tailscale-Certs/jacob-china.tail264a8.ts.net.crt;
     sslCertificateKey = /mypool/documents/Tailscale-Certs/jacob-china.tail264a8.ts.net.key;
+    listen = [
+      {
+        addr = "127.0.0.1";
+        port = 8080; # NOT an exposed port
+      }
+    ];
     locations = {
       "^~ /.well-known" = lib.mkForce {
         priority = 9000;
