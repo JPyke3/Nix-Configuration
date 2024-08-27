@@ -1,8 +1,5 @@
 {...}: {
-  services.tailscale = { 
-	  enable = true;
-	  extraSetFlags = [
-		--advertise-exit-node
-	  ];
+  services.tailscale = {
+    enable = true;
   };
 }
