@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  sops,
+  config,
+  ...
+}: {
   sops.secrets."programs/nextcloud/adminpass" = {};
 
   services.nextcloud = {
