@@ -11,7 +11,7 @@
   services.nextcloud = {
     settings = let
       prot = "https"; # or https
-      host = "localhost";
+      host = "127.0.0.1";
       dir = "/nextcloud";
     in {
       overwriteprotocol = prot;
@@ -24,7 +24,6 @@
       ];
     };
     enable = true;
-    hostName = "localhost";
     config.adminpassFile = config.sops.secrets."programs/nextcloud/adminpass".path;
   };
 
@@ -32,7 +31,7 @@
     "nextcloud-27.1.11"
   ];
 
-  services.nginx.virtualHosts.${config.services.nextcloud.hostName} = {
+  services.nginx.virtualHosts."localhost" = {
     forceSSL = true;
     sslCertificate = /mypool/documents/Tailscale-Certs/jacob-china.tail264a8.ts.net.crt;
     sslCertificateKey = /mypool/documents/Tailscale-Certs/jacob-china.tail264a8.ts.net.key;
