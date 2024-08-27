@@ -24,12 +24,19 @@
       ];
     };
     enable = true;
-    hostName = "localhost";
+    hostName = "127.0.0.1";
     config.adminpassFile = config.sops.secrets."programs/nextcloud/adminpass".path;
   };
 
   nixpkgs.config.permittedInsecurePackages = [
     "nextcloud-27.1.11"
+  ];
+
+  services.nginx.virtualHosts."${config.services.nextcloud.hostName}".listen = [
+    {
+      addr = "127.0.0.1";
+      port = 8080; # NOT an exposed port
+    }
   ];
 
   services.nginx.virtualHosts."localhost" = {
