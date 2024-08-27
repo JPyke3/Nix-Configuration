@@ -4,6 +4,13 @@
   ...
 }: {
   sops.secrets."programs/vaultwarden/envfile" = {};
+  services.nginx.virtualHosts."vaultwarden.jacob-china.tail264a8.ts.net" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:${toString config.services.vaultwarden.config.ROCKET_PORT}";
+    };
+  };
   services.vaultwarden = {
     enable = true;
     # backupDir = "/mypool/documents/vaultwarden/backup";
