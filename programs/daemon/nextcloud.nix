@@ -10,7 +10,7 @@
   services.nextcloud = {
     settings = let
       prot = "https"; # or https
-      host = "127.0.0.1";
+      host = "localhost";
       dir = "/nextcloud";
     in {
       overwriteprotocol = prot;
@@ -18,12 +18,12 @@
       overwritewebroot = dir;
       overwrite.cli.url = "${prot}://${host}${dir}/";
       htaccess.RewriteBase = dir;
+      trusted_domains = [
+        "jacob-china.tail264a8.ts.net"
+      ];
     };
     enable = true;
     hostName = "localhost";
-    settings.trusted_domains = [
-      "jacob-china.tail264a8.ts.net"
-    ];
     config.adminpassFile = config.sops.secrets."programs/nextcloud/adminpass".path;
   };
 
