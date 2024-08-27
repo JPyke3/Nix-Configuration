@@ -24,6 +24,7 @@
     ../../../programs/daemon/pihole.nix
     ../../../programs/daemon/invidious.nix
     ../../../programs/daemon/searxng.nix
+    ../../../programs/daemon/vaultwarden.nix
   ];
 
   # jpyke3.scheduleReboot = {
