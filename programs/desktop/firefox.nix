@@ -22,6 +22,7 @@ in {
           vimium
           sponsorblock
           buster-captcha-solver
+          privacy-redirect
           (buildFirefoxXpiAddon {
             pname = "toggl-button-time-tracker";
             version = "3.0.29";
