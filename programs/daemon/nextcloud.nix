@@ -4,11 +4,11 @@
   ...
 }: {
   sops.secrets."programs/nextcloud/adminpass" = {
-    #  owner = "nextcloud";
+    owner = "nextcloud";
   };
 
   services.nextcloud = {
-    enable = false;
+    enable = true;
     datadir = "/mypool/documents/nextcloud";
     hostName = "localhost";
     config.adminpassFile = config.sops.secrets."programs/nextcloud/adminpass".path;
