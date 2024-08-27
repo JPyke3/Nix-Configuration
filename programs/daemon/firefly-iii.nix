@@ -6,7 +6,7 @@
 
   services.firefly-iii = {
     enable = true;
-    enableNginx = true;
+    # enableNginx = true;
     settings = {
       APP_KEY_FILE = "/mypool/documents/firefly-iii/appkey.txt";
       APP_ENV = "production";
