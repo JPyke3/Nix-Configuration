@@ -19,7 +19,12 @@
   ];
 
   services.nginx.virtualHosts.${config.services.nextcloud.hostName} = {
-    port = 28680;
+    listen = [
+      {
+        addr = "0.0.0.0";
+        port = 41485;
+      }
+    ];
     forceSSL = true;
     sslCertificate = /mypool/documents/Tailscale-Certs/jacob-china.tail264a8.ts.net.crt;
     sslCertificateKey = /mypool/documents/Tailscale-Certs/jacob-china.tail264a8.ts.net.key;
