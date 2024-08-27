@@ -9,6 +9,7 @@
     enable = true;
     home = "/mypool/documents/nextcloud";
     hostName = "jacob-china.tail264a8.ts.net";
+    config.adminpassFile = config.sops.secret "programs/nextcloud/adminpass".path;
   };
 
   nixpkgs.config.permittedInsecurePackages = [
