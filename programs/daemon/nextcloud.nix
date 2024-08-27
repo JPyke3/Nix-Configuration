@@ -32,13 +32,6 @@
     "nextcloud-27.1.11"
   ];
 
-  services.nginx.virtualHosts."${config.services.nextcloud.hostName}".listen = [
-    {
-      addr = "127.0.0.1";
-      port = 8080; # NOT an exposed port
-    }
-  ];
-
   services.nginx.virtualHosts."localhost" = {
     forceSSL = true;
     sslCertificate = /mypool/documents/Tailscale-Certs/jacob-china.tail264a8.ts.net.crt;
