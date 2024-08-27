@@ -1,7 +1,7 @@
 {config, ...}: {
   services.nextcloud = {
     enable = true;
-    home = /mypool/documents/nextcloud;
+    home = "/mypool/documents/nextcloud";
     hostName = "jacob-china.tail264a8.ts.net";
   };
 
