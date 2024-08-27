@@ -24,7 +24,6 @@
       ];
     };
     enable = true;
-    hostName = "jacob-china.tail264a8.ts.net";
     config.adminpassFile = config.sops.secrets."programs/nextcloud/adminpass".path;
   };
 
