@@ -3,7 +3,9 @@
   config,
   ...
 }: {
-  sops.secrets."programs/nextcloud/adminpass" = {};
+  sops.secrets."programs/nextcloud/adminpass" = {
+    owner = "nextcloud";
+  };
 
   services.nextcloud = {
     enable = true;
