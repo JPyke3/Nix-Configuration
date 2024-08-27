@@ -49,14 +49,59 @@
       "~ (^/videoplayback|^/vi/|^/ggpht/|^/sb/)" = {
         proxyPass = "http://unix:/run/http3-ytproxy/socket/http-proxy.sock";
       };
-      "/invidious" = {
-        priority = 9998;
+      "^~ /invidious" = {
+        priority = 9997;
+        extraConfig = ''
+          rewrite ^/invidious$ /invidious/ permanent;
+          rewrite ^/feed/popular$ /invidious/feed/popular permanent;
+
+          proxy_pass http://127.0.0.1:4664/;
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+
+          proxy_set_header Accept-Encoding "";
+
+          sub_filter_once off;
+          sub_filter_types *;
+          sub_filter '/' '/invidious/';
+          sub_filter '"/api/' '"/invidious/api/';
+          sub_filter '"/vi/' '"/invidious/vi/';
+          sub_filter 'src="/ggpht/' 'src="/invidious/ggpht/';
+          sub_filter '/sb/' '/invidious/sb/';
+
+          proxy_hide_header Access-Control-Allow-Origin;
+          add_header Access-Control-Allow-Origin * always;
+        '';
+      };
+
+      "~ ^/invidious/.*\.(js|json|vtt)$" = {
+        priority = 9996;
         extraConfig = ''
           proxy_pass http://127.0.0.1:4664;
-          proxy_set_header X-Forwarded-For $remote_addr;
-          proxy_set_header Host $host;    # so Invidious knows domain
-          proxy_http_version 1.1;     # to keep alive
-          proxy_set_header Connection ""; # to keep alive
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+
+          proxy_set_header Accept-Encoding "";
+
+          sub_filter_once off;
+          sub_filter_types *;
+
+          if ($request_filename ~* \.js$) {
+            sub_filter "'/api/" "'/invidious/api/";
+            sub_filter "'/vi/" "'/invidious/vi/";
+          }
+
+          if ($request_filename ~* \.json$) {
+            sub_filter 'src="/ggpht/' 'src="/invidious/ggpht/';
+          }
+
+          if ($request_filename ~* \.vtt$) {
+            sub_filter '/sb/' '/invidious/sb/';
+          }
         '';
       };
       "~ \.php$" = {
