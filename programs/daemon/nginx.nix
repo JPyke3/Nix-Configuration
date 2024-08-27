@@ -39,7 +39,7 @@
       };
       "/firefly/" = {
         priority = 9998;
-        root = "${config.services.firefly-iii.package}";
+        root = "${config.services.firefly-iii.package}/public";
         index = "index.php";
         extraConfig = ''
           location ~ \.php$ {
