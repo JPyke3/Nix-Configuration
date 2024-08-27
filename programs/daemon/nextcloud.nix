@@ -11,7 +11,7 @@
   services.nextcloud = {
     settings = let
       prot = "https"; # or https
-      host = "jacob-china.tail264a8.ts.net";
+      host = "localhost";
       dir = "/nextcloud";
     in {
       overwriteprotocol = prot;
