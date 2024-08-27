@@ -1,6 +1,7 @@
 {
   sops,
   config,
+  lib,
   ...
 }: {
   sops.secrets."programs/nextcloud/adminpass" = {
@@ -36,7 +37,7 @@
     sslCertificate = /mypool/documents/Tailscale-Certs/jacob-china.tail264a8.ts.net.crt;
     sslCertificateKey = /mypool/documents/Tailscale-Certs/jacob-china.tail264a8.ts.net.key;
     locations = {
-      "^~ /.well-known" = {
+      "^~ /.well-known" = lib.mkForce {
         priority = 9000;
         extraConfig = ''
           absolute_redirect off;
