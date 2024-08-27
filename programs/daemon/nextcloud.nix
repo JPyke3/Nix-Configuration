@@ -10,7 +10,7 @@
   services.nextcloud = {
     enable = true;
     home = "/mypool/documents/nextcloud";
-    hostName = "jacob-china.tail264a8.ts.net";
+    hostName = "localhost";
     config.adminpassFile = config.sops.secrets."programs/nextcloud/adminpass".path;
   };
 
@@ -21,7 +21,7 @@
   services.nginx.virtualHosts.${config.services.nextcloud.hostName} = {
     listen = [
       {
-        addr = "0.0.0.0";
+        addr = "localhost";
         port = 41485;
       }
     ];
