@@ -4,6 +4,7 @@
   ...
 }: {
   sops.secrets."programs/vaultwarden/envfile" = {};
+  security.acme.defaults.email = "jacob@pyk.ee"
   services.nginx.virtualHosts."vaultwarden.jacob-china.tail264a8.ts.net" = {
     enableACME = true;
     forceSSL = true;
