@@ -4,7 +4,7 @@
   ...
 }: {
   sops.secrets."programs/nextcloud/adminpass" = {
-    owner = "nextcloud";
+    #  owner = "nextcloud";
   };
 
   services.nextcloud = {
