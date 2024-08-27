@@ -10,7 +10,7 @@
   services.nextcloud = {
     enable = true;
     home = "/mypool/documents/nextcloud";
-    hostName = "jacob-china.tail264a8.ts.net";
+    hostName = "jacob-china.tail264a8.ts.net:28680";
     config.adminpassFile = config.sops.secrets."programs/nextcloud/adminpass".path;
   };
 
