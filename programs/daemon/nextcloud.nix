@@ -8,7 +8,7 @@
   };
 
   services.nextcloud = {
-    enable = true;
+    enable = false;
     datadir = "/mypool/documents/nextcloud";
     hostName = "localhost";
     config.adminpassFile = config.sops.secrets."programs/nextcloud/adminpass".path;
