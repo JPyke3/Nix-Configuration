@@ -25,6 +25,7 @@
     ../../../programs/daemon/invidious.nix
     ../../../programs/daemon/searxng.nix
     ../../../programs/daemon/vaultwarden.nix
+    ../../../programs/daemon/nextcloud.nix
   ];
 
   # jpyke3.scheduleReboot = {
@@ -65,6 +66,7 @@
       "jacobpyke"
       "firefly"
       "vaultwarden"
+      "nextcloud"
     ];
   };
 
