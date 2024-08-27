@@ -23,6 +23,7 @@
     ../../../programs/daemon/firefly-iii.nix
     ../../../programs/daemon/pihole.nix
     ../../../programs/daemon/invidious.nix
+    ../../../programs/daemon/searxng.nix
   ];
 
   # jpyke3.scheduleReboot = {
