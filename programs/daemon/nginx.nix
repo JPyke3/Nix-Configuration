@@ -46,12 +46,12 @@
           sendfile off;
         '';
       };
-	  "/invidious" = {
-		priority = 9997;	
-		extraConfig = ''
-			proxy_pass http://127.0.0.1:4664/;
-		'';
-	  }
+      "/invidious" = {
+        priority = 9997;
+        extraConfig = ''
+          proxy_pass http://127.0.0.1:4664/;
+        '';
+      };
       "~ \.php$" = {
         extraConfig = ''
           include ${config.services.nginx.package}/conf/fastcgi_params ;
