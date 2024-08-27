@@ -10,6 +10,9 @@
   services.nextcloud = {
     enable = true;
     hostName = "localhost";
+    settings.trusted_domains = [
+      "jacob-china.tail264a8.ts.net"
+    ];
     config.adminpassFile = config.sops.secrets."programs/nextcloud/adminpass".path;
   };
 
