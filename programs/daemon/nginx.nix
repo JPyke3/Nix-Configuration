@@ -51,17 +51,12 @@
       };
       "/invidious" = {
         priority = 9998;
-        proxyPass = "http://127.0.0.1:3000";
         extraConfig = ''
-          rewrite ^/invidious(.*)$ $1 break;
-          proxy_set_header Host $host;
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-          proxy_set_header X-Forwarded-Proto $scheme;
-          proxy_set_header X-Forwarded-Host $host;
-          proxy_set_header X-Forwarded-Prefix /invidious;
-
-          proxy_redirect / /invidious/;
+          proxy_pass http://127.0.0.1:4664;
+          proxy_set_header X-Forwarded-For $remote_addr;
+          proxy_set_header Host $host;    # so Invidious knows domain
+          proxy_http_version 1.1;     # to keep alive
+          proxy_set_header Connection ""; # to keep alive
         '';
       };
       "~ \.php$" = {
