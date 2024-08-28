@@ -100,7 +100,7 @@ in {
       "firefly.${domain}" = {
         forceSSL = true;
         useACMEHost = "${domain}";
-        root = "${config.services.firefly-iii.package}";
+        root = "${config.services.firefly-iii.package}/public";
         locations."/" = {
           index = "index.php";
         };
