@@ -54,7 +54,8 @@ in {
       "${domain}" = {
         forceSSL = true;
         serverAliases = ["*.${domain}"];
-        useACMEHost = tailscaleDomain;
+        sslCertificate = "/var/lib/tailscale/certs/${tailscaleDomain}.crt";
+        sslCertificateKey = "/var/lib/tailscale/certs/${tailscaleDomain}.key";
         locations = {
           "/nextcloud/" = {
             proxyPass = "http://127.0.0.1:8080";
