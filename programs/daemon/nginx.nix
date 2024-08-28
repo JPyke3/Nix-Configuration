@@ -31,39 +31,46 @@ in {
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 
+  services.nginx = {
+    enable = true;
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
+
     virtualHosts = {
-      "${tailscaleDomain}" = {
+      "nextcloud.${domain}" = {
         forceSSL = true;
         sslCertificate = "/var/lib/tailscale/certs/${tailscaleDomain}.crt";
         sslCertificateKey = "/var/lib/tailscale/certs/${tailscaleDomain}.key";
-        locations = {
-          "^~ /.well-known" = {
-            extraConfig = ''
-              return 404;
-            '';
-          };
-          "/nextcloud/" = {
-            proxyPass = "http://127.0.0.1:8080";
-            proxyWebsockets = true;
-          };
-          "/invidious/" = {
-            proxyPass = "http://127.0.0.1:3000";
-          };
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8080";
+          proxyWebsockets = true;
         };
       };
-      "${domain}" = {
+      "invidious.${domain}" = {
         forceSSL = true;
-        serverAliases = ["*.${domain}"];
         sslCertificate = "/var/lib/tailscale/certs/${tailscaleDomain}.crt";
         sslCertificateKey = "/var/lib/tailscale/certs/${tailscaleDomain}.key";
-        locations = {
-          "/nextcloud/" = {
-            proxyPass = "http://127.0.0.1:8080";
-            proxyWebsockets = true;
-          };
-          "/invidious/" = {
-            proxyPass = "http://127.0.0.1:3000";
-          };
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:3000";
+        };
+      };
+      "nextcloud.${tailscaleDomain}" = {
+        forceSSL = true;
+        sslCertificate = "/var/lib/tailscale/certs/${tailscaleDomain}.crt";
+        sslCertificateKey = "/var/lib/tailscale/certs/${tailscaleDomain}.key";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8080";
+          proxyWebsockets = true;
+        };
+      };
+      "invidious.${tailscaleDomain}" = {
+        forceSSL = true;
+        sslCertificate = "/var/lib/tailscale/certs/${tailscaleDomain}.crt";
+        sslCertificateKey = "/var/lib/tailscale/certs/${tailscaleDomain}.key";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:3000";
         };
       };
     };
