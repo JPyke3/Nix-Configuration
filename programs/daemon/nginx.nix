@@ -6,6 +6,12 @@
   domain = "pyk.ee";
   tailscaleDomain = "jacob-china.tail264a8.ts.net"; # Replace with your actual Tailscale domain
 in {
+  # Disable systemd-resolved if it's running
+  services.resolved.enable = false;
+
+  # Disable dnsmasq if it's running
+  services.dnsmasq.enable = false;
+
   services.unbound = {
     enable = true;
     settings = {
