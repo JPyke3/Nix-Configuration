@@ -9,10 +9,9 @@
   };
 
   services.nextcloud = {
-      settings.trusted_domains = [
-        "jacob-china.tail264a8.ts.net"
-      ];
-    };
+    settings.trusted_domains = [
+      "jacob-china.tail264a8.ts.net"
+    ];
     enable = true;
     hostName = "127.0.0.1";
     config.adminpassFile = config.sops.secrets."programs/nextcloud/adminpass".path;
