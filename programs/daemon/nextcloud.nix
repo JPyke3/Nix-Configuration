@@ -13,7 +13,7 @@
       "jacob-china.tail264a8.ts.net"
       "nextcloud.pyk.ee"
     ];
-    enable = true;
+    enable = false;
     hostName = "nextcloud.pyk.ee";
     config.adminpassFile = config.sops.secrets."programs/nextcloud/adminpass".path;
   };
