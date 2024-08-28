@@ -62,14 +62,6 @@ in {
     };
   };
 
-  services.tailscale.enable = true;
-
-  networking.firewall = {
-    allowedTCPPorts = [80 443 53];
-    allowedUDPPorts = [53];
-    checkReversePath = "loose"; # Recommended for Tailscale
-  };
-
   # Ensure your system can resolve its own hostname
   networking.hosts = {
     "127.0.0.1" = ["nextcloud.${domain}" "invidious.${domain}"];
