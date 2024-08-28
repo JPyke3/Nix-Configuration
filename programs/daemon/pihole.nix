@@ -20,4 +20,6 @@ in {
       "--network=host"
     ];
   };
+
+  networking.firewall.interfaces."tailscale0".allowedTCPPorts = [80 443 53];
 }
