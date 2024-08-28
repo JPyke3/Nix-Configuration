@@ -86,7 +86,15 @@ in {
     after = ["tailscaled.service"];
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${pkgs.tailscale}/bin/tailscale cert --cert-file=/var/lib/tailscale/certs/${tailscaleDomain}.crt --key-file=/var/lib/tailscale/certs/${tailscaleDomain}.key ${tailscaleDomain}";
+      ExecStart = pkgs.writeScript "tailscale-cert-renew" ''
+        #!${pkgs.bash}/bin/bash
+        ${pkgs.tailscale}/bin/tailscale cert \
+          --cert-file=/var/lib/tailscale/certs/${tailscaleDomain}.crt \
+          --key-file=/var/lib/tailscale/certs/${tailscaleDomain}.key \
+          ${tailscaleDomain}
+        chown root:nginx /var/lib/tailscale/certs/${tailscaleDomain}.{crt,key}
+        chmod 640 /var/lib/tailscale/certs/${tailscaleDomain}.{crt,key}
+      '';
     };
   };
 
@@ -107,4 +115,7 @@ in {
       chmod -R 750 /var/lib/tailscale/certs
     '';
   };
+
+  # Ensure Nginx can read the Tailscale state directory
+  systemd.services.nginx.serviceConfig.SupplementaryGroups = ["tailscale"];
 }
