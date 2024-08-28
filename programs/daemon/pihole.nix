@@ -7,7 +7,6 @@ in {
       "${serverIP}:53:53/tcp"
       "${serverIP}:53:53/udp"
       "3080:80"
-      "30443:443"
     ];
     volumes = [
       "/home/jacobpyke/pihole-config/pihole:/etc/pihole/"
@@ -15,7 +14,7 @@ in {
     ];
     environment = {
       ServerIP = serverIP;
-      INTERFACE = "tailscale0";
+      WEB_PORT = "3080";
     };
     extraOptions = [
       "--network=host"
