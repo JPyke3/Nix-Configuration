@@ -27,6 +27,7 @@
     ../../../programs/daemon/vaultwarden.nix
     ../../../programs/daemon/nextcloud.nix
     ../../../programs/daemon/acme.nix
+    ../../../programs/daemon/nginx.nix
   ];
 
   # jpyke3.scheduleReboot = {
