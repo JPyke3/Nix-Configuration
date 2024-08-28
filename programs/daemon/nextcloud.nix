@@ -9,17 +9,7 @@
   };
 
   services.nextcloud = {
-    settings = let
-      prot = "https"; # or https
-      host = "127.0.0.1";
-      dir = "/nextcloud";
-    in {
-      overwriteprotocol = prot;
-      overwritehost = host;
-      overwritewebroot = dir;
-      overwrite.cli.url = "${prot}://${host}${dir}/";
-      htaccess.RewriteBase = dir;
-      trusted_domains = [
+      settings.trusted_domains = [
         "jacob-china.tail264a8.ts.net"
       ];
     };
