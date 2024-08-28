@@ -7,8 +7,8 @@
 in {
   services.nginx = {
     enable = true;
-    recommendedProxySettings = true;
-    recommendedTlsSettings = true;
+    # recommendedProxySettings = true;
+    # recommendedTlsSettings = true;
 
     virtualHosts = {
       "nextcloud.${domain}" = {
