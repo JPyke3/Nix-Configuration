@@ -52,13 +52,6 @@ in {
           proxyPass = "http://127.0.0.1:5055";
         };
       };
-      "jellyseerr.${domain}" = {
-        forceSSL = true;
-        useACMEHost = "${domain}";
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:5055";
-        };
-      };
       "jellyfin.${domain}" = {
         forceSSL = true;
         useACMEHost = "${domain}";
