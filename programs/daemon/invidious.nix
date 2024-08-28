@@ -10,7 +10,7 @@
   services.invidious = {
     enable = true;
     port = 4664;
-    address = "127.0.0.1";
+    nginx.enable = true;
     http3-ytproxy.enable = true;
     settings.db = {
       user = "invidious";
