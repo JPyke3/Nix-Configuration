@@ -5,6 +5,7 @@
 }: let
   domain = "pyk.ee";
   tailscaleDomain = "jacob-china.tail264a8.ts.net"; # Replace with your actual Tailscale domain
+  unboundPort = 5353;
 in {
   # Disable systemd-resolved if it's running
   services.resolved.enable = false;
@@ -17,6 +18,7 @@ in {
     settings = {
       server = {
         interface = ["0.0.0.0"];
+		port = unboundPort;
         access-control = [
           "127.0.0.0/8 allow"
           "100.64.0.0/10 allow" # Tailscale IP range
@@ -26,6 +28,25 @@ in {
           ''"*.${domain}. IN A 127.0.0.1"''
           ''"${tailscaleDomain}. IN A 127.0.0.1"''
         ];
+      };
+    };
+  };
+
+    networking = {
+    nameservers = [ "127.0.0.1" ];
+    dhcpcd.extraConfig = "nohook resolv.conf";
+    networkmanager.dns = "none";
+
+    # Use dnsmasq as a forwarder
+    dnsmasq = {
+      enable = true;
+      settings = {
+        server = [
+          "/${domain}/127.0.0.1#${toString unboundPort}"
+          "/${tailscaleDomain}/127.0.0.1#${toString unboundPort}"
+        ];
+        no-resolv = true;
+        server = [ "1.1.1.1" "8.8.8.8" ];  # Forward other queries to public DNS
       };
     };
   };
@@ -104,6 +125,9 @@ in {
     };
   };
 
+  systemd.services.unbound.after = [ "network.target" "tailscale.service" ];
+  systemd.services.dnsmasq.after = [ "unbound.service" ];
+
   systemd.timers.tailscale-cert = {
     wantedBy = ["timers.target"];
     timerConfig = {
@@ -121,6 +145,12 @@ in {
       chmod -R 750 /var/lib/tailscale/certs
     '';
   };
+  
+  networking.firewall = {
+    allowedTCPPorts = [ 80 443 53 unboundPort ];
+    allowedUDPPorts = [ 53 unboundPort ];
+  };
+}
 
   # Ensure Nginx can read the Tailscale state directory
   systemd.services.nginx.serviceConfig.SupplementaryGroups = ["tailscale"];
