@@ -7,7 +7,6 @@ in {
     acceptTerms = true;
     defaults = {
       email = "jacob@pyk.ee";
-      dnsProvider = "route53";
       dnsPropagationCheck = true;
       dnsResolver = "1.1.1.1:53";
     };
