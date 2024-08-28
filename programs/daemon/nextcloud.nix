@@ -11,6 +11,7 @@
   services.nextcloud = {
     settings.trusted_domains = [
       "jacob-china.tail264a8.ts.net"
+      "nextcloud.pyk.ee"
     ];
     enable = true;
     hostName = "nextcloud.pyk.ee";
