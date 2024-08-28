@@ -66,6 +66,34 @@ in {
           proxyPass = "http://127.0.0.1:2082";
         };
       };
+      "pihole.${domain}" = {
+        forceSSL = true;
+        useACMEHost = "${domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:3080";
+        };
+      };
+      "gitea.${domain}" = {
+        forceSSL = true;
+        useACMEHost = "${domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:3000";
+        };
+      };
+      "transmission.${domain}" = {
+        forceSSL = true;
+        useACMEHost = "${domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:9091";
+        };
+      };
+      "bazarr.${domain}" = {
+        forceSSL = true;
+        useACMEHost = "${domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:6767";
+        };
+      };
     };
   };
 }
