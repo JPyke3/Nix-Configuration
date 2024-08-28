@@ -12,11 +12,6 @@ in {
 
     virtualHosts = {
       "nextcloud.${domain}" = {
-        listen = [
-          {
-            addr = "100.73.94.58";
-          }
-        ];
         forceSSL = true;
         useACMEHost = "${domain}";
         locations."/" = {
