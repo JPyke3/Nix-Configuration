@@ -18,9 +18,7 @@ in {
       INTERFACE = "tailscale0";
     };
     extraOptions = [
-      "--cap-add=NET_ADMIN"
-      "--dns=127.0.0.1"
-      "--dns=1.1.1.1"
+      "--network=host"
     ];
   };
 
