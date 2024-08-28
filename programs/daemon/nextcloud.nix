@@ -5,7 +5,7 @@
   ...
 }: {
   sops.secrets."programs/nextcloud/adminpass" = {
-    # owner = "nextcloud";
+    owner = "nextcloud";
   };
 
   services.nextcloud = {
@@ -13,7 +13,7 @@
       "jacob-china.tail264a8.ts.net"
       "nextcloud.pyk.ee"
     ];
-    enable = false;
+    enable = true;
     hostName = "nextcloud.pyk.ee";
     config.adminpassFile = config.sops.secrets."programs/nextcloud/adminpass".path;
   };
