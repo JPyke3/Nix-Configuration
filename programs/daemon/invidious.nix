@@ -5,12 +5,10 @@
 }: {
   sops.secrets."programs/invidious/password" = {};
 
-  # ervices.invidious.settings.db.user must match services.invidious.settings.db.dbname
-
   services.invidious = {
     enable = true;
     port = 4664;
-    nginx.enable = true;
+    #     nginx.enable = true;
     http3-ytproxy.enable = true;
     settings.db = {
       user = "invidious";
