@@ -1,4 +1,4 @@
-{...}: let
+{config, ...}: let
   domain = "pyk.ee";
 in {
   sops.secrets."acme/route53" = {};
