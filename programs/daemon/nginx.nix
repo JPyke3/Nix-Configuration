@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
+{config, ...}: let
   domain = "pyk.ee";
 in {
   services.nginx = {
@@ -99,6 +95,20 @@ in {
         useACMEHost = "${domain}";
         locations."/" = {
           proxyPass = "http://127.0.0.1:8000";
+        };
+      };
+      "firefly.${domain}" = {
+        forceSSL = true;
+        useACMEHost = "${domain}";
+        root = "${config.services.firefly-iii.package}";
+        locations."/" = {
+          index = "index.php";
+        };
+        locations."~ \\.php$" = {
+          extraConfig = ''
+            fastcgi_pass unix:/run/phpfpm/firefly-iii.sock;
+            fastcgi_index index.php;
+          '';
         };
       };
     };
