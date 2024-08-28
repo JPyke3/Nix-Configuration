@@ -1,11 +1,11 @@
 {inputs, ...}: let
-  serverIP = "100.73.94.58";
+  serverIP = "0.0.0.0";
 in {
   virtualisation.oci-containers.containers.pihole = {
     image = "pihole/pihole:latest";
     ports = [
-      "53:53/tcp"
-      "53:53/udp"
+      "${serverIP}:53:53/tcp"
+      "${serverIP}:53:53/udp"
       "3080:80"
       "30443:443"
     ];
