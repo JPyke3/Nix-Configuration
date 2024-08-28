@@ -15,7 +15,6 @@ in {
         listen = [
           {
             addr = "100.73.94.58";
-            port = "80";
           }
         ];
         forceSSL = true;
