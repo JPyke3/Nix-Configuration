@@ -31,13 +31,6 @@ in {
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 
-  services.nginx = {
-    enable = true;
-    recommendedGzipSettings = true;
-    recommendedOptimisation = true;
-    recommendedProxySettings = true;
-    recommendedTlsSettings = true;
-
     virtualHosts = {
       "nextcloud.${domain}" = {
         forceSSL = true;
