@@ -104,12 +104,6 @@ in {
         locations."/" = {
           index = "index.php";
         };
-        locations."~ \\.php$" = {
-          extraConfig = ''
-            fastcgi_pass unix:/run/phpfpm/firefly-iii.sock;
-            fastcgi_index index.php;
-          '';
-        };
       };
     };
   };
