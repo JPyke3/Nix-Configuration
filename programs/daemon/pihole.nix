@@ -1,5 +1,5 @@
 {inputs, ...}: let
-  serverIP = "192.168.0.3";
+  serverIP = "100.73.94.58";
 in {
   virtualisation.oci-containers.containers.pihole = {
     image = "pihole/pihole:latest";
