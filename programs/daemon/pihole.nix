@@ -20,8 +20,4 @@ in {
       "--network=host"
     ];
   };
-
-  # Configure the host to use Pi-hole as its DNS server
-  networking.nameservers = ["127.0.0.1"];
-  networking.dhcpcd.extraConfig = "nohook resolv.conf";
 }
