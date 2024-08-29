@@ -65,10 +65,10 @@
       url = "github:Maroka-chan/VPN-Confinement";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-	immich = {
-	  url = "github:jvanbruegge/nixpkgs/immich"
-	  inputs.nixpkgs.follows = "unstable";
-	};
+    immich = {
+      url = "github:jvanbruegge/nixpkgs/immich";
+      inputs.nixpkgs.follows = "unstable";
+    };
   };
 
   outputs = {
@@ -86,7 +86,7 @@
     stylix,
     spicetify-nix,
     vpnconfinement,
-	immich,
+    immich,
     ...
   } @ inputs: {
     # Desktop PC
