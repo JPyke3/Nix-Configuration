@@ -112,4 +112,40 @@
     zfs
     recyclarr
   ];
+
+  networking.firewall = {
+    enable = true;
+
+    # Allow incoming connections on these ports
+    allowedTCPPorts = [
+      22 # SSH
+      80 # HTTP
+      443 # HTTPS
+    ];
+
+    # If you're using Tailscale, you might need to allow UDP port 41641
+    allowedUDPPorts = [41641];
+
+    # If you need any specific port ranges, uncomment and adjust these
+    # allowedTCPPortRanges = [
+    #   { from = 8000; to = 8999; }  # Example range for your services
+    # ];
+
+    # Allow incoming connections from your Tailscale network
+    trustedInterfaces = ["tailscale0"];
+
+    # If you need to allow incoming connections from specific IP addresses, use this
+    # extraCommands = ''
+    #   iptables -A INPUT -s your.trusted.ip.address -j ACCEPT
+    # '';
+  };
+
+  # Enable nftables for newer firewall implementation
+  networking.nftables.enable = true;
+
+  # Ensure Tailscale is enabled if you're using it
+  services.tailscale.enable = true;
+
+  # You might want to explicitly enable SSH, although it's usually enabled by default
+  services.openssh.enable = true;
 }
