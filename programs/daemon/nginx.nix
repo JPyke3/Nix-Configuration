@@ -18,13 +18,12 @@ in {
         forceSSL = true;
         useACMEHost = "${domain}";
 
-        # Increase max upload size
+        # Combine all extraConfig settings
         extraConfig = ''
+          # Increase max upload size
           client_max_body_size 512M;
-        '';
 
-        # Set headers at the server level
-        extraConfig = ''
+          # Set headers at the server level
           add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload;" always;
           add_header Referrer-Policy                   "no-referrer"       always;
           add_header X-Content-Type-Options            "nosniff"           always;
