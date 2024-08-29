@@ -14,7 +14,7 @@ in {
           return = "444";
         };
       };
-      virtualHosts."nextcloud.${domain}" = {
+      "nextcloud.${domain}" = {
         forceSSL = true;
         useACMEHost = "${domain}";
 
