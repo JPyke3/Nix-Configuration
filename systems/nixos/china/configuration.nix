@@ -91,6 +91,7 @@
       "transmission"
       "jacobpyke"
       "bazarr"
+      "immich"
     ];
   };
 
