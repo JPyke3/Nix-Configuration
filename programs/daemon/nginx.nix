@@ -105,6 +105,13 @@ in {
           proxyPass = "http://127.0.0.1:8000";
         };
       };
+      "immich.${domain}" = {
+        forceSSL = true;
+        useACMEHost = "${domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:3001";
+        };
+      };
       "firefly.${domain}" = {
         forceSSL = true;
         useACMEHost = "${domain}";
