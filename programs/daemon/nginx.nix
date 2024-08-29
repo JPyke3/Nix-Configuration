@@ -6,12 +6,13 @@ in {
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
     virtualHosts = {
-	"_" = {
-      default = true;
-      forceSSL = true;
-      useACMEHost = "pyk.ee";
-      locations."/" = {
-        return = "444";
+      "_" = {
+        default = true;
+        forceSSL = true;
+        useACMEHost = "pyk.ee";
+        locations."/" = {
+          return = "444";
+        };
       };
       "nextcloud.${domain}" = {
         forceSSL = true;
