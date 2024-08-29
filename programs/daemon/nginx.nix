@@ -23,18 +23,20 @@ in {
           client_max_body_size 512M;
         '';
 
+        # Set headers at the server level
+        extraConfig = ''
+          add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload;" always;
+          add_header Referrer-Policy                   "no-referrer"       always;
+          add_header X-Content-Type-Options            "nosniff"           always;
+          add_header X-Frame-Options                   "SAMEORIGIN"        always;
+          add_header X-Permitted-Cross-Domain-Policies "none"              always;
+          add_header X-Robots-Tag                      "noindex, nofollow" always;
+          add_header X-XSS-Protection                  "1; mode=block"     always;
+        '';
+
         locations = {
           "/" = {
             extraConfig = ''
-              add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload;" always;
-              # Set headers for Nextcloud
-              add_header Referrer-Policy                   "no-referrer"       always;
-              add_header X-Content-Type-Options            "nosniff"           always;
-              add_header X-Frame-Options                   "SAMEORIGIN"        always;
-              add_header X-Permitted-Cross-Domain-Policies "none"              always;
-              add_header X-Robots-Tag                      "noindex, nofollow" always;
-              add_header X-XSS-Protection                  "1; mode=block"     always;
-
               # Remove X-Powered-By, which is an information leak
               fastcgi_hide_header X-Powered-By;
 
@@ -109,7 +111,7 @@ in {
               # Serve static files
               location ~ \.(?:css|js|mjs|svg|gif|ico|png|webp|woff|woff2|ttf|map)$ {
                 try_files $uri /index.php$request_uri;
-                add_header Cache-Control "public, max-age=15778463";
+                add_header Cache-Control "public, max-age=15778463" always;
                 access_log off;     # Optional: Don't log access to assets
 
                 location ~ \.woff2?$ {
