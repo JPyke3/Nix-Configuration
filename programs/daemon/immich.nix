@@ -1,12 +1,6 @@
-{
-  pkgs,
-  inputs,
-  ...
-} @ args: {
-  nixpkgs.overlays = [inputs.immich];
-
+{inputs, ...}: {
   imports = [
-    "${args.inputs.immich}/nixos/modules/services/web-apps/immich.nix"
+    "${inputs.immich}/nixos/modules/services/web-apps/immich.nix"
   ];
 
   services.immich = {
