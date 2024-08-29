@@ -53,6 +53,9 @@
     base16 = {
       url = "github:SenchoPens/base16.nix";
     };
+    immich = {
+      url = "github:jvanbruegge/nixpkgs/immich";
+    };
     stylix = {
       url = "github:danth/stylix/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -64,10 +67,6 @@
     vpnconfinement = {
       url = "github:Maroka-chan/VPN-Confinement";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    immich = {
-      url = "github:jvanbruegge/nixpkgs/immich";
-      inputs.nixpkgs.follows = "unstable";
     };
   };
 
