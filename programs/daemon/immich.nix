@@ -21,5 +21,6 @@ in {
 
   services.immich = {
     enable = true;
+    machine-learning.enable = false;
   };
 }
