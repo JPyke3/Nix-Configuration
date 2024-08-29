@@ -70,6 +70,7 @@
       "firefly"
       "vaultwarden"
       "nextcloud"
+      "immich"
     ];
   };
 
