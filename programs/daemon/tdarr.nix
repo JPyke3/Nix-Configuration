@@ -51,7 +51,7 @@ in {
     "d ${tdarrDataDir}/server 0775 tdarr media-server -"
     "d ${tdarrDataDir}/configs 0775 tdarr media-server -"
     "d ${tdarrDataDir}/logs 0775 tdarr media-server -"
-    "d /var/cache/tdarr 0775 tdarr media-server -"
+    "d /mypool/temp 0775 tdarr media-server -"
   ];
 
   # Create a system user and group for Tdarr
