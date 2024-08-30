@@ -31,6 +31,7 @@
       "azure-data-studio"
       "google-chrome"
       "nextcloud"
+      "macfuse"
     ];
     masApps = {
       Infuse = 1136220934;
