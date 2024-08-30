@@ -1,4 +1,3 @@
-
 {config, ...}: {
   launchd.user.agents.tabby = {
     command = "/Users/jacobpyke/Development/Tdarr/Tdarr_Node/Tdarr_Node";
