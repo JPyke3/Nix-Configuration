@@ -11,6 +11,7 @@
     ../../programs/daemon/kanata/kanata.nix
     ../../programs/daemon/jellyfin-mpv-shim.nix
     ../../programs/daemon/tabby/tabby.nix
+    ../../programs/daemon/tabby/tdarr-node-macos.nix
 
     # TODO: Add
     # ../../programs/daemon/download-cleaner.nix
