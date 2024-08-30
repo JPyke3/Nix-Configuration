@@ -15,6 +15,7 @@
     ];
     enable = true;
     hostName = "nextcloud.pyk.ee";
+    https = true;
     config.adminpassFile = config.sops.secrets."programs/nextcloud/adminpass".path;
   };
 
