@@ -32,6 +32,57 @@
     rclone
   ];
 
+  # Create necessary directories
+  system.activationScripts.createMountDirs = ''
+    mkdir -p /Users/jacobpyke/.tdarr/media
+    mkdir -p /Users/jacobpyke/.tdarr/temp
+    chown jacobpyke:staff /Users/jacobpyke/.tdarr/media
+    chown jacobpyke:staff /Users/jacobpyke/.tdarr/temp
+    chmod 755 /Users/jacobpyke/.tdarr/media
+    chmod 755 /Users/jacobpyke/.tdarr/temp
+  '';
+
+  # Launchd agent for rclone mount
+  # Launchd agent for rclone mount
+  launchd.user.agents.rclone-mount = {
+    command = ''
+      ${pkgs.rclone}/bin/rclone mount jacob-china:/mypool/media /Users/jacobpyke/.tdarr/media \
+        --vfs-cache-mode full \
+        --vfs-cache-max-size 100G \
+        --vfs-read-chunk-size 128M \
+        --vfs-read-chunk-size-limit 1G \
+        --buffer-size 512M \
+        --transfers 4 \
+        --checkers 8 \
+        --dir-cache-time 72h \
+        --timeout 10s \
+        --contimeout 10s \
+        --low-level-retries 10 \
+        --stats 0 \
+        & \
+      ${pkgs.rclone}/bin/rclone mount jacob-china:/mypool/temp /Users/jacobpyke/.tdarr/temp \
+        --vfs-cache-mode full \
+        --vfs-cache-max-size 50G \
+        --vfs-read-chunk-size 64M \
+        --vfs-read-chunk-size-limit 512M \
+        --buffer-size 256M \
+        --transfers 4 \
+        --checkers 8 \
+        --dir-cache-time 24h \
+        --timeout 10s \
+        --contimeout 10s \
+        --low-level-retries 10 \
+        --stats 0
+    '';
+    serviceConfig = {
+      UserName = "jacobpyke";
+      StandardOutPath = "/Users/jacobpyke/.logs/rclone-mount.out";
+      StandardErrorPath = "/Users/jacobpyke/.logs/rclone-mount.err";
+      RunAtLoad = true;
+      KeepAlive = true;
+    };
+  };
+
   users.users.jacobpyke = {
     name = "jacobpyke";
     home = "/Users/jacobpyke";
