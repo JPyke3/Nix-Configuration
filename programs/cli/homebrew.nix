@@ -7,6 +7,7 @@
       "zlib"
       "tabbyml/tabby/tabby"
       "handbrake"
+      "mkvtoolnix"
     ];
     casks = [
       "nikitabobko/tap/aerospace"
