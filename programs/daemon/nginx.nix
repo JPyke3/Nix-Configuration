@@ -42,6 +42,13 @@ in {
           proxyPass = "http://127.0.0.1:9696";
         };
       };
+      "tdarr.${domain}" = {
+        forceSSL = true;
+        useACMEHost = "${domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8265";
+        };
+      };
       "jellyseerr.${domain}" = {
         forceSSL = true;
         useACMEHost = "${domain}";
