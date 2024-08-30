@@ -33,16 +33,18 @@
   ];
 
   # Create necessary directories
-  system.activationScripts.createMountDirs = ''
-    mkdir -p /Users/jacobpyke/.tdarr/media
-    mkdir -p /Users/jacobpyke/.tdarr/temp
-    chown jacobpyke:staff /Users/jacobpyke/.tdarr/media
-    chown jacobpyke:staff /Users/jacobpyke/.tdarr/temp
-    chmod 755 /Users/jacobpyke/.tdarr/media
-    chmod 755 /Users/jacobpyke/.tdarr/temp
-  '';
+  system.activationScripts.createMountDirs = {
+    enable = true;
+    text = ''
+      mkdir -p /Users/jacobpyke/.tdarr/media
+      mkdir -p /Users/jacobpyke/.tdarr/temp
+      chown jacobpyke:staff /Users/jacobpyke/.tdarr/media
+      chown jacobpyke:staff /Users/jacobpyke/.tdarr/temp
+      chmod 755 /Users/jacobpyke/.tdarr/media
+      chmod 755 /Users/jacobpyke/.tdarr/temp
+    '';
+  };
 
-  # Launchd agent for rclone mount
   # Launchd agent for rclone mount
   launchd.user.agents.rclone-mount = {
     command = ''
