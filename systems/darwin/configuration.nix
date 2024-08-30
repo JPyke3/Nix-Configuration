@@ -29,6 +29,7 @@
     alejandra
     pipx
     ffmpeg
+    rclone
   ];
 
   users.users.jacobpyke = {
