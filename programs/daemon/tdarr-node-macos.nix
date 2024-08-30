@@ -1,5 +1,5 @@
 {config, ...}: {
-  launchd.user.agents.tabby = {
+  launchd.user.agents.tdarrnode = {
     command = "/Users/jacobpyke/Development/Tdarr/Tdarr_Node/Tdarr_Node";
     serviceConfig = {
       UserName = "jacobpyke";
