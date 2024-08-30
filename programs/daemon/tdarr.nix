@@ -23,7 +23,7 @@ in {
       "${tdarrDataDir}/configs:/app/configs"
       "${tdarrDataDir}/logs:/app/logs"
       "/mypool/media:/media"
-      "/var/cache/tdarr:/temp"
+      "/mypool/cache:/temp"
       "/dev/dri:/dev/dri"
     ];
     environment = {
