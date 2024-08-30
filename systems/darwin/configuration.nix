@@ -60,7 +60,11 @@
         --timeout 10s \
         --contimeout 10s \
         --low-level-retries 10 \
-        --stats 0
+        --stats 0 \
+        --uid 1000 \
+        --gid 1000 \
+        --umask 002 \
+        --allow-other
     '';
     serviceConfig = {
       UserName = "jacobpyke";
@@ -85,7 +89,11 @@
         --timeout 10s \
         --contimeout 10s \
         --low-level-retries 10 \
-        --stats 0
+        --stats 0 \
+        --uid 1000 \
+        --gid 1000 \
+        --umask 002 \
+        --allow-other
     '';
     serviceConfig = {
       UserName = "jacobpyke";
