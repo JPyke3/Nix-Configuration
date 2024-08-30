@@ -6,6 +6,7 @@
       "pyenv"
       "zlib"
       "tabbyml/tabby/tabby"
+      "handbrake"
     ];
     casks = [
       "nikitabobko/tap/aerospace"

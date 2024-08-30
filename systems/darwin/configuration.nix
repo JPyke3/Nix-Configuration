@@ -27,6 +27,7 @@
     parallel
     alejandra
     pipx
+    ffmpeg
   ];
 
   users.users.jacobpyke = {
