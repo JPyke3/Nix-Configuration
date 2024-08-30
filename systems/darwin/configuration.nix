@@ -46,7 +46,7 @@
   };
 
   # Launchd agent for rclone mount
-  launchd.user.agents.rclone-mount = {
+  launchd.user.agents.rclone-mount-media = {
     command = ''
       ${pkgs.rclone}/bin/rclone mount jacob-china:/mypool/media /Users/jacobpyke/.tdarr/media \
         --vfs-cache-mode full \
@@ -60,8 +60,19 @@
         --timeout 10s \
         --contimeout 10s \
         --low-level-retries 10 \
-        --stats 0 \
-        & \
+        --stats 0
+    '';
+    serviceConfig = {
+      UserName = "jacobpyke";
+      StandardOutPath = "/Users/jacobpyke/.logs/rclone-mount-media.out";
+      StandardErrorPath = "/Users/jacobpyke/.logs/rclone-mount-media.err";
+      RunAtLoad = true;
+      KeepAlive = true;
+    };
+  };
+
+  launchd.user.agents.rclone-mount-temp = {
+    command = ''
       ${pkgs.rclone}/bin/rclone mount jacob-china:/mypool/temp /Users/jacobpyke/.tdarr/temp \
         --vfs-cache-mode full \
         --vfs-cache-max-size 50G \
@@ -78,8 +89,8 @@
     '';
     serviceConfig = {
       UserName = "jacobpyke";
-      StandardOutPath = "/Users/jacobpyke/.logs/rclone-mount.out";
-      StandardErrorPath = "/Users/jacobpyke/.logs/rclone-mount.err";
+      StandardOutPath = "/Users/jacobpyke/.logs/rclone-mount-temp.out";
+      StandardErrorPath = "/Users/jacobpyke/.logs/rclone-mount-temp.err";
       RunAtLoad = true;
       KeepAlive = true;
     };
