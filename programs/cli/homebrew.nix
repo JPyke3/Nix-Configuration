@@ -33,6 +33,7 @@
       "google-chrome"
       "nextcloud"
       "macfuse"
+      "unity-hub"
     ];
     masApps = {
       Infuse = 1136220934;
