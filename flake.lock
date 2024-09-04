@@ -185,11 +185,11 @@
         "nixpkgs-lib": "nixpkgs-lib"
       },
       "locked": {
-        "lastModified": 1722555600,
-        "narHash": "sha256-XOQkdLafnb/p9ij77byFQjDf5m5QYl9b2REiVClC+x4=",
+        "lastModified": 1725024810,
+        "narHash": "sha256-ODYRm8zHfLTH3soTFWE452ydPYz2iTvr9T8ftDMUQ3E=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "8471fe90ad337a8074e957b69ca4d0089218391d",
+        "rev": "af510d4a62d071ea13925ce41c95e3dec816c01d",
         "type": "github"
       },
       "original": {
@@ -394,11 +394,11 @@
       },
       "locked": {
         "dir": "nix",
-        "lastModified": 1724217668,
-        "narHash": "sha256-FhZB47K2N62efA5VLIdVz4DEODERyKS23NzJGHqUjl0=",
+        "lastModified": 1725345689,
+        "narHash": "sha256-vA6SmOA7LFIKjisA29d7crEN2AH1w6TPkt7N87VYo/8=",
         "ref": "refs/heads/master",
-        "rev": "4c324f1631b3b2f7e17e804b0ed3ac314e57bcb8",
-        "revCount": 841,
+        "rev": "906b4e9620f3b1da7884787d43213c945affb786",
+        "revCount": 846,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/kmonad/kmonad?dir=nix"
@@ -418,11 +418,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1725307718,
-        "narHash": "sha256-WjLNhcqg7fzo6yFvVQ3M0DuclgDACdhfbw4vYmifuIM=",
+        "lastModified": 1725406603,
+        "narHash": "sha256-Alzxukh+eXODaynlifDi/dMlHfXu9Wbyz6VR15TzJTk=",
         "owner": "ggerganov",
         "repo": "llama.cpp",
-        "rev": "48baa61eccdca9205daf8d620ba28055c2347b64",
+        "rev": "7605ae7daf31c02211bcfec2f46635ef6ec4b98a",
         "type": "github"
       },
       "original": {
@@ -529,11 +529,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1725324742,
-        "narHash": "sha256-MNTl+ckhd1nzCrljPIbOYdW5/FDoGu1fI8MPTYWyfsI=",
+        "lastModified": 1725411193,
+        "narHash": "sha256-08v1P05jeaH6Hbn8ybKi1vptvaUO7SN7KmHCKYRbqco=",
         "owner": "bandithedoge",
         "repo": "nixpkgs-firefox-darwin",
-        "rev": "2416f978a8cd603b9261da8a28fa2aecd606eb64",
+        "rev": "ed1c97cfebcfd4689bd636996cdb29f0ac9d9479",
         "type": "github"
       },
       "original": {
@@ -619,11 +619,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1725342805,
-        "narHash": "sha256-uNI2O+UhwUXKry0K9g3c8w2/vRVVGJyvNlawRM4GahY=",
+        "lastModified": 1725428071,
+        "narHash": "sha256-za8eJNDeHpgOMycm6Ked4eRitY1BwvtHq2OMrGePxaI=",
         "owner": "nix-community",
         "repo": "nur",
-        "rev": "62e96f6b67982265c7b300beb8707006abe6a321",
+        "rev": "6b2966e756a23de81e551e9c8e3b0487b70fb436",
         "type": "github"
       },
       "original": {
@@ -683,11 +683,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1725336973,
-        "narHash": "sha256-IQPxrZmtav2w0Cq+WkxYANGrlBZW1UhrHOogc9dhLQE=",
+        "lastModified": 1725423405,
+        "narHash": "sha256-h+2PmbkeB6cITOitcDuakWjgPDTeYnIfQifBvpUYnIY=",
         "owner": "Gerg-L",
         "repo": "spicetify-nix",
-        "rev": "f0d3b27df2a5b6c6b2fe32984e4ae6c21a441f2b",
+        "rev": "16d0e7b426971032c7d6b5f7f008a573b84a56c6",
         "type": "github"
       },
       "original": {
