@@ -8,6 +8,10 @@
     inputs.jovian.nixosModules.jovian
     ./syncthing.nix
   ];
+  
+  environment.systemPackages = [
+    pkgs.kodi-wayland
+  ];
 
   environment.systemPackages = with pkgs; [
     steamdeck-firmware
