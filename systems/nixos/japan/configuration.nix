@@ -8,7 +8,7 @@
     inputs.jovian.nixosModules.jovian
     ./syncthing.nix
   ];
-  
+
   environment.systemPackages = [
     pkgs.kodi-wayland
   ];
