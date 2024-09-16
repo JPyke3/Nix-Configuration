@@ -8,6 +8,10 @@
       "tabbyml/tabby/tabby"
       "handbrake"
       "mkvtoolnix"
+      {
+        name = "koekeishiya/formulae/yabai";
+        args = ["HEAD"];
+      }
     ];
     casks = [
       "nikitabobko/tap/aerospace"
