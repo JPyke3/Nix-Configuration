@@ -5,7 +5,7 @@ in {
     ./sketchybar/sketchybar.nix
   ];
   services.yabai = {
-    enable = true;
+    enable = false;
     enableScriptingAddition = true;
     config = {
       # General
