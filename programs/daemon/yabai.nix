@@ -10,7 +10,7 @@ in {
     ./sketchybar/sketchybar.nix
   ];
   services.yabai = {
-    enable = false;
+    enable = true;
     enableScriptingAddition = true;
     package = pkgs_unstable.yabai;
     config = {
