@@ -1,4 +1,5 @@
 {inputs, ...}: let
+  pkgs_unstable = inputs.unstable.legacyPackages.${pkgs.system};
 in {
   imports = [
     ./skhd/skhd.nix
@@ -7,6 +8,7 @@ in {
   services.yabai = {
     enable = false;
     enableScriptingAddition = true;
+    package = pkgs_unstable.yabai;
     config = {
       # General
       layout = "bsp";
