@@ -1,4 +1,8 @@
-{inputs, ...}: let
+{
+  pkgs,
+  inputs,
+  ...
+}: let
   pkgs_unstable = inputs.unstable.legacyPackages.${pkgs.system};
 in {
   imports = [
