@@ -6,10 +6,10 @@
     };
     userEmail = "github@pyk.ee";
     userName = "JPyke3";
-    #    signing = {
-    #      key = "6B3155FBAD28F036";
-    #      signByDefault = true;
-    #    };
+    signing = {
+      key = "6B3155FBAD28F036";
+      signByDefault = true;
+    };
     extraConfig = {
       rerere = {
         enabled = true;
