@@ -34,6 +34,7 @@
       "nextcloud"
       "macfuse"
       "unity-hub"
+      "vlc"
     ];
     masApps = {
       Infuse = 1136220934;
