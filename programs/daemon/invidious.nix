@@ -22,4 +22,21 @@
       passwordFile = config.sops.secrets."programs/invidious/password".path;
     };
   };
+
+  virtualisation.oci-containers.containers."inv_sig_helper" = {
+    image = "quay.io/invidious/inv-sig-helper:latest";
+    cmd = ["--tcp" "127.0.0.1:12999"];
+    ports = ["127.0.0.1:12999:12999"];
+    environment = {
+      RUST_LOG = "info";
+    };
+    extraOptions = [
+      "--init"
+      "--cap-drop=ALL"
+      "--read-only"
+      "--user=10001:10001"
+      "--security-opt=no-new-privileges:true"
+    ];
+    autoStart = true;
+  };
 }
