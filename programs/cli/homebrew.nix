@@ -35,7 +35,6 @@
       "macfuse"
       "unity-hub"
       "vlc"
-      "whatsapp"
     ];
     masApps = {
       Infuse = 1136220934;
@@ -46,6 +45,7 @@
       "Xcode" = 497799835;
       "Parcel - Delivery Tracker" = 639968404;
       "Amphetamine" = 937984704;
+      "WhatsApp Messenger" = 310633997;
     };
   };
 }
