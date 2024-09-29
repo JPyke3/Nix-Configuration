@@ -1,6 +1,6 @@
 {...}: {
   services.jellyseerr = {
-    enable = true;
-    openFirewall = true;
+    enable = false;
+    # openFirewall = true;
   };
 }

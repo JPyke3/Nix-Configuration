@@ -17,9 +17,6 @@ in {
       "invidious.${domain}" = {
         forceSSL = true;
         useACMEHost = "${domain}";
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:4664";
-        };
       };
       "sonarr.${domain}" = {
         forceSSL = true;

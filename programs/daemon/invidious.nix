@@ -7,8 +7,9 @@
 
   services.invidious = {
     enable = true;
+    nginx.enable = true;
     port = 4664;
-    http3-ytproxy.enable = true;
+    domain = "invidious.pyk.ee";
     settings.db = {
       user = "invidious";
       dbname = "invidious";
