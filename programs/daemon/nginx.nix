@@ -1,4 +1,8 @@
-{config, ...}: let
+{
+  config,
+  lib,
+  ...
+}: let
   domain = "pyk.ee";
 in {
   services.nginx = {
@@ -16,6 +20,7 @@ in {
       };
       "invidious.${domain}" = {
         forceSSL = true;
+        enableACME = lib.mkForce false;
         useACMEHost = "${domain}";
       };
       "sonarr.${domain}" = {
