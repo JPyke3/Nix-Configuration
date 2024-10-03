@@ -35,7 +35,7 @@
       "macfuse"
       "unity-hub"
       "vlc"
-      "jagex"
+      "runelite"
     ];
     masApps = {
       Infuse = 1136220934;
