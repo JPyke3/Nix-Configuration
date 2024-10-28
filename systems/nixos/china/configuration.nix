@@ -28,7 +28,7 @@
     ../../../programs/daemon/nextcloud.nix
     ../../../programs/daemon/acme.nix
     ../../../programs/daemon/nginx.nix
-    ../../../programs/daemon/immich.nix
+    # ../../../programs/daemon/immich.nix
   ];
 
   # jpyke3.scheduleReboot = {

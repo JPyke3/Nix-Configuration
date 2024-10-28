@@ -53,9 +53,6 @@
     base16 = {
       url = "github:SenchoPens/base16.nix";
     };
-    immich = {
-      url = "github:jvanbruegge/nixpkgs/immich";
-    };
     stylix = {
       url = "github:danth/stylix/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -85,7 +82,6 @@
     stylix,
     spicetify-nix,
     vpnconfinement,
-    immich,
     ...
   } @ inputs: {
     # Desktop PC
