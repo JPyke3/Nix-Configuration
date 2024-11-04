@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   home.packages = [
     pkgs.steam
-    pkgs.armcord
+    pkgs.legcord
   ];
 
   imports = [

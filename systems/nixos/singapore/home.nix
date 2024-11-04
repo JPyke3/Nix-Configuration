@@ -9,7 +9,7 @@
     pkgs.swww
     pkgs.waybar
     pkgs.steam
-    pkgs.armcord
+    pkgs.legcord
     pkgs.runelite
     pkgs.obsidian
     pkgs.texliveFull
