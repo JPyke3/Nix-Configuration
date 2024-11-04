@@ -55,7 +55,6 @@ in {
     ../../programs/cli/nvim/nvim.nix
     ../../programs/cli/lf.nix
     ../../programs/cli/nix-index.nix
-    ../../programs/cli/spicetify.nix
   ];
 
   sops = {
