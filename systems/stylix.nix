@@ -15,11 +15,11 @@ in {
       name = "FiraMono Nerd Font";
     };
     sansSerif = {
-      package = pkgs.noto-fonts-cjk;
+      package = pkgs.noto-fonts-cjk-sans;
       name = "Noto Sans CJK";
     };
     serif = {
-      package = pkgs.noto-fonts-cjk;
+      package = pkgs.noto-fonts-cjk-sans;
       name = "Noto Serif CJK";
     };
     sizes = {
