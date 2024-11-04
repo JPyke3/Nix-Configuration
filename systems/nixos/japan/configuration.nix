@@ -5,6 +5,10 @@
     ./syncthing.nix
   ];
 
+  systemPackages = with pkgs; [
+    steamdeck-firmware
+  ];
+
   jovian = {
     devices.steamdeck = {
       enable = true;
