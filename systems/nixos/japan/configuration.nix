@@ -9,14 +9,11 @@
     ./syncthing.nix
   ];
 
-  systemPackages = with pkgs; [
-    steamdeck-firmware
-  ];
-
   jovian = {
     devices.steamdeck = {
       enable = true;
       enableGyroDsuService = true;
+      autoUpdate = true;
     };
 
     decky-loader = {
