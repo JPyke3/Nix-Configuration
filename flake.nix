@@ -131,8 +131,6 @@
         nur.nixosModules.nur
         ./systems/nixos/configuration.nix
         ./systems/nixos/japan/configuration.nix
-        stylix.nixosModules.stylix
-        ./systems/stylix.nix
         home-manager-unstable.nixosModules.home-manager
         {
           home-manager.users.jacobpyke = import ./systems/nixos/japan/home.nix;
