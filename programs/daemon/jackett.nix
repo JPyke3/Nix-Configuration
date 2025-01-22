@@ -4,4 +4,4 @@
     openFirewall = true;
     group = "media-server";
   };
-};
+}
