@@ -28,6 +28,12 @@
     options = ["fmask=0022" "dmask=0022"];
   };
 
+  fileSystems."/media" = {
+    device = "192.168.88.11:/volume1/media";
+    fsType = "nfs";
+    options = ["x-systemd.automount" "noauto"];
+  };
+
   swapDevices = [];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
