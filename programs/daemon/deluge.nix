@@ -1,6 +1,6 @@
 {...}: {
   services.deluge = {
-    enable = true;
+    enable = false;
     openFirewall = true;
     group = "media-server";
     web = {
