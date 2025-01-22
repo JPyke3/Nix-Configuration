@@ -3,6 +3,7 @@
     enable = true;
     openFirewall = true;
     group = "media-server";
+    declarative = true;
     web = {
       enable = true;
       openFirewall = true;
