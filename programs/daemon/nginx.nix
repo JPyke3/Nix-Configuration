@@ -23,6 +23,13 @@ in {
         enableACME = lib.mkForce false;
         useACMEHost = "${domain}";
       };
+      "home-assistant.${domain}" = {
+        forceSSL = true;
+        useACMEHost = "${domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8123";
+        };
+      };
       "sonarr.${domain}" = {
         forceSSL = true;
         useACMEHost = "${domain}";
@@ -69,14 +76,7 @@ in {
         forceSSL = true;
         useACMEHost = "${domain}";
         locations."/" = {
-          proxyPass = "http://127.0.0.1:8096";
-        };
-      };
-      "searx.${domain}" = {
-        forceSSL = true;
-        useACMEHost = "${domain}";
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:2082";
+          proxyPass = "http://192.168.88.11:8096";
         };
       };
       "pihole.${domain}" = {
