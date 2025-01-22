@@ -7,5 +7,8 @@
       enable = true;
       openFirewall = true;
     };
+    config = {
+      allow_remote = true;
+    };
   };
 }
