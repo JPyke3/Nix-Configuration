@@ -9,8 +9,6 @@
   imports = [
     inputs.vpnconfinement.nixosModules.default
     ./hardware-configuration.nix
-    ../../../programs/daemon/jellyfin.nix
-    ../../../programs/daemon/jellyseerr.nix
     ../../../programs/daemon/sonarr.nix
     ../../../programs/daemon/radarr.nix
     ../../../programs/daemon/bazarr.nix
@@ -19,16 +17,9 @@
     ../../../programs/daemon/lidarr.nix
     ../../../programs/daemon/deluge.nix
     ../../../programs/daemon/transmission.nix
-    ../../../programs/daemon/gitea.nix
-    ../../../programs/daemon/firefly-iii.nix
-    ../../../programs/daemon/pihole.nix
-    ../../../programs/daemon/invidious.nix
-    ../../../programs/daemon/searxng.nix
     ../../../programs/daemon/vaultwarden.nix
-    ../../../programs/daemon/nextcloud.nix
     ../../../programs/daemon/acme.nix
     ../../../programs/daemon/nginx.nix
-    # ../../../programs/daemon/immich.nix
   ];
 
   # jpyke3.scheduleReboot = {
