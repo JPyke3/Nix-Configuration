@@ -23,6 +23,13 @@ in {
         enableACME = lib.mkForce false;
         useACMEHost = "${domain}";
       };
+      "unifi.${domain}" = {
+        forceSSL = true;
+        useACMEHost = "${domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8443";
+        };
+      };
       "home-assistant.${domain}" = {
         forceSSL = true;
         useACMEHost = "${domain}";
