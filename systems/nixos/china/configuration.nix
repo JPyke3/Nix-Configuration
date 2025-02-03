@@ -9,7 +9,6 @@
   imports = [
     inputs.vpnconfinement.nixosModules.default
     ./hardware-configuration.nix
-    ../../../programs/daemon/jackett.nix
     ../../../programs/daemon/sonarr.nix
     ../../../programs/daemon/radarr.nix
     ../../../programs/daemon/bazarr.nix
