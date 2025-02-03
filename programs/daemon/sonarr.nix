@@ -3,6 +3,7 @@
     enable = true;
     openFirewall = true;
     group = "media-server";
+    package = pkgs.sonarr.overrideAttrs (lib.const {doCheck = false;});
   };
 
   systemd.services.sonarr.serviceConfig = {
