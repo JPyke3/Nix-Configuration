@@ -6,7 +6,7 @@
 
   vpnnamespaces.wg = {
     enable = true;
-    wireguardConfigFile = "../.secrets/nord/wg0.conf";
+    wireguardConfigFile = "/home/jacobpyke/.secrets/nord/wg0.conf";
     accessibleFrom = [
       "192.168.1.0/24"
       "10.0.0.0/8"
