@@ -21,7 +21,7 @@
     ../../../programs/daemon/acme.nix
     ../../../programs/daemon/home-assistant.nix
     ../../../programs/daemon/nginx.nix
-    ../../../programs/daemon/unifi.nix
+    #    ../../../programs/daemon/unifi.nix
   ];
 
   # jpyke3.scheduleReboot = {
