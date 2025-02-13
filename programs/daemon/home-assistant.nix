@@ -11,6 +11,8 @@
     };
   };
 
+  services.mosquitto.enable = true;
+
   networking.firewall.allowedTCPPortRanges = [
     {
       from = 100;
