@@ -3,7 +3,7 @@
   lib,
   ...
 }: let
-  domain = "pyk.ee";
+  domain = "pyk.ee";nginx
 in {
   services.nginx = {
     enable = true;
@@ -30,7 +30,7 @@ in {
           proxyPass = "http://127.0.0.1:8443";
         };
       };
-      "home-assistant.${domain}" = {
+      "ha.${domain}" = {
         forceSSL = true;
         useACMEHost = "${domain}";
         locations."/" = {
