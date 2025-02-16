@@ -11,21 +11,6 @@
           "--device=/dev/serial/by-id/usb-Itead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_V2_24fdb0c68739ef1181b35ef454516304-if00-port0:/dev/ttyUSB0"
         ];
       };
-      silabs-multipan = {
-        image = "b2un0/silabs-multipan-docker:latest";
-        extraOptions = [
-          "--network=host"
-          "--cap-add=SYS_ADMIN"
-          "--cap-add=NET_ADMIN"
-        ];
-        volumes = [
-          "multipan:/data"
-        ];
-        environment = {
-          DEVICE = "/dev/ttyUSB0"; # Update this to your device path
-          BACKBONE_IF = "eth0"; # Update this to your network interface
-        };
-      };
     };
   };
 
