@@ -3,7 +3,7 @@
   lib,
   ...
 }: let
-  domain = "pyk.ee";nginx
+  domain = "pyk.ee";
 in {
   services.nginx = {
     enable = true;
