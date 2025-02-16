@@ -13,7 +13,6 @@
       };
       silabs-multipan = {
         image = "ghcr.io/b2un0/silabs-multipan-docker:latest";
-        autoStart = true;
         extraOptions = [
           "--network=host"
           "--cap-add=SYS_ADMIN"
