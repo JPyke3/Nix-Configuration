@@ -15,8 +15,8 @@
         image = "ghcr.io/b2un0/silabs-multipan-docker:latest";
         autoStart = true;
         privileged = true;
-        network = "host";
         extraOptions = [
+          "--network=host"
           "--cap-add=SYS_ADMIN"
           "--cap-add=NET_ADMIN"
         ];
