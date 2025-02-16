@@ -12,7 +12,7 @@
         ];
       };
       silabs-multipan = {
-        image = "ghcr.io/b2un0/silabs-multipan-docker:latest";
+        image = "b2un0/silabs-multipan-docker:latest";
         extraOptions = [
           "--network=host"
           "--cap-add=SYS_ADMIN"
