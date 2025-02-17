@@ -19,7 +19,6 @@
     ../../../programs/daemon/transmission.nix
     ../../../programs/daemon/vaultwarden.nix
     ../../../programs/daemon/acme.nix
-    ../../../programs/daemon/home-assistant.nix
     ../../../programs/daemon/nginx.nix
     ../../../programs/daemon/matter.nix
     #    ../../../programs/daemon/unifi.nix
