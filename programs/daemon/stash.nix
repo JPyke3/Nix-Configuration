@@ -7,11 +7,11 @@
         volumes = [
           "/etc/localtime:/etc/localtime:ro"
           "/adult:/data"
-          "stash/config:/root/.stash"
-          "stash/metadata:/metadata"
-          "stash/cache:/cache"
-          "stash/blobs:/blobs"
-          "stash/generated:/generated"
+          "stashConfig:/root/.stash"
+          "stashMetadata:/metadata"
+          "stashCache:/cache"
+          "stashBlobs:/blobs"
+          "stashGenerated:/generated"
         ];
         environment = {
           STASH_STASH = "/data/";
