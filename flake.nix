@@ -149,6 +149,7 @@
         nur.nixosModules.nur
         ./systems/nixos/configuration.nix
         ./systems/nixos/china/configuration.nix
+        inputs.nixpkgs-unstable.nixosModules.whisparr
         home-manager.nixosModules.home-manager
         {
           home-manager.users.jacobpyke = import ./systems/nixos/china/home.nix;
