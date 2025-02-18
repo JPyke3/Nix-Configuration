@@ -21,9 +21,6 @@
           STASH_PORT = "9999";
         };
         ports = ["9999:9999"];
-        extraOptions = [
-          "--restart=unless-stopped"
-        ];
       };
     };
   };
