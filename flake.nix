@@ -78,7 +78,6 @@
     nix-darwin,
     nixpkgs-darwin,
     nur,
-    kmonad,
     stylix,
     spicetify-nix,
     vpnconfinement,
