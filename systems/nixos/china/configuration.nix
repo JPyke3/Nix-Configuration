@@ -5,9 +5,15 @@
   pkgs,
   inputs,
   ...
-}: {
+}: let
+  unstable = import inputs.unstable {
+    system = "x86_64-linux";
+    config.allowUnfree = true; # Enable if needed
+  };
+in {
   imports = [
     inputs.vpnconfinement.nixosModules.default
+    <unstable/modules/services/misc/whisparr.nix>
     ./hardware-configuration.nix
     ../../../programs/daemon/sonarr.nix
     ../../../programs/daemon/radarr.nix
@@ -21,6 +27,7 @@
     ../../../programs/daemon/acme.nix
     ../../../programs/daemon/nginx.nix
     ../../../programs/daemon/matter.nix
+    ../../../programs/daemon/whisparr.nix
     #    ../../../programs/daemon/unifi.nix
   ];
 
