@@ -23,6 +23,7 @@
     ../../../programs/daemon/nginx.nix
     ../../../programs/daemon/matter.nix
     ../../../programs/daemon/whisparr.nix
+    ../../../programs/daemon/stash.nix
     #    ../../../programs/daemon/unifi.nix
   ];
 
