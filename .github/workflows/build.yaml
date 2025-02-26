@@ -3,8 +3,35 @@ on:
   pull_request:
   push:
 jobs:
-  tests:
+  start-runner:
+    timeout-minutes: 5              # normally it only takes 1-2 minutes
+    name: Start self-hosted EC2 runner   
     runs-on: ubuntu-latest
+    permissions:
+      actions: write        
+    steps:      
+      - name: Start EC2 runner
+        id: start-ec2-runner
+        uses: NextChapterSoftware/ec2-action-builder@v1.10
+        with:
+          github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          aws_access_key_id: ${{ secrets.DEPLOY_AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.DEPLOY_AWS_SECRET_ACCESS_KEY }}
+          aws_region: "us-west-2"
+          ec2_instance_type: c5a.8xlarge
+          ec2_root_disk_size_gb: "100"
+          ec2_ami_id: ami-008fe2fc65df48dac
+          ec2_iam_instance_profile: AWSInstanceProfile
+          ec2_subnet_id: "subnet-0de957e3a1a79a651"
+          ec2_security_group_id: "sg-080bb88987d22d2a3"
+          ec2_instance_ttl: 40                # Optional (default is 60 minutes)
+          ec2_spot_instance_strategy: SpotOnly
+
+  run-build:
+    timeout-minutes: 1
+    needs:
+      - start-runner
+    runs-on: ${{ github.run_id }}
     steps:
     - uses: actions/checkout@v4
     - uses: cachix/install-nix-action@v25
