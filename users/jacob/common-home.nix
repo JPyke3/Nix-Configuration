@@ -38,7 +38,7 @@ in {
   };
 
   nixpkgs.overlays = [
-    inputs.nur.overlay
+    inputs.nur.overlays.default
   ];
 
   colorScheme = inputs.nix-colors.colorSchemes.catppuccin-frappe;

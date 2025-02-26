@@ -26,7 +26,7 @@
       inputs.nixpkgs.follows = "unstable";
     };
     nix-darwin = {
-      url = "github:LnL7/nix-darwin";
+      url = "github:LnL7/nix-darwin/nix-darwin-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-colors = {
@@ -48,13 +48,13 @@
       inputs.nixpkgs.follows = "unstable";
     };
     kmonad = {
-      url = "git+https://github.com/kmonad/kmonad?submodules=1&dir=nix";
+      url = "github:kmonad/kmonad?dir=nix";
     };
     base16 = {
       url = "github:SenchoPens/base16.nix";
     };
     stylix = {
-      url = "github:danth/stylix/master";
+      url = "github:danth/stylix/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     spicetify-nix = {
