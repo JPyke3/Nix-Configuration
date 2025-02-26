@@ -4,11 +4,11 @@
   nixConfig = {
     extra-substituters = [
       "https://jpyke3.cachix.org"
-	  "https://0uptime.cachix.org"
+      "https://0uptime.cachix.org"
     ];
     extra-trusted-public-keys = [
       "jpyke3.cachix.org-1:SkUkQoQ6WbhSs7SGsMZ22H/DyJ7VNpT4/BaEvTCEQZY="
-	  "0uptime.cachix.org-1:ctw8yknBLg9cZBdqss+5krAem0sHYdISkw/IFdRbYdE="
+      "0uptime.cachix.org-1:ctw8yknBLg9cZBdqss+5krAem0sHYdISkw/IFdRbYdE="
     ];
   };
 
@@ -67,6 +67,10 @@
       url = "github:Maroka-chan/VPN-Confinement";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-rosetta-builder = {
+      url = "github:cpick/nix-rosetta-builder";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -83,6 +87,7 @@
     stylix,
     spicetify-nix,
     vpnconfinement,
+    nix-rosetta-builder,
     ...
   } @ inputs: {
     # Desktop PC
@@ -169,6 +174,7 @@
         ./systems/darwin/kmonad.nix
         ./systems/darwin/configuration.nix
         ./systems/stylix.nix
+        {nix.linux-builder.enable = true;}
         home-manager.darwinModules.home-manager
         {
           home-manager.backupFileExtension = "backup";
