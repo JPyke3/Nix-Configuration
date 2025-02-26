@@ -18,7 +18,7 @@ jobs:
           aws_access_key_id: ${{ secrets.DEPLOY_AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.DEPLOY_AWS_SECRET_ACCESS_KEY }}
           aws_region: "us-east-2"
-          ec2_instance_type: c5a.8xlarge
+          ec2_instance_type: c5a.12xlarge
           ec2_root_disk_size_gb: "100"
           ec2_ami_id: ami-0cb91c7de36eed2cb
           ec2_subnet_id: "subnet-0de957e3a1a79a651"
