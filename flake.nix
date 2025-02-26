@@ -174,7 +174,7 @@
         ./systems/darwin/kmonad.nix
         ./systems/darwin/configuration.nix
         ./systems/stylix.nix
-        {nix.linux-builder.enable = true;}
+        nix-rosetta-builder.darwinModules.default
         home-manager.darwinModules.home-manager
         {
           home-manager.backupFileExtension = "backup";
