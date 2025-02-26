@@ -13,7 +13,6 @@ in {
     mpv
     slack
     discord
-    teams
     python312Packages.jupytext
     cyberduck
   ];
