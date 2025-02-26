@@ -27,7 +27,6 @@
         image = "ofl0w/stash-vr:latest";
         environment = {
           STASH_GRAPHQL_URL = "http://127.0.0.1:9999/graphql";
-          STASH_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJVbnR3aXN0MjMwNSIsInN1YiI6IkFQSUtleSIsImlhdCI6MTc0MDM3NDk0N30.d_buQJYJJuAc_oBWeGE2ESSeWpdMHXukLa7jBMSTwgM";
         };
         ports = ["9666:9666"];
       };
