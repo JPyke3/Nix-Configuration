@@ -10,6 +10,10 @@
       "jpyke3.cachix.org-1:SkUkQoQ6WbhSs7SGsMZ22H/DyJ7VNpT4/BaEvTCEQZY="
       "0uptime.cachix.org-1:ctw8yknBLg9cZBdqss+5krAem0sHYdISkw/IFdRbYdE="
     ];
+    trusted-users = [
+      "root"
+      "jacobpyke"
+    ];
   };
 
   inputs = {
