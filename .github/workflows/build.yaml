@@ -21,7 +21,7 @@ jobs:
           ec2_instance_type: c5a.8xlarge
           ec2_root_disk_size_gb: "100"
           ec2_ami_id: ami-0cb91c7de36eed2cb
-          ec2_iam_instance_profile: AWSInstanceProfile
+          ec2_iam_instance_profile: EC2GitHubActionsRole
           ec2_subnet_id: "subnet-0de957e3a1a79a651"
           ec2_security_group_id: "sg-080bb88987d22d2a3"
           ec2_instance_ttl: 40                # Optional (default is 60 minutes)
