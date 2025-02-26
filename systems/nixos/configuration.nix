@@ -110,7 +110,6 @@
     htop
     alejandra
     parallel
-    xwaylandvideobridge
     nom
     nvd
     oterm
