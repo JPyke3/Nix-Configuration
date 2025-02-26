@@ -32,6 +32,8 @@ jobs:
       - start-runner
     runs-on: ${{ github.run_id }}
     steps:
+    - run: mkdir -p /home/runner && chmod -R 777 /home/runner
+    - run: echo "HOME=/home/runner" >> $GITHUB_ENV
     - uses: actions/checkout@v4
     - uses: cachix/install-nix-action@v25
       with:
