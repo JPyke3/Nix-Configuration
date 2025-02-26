@@ -111,6 +111,7 @@
 
   services.nix-daemon.enable = true;
   nix.package = pkgs.nix;
+  nix.settings.trusted-users = ["root" "jacobpyke"];
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true; # default shell on catalina
