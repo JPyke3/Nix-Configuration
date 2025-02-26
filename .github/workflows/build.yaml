@@ -27,7 +27,7 @@ jobs:
           ec2_spot_instance_strategy: SpotOnly
 
   run-build:
-    timeout-minutes: 1
+    timeout-minutes: 60
     needs:
       - start-runner
     runs-on: ${{ github.run_id }}
