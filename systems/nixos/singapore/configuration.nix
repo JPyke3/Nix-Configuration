@@ -20,8 +20,6 @@
 
   hardware.opengl = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
     extraPackages = with pkgs; [
       amdvlk
       driversi686Linux.amdvlk
@@ -32,7 +30,6 @@
     pkgs.amdgpu_top
     pkgs.alvr
     pkgs.corectrl
-    config.nur.repos.ataraxiasjel.waydroid-script
   ];
 
   programs.hyprland = {

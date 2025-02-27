@@ -33,6 +33,14 @@
     };
   };
 
+  services.desktopManager.plasma6.enable = true;
+
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    plasma-browser-integration
+    konsole
+    oxygen
+  ];
+
   # Small Hack for the SD Card
   systemd.services.mount-games = {
     description = "Mount /dev/mmcblk0p1 to /games";
@@ -55,7 +63,6 @@
 
   services.xserver = {
     enable = true;
-    desktopManager.plasma6.enable = true;
   };
 
   services.pipewire.enable = true;
