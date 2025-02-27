@@ -29,9 +29,13 @@ in {
   #    /run/current-system/sw/bin/systemctl start --user sops-nix
   #  '';
 
-  home.file."Development".source = config.lib.file.mkOutOfStoreSymlink "/home/jacobpyke/data/Development";
-  home.file."Documents".source = config.lib.file.mkOutOfStoreSymlink "/home/jacobpyke/data/Documents";
-  home.file."Downloads".source = config.lib.file.mkOutOfStoreSymlink "/home/jacobpyke/data/Downloads";
+  home.file = builtins.foldl' (
+    acc: name:
+      acc
+      // lib.optionalAttrs (builtins.pathExists "/home/jacobpyke/data/${name}") {
+        "${name}".source = config.lib.file.mkOutOfStoreSymlink "/home/jacobpyke/data/${name}";
+      }
+  ) {} ["Development" "Documents" "Downloads"];
 
   imports = [
     ../../users/jacob/common-home.nix
