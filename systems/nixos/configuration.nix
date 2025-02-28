@@ -84,6 +84,9 @@
   };
 
   nix.settings.experimental-features = "nix-command flakes";
+  nix.settings.substituters = ["https://jpyke3.cachix.org/"];
+  nix.settings.trusted-substituters = ["https://jpyke3.cachix.org/"];
+  nix.settings.trusted-public-keys = ["jpyke3.cachix.org-1:SkUkQoQ6WbhSs7SGsMZ22H/DyJ7VNpT4/BaEvTCEQZY="];
 
   programs.zsh.enable = true;
 
@@ -97,6 +100,14 @@
       tree
     ];
     hashedPasswordFile = config.sops.secrets."users/jacobpyke/password".path;
+  };
+
+  system.autoUpgrade = {
+    enable = true;
+    allowReboot = false;
+    dates = "03:00";
+    flake = "github:JPyke3/Nix-Configuration";
+    persistent = true;
   };
 
   # List packages installed in system profile. To search, run:

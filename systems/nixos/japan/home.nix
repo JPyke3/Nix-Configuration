@@ -6,6 +6,7 @@
   home.packages = [
     pkgs.steam
     pkgs.legcord
+	pkgs.moonlight-qt
   ];
 
   imports = [
