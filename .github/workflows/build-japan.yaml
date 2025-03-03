@@ -38,13 +38,9 @@ jobs:
     - uses: cachix/install-nix-action@v25
       with:
         nix_path: nixpkgs=channel:nixos-unstable
-    - name: Set up S3 nix cache
-      uses: nix-ocaml/nix-s3-action@v1.0.0
+    - uses: cachix/cachix-action@v14
       with:
-        endpoint: "s3://jpyke3-nix-cache"  # Replace with your actual bucket URL
-        signingKey: "${{ secrets.NIX_S3_SIGNING_KEY }}"
-        awsAccessKeyId: "${{ secrets.WASABI_ACCESS_KEY_ID }}"
-        awsSecretAccessKey: "${{ secrets.WASABI_SECRET_ACCESS_KEY }}"
-        skipPush: "false"  # Set to "true" if you only want to use the cache for pulling builds
-    - run: nix flake check
+        name: jpyke3
+        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
     - run: nix build .#nixosConfigurations.jacob-japan.config.system.build.toplevel
+    - run: nix flake check
