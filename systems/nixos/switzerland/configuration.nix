@@ -27,7 +27,7 @@
 
   services.printing.enable = true;
 
-  #  hardware.opengl = {
+  #  hardware.enable = {
   #    enable = true;
   #    driSupport = true;
   #    driSupport32Bit = true;

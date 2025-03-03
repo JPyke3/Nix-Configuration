@@ -1,5 +1,5 @@
 {config, ...}:
-with config.colorScheme.colors; ''
+with config.colorScheme.palette; ''
   # name: Jacobs Nix Theme
   # author: Jacob Pyke
 

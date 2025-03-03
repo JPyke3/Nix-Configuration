@@ -1,6 +1,6 @@
 {config, ...}: {
   xdg.configFile."hypr/hyprlock.conf" = {
-    text = with config.colorScheme.colors; ''
+    text = with config.colorScheme.palette; ''
       # BACKGROUND
       background {
           monitor =

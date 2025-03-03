@@ -14,7 +14,7 @@ in {
         id = 0;
         name = "default";
         isDefault = true;
-        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        packages = with pkgs.nur.repos.rycee.firefox-addons; [
           bitwarden
           ublock-origin
           darkreader
@@ -41,7 +41,7 @@ in {
           "browser.fullscreen.autohide" = false;
           "browser.sessionstore.max_resumed_crashes" = 0;
         };
-        userChrome = with config.colorScheme.colors; ''
+        userChrome = with config.colorScheme.palette; ''
           toolbar#TabsToolbar
           {
           	-moz-appearance: none !important;
