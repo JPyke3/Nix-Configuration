@@ -14,7 +14,7 @@ in {
         id = 0;
         name = "default";
         isDefault = true;
-        packages = with pkgs.nur.repos.rycee.firefox-addons; [
+        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           bitwarden
           ublock-origin
           darkreader
