@@ -8,7 +8,6 @@
 }: {
   imports = [
     inputs.vpnconfinement.nixosModules.default
-    "${inputs.unstable}/nixos/modules/services/misc/whisparr.nix"
     ./hardware-configuration.nix
     ../../../programs/daemon/sonarr.nix
     ../../../programs/daemon/radarr.nix
