@@ -20,6 +20,7 @@
     ../../../programs/daemon/nginx.nix
     ../../../programs/daemon/matter.nix
     ../../../programs/daemon/stash.nix
+    ../../../programs/daemon/mylar.nix
     #    ../../../programs/daemon/unifi.nix
   ];
 
