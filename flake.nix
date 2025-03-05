@@ -69,7 +69,6 @@
     };
     vpnconfinement = {
       url = "github:Maroka-chan/VPN-Confinement";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-rosetta-builder = {
       url = "github:cpick/nix-rosetta-builder";
@@ -94,45 +93,27 @@
     nix-rosetta-builder,
     ...
   } @ inputs: {
-    # Desktop PC
-    nixosConfigurations.jacob-singapore = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = {inherit inputs;};
-      modules = [
-        nur.modules.nixos.default
-        ./systems/nixos/configuration.nix
-        ./systems/nixos/singapore/configuration.nix
-        stylix.nixosModules.stylix
-        ./systems/stylix.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.users.jacobpyke = import ./systems/nixos/singapore/home.nix;
-          home-manager.backupFileExtension = "backup";
-          home-manager.extraSpecialArgs = {
-            inherit inputs;
-            system = "x86_64-linux";
-          };
-        }
-      ];
-    };
-    # Steam Deck LCD
-    nixosConfigurations.jacob-switzerland = unstable.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = {inherit inputs;};
-      modules = [
-        nur.modules.nixos.default
-        ./systems/nixos/configuration.nix
-        ./systems/nixos/switzerland/configuration.nix
-        home-manager-unstable.nixosModules.home-manager
-        {
-          home-manager.users.jacobpyke = import ./systems/nixos/switzerland/home.nix;
-          home-manager.extraSpecialArgs = {
-            inherit inputs;
-            system = "x86_64-linux";
-          };
-        }
-      ];
-    };
+    # Desktop PC (Currently Unused)
+    # nixosConfigurations.jacob-singapore = nixpkgs.lib.nixosSystem {
+    #   system = "x86_64-linux";
+    #   specialArgs = {inherit inputs;};
+    #   modules = [
+    #     nur.modules.nixos.default
+    #     ./systems/nixos/configuration.nix
+    #     ./systems/nixos/singapore/configuration.nix
+    #     stylix.nixosModules.stylix
+    #     ./systems/stylix.nix
+    #     home-manager.nixosModules.home-manager
+    #     {
+    #       home-manager.users.jacobpyke = import ./systems/nixos/singapore/home.nix;
+    #       home-manager.backupFileExtension = "backup";
+    #       home-manager.extraSpecialArgs = {
+    #         inherit inputs;
+    #         system = "x86_64-linux";
+    #       };
+    #     }
+    #   ];
+    # };
     # Steam Deck OLED
     nixosConfigurations.jacob-japan = unstable.lib.nixosSystem {
       system = "x86_64-linux";
