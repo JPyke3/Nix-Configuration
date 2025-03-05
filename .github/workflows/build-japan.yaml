@@ -24,7 +24,7 @@ jobs:
           ec2_subnet_id: "subnet-e54cb9ad"
           ec2_security_group_id: "sg-c4dfe0b2"
           ec2_instance_ttl: 40                # Optional (default is 60 minutes)
-          ec2_spot_instance_strategy: MaxPerformance
+          ec2_spot_instance_strategy: BestEffort
 
   run-build:
     timeout-minutes: 60
