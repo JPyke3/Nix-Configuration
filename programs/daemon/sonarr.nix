@@ -29,7 +29,7 @@
         volumes = [
           "sonarrYtdlpConfig:/config"
           "/media/TV Shows:/sonarr_root"
-          "/sonarrYtdlpLogs:/logs"
+          "sonarrYtdlpLogs:/logs"
         ];
         extraOptions = [
           "--network=host"
