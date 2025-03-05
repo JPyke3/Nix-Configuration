@@ -20,4 +20,22 @@
     "dotnet-sdk-6.0.428"
     "dotnet-sdk-wrapped-6.0.428"
   ];
+
+  virtualisation.oci-containers = {
+    backend = "podman";
+    containers = {
+      sonarr_yt-dlp = {
+        image = "bdwinanto/sonarr_yt-dlp:latest";
+        container_name = "sonarr_yt-dlp";
+        volumes = [
+          "sonarrYtdlpConfig:/config"
+          "/media/TV Shows:/sonarr_root"
+          "/sonarrYtdlpLogs:/logs"
+        ];
+        extraOptions = [
+          "--network=host"
+        ];
+      };
+    };
+  };
 }
