@@ -28,7 +28,7 @@
         image = "jpyke3/sonarr_youtubedl:latest";
         volumes = [
           "sonarrYtdlpConfig:/config"
-          "/media/TV Shows:/sonarr_root"
+          "/media/TV Shows:/sonarr_root/media/TV Shows"
           "sonarrYtdlpLogs:/logs"
         ];
         extraOptions = [
