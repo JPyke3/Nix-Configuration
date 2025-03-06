@@ -25,7 +25,7 @@
     backend = "podman";
     containers = {
       sonarr_yt-dlp = {
-        image = "jpyke3/sonarr_yt-dlp:latest";
+        image = "jpyke3/sonarr_youtubedl:latest";
         volumes = [
           "sonarrYtdlpConfig:/config"
           "/media/TV Shows:/sonarr_root"
