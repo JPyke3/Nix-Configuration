@@ -23,6 +23,13 @@ in {
         enableACME = lib.mkForce false;
         useACMEHost = "${domain}";
       };
+      "komga.${domain}" = {
+        forceSSL = true;
+        useACMEHost = "${domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:26500";
+        };
+      };
       "unifi.${domain}" = {
         forceSSL = true;
         useACMEHost = "${domain}";
