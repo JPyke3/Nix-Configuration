@@ -1,7 +1,6 @@
-{...}:
-{
-	services.komga = {
-		enable = true;
-		port = 26500;
-	};
+{...}: {
+  services.komga = {
+    enable = true;
+    port = 26500;
+  };
 }

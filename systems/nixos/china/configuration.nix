@@ -21,7 +21,7 @@
     ../../../programs/daemon/matter.nix
     ../../../programs/daemon/stash.nix
     ../../../programs/daemon/mylar.nix
-	../../../programs/daemon/komga.nix
+    ../../../programs/daemon/komga.nix
     #    ../../../programs/daemon/unifi.nix
   ];
 
@@ -86,7 +86,7 @@
       "jacobpyke"
       "bazarr"
       "immich"
-	  "komga"
+      "komga"
     ];
   };
 
