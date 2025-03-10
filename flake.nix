@@ -4,11 +4,11 @@
   nixConfig = {
     extra-substituters = [
       "https://jpyke3.cachix.org"
-	  "s3://jpyke3-nix-cache"
+      "s3://jpyke3-nix-cache"
     ];
     extra-trusted-public-keys = [
       "jpyke3.cachix.org-1:SkUkQoQ6WbhSs7SGsMZ22H/DyJ7VNpT4/BaEvTCEQZY="
-	  "jpyke3-nix-cache:3rgaOBR/W59xxQ7Mt+LOHJWw84LRsS/Lzd3gTjEFidg="
+      "jpyke3-nix-cache:3rgaOBR/W59xxQ7Mt+LOHJWw84LRsS/Lzd3gTjEFidg="
     ];
     trusted-users = [
       "root"
@@ -74,6 +74,9 @@
       url = "github:cpick/nix-rosetta-builder";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-apple-silicon = {
+      url = "github:oliverbestmann/nixos-apple-silicon";
+    };
   };
 
   outputs = {
@@ -91,6 +94,7 @@
     spicetify-nix,
     vpnconfinement,
     nix-rosetta-builder,
+    nixos-apple-silicon,
     ...
   } @ inputs: {
     # Desktop PC (Currently Unused)
@@ -114,6 +118,28 @@
     #     }
     #   ];
     # };
+    # Asahi Linux
+    nixosConfigurations.jacob-austria = unstable.lib.nixosSystem {
+      system = "aarch64-linux";
+      specialArgs = {inherit inputs;};
+      modules = [
+        nur.modules.nixos.default
+        ./systems/nixos/configuration.nix
+        ./systems/nixos/austria/configuration.nix
+        nixos-apple-silicon.nixosModules.default
+        stylix.nixosModules.stylix
+        ./systems/stylix.nix
+        home-manager-unstable.nixosModules.home-manager
+        {
+          home-manager.users.jacobpyke = import ./systems/nixos/austria/home.nix;
+          home-manager.backupFileExtension = "backup";
+          home-manager.extraSpecialArgs = {
+            inherit inputs;
+            system = "aarch64-linux";
+          };
+        }
+      ];
+    };
     # Steam Deck OLED
     nixosConfigurations.jacob-japan = unstable.lib.nixosSystem {
       system = "x86_64-linux";

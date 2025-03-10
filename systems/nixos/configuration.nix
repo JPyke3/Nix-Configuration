@@ -115,7 +115,6 @@
   environment.systemPackages = with pkgs; [
     vim
     wget
-    kitty
     wofi
     blueman
     htop
@@ -125,6 +124,7 @@
     nvd
     oterm
     nh
+    attic-client
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

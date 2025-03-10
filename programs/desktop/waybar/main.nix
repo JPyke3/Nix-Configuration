@@ -12,15 +12,22 @@
     '';
 in {
   xdg.configFile."waybar/style.css".text = import ./style.nix {inherit config;};
+
+  home.packages = with pkgs; [
+    material-design-icons
+    lexend
+    nerd-fonts.iosevka
+  ];
+
   programs.waybar = {
     enable = true;
     package = pkgs.waybar;
     settings = {
       mainBar = {
         layer = "top";
-        position = "right";
+        position = "top";
         spacing = 6;
-        width = 16;
+        height = 16;
         fixed-center = false;
         margin-left = null;
         margin-top = null;
@@ -30,11 +37,8 @@ in {
         modules-left = [
           "custom/search"
           "hyprland/workspaces"
-          "custom/lock"
-          "backlight"
-          "battery"
         ];
-        modules-right = ["custom/weather" "pulseaudio" "network" "clock" "custom/power"];
+        modules-right = ["battery" "backlight" "custom/weather" "pulseaudio" "network" "clock" "custom/power"];
         "hyprland/workspaces" = {
           on-click = "activate";
           format = "{icon}";
@@ -58,48 +62,27 @@ in {
           on-click = "sh -c 'run-as-service $(tofi-drun)'";
         };
 
-        "custom/weather" = let
-          weather = pkgs.stdenv.mkDerivation {
-            name = "waybar-wttr";
-            buildInputs = [
-              (pkgs.python39.withPackages
-                (pythonPackages: with pythonPackages; [requests pyquery]))
-            ];
-            unpackPhase = "true";
-            installPhase = ''
-              mkdir -p $out/bin
-              cp ${./weather.py} $out/bin/weather
-              chmod +x $out/bin/weather
-            '';
-          };
-        in {
-          format = "{}";
-          tooltip = true;
-          interval = 30;
-          exec = "${weather}/bin/weather";
-          return-type = "json";
-        };
-        "custom/crypto" = let
-          crypto = pkgs.stdenv.mkDerivation {
-            name = "waybar-wttr";
-            buildInputs = [
-              (pkgs.python39.withPackages
-                (pythonPackages: with pythonPackages; [requests]))
-            ];
-            unpackPhase = "true";
-            installPhase = ''
-              mkdir -p $out/bin
-              cp ${./crypto.py} $out/bin/crypto
-              chmod +x $out/bin/crypto
-            '';
-          };
-        in {
-          format = "{}";
-          tooltip = true;
-          interval = 30;
-          exec = "${crypto}/bin/crypto";
-          return-type = "json";
-        };
+        # "custom/weather" = let
+        #   weather = pkgs.stdenv.mkDerivation {
+        #     name = "waybar-wttr";
+        #     buildInputs = [
+        #       (pkgs.python39.withPackages
+        #         (pythonPackages: with pythonPackages; [requests pyquery]))
+        #     ];
+        #     unpackPhase = "true";
+        #     installPhase = ''
+        #       mkdir -p $out/bin
+        #       cp ${./weather.py} $out/bin/weather
+        #       chmod +x $out/bin/weather
+        #     '';
+        #   };
+        # in {
+        #   format = "{}";
+        #   tooltip = true;
+        #   interval = 30;
+        #   exec = "${weather}/bin/weather";
+        #   return-type = "json";
+        # };
         "custom/vpn" = {
           format = " VPN {}";
           tooltip = true;
@@ -133,7 +116,7 @@ in {
           format = "󰐥";
         };
         clock = {
-          format = "{:%H\n%M}";
+          format = "{:%H:%M}";
           tooltip-format = ''
             <big>{:%Y %B}</big>
             <tt><small>{calendar}</small></tt>'';
@@ -160,7 +143,7 @@ in {
           };
         };
         backlight = {
-          format = "{icon}  {percent}%";
+          format = "{icon}";
           format-icons = ["" "" "" "" "" "" "" "" ""];
         };
         battery = {
@@ -168,8 +151,8 @@ in {
             warning = 30;
             critical = 15;
           };
-          format = "{icon} {capacity}% 󱐋{power}";
-          format-charging = "󰚥{icon} {capacity}% 󱐋{power}";
+          format = "{icon}";
+          format-charging = "󰚥{icon}";
           format-alt = "{icon} {capacity}%";
           format-icons = ["󰂃" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
         };

@@ -17,7 +17,7 @@ in
       border-radius: 0px;
       color: #${base08};
       box-shadow: 2px 3px 2px 2px #151515;
-      font-size: 15px;
+      font-size: 8px;
       transition-property: background-color;
       transition-duration: 0.5s;
     }

@@ -15,7 +15,7 @@
           PGID = "1000";
           TZ = "Etc/UTC";
         };
-		extraOptions = [ "--network=host" ];
+        extraOptions = ["--network=host"];
         ports = ["8090:8090"];
       };
     };

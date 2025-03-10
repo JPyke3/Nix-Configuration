@@ -1,7 +1,4 @@
-{
-  config,
-  ...
-}: {
+{config, ...}: {
   sops.secrets."programs/syncthing/guipassword" = {};
 
   services = {

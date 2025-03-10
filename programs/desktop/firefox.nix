@@ -5,7 +5,7 @@
 }: {
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox-bin;
+    package = pkgs.firefox;
     profiles = {
       default = {
         id = 0;

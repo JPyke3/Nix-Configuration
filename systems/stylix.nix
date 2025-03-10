@@ -11,7 +11,7 @@ in {
 
   stylix.fonts = {
     monospace = {
-      package = pkgs.nerdfonts.override {fonts = ["FiraMono"];};
+      package = pkgs.nerd-fonts.fira-mono;
       name = "FiraMono Nerd Font";
     };
     sansSerif = {
@@ -24,6 +24,7 @@ in {
     };
     sizes = {
       terminal = fontSize;
+      desktop = 5;
     };
   };
 }
