@@ -173,7 +173,7 @@ in {
         forceSSL = true;
         useACMEHost = "${domain}";
         locations."/" = {
-          proxyPass = "http://100.99.79.19:8096"; # Mac Mini via Tailscale
+          proxyPass = "http://192.168.88.13:8096"; # Mac Mini
         };
       };
       "bazarr.${domain}" = {
