@@ -1,6 +1,9 @@
-{ config, pkgs, ... }:
-let
-	domain = "pyk.ee";
+{
+  config,
+  pkgs,
+  ...
+}: let
+  domain = "pyk.ee";
 in {
   # NixOS Enabled Services
   services.bazarr = {
@@ -28,12 +31,12 @@ in {
   };
 
   # Containerised Services
-   virtualisation.oci-containers = {
+  virtualisation.oci-containers = {
     backend = "podman";
     containers = {
       sonarr-tv = {
         image = "linuxserver/sonarr";
-        ports = [ "8989:3301" ];
+        ports = ["8989:3301"];
         volumes = [
           "/var/lib/sonarr-tv/config:/config"
           "/media/TV Shows/Regular:/tv"
@@ -47,7 +50,7 @@ in {
 
       sonarr-anime = {
         image = "linuxserver/sonarr";
-        ports = [ "8989:3302" ];
+        ports = ["8989:3302"];
         volumes = [
           "/var/lib/sonarr-anime/config:/config"
           "/media/TV Shows/Anime:/tv"
@@ -61,7 +64,7 @@ in {
 
       recyclarr = {
         image = "ghcr.io/recyclarr/recyclarr";
-        ports = [ "8989:3303" ];
+        ports = ["8989:3303"];
         volumes = [
           "/var/lib/recyclarr/config:/config"
         ];
@@ -69,7 +72,7 @@ in {
 
       radarr-movies = {
         image = "linuxserver/radarr";
-        ports = [ "7878:3304" ];
+        ports = ["7878:3304"];
         volumes = [
           "/var/lib/radarr-movies/config:/config"
           "/media/Movies/Regular:/movies"
@@ -83,7 +86,7 @@ in {
 
       radarr-anime = {
         image = "linuxserver/radarr";
-        ports = [ "7879:3305" ];
+        ports = ["7879:3305"];
         volumes = [
           "/var/lib/radarr-anime/config:/config"
           "/media/Movies/Anime:/movies"
@@ -156,4 +159,3 @@ in {
     };
   };
 }
-
