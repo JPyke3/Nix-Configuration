@@ -44,55 +44,6 @@ in {
           proxyPass = "http://127.0.0.1:8123";
         };
       };
-      "sonarr.${domain}" = {
-        forceSSL = true;
-        useACMEHost = "${domain}";
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:8989";
-        };
-      };
-      "jackett.${domain}" = {
-        forceSSL = true;
-        useACMEHost = "${domain}";
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:9117";
-        };
-      };
-      "radarr.${domain}" = {
-        forceSSL = true;
-        useACMEHost = "${domain}";
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:7878";
-        };
-      };
-      "prowlarr.${domain}" = {
-        forceSSL = true;
-        useACMEHost = "${domain}";
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:9696";
-        };
-      };
-      "tdarr.${domain}" = {
-        forceSSL = true;
-        useACMEHost = "${domain}";
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:8265";
-        };
-      };
-      "jellyseerr.${domain}" = {
-        forceSSL = true;
-        useACMEHost = "${domain}";
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:5055";
-        };
-      };
-      "jellyfin.${domain}" = {
-        forceSSL = true;
-        useACMEHost = "${domain}";
-        locations."/" = {
-          proxyPass = "http://192.168.88.11:8096";
-        };
-      };
       "pihole.${domain}" = {
         forceSSL = true;
         useACMEHost = "${domain}";
@@ -112,13 +63,6 @@ in {
         useACMEHost = "${domain}";
         locations."/" = {
           proxyPass = "http://127.0.0.1:9091";
-        };
-      };
-      "bazarr.${domain}" = {
-        forceSSL = true;
-        useACMEHost = "${domain}";
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:6767";
         };
       };
       "vaultwarden.${domain}" = {
