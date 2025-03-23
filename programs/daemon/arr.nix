@@ -30,6 +30,14 @@ in {
     };
   };
 
+  systemd.tmpfiles.rules = [
+    "d /var/lib/sonarr-tv/config 0770 jacobpyke users -"
+    "d /var/lib/sonarr-anime/config 0770 jacobpyke users -"
+    "d /var/lib/radarr-movies/config 0770 jacobpyke users -"
+    "d /var/lib/radarr-anime/config 0770 jacobpyke users -"
+    "d /var/lib/recyclarr/config 0770 jacobpyke users -"
+  ];
+
   # Containerised Services
   virtualisation.oci-containers = {
     backend = "podman";
