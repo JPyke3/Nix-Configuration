@@ -30,6 +30,7 @@ in {
     };
   };
 
+  # Create the config directories if they don't exist
   systemd.tmpfiles.rules = [
     "d /var/lib/sonarr-tv/config 0770 jacobpyke users -"
     "d /var/lib/sonarr-anime/config 0770 jacobpyke users -"
@@ -126,14 +127,28 @@ in {
         forceSSL = true;
         useACMEHost = "${domain}";
         locations."/" = {
-          proxyPass = "http://127.0.0.1:3001";
+          proxyPass = "http://127.0.0.1:3301";
         };
       };
       "sonarr-anime.${domain}" = {
         forceSSL = true;
         useACMEHost = "${domain}";
         locations."/" = {
-          proxyPass = "http://127.0.0.1:3002";
+          proxyPass = "http://127.0.0.1:3302";
+        };
+      };
+      "radarr-regular.${domain}" = {
+        forceSSL = true;
+        useACMEHost = "${domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:3304";
+        };
+      };
+      "radarr-anime.${domain}" = {
+        forceSSL = true;
+        useACMEHost = "${domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:3305";
         };
       };
       "jackett.${domain}" = {
