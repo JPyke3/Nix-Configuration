@@ -12,11 +12,11 @@ in {
     enable = true;
     openFirewall = true;
   };
-  services.jackett = {
-    enable = true;
-    openFirewall = true;
-    group = "media-server";
-  };
+  # services.jackett = {
+  #   enable = true;
+  #   openFirewall = true;
+  #   group = "media-server";
+  # };
   services.deluge = {
     enable = true;
     openFirewall = true;
