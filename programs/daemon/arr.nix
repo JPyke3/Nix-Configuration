@@ -74,6 +74,7 @@ in {
       recyclarr = {
         image = "ghcr.io/recyclarr/recyclarr";
         ports = ["3303:8989"];
+		user = "1000:1000"
         volumes = [
           "/var/lib/recyclarr/config:/config"
         ];
