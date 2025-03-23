@@ -48,7 +48,7 @@ in {
         volumes = [
           "/var/lib/sonarr-tv/config:/config"
           "/media/TV Shows/Regular:/tv"
-          "/Media/Downloads:/downloads"
+          "/media/Downloads:/downloads"
         ];
         environment = {
           PUID = "1000";
@@ -62,7 +62,7 @@ in {
         volumes = [
           "/var/lib/sonarr-anime/config:/config"
           "/media/TV Shows/Anime:/tv"
-          "/Media/Downloads:/downloads"
+          "/media/Downloads:/downloads"
         ];
         environment = {
           PUID = "1000";
@@ -84,7 +84,7 @@ in {
         volumes = [
           "/var/lib/radarr-movies/config:/config"
           "/media/Movies/Regular:/movies"
-          "/Media/Downloads:/downloads"
+          "/media/Downloads:/downloads"
         ];
         environment = {
           PUID = "1000";
@@ -98,7 +98,7 @@ in {
         volumes = [
           "/var/lib/radarr-anime/config:/config"
           "/media/Movies/Anime:/movies"
-          "/Media/Downloads:/downloads"
+          "/media/Downloads:/downloads"
         ];
         environment = {
           PUID = "1000";
