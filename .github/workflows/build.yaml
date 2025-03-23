@@ -42,5 +42,5 @@ jobs:
       with:
         name: jpyke3
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-    - run: nix flake check
+        # - run: nix flake check https://github.com/NixOS/nix/issues/6398
     - run: nix build .#nixosConfigurations.jacob-china.config.system.build.toplevel
