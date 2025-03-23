@@ -78,6 +78,9 @@ in {
         volumes = [
           "/var/lib/recyclarr/config:/config"
         ];
+        extraOptions = [
+          "--network=host"
+        ];
       };
 
       radarr-movies = {
