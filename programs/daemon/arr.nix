@@ -44,7 +44,7 @@ in {
     containers = {
       sonarr-tv = {
         image = "linuxserver/sonarr";
-        ports = ["8989:3301"];
+        ports = ["3301:8989"];
         volumes = [
           "/var/lib/sonarr-tv/config:/config"
           "/media/TV Shows/Regular:/tv"
@@ -58,7 +58,7 @@ in {
 
       sonarr-anime = {
         image = "linuxserver/sonarr";
-        ports = ["8989:3302"];
+        ports = ["3302:8989"];
         volumes = [
           "/var/lib/sonarr-anime/config:/config"
           "/media/TV Shows/Anime:/tv"
@@ -72,7 +72,7 @@ in {
 
       recyclarr = {
         image = "ghcr.io/recyclarr/recyclarr";
-        ports = ["8989:3303"];
+        ports = ["3303:8989"];
         volumes = [
           "/var/lib/recyclarr/config:/config"
         ];
@@ -80,7 +80,7 @@ in {
 
       radarr-movies = {
         image = "linuxserver/radarr";
-        ports = ["7878:3304"];
+        ports = ["3304:7878"];
         volumes = [
           "/var/lib/radarr-movies/config:/config"
           "/media/Movies/Regular:/movies"
@@ -94,7 +94,7 @@ in {
 
       radarr-anime = {
         image = "linuxserver/radarr";
-        ports = ["7879:3305"];
+        ports = ["3305:7878"];
         volumes = [
           "/var/lib/radarr-anime/config:/config"
           "/media/Movies/Anime:/movies"
