@@ -33,6 +33,7 @@ in {
   # Create the config directories if they don't exist
   systemd.tmpfiles.rules = [
     "d /var/lib/sonarr-tv/config 0770 jacobpyke users -"
+    "d /var/lib/sonarr-4k/config 0770 jacobpyke users -"
     "d /var/lib/sonarr-anime/config 0770 jacobpyke users -"
     "d /var/lib/radarr-movies/config 0770 jacobpyke users -"
     "d /var/lib/radarr-anime/config 0770 jacobpyke users -"
@@ -110,6 +111,20 @@ in {
           PGID = "1000";
         };
       };
+
+      sonarr-4k = {
+        image = "linuxserver/sonarr";
+        ports = ["3306:8989"];
+        volumes = [
+          "/var/lib/sonarr-4k/config:/config"
+          "/media/TV Shows/Regular:/tv"
+          "/media/Downloads:/downloads"
+        ];
+        environment = {
+          PUID = "1000";
+          PGID = "1000";
+        };
+      };
     };
   };
 
@@ -139,6 +154,13 @@ in {
         useACMEHost = "${domain}";
         locations."/" = {
           proxyPass = "http://127.0.0.1:3302";
+        };
+      };
+      "sonarr-4k.${domain}" = {
+        forceSSL = true;
+        useACMEHost = "${domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:3306";
         };
       };
       "radarr-regular.${domain}" = {
