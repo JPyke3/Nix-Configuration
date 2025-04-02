@@ -7,7 +7,7 @@
     pkgs.steam
     pkgs.legcord
     pkgs.moonlight-qt
-	pkgs.owocr
+    pkgs.owocr
   ];
 
   imports = [
