@@ -39,7 +39,7 @@ in {
     "d /var/lib/radarr-movies/config 0770 jacobpyke users -"
     "d /var/lib/radarr-anime/config 0770 jacobpyke users -"
     "d /var/lib/recyclarr/config 0770 jacobpyke users -"
-    "d /var/lib/saznzbd/config 0770 jacobpyke users -"
+    "d /var/lib/sabnzbd/config 0770 jacobpyke users -"
   ];
 
   # Containerised Services
@@ -141,7 +141,7 @@ in {
         };
       };
       sabnzbd = {
-        image = "linuxserver/saznzbd";
+        image = "linuxserver/sabnzbd";
         ports = ["3307:8080"];
         volumes = [
           "/var/lib/sabnzbd/config:/config"
