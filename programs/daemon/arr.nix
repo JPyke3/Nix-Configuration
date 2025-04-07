@@ -142,7 +142,6 @@ in {
           PUID = "1000";
           PGID = "1000";
         };
-        extraOptions = ["--network=host"];
       };
     };
   };
