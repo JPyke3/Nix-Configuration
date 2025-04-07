@@ -15,9 +15,16 @@ in {
     enable = true;
     openFirewall = true;
   };
+
+  xdg.configFile."sabnzbd/sabnzbd.ini".text = ''
+     	[misc]
+    host_whitelist = localhost, 127.0.0.1, sabnzbd.pyk.ee
+  '';
+
   services.sabnzbd = {
     enable = true;
     openFirewall = true;
+    configFile = "${config.users.users.jacobpyke.home}/.config/sabnzbd/sabnzbd.ini";
   };
   # services.jackett = {
   #   enable = true;
