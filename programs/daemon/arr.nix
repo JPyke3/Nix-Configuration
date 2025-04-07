@@ -15,6 +15,10 @@ in {
     enable = true;
     openFirewall = true;
   };
+  services.sabnzbd = {
+    enable = true;
+    openFirewall = true;
+  };
   # services.jackett = {
   #   enable = true;
   #   openFirewall = true;
@@ -203,6 +207,13 @@ in {
         useACMEHost = "${domain}";
         locations."/" = {
           proxyPass = "http://127.0.0.1:6767";
+        };
+      };
+      "sabnzbd.${domain}" = {
+        forceSSL = true;
+        useACMEHost = "${domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8080";
         };
       };
     };
