@@ -3,8 +3,6 @@
   pkgs,
   ...
 }: let
-  externalConfigs = import ./sabnzbd-config.nix {inherit pkgs;};
-  inherit (externalConfigs) sabnzbdConfig;
   domain = "pyk.ee";
 in {
   # NixOS Enabled Services
@@ -20,7 +18,6 @@ in {
   services.sabnzbd = {
     enable = true;
     openFirewall = true;
-    configFile = "${sabnzbdConfig}";
   };
   # services.jackett = {
   #   enable = true;

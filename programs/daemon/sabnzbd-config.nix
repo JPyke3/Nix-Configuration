@@ -19,7 +19,7 @@
     auto_browser = 0
     language = en
     enable_https_verification = 1
-    host = 127.0.0.1, sabnzbd.pyk.ee
+    host = 127.0.0.1
     port = 3307
     https_port = ""
     username = ""
@@ -154,7 +154,7 @@
     nomedia_marker = ""
     ipv6_servers = 1
     url_base = /sabnzbd
-    host_whitelist = jacob-china,
+    host_whitelist = jacob-china, sabnzbd.pyk.ee
     local_ranges = ,
     max_url_retries = 10
     downloader_sleep_time = 10
