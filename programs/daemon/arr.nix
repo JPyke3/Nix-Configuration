@@ -3,12 +3,9 @@
   pkgs,
   ...
 }: let
+  externalConfigs = import ./sabnzbd-config.nix {inherit pkgs;};
+  inherit (externalConfigs) sabnzbdConfig;
   domain = "pyk.ee";
-
-  sabnzbdConfig = pkgs.writeText "sabnzbd.ini" ''
-    [misc]
-    host_whitelist = localhost, 127.0.0.1, sabnzbd.pyk.ee
-  '';
 in {
   # NixOS Enabled Services
   services.bazarr = {
@@ -219,7 +216,7 @@ in {
         forceSSL = true;
         useACMEHost = "${domain}";
         locations."/" = {
-          proxyPass = "http://127.0.0.1:8080";
+          proxyPass = "http://127.0.0.1:3307";
         };
       };
     };
