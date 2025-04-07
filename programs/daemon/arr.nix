@@ -15,10 +15,6 @@ in {
     enable = true;
     openFirewall = true;
   };
-  services.sabnzbd = {
-    enable = true;
-    openFirewall = true;
-  };
   # services.jackett = {
   #   enable = true;
   #   openFirewall = true;
@@ -43,6 +39,7 @@ in {
     "d /var/lib/radarr-movies/config 0770 jacobpyke users -"
     "d /var/lib/radarr-anime/config 0770 jacobpyke users -"
     "d /var/lib/recyclarr/config 0770 jacobpyke users -"
+    "d /var/lib/saznzbd/config 0770 jacobpyke users -"
   ];
 
   # Containerised Services
@@ -142,9 +139,19 @@ in {
           PUID = "1000";
           PGID = "1000";
         };
-        extraOptions = [
-          "--network=host"
+      };
+      sabnzbd = {
+        image = "linuxserver/saznzbd";
+        ports = ["3307:8080"];
+        volumes = [
+          "/var/lib/sabnzbd/config:/config"
+          "/media/Downloads/Usenet/complete:/downloads"
+          "/media/Downloads/Usenet/incomplete:/incomplete-downloads"
         ];
+        environment = {
+          PUID = "1000";
+          PGID = "1000";
+        };
       };
     };
   };
