@@ -4,6 +4,11 @@
   ...
 }: let
   domain = "pyk.ee";
+
+  sabnzbdConfig = pkgs.writeText "sabnzbd.ini" ''
+    [misc]
+    host_whitelist = localhost, 127.0.0.1, sabnzbd.pyk.ee
+  '';
 in {
   # NixOS Enabled Services
   services.bazarr = {
@@ -15,12 +20,6 @@ in {
     enable = true;
     openFirewall = true;
   };
-
-  sabnzbdConfig = pkgs.writeText "sabnzbd.ini" ''
-    [misc]
-    host_whitelist = localhost, 127.0.0.1, sabnzbd.pyk.ee
-  '';
-
   services.sabnzbd = {
     enable = true;
     openFirewall = true;
