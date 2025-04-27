@@ -37,6 +37,7 @@ in {
     "d /var/lib/sonarr-german/config 0770 jacobpyke users -"
     "d /var/lib/sonarr-anime/config 0770 jacobpyke users -"
     "d /var/lib/radarr-movies/config 0770 jacobpyke users -"
+    "d /var/lib/radarr-4k/config 0770 jacobpyke users -"
     "d /var/lib/radarr-anime/config 0770 jacobpyke users -"
     "d /var/lib/radarr-german/config 0770 jacobpyke users -"
     "d /var/lib/radarr-german-4k/config 0770 jacobpyke users -"
@@ -181,6 +182,20 @@ in {
           PGID = "1000";
         };
       };
+
+      radarr-4k = {
+        image = "linuxserver/radarr";
+        ports = ["3311:7878"];
+        volumes = [
+          "/var/lib/radarr-4k/config:/config"
+          "/media/Movies/4K:/movies"
+          "/media/Downloads:/downloads"
+        ];
+        environment = {
+          PUID = "1000";
+          PGID = "1000";
+        };
+      };
     };
   };
 
@@ -287,6 +302,13 @@ in {
         useACMEHost = "${domain}";
         locations."/" = {
           proxyPass = "http://127.0.0.1:3310";
+        };
+      };
+      "radarr-4k.${domain}" = {
+        forceSSL = true;
+        useACMEHost = "${domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:3311";
         };
       };
     };
