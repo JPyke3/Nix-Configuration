@@ -350,17 +350,17 @@ in {
         };
       };
       "jellyseerr.${domain}" = {
-        forcessl = true;
-        useacmehost = "${domain}";
+        forceSSL = true;
+        useACMEHost = "${domain}";
         locations."/" = {
-          proxypass = "http://127.0.0.1:3312";
+          proxyPass = "http://127.0.0.1:3312";
         };
       };
       "requestrr.${domain}" = {
-        forcessl = true;
-        useacmehost = "${domain}";
+        forceSSL = true;
+        useACMEHost = "${domain}";
         locations."/" = {
-          proxypass = "http://127.0.0.1:3313";
+          proxyPass = "http://127.0.0.1:3313";
         };
       };
     };
