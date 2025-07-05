@@ -48,6 +48,9 @@ in {
     "d /var/lib/membarr/config 0770 jacobpyke users -"
   ];
 
+  # Discord Bot Token
+  config.sops.secrets."programs/membarr/envfile" = {};
+
   # Containerised Services
   virtualisation.oci-containers = {
     backend = "podman";
