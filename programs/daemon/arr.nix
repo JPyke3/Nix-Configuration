@@ -233,9 +233,9 @@ in {
           PUID = "1000";
           PGID = "1000";
         };
-		environmentFiles = [
-		  config.sops.secrets."programs/membarr/envfile".path;
-		];
+        environmentFiles = [
+          config.sops.secrets."programs/membarr/envfile".path
+        ];
       };
     };
   };
