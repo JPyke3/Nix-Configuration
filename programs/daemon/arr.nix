@@ -49,7 +49,7 @@ in {
   ];
 
   # Discord Bot Token
-  config.sops.secrets."programs/membarr/envfile" = {};
+  sops.secrets."programs/membarr/envfile" = {};
 
   # Containerised Services
   virtualisation.oci-containers = {
