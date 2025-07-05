@@ -43,6 +43,9 @@ in {
     "d /var/lib/radarr-german-4k/config 0770 jacobpyke users -"
     "d /var/lib/recyclarr/config 0770 jacobpyke users -"
     "d /var/lib/sabnzbd/config 0770 jacobpyke users -"
+    "d /var/lib/jellyseerr/config 0770 jacobpyke users -"
+    "d /var/lib/requestrr/config 0770 jacobpyke users -"
+    "d /var/lib/membarr/config 0770 jacobpyke users -"
   ];
 
   # Containerised Services
@@ -196,6 +199,41 @@ in {
           PGID = "1000";
         };
       };
+
+      jellyseerr = {
+        image = "fallenbagel/jellyseerr";
+        ports = ["3312:5055"];
+        volumes = [
+          "/var/lib/jellyseerr/config:/app/config"
+        ];
+        environment = {
+          PUID = "1000";
+          PGID = "1000";
+        };
+      };
+
+      requestrr = {
+        image = "thomst08/requestrr";
+        ports = ["3313:4545"];
+        volumes = [
+          "/var/lib/requestrr/config:/root/config"
+        ];
+        environment = {
+          PUID = "1000";
+          PGID = "1000";
+        };
+      };
+
+      membarr = {
+        image = "yoruio/membarr";
+        volumes = [
+          "/var/lib/membarr/config:/app/app/config"
+        ];
+        environment = {
+          PUID = "1000";
+          PGID = "1000";
+        };
+      };
     };
   };
 
@@ -309,6 +347,20 @@ in {
         useACMEHost = "${domain}";
         locations."/" = {
           proxyPass = "http://127.0.0.1:3311";
+        };
+      };
+      "jellyseerr.${domain}" = {
+        forcessl = true;
+        useacmehost = "${domain}";
+        locations."/" = {
+          proxypass = "http://127.0.0.1:3312";
+        };
+      };
+      "requestrr.${domain}" = {
+        forcessl = true;
+        useacmehost = "${domain}";
+        locations."/" = {
+          proxypass = "http://127.0.0.1:3313";
         };
       };
     };
