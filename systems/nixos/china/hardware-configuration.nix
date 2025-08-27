@@ -31,12 +31,12 @@
   fileSystems."/media" = {
     device = "192.168.88.11:/volume1/media";
     fsType = "nfs";
-    options = [];
+    options = ["x-systemd.automount"];
   };
   fileSystems."/adult" = {
     device = "192.168.88.11:/volume1/adult";
     fsType = "nfs";
-    options = [];
+    options = ["x-systemd.automount"];
   };
 
   swapDevices = [];
