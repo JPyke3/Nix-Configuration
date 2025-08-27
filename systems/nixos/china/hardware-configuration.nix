@@ -38,6 +38,10 @@
     fsType = "nfs";
     options = ["x-systemd.automount"];
   };
+  fileSystems."/cache" = {
+    device = "/dev/disk/by-uuid/b1540301-3523-4ee6-a53f-d6c7e9af2f39";
+    fsType = "ext4";
+  };
 
   swapDevices = [];
 
