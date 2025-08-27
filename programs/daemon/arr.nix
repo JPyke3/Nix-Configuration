@@ -155,7 +155,7 @@ in {
         volumes = [
           "/var/lib/sabnzbd/config:/config"
           "/media/Downloads/Usenet/complete:/downloads"
-          "/media/Downloads/Usenet/incomplete:/incomplete-downloads"
+          "/cache/incomplete:/incomplete-downloads"
         ];
         environment = {
           PUID = "1000";
