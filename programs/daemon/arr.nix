@@ -227,6 +227,15 @@ in {
         };
       };
 
+      flaresolverr = {
+        image = "ghcr.io/flaresolverr/flaresolverr";
+        ports = ["3314:8192"];
+        user = "1000:1000";
+        extraOptions = [
+          "--network=host"
+        ];
+      };
+
       membarr = {
         image = "yoruio/membarr";
         volumes = [
@@ -367,6 +376,13 @@ in {
         useACMEHost = "${domain}";
         locations."/" = {
           proxyPass = "http://127.0.0.1:3313";
+        };
+      };
+      "flaresolverr.${domain}" = {
+        forceSSL = true;
+        useACMEHost = "${domain}";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:3314";
         };
       };
     };
