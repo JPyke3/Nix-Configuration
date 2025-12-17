@@ -376,11 +376,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1765526639,
-        "narHash": "sha256-4U8crbUT3PDQdqhaMLnVaxnciBlcnDAw8XAJaXiS0pA=",
+        "lastModified": 1765880244,
+        "narHash": "sha256-dUJ3buomtThb/wALuO16LMfFfd6Yy/7e9eDKG9ZtSBE=",
         "owner": "Jovian-Experiments",
         "repo": "Jovian-NixOS",
-        "rev": "457a55ed77a105088a47cb55b9eccf7768559451",
+        "rev": "559665e64022db12bd272df1037aab460ab613a5",
         "type": "github"
       },
       "original": {
@@ -417,11 +417,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1765832596,
-        "narHash": "sha256-aFT4ABi7hwVh38Z9JJIZptb5R9ElH7sAvMpArDHdm3E=",
+        "lastModified": 1765943221,
+        "narHash": "sha256-/BLjdC9I6H7cbElwWJtz9yi9nkesRdPRfuk02k7jZJk=",
         "owner": "ggerganov",
         "repo": "llama.cpp",
-        "rev": "d6a1e18c651a46109cbf2ad3b299581f0651128f",
+        "rev": "58062860afb88e555857c1266d3a17e1b65b5eb9",
         "type": "github"
       },
       "original": {
@@ -716,11 +716,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1765861191,
-        "narHash": "sha256-OP7ZDv5XGbz0VxPaeP2SDQXWXSkdJodIxwKHOjYuW2Y=",
+        "lastModified": 1765945116,
+        "narHash": "sha256-p3kvO+VHlsAJy5RuLrvXfjA6UY3kn13mDO22+tUMQ/o=",
         "owner": "nix-community",
         "repo": "nur",
-        "rev": "28379486ea1ccedaaa910a1c454aed924d735524",
+        "rev": "21d071bce99564c8e47e7708fd91ec819e3a5ba2",
         "type": "github"
       },
       "original": {
