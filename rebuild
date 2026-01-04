@@ -1,13 +1,18 @@
 #!/usr/bin/env bash
+set -e
 CURRENT_DIR=$(echo $PWD)
 OS=$(uname -s)
 SUBOS=$(cat /etc/*-release | grep DISTRIB_ID | sed s/DISTRIB_ID=//)
 HOST=$(hostname)
-nvim .
+
+# Format all nix files
+echo "Formatting nix files..."
 for file in $(find . -name "*.nix"); do
 	alejandra $file &>/dev/null
 done
-git diff *.nix
+
+# Show changes
+git diff --stat
 if [ "$OS" = "Darwin" ]; then
 	echo "Nix Darwin Rebuilding..."
 	darwin-rebuild switch --flake .#jacob-germany &>~/.logs/latest-rebuild.log || (cat ~/.logs/latest-rebuild.log | grep --color error && false)
