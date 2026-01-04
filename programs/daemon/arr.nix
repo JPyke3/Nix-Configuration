@@ -4,7 +4,30 @@
   ...
 }: let
   domain = "pyk.ee";
+
+  # Services that depend on NFS media mount
+  mediaContainers = [
+    "sonarr-tv"
+    "sonarr-anime"
+    "sonarr-4k"
+    "sonarr-german"
+    "radarr-movies"
+    "radarr-anime"
+    "radarr-4k"
+    "radarr-german"
+    "radarr-german-4k"
+    "sabnzbd"
+  ];
 in {
+  # Make container services wait for NFS mount
+  systemd.services = builtins.listToAttrs (map (name: {
+      name = "podman-${name}";
+      value = {
+        after = ["media.mount"];
+        requires = ["media.mount"];
+      };
+    })
+    mediaContainers);
   # NixOS Enabled Services
   services.bazarr = {
     enable = true;

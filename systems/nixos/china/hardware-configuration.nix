@@ -31,12 +31,28 @@
   fileSystems."/media" = {
     device = "192.168.88.11:/volume1/media";
     fsType = "nfs";
-    options = ["x-systemd.automount"];
+    options = [
+      "x-systemd.automount"
+      "x-systemd.mount-timeout=10"
+      "_netdev" # Wait for network
+      "nofail" # Don't fail boot if mount fails
+      "soft" # Return error instead of hanging
+      "timeo=30" # 3 second timeout per retry
+      "retrans=3" # 3 retries
+    ];
   };
   fileSystems."/adult" = {
     device = "192.168.88.11:/volume1/adult";
     fsType = "nfs";
-    options = ["x-systemd.automount"];
+    options = [
+      "x-systemd.automount"
+      "x-systemd.mount-timeout=10"
+      "_netdev"
+      "nofail"
+      "soft"
+      "timeo=30"
+      "retrans=3"
+    ];
   };
   fileSystems."/cache" = {
     device = "/dev/disk/by-uuid/b1540301-3523-4ee6-a53f-d6c7e9af2f39";
