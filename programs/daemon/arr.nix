@@ -53,22 +53,41 @@ in {
     };
   };
 
-  # Create the config directories if they don't exist
+  # Create the config directories and fix ownership on boot
+  # Using UID/GID 1000 to match container PUID/PGID settings
+  # 'd' creates directory, 'Z' recursively sets ownership on existing files
   systemd.tmpfiles.rules = [
-    "d /var/lib/sonarr-tv/config 0770 jacobpyke users -"
-    "d /var/lib/sonarr-4k/config 0770 jacobpyke users -"
-    "d /var/lib/sonarr-german/config 0770 jacobpyke users -"
-    "d /var/lib/sonarr-anime/config 0770 jacobpyke users -"
-    "d /var/lib/radarr-movies/config 0770 jacobpyke users -"
-    "d /var/lib/radarr-4k/config 0770 jacobpyke users -"
-    "d /var/lib/radarr-anime/config 0770 jacobpyke users -"
-    "d /var/lib/radarr-german/config 0770 jacobpyke users -"
-    "d /var/lib/radarr-german-4k/config 0770 jacobpyke users -"
-    "d /var/lib/recyclarr/config 0770 jacobpyke users -"
-    "d /var/lib/sabnzbd/config 0770 jacobpyke users -"
-    "d /var/lib/jellyseerr/config 0770 jacobpyke users -"
-    "d /var/lib/requestrr/config 0770 jacobpyke users -"
-    "d /var/lib/membarr/config 0770 jacobpyke users -"
+    # Sonarr instances
+    "d /var/lib/sonarr-tv 0775 1000 media-server -"
+    "Z /var/lib/sonarr-tv - 1000 media-server -"
+    "d /var/lib/sonarr-4k 0775 1000 media-server -"
+    "Z /var/lib/sonarr-4k - 1000 media-server -"
+    "d /var/lib/sonarr-german 0775 1000 media-server -"
+    "Z /var/lib/sonarr-german - 1000 media-server -"
+    "d /var/lib/sonarr-anime 0775 1000 media-server -"
+    "Z /var/lib/sonarr-anime - 1000 media-server -"
+    # Radarr instances
+    "d /var/lib/radarr-movies 0775 1000 media-server -"
+    "Z /var/lib/radarr-movies - 1000 media-server -"
+    "d /var/lib/radarr-4k 0775 1000 media-server -"
+    "Z /var/lib/radarr-4k - 1000 media-server -"
+    "d /var/lib/radarr-anime 0775 1000 media-server -"
+    "Z /var/lib/radarr-anime - 1000 media-server -"
+    "d /var/lib/radarr-german 0775 1000 media-server -"
+    "Z /var/lib/radarr-german - 1000 media-server -"
+    "d /var/lib/radarr-german-4k 0775 1000 media-server -"
+    "Z /var/lib/radarr-german-4k - 1000 media-server -"
+    # Support services
+    "d /var/lib/recyclarr 0775 1000 media-server -"
+    "Z /var/lib/recyclarr - 1000 media-server -"
+    "d /var/lib/sabnzbd 0775 1000 media-server -"
+    "Z /var/lib/sabnzbd - 1000 media-server -"
+    "d /var/lib/jellyseerr 0775 1000 media-server -"
+    "Z /var/lib/jellyseerr - 1000 media-server -"
+    "d /var/lib/requestrr 0775 1000 media-server -"
+    "Z /var/lib/requestrr - 1000 media-server -"
+    "d /var/lib/membarr 0775 1000 media-server -"
+    "Z /var/lib/membarr - 1000 media-server -"
   ];
 
   # Discord Bot Token
