@@ -33,12 +33,16 @@
     fsType = "nfs";
     options = [
       "x-systemd.automount"
-      "x-systemd.mount-timeout=10"
-      "_netdev" # Wait for network
-      "nofail" # Don't fail boot if mount fails
-      "soft" # Return error instead of hanging
-      "timeo=30" # 3 second timeout per retry
-      "retrans=3" # 3 retries
+      "x-systemd.idle-timeout=0" # Never unmount automatically
+      "x-systemd.mount-timeout=30" # Give more time to mount
+      "x-systemd.requires=network-online.target" # Wait for network
+      "x-systemd.after=network-online.target" # Order after network
+      "_netdev"
+      "nofail"
+      "soft"
+      "timeo=50" # 5 second timeout per retry
+      "retrans=5" # 5 retries
+      "bg" # Retry in background if initial mount fails
     ];
   };
   fileSystems."/adult" = {
@@ -46,12 +50,16 @@
     fsType = "nfs";
     options = [
       "x-systemd.automount"
-      "x-systemd.mount-timeout=10"
+      "x-systemd.idle-timeout=0"
+      "x-systemd.mount-timeout=30"
+      "x-systemd.requires=network-online.target"
+      "x-systemd.after=network-online.target"
       "_netdev"
       "nofail"
       "soft"
-      "timeo=30"
-      "retrans=3"
+      "timeo=50"
+      "retrans=5"
+      "bg"
     ];
   };
   fileSystems."/cache" = {
