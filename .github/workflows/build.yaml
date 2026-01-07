@@ -8,13 +8,16 @@ on:
   workflow_dispatch:
 
 jobs:
-  # Start a single EC2 runner for all builds (cost optimization)
-  start-runner:
+  # Start EC2 runners for each system in parallel
+  start-runners:
     timeout-minutes: 5
-    name: Start EC2 runner
+    name: Start EC2 runner (${{ matrix.system }})
     runs-on: ubuntu-latest
     permissions:
       actions: write
+    strategy:
+      matrix:
+        system: [norway, china, japan]
     steps:
       - name: Start EC2 runner
         id: start-ec2-runner
@@ -32,11 +35,11 @@ jobs:
           ec2_instance_ttl: 120
           ec2_spot_instance_strategy: BestEffort
 
-  # Build each system in parallel on the same runner
+  # Build each system in parallel on separate runners
   build:
     timeout-minutes: 90
     name: Build ${{ matrix.system }}
-    needs: start-runner
+    needs: start-runners
     runs-on: ${{ github.run_id }}
     strategy:
       fail-fast: false
