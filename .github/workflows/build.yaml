@@ -144,18 +144,18 @@ jobs:
           echo "Pushing ${{ matrix.config }} closure to Attic cache..."
 
           # Check Attic connectivity first
-          if ! attic cache info main &>/dev/null; then
+          if ! attic cache info main; then
             echo "::warning::Cannot connect to Attic cache, skipping push"
             exit 0
           fi
 
-          # Push closure (attic computes the closure automatically)
+          # Push closure with verbose output to diagnose failures
           # Use -j for parallel uploads
-          if attic push -j 5 main $(cat build-paths.txt); then
-            echo "Push complete"
-          else
-            echo "::warning::Some paths may have failed to push"
-          fi
+          attic push -j 5 main $(cat build-paths.txt) 2>&1 || {
+            echo "::error::Attic push failed"
+            exit 1
+          }
+          echo "Push complete"
 
       - name: Build summary
         if: always()
