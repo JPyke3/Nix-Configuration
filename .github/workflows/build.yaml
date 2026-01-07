@@ -117,8 +117,9 @@ jobs:
         run: |
           echo "Downloading Citrix workspace tarball via Tailscale..."
           # Fetch directly from jacob-china via Tailscale (nginx serves the file)
-          curl -kL -o linuxx64-24.5.0.76.tar.gz \
-            "https://jacob-china/citrix/linuxx64-24.5.0.76.tar.gz" \
+          # Using HTTP since Tailscale already provides encryption
+          curl -L -o linuxx64-24.5.0.76.tar.gz \
+            "http://jacob-china/citrix/linuxx64-24.5.0.76.tar.gz" \
             -H "Host: files.pyk.ee"
 
           # Verify download

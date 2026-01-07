@@ -306,11 +306,14 @@ GitHub Actions (EC2) → Build → Push via Tailscale → Attic (china:5000) →
 | **Cache name** | `main` | Default Attic cache |
 | **Garbage Collection** | 30-day retention | Runs daily |
 
-### Cache URLs (Priority Order)
+### Cache Priority Order (CI)
 
-1. `http://jacob-china:5000/main` - Self-hosted Attic (via Tailscale)
-2. `https://jpyke3.cachix.org` - Cachix fallback
-3. `https://cache.nixos.org` - Official NixOS cache
+1. **Magic Nix Cache** - Ephemeral per-CI-run cache (fastest for repeated builds in same run)
+2. **Attic** (`http://jacob-china:5000/main`) - Self-hosted primary cache via Tailscale
+3. **Cachix** (`https://jpyke3.cachix.org`) - Public fallback when Attic unavailable
+4. **cache.nixos.org** - Official NixOS cache (always available)
+
+> **Note:** Historical `modules-shrunk` build failures were caused by a Nix 2.18.x bug (fixed by using Nix 2.28.3), not cache corruption.
 
 ### Attic Management
 

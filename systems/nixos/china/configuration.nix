@@ -109,9 +109,33 @@
     serviceConfig = {
       Type = "oneshot";
       ExecStart = pkgs.writeShellScript "attic-backup" ''
-        ${pkgs.sqlite}/bin/sqlite3 /var/lib/atticd/server.db ".backup '/nix-cache/backups/server-$(date +%Y%m%d).db'"
-        # Keep only last 7 backups
-        ls -t /nix-cache/backups/server-*.db | tail -n +8 | xargs -r rm
+        set -euo pipefail
+
+        DB_PATH="/var/lib/atticd/server.db"
+        BACKUP_DIR="/nix-cache/backups"
+        BACKUP_PATH="$BACKUP_DIR/server-$(date +%Y%m%d).db"
+
+        # Ensure database exists
+        if [ ! -f "$DB_PATH" ]; then
+          echo "Database not found: $DB_PATH"
+          exit 1
+        fi
+
+        # Perform backup
+        ${pkgs.sqlite}/bin/sqlite3 "$DB_PATH" ".backup '$BACKUP_PATH'"
+
+        # Verify backup succeeded
+        if [ ! -s "$BACKUP_PATH" ]; then
+          echo "Backup failed: $BACKUP_PATH is empty"
+          exit 1
+        fi
+
+        # Cleanup old backups (only if backups exist)
+        if compgen -G "$BACKUP_DIR/server-*.db" > /dev/null; then
+          ls -t "$BACKUP_DIR"/server-*.db | tail -n +8 | xargs -r rm
+        fi
+
+        echo "Backup successful: $BACKUP_PATH"
       '';
       User = "atticd";
     };
