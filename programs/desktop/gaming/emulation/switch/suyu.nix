@@ -1,9 +1,10 @@
 {
   inputs,
   config,
-  system,
+  pkgs,
   ...
 }: let
+  system = pkgs.stdenv.hostPlatform.system;
   nur = import inputs.nur {
     nurpkgs = import inputs.unstable {inherit system;};
     pkgs = import inputs.unstable {inherit system;};

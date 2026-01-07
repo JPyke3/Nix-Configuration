@@ -1,11 +1,10 @@
 {
   config,
   pkgs,
-  system,
   inputs,
   ...
 }: let
-  pkgs_unstable = inputs.unstable.legacyPackages.${system};
+  pkgs_unstable = inputs.unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
   fontSize =
     if pkgs.stdenv.isDarwin
     then 16

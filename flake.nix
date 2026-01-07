@@ -156,33 +156,32 @@
           home-manager.backupFileExtension = "backup";
           home-manager.extraSpecialArgs = {
             inherit inputs pkgs_unstable pkgs_citrix;
-            system = "x86_64-linux";
           };
         })
       ];
     };
-    # Asahi Linux
-    nixosConfigurations.jacob-austria = unstable.lib.nixosSystem {
-      system = "aarch64-linux";
-      specialArgs = {inherit inputs;};
-      modules = [
-        nur.modules.nixos.default
-        ./systems/nixos/configuration.nix
-        ./systems/nixos/austria/configuration.nix
-        nixos-apple-silicon.nixosModules.default
-        stylix.nixosModules.stylix
-        ./systems/stylix.nix
-        home-manager-unstable.nixosModules.home-manager
-        {
-          home-manager.users.jacobpyke = import ./systems/nixos/austria/home.nix;
-          home-manager.backupFileExtension = "backup";
-          home-manager.extraSpecialArgs = {
-            inherit inputs;
-            system = "aarch64-linux";
-          };
-        }
-      ];
-    };
+    # Asahi Linux (Deprecated - no longer active)
+    # nixosConfigurations.jacob-austria = unstable.lib.nixosSystem {
+    #   system = "aarch64-linux";
+    #   specialArgs = {inherit inputs;};
+    #   modules = [
+    #     nur.modules.nixos.default
+    #     ./systems/nixos/configuration.nix
+    #     ./systems/nixos/austria/configuration.nix
+    #     nixos-apple-silicon.nixosModules.default
+    #     stylix.nixosModules.stylix
+    #     ./systems/stylix.nix
+    #     home-manager-unstable.nixosModules.home-manager
+    #     {
+    #       home-manager.users.jacobpyke = import ./systems/nixos/austria/home.nix;
+    #       home-manager.backupFileExtension = "backup";
+    #       home-manager.extraSpecialArgs = {
+    #         inherit inputs;
+    #         system = "aarch64-linux";
+    #       };
+    #     }
+    #   ];
+    # };
     # Steam Deck OLED
     nixosConfigurations.jacob-japan = unstable.lib.nixosSystem {
       system = "x86_64-linux";
@@ -196,7 +195,6 @@
           home-manager.users.jacobpyke = import ./systems/nixos/japan/home.nix;
           home-manager.extraSpecialArgs = {
             inherit inputs;
-            system = "x86_64-linux";
           };
         }
       ];
@@ -214,7 +212,6 @@
           home-manager.users.jacobpyke = import ./systems/nixos/china/home.nix;
           home-manager.extraSpecialArgs = {
             inherit inputs;
-            system = "x86_64-linux";
           };
         }
       ];
@@ -238,7 +235,6 @@
           ];
           home-manager.extraSpecialArgs = {
             inherit inputs;
-            system = "aarch64-darwin";
           };
         }
       ];

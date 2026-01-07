@@ -5,6 +5,10 @@ OS=$(uname -s)
 SUBOS=$(cat /etc/*-release | grep DISTRIB_ID | sed s/DISTRIB_ID=//)
 HOST=$(hostname)
 
+# Clean up old home-manager backup files to prevent conflicts
+echo "Cleaning up old home-manager backup files..."
+find ~ -maxdepth 3 -name "*.backup" -type f 2>/dev/null | xargs -r rm -f
+
 # Format all nix files
 echo "Formatting nix files..."
 for file in $(find . -name "*.nix"); do

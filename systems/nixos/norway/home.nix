@@ -39,6 +39,9 @@
 
   home.stateVersion = "25.11";
 
+  # Stylix Firefox profile configuration
+  stylix.targets.firefox.profileNames = ["default"];
+
   # Override for Obsidian if needed
   nixpkgs.config.permittedInsecurePackages =
     lib.optional (pkgs.obsidian.version == "1.4.16") "electron-25.9.0"

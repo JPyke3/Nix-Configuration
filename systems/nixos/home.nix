@@ -18,12 +18,15 @@ in {
   ];
 
   # Japanese Language Support
-  i18n.inputMethod.enabled = "fcitx5";
-  i18n.inputMethod.fcitx5.addons = [
-    pkgs.fcitx5-mozc
-    pkgs.fcitx5-gtk
-    pkgs.qt6Packages.fcitx5-configtool
-  ];
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+    fcitx5.addons = [
+      pkgs.fcitx5-mozc
+      pkgs.fcitx5-gtk
+      pkgs.qt6Packages.fcitx5-configtool
+    ];
+  };
 
   #  home.activation.setupEtc = config.lib.dag.entryAfter ["writeBoundary"] ''
   #    /run/current-system/sw/bin/systemctl start --user sops-nix

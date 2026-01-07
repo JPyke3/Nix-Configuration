@@ -3,7 +3,7 @@
   inputs,
   ...
 }: let
-  pkgs_unstable = inputs.unstable.legacyPackages.${pkgs.system};
+  pkgs_unstable = inputs.unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in {
   imports = [
     ./skhd/skhd.nix

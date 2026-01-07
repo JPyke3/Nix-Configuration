@@ -12,6 +12,17 @@
 
   networking.hostName = "jacob-norway";
   networking.networkmanager.wifi.powersave = false;
+  networking.networkmanager.wifi.backend = "iwd";
+
+  # iwd for better wifi performance
+  networking.wireless.iwd = {
+    enable = true;
+    settings = {
+      Settings = {
+        AutoConnect = true;
+      };
+    };
+  };
 
   # Using default NixOS kernel (pre-built from binary cache)
   # CachyOS kernel available but requires compilation:
