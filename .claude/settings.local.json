@@ -10,9 +10,18 @@
       "Bash(systemctl list-units:*)",
       "Bash(mount:*)",
       "Bash(curl:*)",
-      "Bash(/nix/store/lkyl93ljwfy2kfkkklmqi17vnpd5395k-attic-0-unstable-2025-09-24/bin/atticadm:*)",
+      "Bash(atticadm:*)",
       "Bash(cat:*)",
-      "Bash(gh pr create:*)"
+      "Bash(gh pr create:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh api:*)",
+      "Bash(gh run:*)",
+      "Bash(nix-instantiate:*)",
+      "Bash(tailscale status:*)",
+      "Bash(ping:*)",
+      "WebSearch",
+      "Bash(ls:*)",
+      "Bash(nix flake check:*)"
     ]
   }
 }

@@ -87,6 +87,18 @@ in {
         forceSSL = true;
         useACMEHost = "${domain}";
       };
+      # Static file server for CI assets (Citrix tarball, etc.)
+      "files.${domain}" = {
+        forceSSL = true;
+        useACMEHost = "${domain}";
+        locations."/citrix/" = {
+          alias = "/media/Software/citrix/";
+          extraConfig = ''
+            autoindex off;
+            expires 30d;
+          '';
+        };
+      };
     };
   };
 }

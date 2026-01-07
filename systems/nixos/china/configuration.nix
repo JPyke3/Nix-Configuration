@@ -103,6 +103,33 @@
     recyclarr
   ];
 
+  # Attic database backup to NAS
+  systemd.services.attic-backup = {
+    description = "Backup Attic database to NAS";
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = pkgs.writeShellScript "attic-backup" ''
+        ${pkgs.sqlite}/bin/sqlite3 /var/lib/atticd/server.db ".backup '/nix-cache/backups/server-$(date +%Y%m%d).db'"
+        # Keep only last 7 backups
+        ls -t /nix-cache/backups/server-*.db | tail -n +8 | xargs -r rm
+      '';
+      User = "atticd";
+    };
+  };
+
+  systemd.timers.attic-backup = {
+    wantedBy = ["timers.target"];
+    timerConfig = {
+      OnCalendar = "daily";
+      Persistent = true;
+    };
+  };
+
+  # Ensure backup directory exists
+  systemd.tmpfiles.rules = [
+    "d /nix-cache/backups 0750 atticd atticd -"
+  ];
+
   networking.firewall = {
     enable = true;
 

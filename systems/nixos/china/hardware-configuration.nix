@@ -29,7 +29,7 @@
   };
 
   fileSystems."/media" = {
-    device = "192.168.88.11:/volume1/media";
+    device = "jacob-nas:/volume1/media";
     fsType = "nfs";
     options = [
       "x-systemd.automount"
@@ -46,7 +46,7 @@
     ];
   };
   fileSystems."/adult" = {
-    device = "192.168.88.11:/volume1/adult";
+    device = "jacob-nas:/volume1/adult";
     fsType = "nfs";
     options = [
       "x-systemd.automount"
@@ -67,9 +67,9 @@
     fsType = "ext4";
   };
 
-  # Attic binary cache storage on Synology NAS
+  # Attic binary cache storage on Synology NAS (via Tailscale)
   fileSystems."/nix-cache" = {
-    device = "192.168.88.11:/volume1/nix-cache";
+    device = "jacob-nas:/volume1/nix-cache";
     fsType = "nfs";
     options = [
       "x-systemd.automount"
