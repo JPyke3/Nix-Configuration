@@ -14,7 +14,7 @@
     ../../../programs/daemon/acme.nix
     ../../../programs/daemon/nginx.nix
     ../../../programs/daemon/matter.nix
-    ../../../programs/daemon/stash.nix
+    # ../../../programs/daemon/stash.nix  # Disabled - /adult volume removed from NAS
     ../../../programs/daemon/mylar.nix
     ../../../programs/daemon/komga.nix
     ../../../programs/daemon/attic.nix # Self-hosted Nix binary cache

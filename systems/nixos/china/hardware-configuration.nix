@@ -45,23 +45,6 @@
       "bg" # Retry in background if initial mount fails
     ];
   };
-  fileSystems."/adult" = {
-    device = "jacob-nas:/volume1/adult";
-    fsType = "nfs";
-    options = [
-      "x-systemd.automount"
-      "x-systemd.idle-timeout=0"
-      "x-systemd.mount-timeout=30"
-      "x-systemd.requires=network-online.target"
-      "x-systemd.after=network-online.target"
-      "_netdev"
-      "nofail"
-      "soft"
-      "timeo=50"
-      "retrans=5"
-      "bg"
-    ];
-  };
   fileSystems."/cache" = {
     device = "/dev/disk/by-uuid/b1540301-3523-4ee6-a53f-d6c7e9af2f39";
     fsType = "ext4";
