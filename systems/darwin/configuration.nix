@@ -12,9 +12,6 @@
     ../../programs/daemon/jellyfin-mpv-shim.nix
     ../../programs/daemon/tabby/tabby.nix
     ../../programs/daemon/tdarr-node-macos.nix
-
-    # TODO: Add
-    # ../../programs/daemon/download-cleaner.nix
   ];
 
   nixpkgs.hostPlatform = "aarch64-darwin";

@@ -14,17 +14,16 @@
     ../../../programs/daemon/acme.nix
     ../../../programs/daemon/nginx.nix
     ../../../programs/daemon/matter.nix
-    # ../../../programs/daemon/stash.nix  # Disabled - /adult volume removed from NAS
     ../../../programs/daemon/mylar.nix
     ../../../programs/daemon/komga.nix
     ../../../programs/daemon/attic.nix # Self-hosted Nix binary cache
-    #    ../../../programs/daemon/unifi.nix
+    ../../../programs/daemon/schedule-reboot.nix
   ];
 
-  # jpyke3.scheduleReboot = {
-  #   enable = true;
-  #   hour = "03";
-  # };
+  jpyke3.scheduleReboot = {
+    enable = true;
+    hour = "03";
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -86,13 +85,13 @@
     ];
   };
 
-  # system.autoUpgrade = {
-  #   enable = true;
-  #   allowReboot = true;
-  #   dates = "03:00";
-  #   flake = "github:JPyke3/Nix-Configuration";
-  #   persistent = true;
-  # };
+  system.autoUpgrade = {
+    enable = true;
+    allowReboot = true;
+    dates = "03:00";
+    flake = "github:JPyke3/Nix-Configuration";
+    persistent = true;
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
