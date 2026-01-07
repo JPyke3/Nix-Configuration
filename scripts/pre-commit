@@ -8,6 +8,9 @@
 
 set -euo pipefail
 
+# Include local bin in PATH (for tools installed by session-start hook)
+export PATH="$HOME/.local/bin:$PATH"
+
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
