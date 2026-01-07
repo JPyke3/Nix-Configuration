@@ -20,7 +20,7 @@
       }
     '';
     shellAliases = {
-      aria2c = "${pkgs.aria}/bin/aria2c --split=32 --min-split-size=4M --max-connection-per-server=16 --max-concurrent-downloads=16";
+      aria2c = "${pkgs.aria2}/bin/aria2c --split=32 --min-split-size=4M --max-connection-per-server=16 --max-concurrent-downloads=16";
       vim = "nvim";
       ls = "${pkgs.eza}/bin/eza --icons --git";
       ll = "ls -lh -s date";

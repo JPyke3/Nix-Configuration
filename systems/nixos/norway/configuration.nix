@@ -13,19 +13,15 @@
   networking.hostName = "jacob-norway";
   networking.networkmanager.wifi.powersave = false;
 
-  # CachyOS optimized kernel
-  nixpkgs.overlays = [inputs.nix-cachyos-kernel.overlays.pinned];
-  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
+  # Using default NixOS kernel (pre-built from binary cache)
+  # CachyOS kernel available but requires compilation:
+  # nixpkgs.overlays = [inputs.nix-cachyos-kernel.overlays.pinned];
+  # boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
 
   # NVIDIA RTX 5070 Ti Mobile + AMD Radeon 890M (Hybrid Graphics)
+  # RADV (Mesa Vulkan) is enabled by default - amdvlk was deprecated
   hardware.graphics = {
     enable = true;
-    extraPackages = with pkgs; [
-      amdvlk
-    ];
-    extraPackages32 = with pkgs; [
-      driversi686Linux.amdvlk
-    ];
   };
 
   # NVIDIA Configuration
@@ -116,7 +112,7 @@
     nvtopPackages.full
     amdgpu_top
     vulkan-tools
-    glxinfo
+    mesa-demos
 
     # ASUS tools
     asusctl

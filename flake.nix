@@ -81,6 +81,10 @@
     nix-cachyos-kernel = {
       url = "github:xddxdd/nix-cachyos-kernel/release";
     };
+    # NixOS 24.11 for citrix_workspace (needs webkitgtk_4_0 which was removed in 25.x)
+    nixpkgs-citrix = {
+      url = "github:nixos/nixpkgs/nixos-24.11";
+    };
   };
 
   outputs = {
@@ -100,6 +104,7 @@
     nix-rosetta-builder,
     nixos-apple-silicon,
     nix-cachyos-kernel,
+    nixpkgs-citrix,
     ...
   } @ inputs: {
     # Desktop PC (Currently Unused)
@@ -134,14 +139,26 @@
         stylix.nixosModules.stylix
         ./systems/stylix.nix
         home-manager.nixosModules.home-manager
-        {
+        ({...}: let
+          pkgs_unstable = import unstable {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+            config.allowBroken = true;
+            config.permittedInsecurePackages = ["libsoup-2.74.3"];
+          };
+          pkgs_citrix = import nixpkgs-citrix {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+            config.permittedInsecurePackages = ["libsoup-2.74.3"];
+          };
+        in {
           home-manager.users.jacobpyke = import ./systems/nixos/norway/home.nix;
           home-manager.backupFileExtension = "backup";
           home-manager.extraSpecialArgs = {
-            inherit inputs;
+            inherit inputs pkgs_unstable pkgs_citrix;
             system = "x86_64-linux";
           };
-        }
+        })
       ];
     };
     # Asahi Linux

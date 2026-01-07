@@ -1,5 +1,7 @@
 {
   pkgs,
+  pkgs_unstable,
+  pkgs_citrix,
   lib,
   inputs,
   ...
@@ -16,7 +18,7 @@
     telegram-desktop
     vlc
     mpv
-    dolphin
+    kdePackages.dolphin
 
     # Gaming
     steam
@@ -27,11 +29,11 @@
     # Development
     vscode
 
-    # Work
-    citrix_workspace
+    # Work (uses pinned nixpkgs with webkitgtk_4_0)
+    pkgs_citrix.citrix_workspace
 
     # Utilities
-    bitwarden
+    bitwarden-desktop
     qbittorrent
   ];
 

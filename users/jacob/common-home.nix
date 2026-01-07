@@ -11,7 +11,7 @@ in {
   home.packages = [
     pkgs.lf
     pkgs.neovim
-    pkgs.aria
+    pkgs.aria2
     pkgs.tmux
     pkgs.direnv
     pkgs.git

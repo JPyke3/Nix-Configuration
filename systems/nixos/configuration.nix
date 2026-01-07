@@ -67,7 +67,7 @@
     packages = with pkgs; [
       open-sans
       noto-fonts-cjk-sans
-      noto-fonts-emoji
+      noto-fonts-color-emoji
     ];
 
     fontDir.enable = true;
