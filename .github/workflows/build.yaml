@@ -71,11 +71,19 @@ jobs:
             experimental-features = nix-command flakes
             accept-flake-config = true
 
-      - name: Setup Cachix
+      - name: Setup Cachix (low priority fallback)
         uses: cachix/cachix-action@v14
         with:
           name: jpyke3
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          # Set Cachix to low priority (100) so cache.nixos.org (40) and Attic are preferred
+          # This avoids corrupted modules-shrunk entries in Cachix
+          extraPullNames: ""
+
+      - name: Configure cache priorities
+        run: |
+          # Ensure Cachix has lowest priority to avoid corrupted kernel modules
+          echo "extra-substituters = https://jpyke3.cachix.org?priority=100" >> ~/.config/nix/nix.conf
 
       - name: Setup Magic Nix Cache
         uses: DeterminateSystems/magic-nix-cache-action@v2
@@ -132,10 +140,8 @@ jobs:
       - name: Build ${{ matrix.config }} (${{ matrix.description }})
         run: |
           echo "Building ${{ matrix.config }}..."
-          # Use --rebuild to force rebuilding kernel modules (workaround for modules-shrunk cache corruption)
-          # See: https://discourse.nixos.org/t/updating-linux-kernel-results-in-modules-shrunk-not-in-nix-store/62343
           nix build .#nixosConfigurations.${{ matrix.config }}.config.system.build.toplevel \
-            --no-link --print-out-paths --rebuild > build-paths.txt
+            --no-link --print-out-paths > build-paths.txt
           echo "Build complete"
           cat build-paths.txt
 
