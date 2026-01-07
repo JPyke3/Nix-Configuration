@@ -113,12 +113,17 @@ jobs:
       - name: Prefetch Citrix workspace tarball (norway only)
         if: matrix.system == 'norway'
         run: |
-          echo "Downloading Citrix workspace tarball from NAS..."
-          # Try files.pyk.ee first, then fall back to direct Tailscale access
-          curl -L -o linuxx64-24.5.0.76.tar.gz \
-            "https://files.pyk.ee/citrix/linuxx64-24.5.0.76.tar.gz" \
-            || curl -L -o linuxx64-24.5.0.76.tar.gz \
-            "http://jacob-nas/citrix/linuxx64-24.5.0.76.tar.gz"
+          echo "Downloading Citrix workspace tarball via Tailscale..."
+          # Fetch directly from jacob-china via Tailscale (nginx serves the file)
+          curl -kL -o linuxx64-24.5.0.76.tar.gz \
+            "https://jacob-china/citrix/linuxx64-24.5.0.76.tar.gz" \
+            -H "Host: files.pyk.ee"
+
+          # Verify download
+          if [ ! -s linuxx64-24.5.0.76.tar.gz ]; then
+            echo "::error::Failed to download Citrix tarball"
+            exit 1
+          fi
 
           # Add to Nix store with correct hash
           nix-prefetch-url file://$PWD/linuxx64-24.5.0.76.tar.gz
