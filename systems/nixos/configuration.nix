@@ -93,7 +93,7 @@
     "https://jpyke3.cachix.org/"
   ];
   nix.settings.trusted-public-keys = [
-    "main:ATTIC_PUBLIC_KEY_PLACEHOLDER" # Replace after Attic setup
+    "main:cTGyR3LMgVRA9oIu0U65WPKezuI9zl4EAlVb6y6I2kk="
     "jpyke3.cachix.org-1:SkUkQoQ6WbhSs7SGsMZ22H/DyJ7VNpT4/BaEvTCEQZY="
   ];
 
@@ -131,7 +131,7 @@
     parallel
     nom
     nvd
-    oterm
+    # oterm  # Temporarily disabled - fastmcp build failure upstream
     nh
     attic-client
   ];

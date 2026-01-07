@@ -29,7 +29,7 @@
   };
 
   fileSystems."/media" = {
-    device = "192.168.88.11:/volume1/media";
+    device = "jacob-nas:/volume1/media";
     fsType = "nfs";
     options = [
       "x-systemd.automount"
@@ -45,31 +45,14 @@
       "bg" # Retry in background if initial mount fails
     ];
   };
-  fileSystems."/adult" = {
-    device = "192.168.88.11:/volume1/adult";
-    fsType = "nfs";
-    options = [
-      "x-systemd.automount"
-      "x-systemd.idle-timeout=0"
-      "x-systemd.mount-timeout=30"
-      "x-systemd.requires=network-online.target"
-      "x-systemd.after=network-online.target"
-      "_netdev"
-      "nofail"
-      "soft"
-      "timeo=50"
-      "retrans=5"
-      "bg"
-    ];
-  };
   fileSystems."/cache" = {
     device = "/dev/disk/by-uuid/b1540301-3523-4ee6-a53f-d6c7e9af2f39";
     fsType = "ext4";
   };
 
-  # Attic binary cache storage on Synology NAS
+  # Attic binary cache storage on Synology NAS (via Tailscale)
   fileSystems."/nix-cache" = {
-    device = "192.168.88.11:/volume1/nix-cache";
+    device = "jacob-nas:/volume1/nix-cache";
     fsType = "nfs";
     options = [
       "x-systemd.automount"

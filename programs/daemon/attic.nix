@@ -21,12 +21,12 @@
       url = "sqlite:///var/lib/atticd/server.db?mode=rwc";
     };
 
-    # Chunking settings for deduplication
+    # Chunking settings for deduplication (optimized for large NixOS packages)
     chunking = {
       nar-size-threshold = 65536; # 64 KiB - chunk NARs larger than this
-      min-size = 16384; # 16 KiB minimum chunk size
-      avg-size = 65536; # 64 KiB average chunk size
-      max-size = 262144; # 256 KiB maximum chunk size
+      min-size = 32768; # 32 KiB minimum chunk size
+      avg-size = 131072; # 128 KiB average chunk size
+      max-size = 524288; # 512 KiB maximum chunk size
     };
 
     # Garbage collection settings
@@ -75,16 +75,17 @@ in {
   systemd.services.atticd = {
     description = "Attic Binary Cache Server";
     wantedBy = ["multi-user.target"];
-    after = ["network-online.target" "nix-cache.mount"];
+    # Note: systemd escapes hyphens in mount paths as \x2d
+    after = ["network-online.target" "nix\\x2dcache.mount"];
     wants = ["network-online.target"];
-    requires = ["nix-cache.mount"];
-
-    environment = {
-      ATTIC_SERVER_TOKEN_HS256_SECRET_BASE64_FILE = config.sops.secrets."attic/server-token".path;
-    };
+    requires = ["nix\\x2dcache.mount"];
 
     serviceConfig = {
+      # Verify NFS mount is available before starting
+      ExecStartPre = "${pkgs.coreutils}/bin/test -d /nix-cache/storage";
       ExecStart = "${pkgs.attic-server}/bin/atticd --config ${atticConfigFile}";
+      # Load the secret from file into environment variable (expects ATTIC_SERVER_TOKEN_HS256_SECRET_BASE64=<token>)
+      EnvironmentFile = config.sops.secrets."attic/server-token".path;
       User = "atticd";
       Group = "atticd";
       StateDirectory = "atticd";

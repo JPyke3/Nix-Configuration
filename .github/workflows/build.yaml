@@ -8,12 +8,16 @@ on:
   workflow_dispatch:
 
 jobs:
-  start-runner:
+  # Start EC2 runners for each system in parallel
+  start-runners:
     timeout-minutes: 5
-    name: Start self-hosted EC2 runner
+    name: Start EC2 runner (${{ matrix.system }})
     runs-on: ubuntu-latest
     permissions:
       actions: write
+    strategy:
+      matrix:
+        system: [norway, china, japan]
     steps:
       - name: Start EC2 runner
         id: start-ec2-runner
@@ -28,19 +32,33 @@ jobs:
           ec2_ami_id: ami-09e143e99e8fa74f9
           ec2_subnet_id: "subnet-e54cb9ad"
           ec2_security_group_id: "sg-c4dfe0b2"
-          ec2_instance_ttl: 60
+          ec2_instance_ttl: 120
           ec2_spot_instance_strategy: BestEffort
 
-  build-and-cache:
-    timeout-minutes: 120
-    needs:
-      - start-runner
+  # Build each system in parallel on separate runners
+  build:
+    timeout-minutes: 90
+    name: Build ${{ matrix.system }}
+    needs: start-runners
     runs-on: ${{ github.run_id }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - system: norway
+            config: jacob-norway
+            description: "Primary Laptop"
+          - system: china
+            config: jacob-china
+            description: "Home Server"
+          - system: japan
+            config: jacob-japan
+            description: "Steam Deck"
     steps:
       - name: Setup runner environment
         run: |
           mkdir -p /home/runner
-          chmod -R 777 /home/runner
+          chmod -R 755 /home/runner
           echo "HOME=/home/runner" >> $GITHUB_ENV
 
       - uses: actions/checkout@v4
@@ -49,6 +67,8 @@ jobs:
         uses: cachix/install-nix-action@v25
         with:
           nix_path: nixpkgs=channel:nixos-unstable
+          # Use latest Nix to avoid bug in 2.18.x causing modules-shrunk build failures
+          install_url: https://releases.nixos.org/nix/nix-2.28.3/install
           extra_nix_config: |
             experimental-features = nix-command flakes
             accept-flake-config = true
@@ -69,55 +89,82 @@ jobs:
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:ci
 
+      - name: Verify Tailscale connectivity
+        run: |
+          echo "Waiting for Tailscale to establish connection..."
+          sleep 5
+          tailscale status
+
+          # Verify we can reach the Attic cache
+          if ! ping -c 3 jacob-china; then
+            echo "::warning::Cannot reach jacob-china via Tailscale"
+          fi
+
+          # Verify Attic is accessible
+          if curl -sf http://jacob-china:5000/ > /dev/null 2>&1; then
+            echo "Attic cache is accessible"
+          else
+            echo "::warning::Attic cache not responding"
+          fi
+
       - name: Setup Attic client
         run: |
           nix profile install nixpkgs#attic-client
           attic login main http://jacob-china:5000 ${{ secrets.ATTIC_TOKEN }}
 
-      - name: Build jacob-norway (Primary Laptop)
+      - name: Prefetch Citrix workspace tarball (norway only)
+        if: matrix.system == 'norway'
         run: |
-          echo "Building jacob-norway..."
-          nix build .#nixosConfigurations.jacob-norway.config.system.build.toplevel --no-link --print-out-paths > norway-paths.txt
-          echo "jacob-norway build complete"
+          echo "Downloading Citrix workspace tarball via Tailscale..."
+          # Fetch directly from jacob-china via Tailscale (nginx serves the file)
+          # Using HTTP since Tailscale already provides encryption
+          curl -L -o linuxx64-24.5.0.76.tar.gz \
+            "http://jacob-china/citrix/linuxx64-24.5.0.76.tar.gz" \
+            -H "Host: files.pyk.ee"
 
-      - name: Build jacob-china (Home Server)
+          # Verify download
+          if [ ! -s linuxx64-24.5.0.76.tar.gz ]; then
+            echo "::error::Failed to download Citrix tarball"
+            exit 1
+          fi
+
+          # Add to Nix store with correct hash
+          nix-prefetch-url file://$PWD/linuxx64-24.5.0.76.tar.gz
+          rm linuxx64-24.5.0.76.tar.gz
+
+      - name: Build ${{ matrix.config }} (${{ matrix.description }})
         run: |
-          echo "Building jacob-china..."
-          nix build .#nixosConfigurations.jacob-china.config.system.build.toplevel --no-link --print-out-paths > china-paths.txt
-          echo "jacob-china build complete"
+          echo "Building ${{ matrix.config }}..."
+          nix build .#nixosConfigurations.${{ matrix.config }}.config.system.build.toplevel \
+            --no-link --print-out-paths > build-paths.txt
+          echo "Build complete"
+          cat build-paths.txt
 
-      - name: Build jacob-japan (Steam Deck)
+      - name: Push to Attic cache
         run: |
-          echo "Building jacob-japan..."
-          nix build .#nixosConfigurations.jacob-japan.config.system.build.toplevel --no-link --print-out-paths > japan-paths.txt
-          echo "jacob-japan build complete"
+          echo "Pushing ${{ matrix.config }} closure to Attic cache..."
 
-      - name: Push all builds to Attic cache
-        run: |
-          echo "Pushing builds to Attic cache..."
+          # Check Attic connectivity first
+          if ! attic cache info main; then
+            echo "::warning::Cannot connect to Attic cache, skipping push"
+            exit 0
+          fi
 
-          # Push each system's closure
-          for paths_file in norway-paths.txt china-paths.txt japan-paths.txt; do
-            if [ -f "$paths_file" ]; then
-              system_name=$(basename "$paths_file" -paths.txt)
-              echo "Pushing $system_name closure..."
-              while read -r path; do
-                attic push main "$path" || echo "Warning: Failed to push $path"
-              done < "$paths_file"
-            fi
-          done
+          # Push closure with verbose output to diagnose failures
+          # Use -j for parallel uploads
+          attic push -j 5 main $(cat build-paths.txt) 2>&1 || {
+            echo "::error::Attic push failed"
+            exit 1
+          }
+          echo "Push complete"
 
-          echo "All builds pushed to Attic cache"
-
-      - name: Cache statistics
+      - name: Build summary
         if: always()
         run: |
-          echo "=== Build Summary ==="
-          echo "Norway paths:"
-          cat norway-paths.txt 2>/dev/null || echo "No paths"
-          echo ""
-          echo "China paths:"
-          cat china-paths.txt 2>/dev/null || echo "No paths"
-          echo ""
-          echo "Japan paths:"
-          cat japan-paths.txt 2>/dev/null || echo "No paths"
+          echo "=== Build Summary for ${{ matrix.config }} ==="
+          echo "System: ${{ matrix.description }}"
+          echo "Paths built:"
+          cat build-paths.txt 2>/dev/null || echo "No paths (build may have failed)"
+          if [ -f closure-paths.txt ]; then
+            echo "Closure size: $(wc -l < closure-paths.txt) paths"
+          fi

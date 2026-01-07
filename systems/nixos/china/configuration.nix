@@ -14,7 +14,7 @@
     ../../../programs/daemon/acme.nix
     ../../../programs/daemon/nginx.nix
     ../../../programs/daemon/matter.nix
-    ../../../programs/daemon/stash.nix
+    # ../../../programs/daemon/stash.nix  # Disabled - /adult volume removed from NAS
     ../../../programs/daemon/mylar.nix
     ../../../programs/daemon/komga.nix
     ../../../programs/daemon/attic.nix # Self-hosted Nix binary cache
@@ -101,6 +101,57 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     git
     recyclarr
+  ];
+
+  # Attic database backup to NAS
+  systemd.services.attic-backup = {
+    description = "Backup Attic database to NAS";
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = pkgs.writeShellScript "attic-backup" ''
+        set -euo pipefail
+
+        DB_PATH="/var/lib/atticd/server.db"
+        BACKUP_DIR="/nix-cache/backups"
+        BACKUP_PATH="$BACKUP_DIR/server-$(date +%Y%m%d).db"
+
+        # Ensure database exists
+        if [ ! -f "$DB_PATH" ]; then
+          echo "Database not found: $DB_PATH"
+          exit 1
+        fi
+
+        # Perform backup
+        ${pkgs.sqlite}/bin/sqlite3 "$DB_PATH" ".backup '$BACKUP_PATH'"
+
+        # Verify backup succeeded
+        if [ ! -s "$BACKUP_PATH" ]; then
+          echo "Backup failed: $BACKUP_PATH is empty"
+          exit 1
+        fi
+
+        # Cleanup old backups (only if backups exist)
+        if compgen -G "$BACKUP_DIR/server-*.db" > /dev/null; then
+          ls -t "$BACKUP_DIR"/server-*.db | tail -n +8 | xargs -r rm
+        fi
+
+        echo "Backup successful: $BACKUP_PATH"
+      '';
+      User = "atticd";
+    };
+  };
+
+  systemd.timers.attic-backup = {
+    wantedBy = ["timers.target"];
+    timerConfig = {
+      OnCalendar = "daily";
+      Persistent = true;
+    };
+  };
+
+  # Ensure backup directory exists
+  systemd.tmpfiles.rules = [
+    "d /nix-cache/backups 0750 atticd atticd -"
   ];
 
   networking.firewall = {
