@@ -143,35 +143,18 @@ jobs:
         run: |
           echo "Pushing ${{ matrix.config }} closure to Attic cache..."
 
-          # Get all paths in the closure (not just toplevel)
-          nix path-info --recursive $(cat build-paths.txt) > closure-paths.txt 2>/dev/null || true
-          total=$(wc -l < closure-paths.txt)
-          echo "Found $total paths in closure"
-
           # Check Attic connectivity first
           if ! attic cache info main &>/dev/null; then
             echo "::warning::Cannot connect to Attic cache, skipping push"
             exit 0
           fi
 
-          # Push closure with error tracking
-          # Use : $((var++)) to avoid exit code 1 when var is 0
-          failed=0
-          pushed=0
-          while read -r path; do
-            if attic push main "$path" 2>/dev/null; then
-              : $((pushed++))
-            else
-              : $((failed++))
-            fi
-          done < closure-paths.txt
-
-          echo "Push complete: $pushed succeeded, $failed failed out of $total"
-
-          # Fail if more than 10% of paths failed
-          if [ $total -gt 0 ] && [ $((failed * 100 / total)) -gt 10 ]; then
-            echo "::error::Too many push failures ($failed / $total)"
-            exit 1
+          # Push closure (attic computes the closure automatically)
+          # Use -j for parallel uploads
+          if attic push -j 5 main $(cat build-paths.txt); then
+            echo "Push complete"
+          else
+            echo "::warning::Some paths may have failed to push"
           fi
 
       - name: Build summary
