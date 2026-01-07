@@ -1,0 +1,62 @@
+name: Lint and Format Check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint:
+    name: Nix Lint & Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v25
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - name: Install linting tools
+        run: |
+          nix profile install nixpkgs#alejandra nixpkgs#deadnix nixpkgs#statix
+
+      - name: Check formatting (alejandra)
+        run: |
+          echo "Checking Nix file formatting with alejandra..."
+          alejandra --check . || {
+            echo ""
+            echo "::error::Nix files are not properly formatted!"
+            echo "Run 'alejandra .' locally to fix formatting."
+            exit 1
+          }
+
+      - name: Check for dead code (deadnix)
+        run: |
+          echo "Checking for dead code with deadnix..."
+          # Exclude flake.nix as it has intentional unused bindings for inputs
+          deadnix --fail --exclude flake.nix . || {
+            echo ""
+            echo "::error::Dead code found!"
+            echo "Run 'deadnix --edit --exclude flake.nix .' locally to auto-fix."
+            exit 1
+          }
+
+      - name: Lint with statix
+        run: |
+          echo "Linting with statix..."
+          statix check . || {
+            echo ""
+            echo "::error::Statix found anti-patterns!"
+            echo "Run 'statix check .' locally to see issues."
+            exit 1
+          }
+
+      - name: Validate flake
+        run: |
+          echo "Validating flake..."
+          nix flake check --no-build || {
+            echo ""
+            echo "::error::Flake validation failed!"
+            exit 1
+          }

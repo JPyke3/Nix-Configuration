@@ -1,0 +1,130 @@
+#!/usr/bin/env bash
+#
+# Pre-commit hook for Nix-Configuration
+# Runs formatting (alejandra, deadnix) and linting (statix, nix flake check)
+#
+# If files are modified by formatters, the commit is aborted and you must re-stage.
+#
+
+set -euo pipefail
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+# Track if we need to abort due to modifications
+FILES_MODIFIED=0
+CHECKS_FAILED=0
+
+echo -e "${BLUE}Running pre-commit checks...${NC}"
+echo ""
+
+# Get repo root
+REPO_ROOT=$(git rev-parse --show-toplevel)
+cd "$REPO_ROOT"
+
+# Find all .nix files in the repo (excluding result symlinks and .git)
+NIX_FILES=$(find . -name "*.nix" -type f ! -path "./.git/*" ! -path "./result/*" 2>/dev/null || true)
+
+if [ -z "$NIX_FILES" ]; then
+    echo -e "${GREEN}No Nix files found, skipping checks.${NC}"
+    exit 0
+fi
+
+# Get checksums before formatting
+get_checksums() {
+    echo "$NIX_FILES" | xargs -r sha256sum 2>/dev/null | sort
+}
+
+CHECKSUMS_BEFORE=$(get_checksums)
+
+# === ALEJANDRA (Auto-format) ===
+echo -e "${BLUE}[1/4] Running alejandra (formatter)...${NC}"
+if command -v alejandra &> /dev/null; then
+    # Format all nix files
+    echo "$NIX_FILES" | xargs -r alejandra --quiet 2>/dev/null || true
+    echo -e "${GREEN}  ✓ alejandra complete${NC}"
+else
+    echo -e "${YELLOW}  ⚠ alejandra not found, skipping formatting${NC}"
+fi
+
+# === DEADNIX (Remove dead code) ===
+echo -e "${BLUE}[2/4] Running deadnix (dead code removal)...${NC}"
+if command -v deadnix &> /dev/null; then
+    # Auto-fix dead code, exclude flake.nix (has intentional unused bindings)
+    echo "$NIX_FILES" | grep -v "flake.nix" | xargs -r deadnix --edit 2>/dev/null || true
+    echo -e "${GREEN}  ✓ deadnix complete${NC}"
+else
+    echo -e "${YELLOW}  ⚠ deadnix not found, skipping dead code removal${NC}"
+fi
+
+# Check if files were modified
+CHECKSUMS_AFTER=$(get_checksums)
+if [ "$CHECKSUMS_BEFORE" != "$CHECKSUMS_AFTER" ]; then
+    FILES_MODIFIED=1
+    echo ""
+    echo -e "${YELLOW}Files were modified by formatters!${NC}"
+    echo -e "${YELLOW}Modified files:${NC}"
+
+    # Show which files changed
+    diff <(echo "$CHECKSUMS_BEFORE") <(echo "$CHECKSUMS_AFTER") | grep "^[<>]" | sed 's/^[<>] [^ ]* /  /' || true
+fi
+
+# === STATIX (Linting) ===
+echo ""
+echo -e "${BLUE}[3/4] Running statix (linter)...${NC}"
+if command -v statix &> /dev/null; then
+    if statix check . 2>&1; then
+        echo -e "${GREEN}  ✓ statix passed${NC}"
+    else
+        echo -e "${RED}  ✗ statix found issues${NC}"
+        CHECKS_FAILED=1
+    fi
+else
+    echo -e "${YELLOW}  ⚠ statix not found, skipping linting${NC}"
+fi
+
+# === NIX FLAKE CHECK ===
+echo ""
+echo -e "${BLUE}[4/4] Running nix flake check...${NC}"
+if command -v nix &> /dev/null; then
+    # Run flake check with limited evaluation (no full builds)
+    if nix flake check --no-build 2>&1; then
+        echo -e "${GREEN}  ✓ nix flake check passed${NC}"
+    else
+        echo -e "${RED}  ✗ nix flake check failed${NC}"
+        CHECKS_FAILED=1
+    fi
+else
+    echo -e "${YELLOW}  ⚠ nix not found, skipping flake check${NC}"
+fi
+
+# === FINAL RESULT ===
+echo ""
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+if [ $FILES_MODIFIED -eq 1 ]; then
+    echo -e "${YELLOW}⚠ Files were auto-formatted!${NC}"
+    echo ""
+    echo "Please review the changes, re-stage your files, and commit again:"
+    echo -e "  ${BLUE}git add -u && git commit${NC}"
+    echo ""
+    exit 1
+fi
+
+if [ $CHECKS_FAILED -eq 1 ]; then
+    echo -e "${RED}✗ Pre-commit checks failed!${NC}"
+    echo ""
+    echo "Please fix the issues above and try again."
+    echo "You can run individual checks with:"
+    echo -e "  ${BLUE}statix check .${NC}"
+    echo -e "  ${BLUE}nix flake check --no-build${NC}"
+    echo ""
+    exit 1
+fi
+
+echo -e "${GREEN}✓ All pre-commit checks passed!${NC}"
+exit 0

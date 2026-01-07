@@ -113,6 +113,14 @@ Machines are named after **geographic locations** (countries/regions):
 │   └── secrets.yaml
 │
 ├── scripts/                     # Utility scripts
+│   ├── pre-commit               # Git pre-commit hook
+│   └── install-hooks.sh         # Hook installer
+│
+├── .claude/                     # Claude Code configuration
+│   ├── settings.json            # Claude settings (hooks config)
+│   └── hooks/
+│       └── session-start.sh     # Auto-installs git hooks on session start
+│
 ├── wallpapers/                  # Desktop wallpapers
 └── .github/workflows/           # CI/CD automation
 ```
@@ -383,12 +391,49 @@ sops.secrets."path/to/secret" = {
 
 ---
 
+## Pre-Commit Hooks
+
+This repository uses native git pre-commit hooks for code quality. The hooks are **automatically installed** when Claude Code starts a session via the SessionStart hook.
+
+### What the hooks check
+
+| Step | Tool | Action |
+|------|------|--------|
+| 1 | **alejandra** | Auto-formats all Nix files |
+| 2 | **deadnix** | Auto-removes dead code (excludes flake.nix) |
+| 3 | **statix** | Lints for anti-patterns (blocks on failure) |
+| 4 | **nix flake check** | Validates the flake (blocks on failure) |
+
+### Behavior
+
+- If formatters modify files, the commit is **aborted** - re-stage and commit again
+- If linters find issues, the commit is **blocked** until fixed
+- To skip hooks temporarily: `git commit --no-verify`
+
+### Manual installation
+
+For local development (non-Claude environments):
+
+```bash
+./scripts/install-hooks.sh
+```
+
+### Required tools
+
+Install via nix-shell or system packages:
+- `alejandra` - Nix formatter
+- `deadnix` - Dead code finder
+- `statix` - Nix linter
+- `nix` - With flakes enabled
+
+---
+
 ## CI/CD
 
 GitHub Actions workflows in `.github/workflows/`:
 - `build.yaml` - Unified build for all systems (norway, china, japan), pushes to Attic + Cachix
 - `main.yaml` - Daily flake.lock updates
-- `deadnix.yml` - Dead code detection
+- `lint.yaml` - Format checking (alejandra), dead code (deadnix), linting (statix), flake validation
 - `claude.yml` / `claude-code-review.yml` - Claude Code automation
 
 ### Build Pipeline
