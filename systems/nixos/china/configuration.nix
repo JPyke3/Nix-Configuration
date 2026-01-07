@@ -3,6 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   pkgs,
+  lib,
   inputs,
   ...
 }: {
@@ -87,7 +88,7 @@
 
   system.autoUpgrade = {
     enable = true;
-    allowReboot = true;
+    allowReboot = lib.mkForce true;
     dates = "03:00";
     flake = "github:JPyke3/Nix-Configuration";
     persistent = true;
