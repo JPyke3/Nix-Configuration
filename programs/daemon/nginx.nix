@@ -88,8 +88,9 @@ in {
         useACMEHost = "${domain}";
       };
       # Static file server for CI assets (Citrix tarball, etc.)
+      # Using addSSL instead of forceSSL to allow HTTP access via Tailscale
       "files.${domain}" = {
-        forceSSL = true;
+        addSSL = true;
         useACMEHost = "${domain}";
         locations."/citrix/" = {
           alias = "/media/Software/citrix/";
