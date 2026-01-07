@@ -3,12 +3,12 @@
 
   nixConfig = {
     extra-substituters = [
+      "http://jacob-china:5000/main" # Self-hosted Attic cache (via Tailscale)
       "https://jpyke3.cachix.org"
-      "s3://jpyke3-nix-cache"
     ];
     extra-trusted-public-keys = [
+      "main:ATTIC_PUBLIC_KEY_PLACEHOLDER" # Replace after Attic setup
       "jpyke3.cachix.org-1:SkUkQoQ6WbhSs7SGsMZ22H/DyJ7VNpT4/BaEvTCEQZY="
-      "jpyke3-nix-cache:3rgaOBR/W59xxQ7Mt+LOHJWw84LRsS/Lzd3gTjEFidg="
     ];
     trusted-users = [
       "root"

@@ -67,6 +67,25 @@
     fsType = "ext4";
   };
 
+  # Attic binary cache storage on Synology NAS
+  fileSystems."/nix-cache" = {
+    device = "192.168.88.11:/volume1/nix-cache";
+    fsType = "nfs";
+    options = [
+      "x-systemd.automount"
+      "x-systemd.idle-timeout=0"
+      "x-systemd.mount-timeout=30"
+      "x-systemd.requires=network-online.target"
+      "x-systemd.after=network-online.target"
+      "_netdev"
+      "nofail"
+      "soft"
+      "timeo=50"
+      "retrans=5"
+      "bg"
+    ];
+  };
+
   swapDevices = [];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

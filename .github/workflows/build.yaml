@@ -1,15 +1,20 @@
-name: "Build Homelab Packages"
+name: "Build and Cache NixOS Configurations"
+
 on:
   pull_request:
   push:
+    branches:
+      - main
+  workflow_dispatch:
+
 jobs:
   start-runner:
-    timeout-minutes: 5              # normally it only takes 1-2 minutes
-    name: Start self-hosted EC2 runner   
+    timeout-minutes: 5
+    name: Start self-hosted EC2 runner
     runs-on: ubuntu-latest
     permissions:
-      actions: write        
-    steps:      
+      actions: write
+    steps:
       - name: Start EC2 runner
         id: start-ec2-runner
         uses: NextChapterSoftware/ec2-action-builder@v1.10
@@ -23,24 +28,96 @@ jobs:
           ec2_ami_id: ami-09e143e99e8fa74f9
           ec2_subnet_id: "subnet-e54cb9ad"
           ec2_security_group_id: "sg-c4dfe0b2"
-          ec2_instance_ttl: 40                # Optional (default is 60 minutes)
+          ec2_instance_ttl: 60
           ec2_spot_instance_strategy: BestEffort
 
-  run-build:
-    timeout-minutes: 60
+  build-and-cache:
+    timeout-minutes: 120
     needs:
       - start-runner
     runs-on: ${{ github.run_id }}
     steps:
-    - run: mkdir -p /home/runner && chmod -R 777 /home/runner
-    - run: echo "HOME=/home/runner" >> $GITHUB_ENV
-    - uses: actions/checkout@v4
-    - uses: cachix/install-nix-action@v25
-      with:
-        nix_path: nixpkgs=channel:nixos-24.11
-    - uses: cachix/cachix-action@v14
-      with:
-        name: jpyke3
-        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-        # - run: nix flake check https://github.com/NixOS/nix/issues/6398
-    - run: nix build .#nixosConfigurations.jacob-china.config.system.build.toplevel
+      - name: Setup runner environment
+        run: |
+          mkdir -p /home/runner
+          chmod -R 777 /home/runner
+          echo "HOME=/home/runner" >> $GITHUB_ENV
+
+      - uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v25
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            accept-flake-config = true
+
+      - name: Setup Cachix
+        uses: cachix/cachix-action@v14
+        with:
+          name: jpyke3
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+
+      - name: Setup Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@v2
+
+      - name: Connect to Tailscale
+        uses: tailscale/github-action@v2
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+
+      - name: Setup Attic client
+        run: |
+          nix profile install nixpkgs#attic-client
+          attic login main http://jacob-china:5000 ${{ secrets.ATTIC_TOKEN }}
+
+      - name: Build jacob-norway (Primary Laptop)
+        run: |
+          echo "Building jacob-norway..."
+          nix build .#nixosConfigurations.jacob-norway.config.system.build.toplevel --no-link --print-out-paths > norway-paths.txt
+          echo "jacob-norway build complete"
+
+      - name: Build jacob-china (Home Server)
+        run: |
+          echo "Building jacob-china..."
+          nix build .#nixosConfigurations.jacob-china.config.system.build.toplevel --no-link --print-out-paths > china-paths.txt
+          echo "jacob-china build complete"
+
+      - name: Build jacob-japan (Steam Deck)
+        run: |
+          echo "Building jacob-japan..."
+          nix build .#nixosConfigurations.jacob-japan.config.system.build.toplevel --no-link --print-out-paths > japan-paths.txt
+          echo "jacob-japan build complete"
+
+      - name: Push all builds to Attic cache
+        run: |
+          echo "Pushing builds to Attic cache..."
+
+          # Push each system's closure
+          for paths_file in norway-paths.txt china-paths.txt japan-paths.txt; do
+            if [ -f "$paths_file" ]; then
+              system_name=$(basename "$paths_file" -paths.txt)
+              echo "Pushing $system_name closure..."
+              while read -r path; do
+                attic push main "$path" || echo "Warning: Failed to push $path"
+              done < "$paths_file"
+            fi
+          done
+
+          echo "All builds pushed to Attic cache"
+
+      - name: Cache statistics
+        if: always()
+        run: |
+          echo "=== Build Summary ==="
+          echo "Norway paths:"
+          cat norway-paths.txt 2>/dev/null || echo "No paths"
+          echo ""
+          echo "China paths:"
+          cat china-paths.txt 2>/dev/null || echo "No paths"
+          echo ""
+          echo "Japan paths:"
+          cat japan-paths.txt 2>/dev/null || echo "No paths"

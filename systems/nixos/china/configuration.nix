@@ -17,6 +17,7 @@
     ../../../programs/daemon/stash.nix
     ../../../programs/daemon/mylar.nix
     ../../../programs/daemon/komga.nix
+    ../../../programs/daemon/attic.nix # Self-hosted Nix binary cache
     #    ../../../programs/daemon/unifi.nix
   ];
 
