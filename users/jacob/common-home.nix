@@ -46,7 +46,6 @@ in {
   imports = [
     inputs.nix-colors.homeManagerModules.default
     inputs.sops-nix.homeManagerModules.sops
-    # inputs.spicetify-nix.homeManagerModules.default
 
     ../../programs/cli/zsh.nix
     ../../programs/cli/tmux.nix

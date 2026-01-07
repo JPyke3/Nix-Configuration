@@ -9,11 +9,9 @@ Machines are named after **geographic locations** (countries/regions):
 | Name | Platform | Purpose |
 |------|----------|---------|
 | **norway** | NixOS (x86_64) | Primary ASUS ROG laptop - NVIDIA+AMD hybrid graphics, KDE Plasma + Hyprland |
-| **austria** | NixOS (aarch64) | Apple Silicon MacBook - Asahi Linux, KDE Plasma + Hyprland |
 | **japan** | NixOS (x86_64) | Steam Deck OLED - Jovian, gaming-focused |
 | **china** | NixOS (x86_64) | Home server - Media stack, self-hosted services |
-| **singapore** | NixOS (x86_64) | **[DEPRECATED]** Gaming desktop, VR development |
-| **darwin** | nix-darwin (aarch64) | Mac Mini - Yabai WM, Tdarr transcoding |
+| **jacob-germany** | nix-darwin (aarch64) | Mac Mini - Yabai WM, Tdarr transcoding |
 
 ---
 
@@ -33,45 +31,29 @@ Machines are named after **geographic locations** (countries/regions):
 │   │   ├── tmux.nix             # Terminal multiplexer
 │   │   ├── git.nix              # Git with diff-so-fancy
 │   │   ├── lf.nix               # File manager
-│   │   ├── ollama.nix           # Local LLM
-│   │   ├── spicetify.nix        # Spotify customization
 │   │   ├── nix-index.nix        # Package search
 │   │   └── homebrew.nix         # macOS Homebrew
 │   │
 │   ├── daemon/                  # Background services
-│   │   ├── jellyfin.nix         # Media server
-│   │   ├── sonarr.nix           # TV management
-│   │   ├── radarr.nix           # Movie management
-│   │   ├── lidarr.nix           # Music management
-│   │   ├── prowlarr.nix         # Indexer manager
-│   │   ├── bazarr.nix           # Subtitles
-│   │   ├── transmission.nix     # Torrent client
-│   │   ├── deluge.nix           # Torrent client
+│   │   ├── arr.nix              # Media server stack (containerized Sonarr, Radarr, etc.)
 │   │   ├── nginx.nix            # Web server/reverse proxy
 │   │   ├── tailscale.nix        # VPN mesh networking
 │   │   ├── syncthing/           # File synchronization
 │   │   ├── docker.nix           # Container runtime
-│   │   ├── distrobox.nix        # Container environments
-│   │   ├── nextcloud.nix        # Cloud storage
 │   │   ├── vaultwarden.nix      # Password manager
-│   │   ├── gitea.nix            # Git hosting
-│   │   ├── home-assistant.nix   # Home automation
-│   │   ├── immich.nix           # Photo management
-│   │   ├── tdarr.nix            # Video transcoding
+│   │   ├── attic.nix            # Self-hosted Nix binary cache
 │   │   ├── kanata/              # Keyboard remapping
 │   │   ├── yabai.nix            # macOS window manager
 │   │   ├── sketchybar/          # macOS status bar
-│   │   └── ...                  # Many more services
+│   │   └── ...                  # More services (komga, mylar, matter, etc.)
 │   │
 │   └── desktop/                 # GUI applications
 │       ├── hyprland.nix         # Wayland compositor
-│       ├── hyprlock.nix         # Screen locker
 │       ├── waybar/              # Status bar
 │       ├── kitty/               # Terminal emulator
 │       ├── firefox.nix          # Web browser
-│       ├── chrome.nix           # Chromium
 │       ├── vscode.nix           # Code editor
-│       └── gaming/              # Gaming configs (emulators)
+│       └── gaming/              # Gaming configs (ryujinx emulator)
 │
 ├── systems/                     # System configurations
 │   ├── nixos/
@@ -82,21 +64,15 @@ Machines are named after **geographic locations** (countries/regions):
 │   │   │   ├── configuration.nix
 │   │   │   ├── hardware-configuration.nix
 │   │   │   └── home.nix
-│   │   ├── austria/             # Apple Silicon (Asahi)
-│   │   │   ├── configuration.nix
-│   │   │   ├── hardware-configuration.nix
-│   │   │   ├── home.nix
-│   │   │   └── apple-silicon-support/  # Asahi modules
 │   │   ├── japan/               # Steam Deck
 │   │   │   ├── configuration.nix
 │   │   │   ├── hardware-configuration.nix
 │   │   │   ├── home.nix
 │   │   │   └── syncthing.nix
-│   │   ├── china/               # Home server
-│   │   │   ├── configuration.nix
-│   │   │   ├── hardware-configuration.nix
-│   │   │   └── home.nix
-│   │   └── singapore/           # [DEPRECATED] Desktop
+│   │   └── china/               # Home server
+│   │       ├── configuration.nix
+│   │       ├── hardware-configuration.nix
+│   │       └── home.nix
 │   │
 │   ├── darwin/                  # macOS (Mac Mini)
 │   │   ├── configuration.nix
@@ -130,7 +106,6 @@ Machines are named after **geographic locations** (countries/regions):
 | `stylix` | 25.11 | Consistent theming across systems |
 | `sops-nix` | - | Secrets management (age encryption) |
 | `jovian` | - | Steam Deck support |
-| `nixos-apple-silicon` | - | Asahi Linux support |
 
 ---
 
@@ -358,25 +333,22 @@ sops.secrets."path/to/secret" = {
 - ASUS ROG tools (asusd, supergfxd)
 - KDE Plasma 6 + Hyprland available
 
-### austria (Apple Silicon)
-- Asahi Linux with custom GPU drivers
-- Custom kernel modules in `apple-silicon-support/`
-- Firmware in `systems/nixos/austria/firmware/`
-
 ### japan (Steam Deck)
 - Jovian NixOS with Decky Loader
 - Auto-mounts SD card to `/games`
 - Syncthing for game saves/ROMs
 
 ### china (Home Server)
-- Media stack: Jellyfin, Sonarr, Radarr, Lidarr, etc.
+- Media stack: Jellyfin, Sonarr, Radarr, Lidarr, etc. (containerized via arr.nix)
 - NFS mounts for media storage (Synology NAS)
 - Nginx reverse proxy for services
 - User groups for permission management
 - **Attic binary cache server** (port 5000, Tailscale only)
 - NFS mount `/nix-cache` for Attic storage on Synology
+- Auto-upgrade enabled (pulls from GitHub daily at 03:00)
+- Scheduled reboot at 03:00
 
-### darwin (Mac Mini)
+### jacob-germany (Mac Mini)
 - Yabai window manager
 - Rclone mounts for media
 - Tdarr transcoding node

@@ -14,8 +14,8 @@
           passwordFile = config.sops.secrets."programs/syncthing/guipassword".path;
         };
         devices = {
-          # Desktop
-          "singapore" = {id = "CNOEUAD-NAKEO7K-VFEOW3J-GYDKRJL-VQTCJDX-VHKDQUP-HHVIGNW-U5QY5AW";};
+          # Primary Laptop (ASUS ROG)
+          "norway" = {id = "CNOEUAD-NAKEO7K-VFEOW3J-GYDKRJL-VQTCJDX-VHKDQUP-HHVIGNW-U5QY5AW";};
 
           # iPhone
           "korea" = {

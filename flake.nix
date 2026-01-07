@@ -41,10 +41,6 @@
     nixpkgs-firefox-darwin = {
       url = "github:bandithedoge/nixpkgs-firefox-darwin";
     };
-    llama-cpp = {
-      url = "github:ggerganov/llama.cpp";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -56,15 +52,8 @@
     kmonad = {
       url = "github:kmonad/kmonad?dir=nix";
     };
-    base16 = {
-      url = "github:SenchoPens/base16.nix";
-    };
     stylix = {
       url = "github:danth/stylix/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    spicetify-nix = {
-      url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     vpnconfinement = {
@@ -73,9 +62,6 @@
     nix-rosetta-builder = {
       url = "github:cpick/nix-rosetta-builder";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nixos-apple-silicon = {
-      url = "github:oliverbestmann/nixos-apple-silicon";
     };
     # CachyOS optimized kernel
     nix-cachyos-kernel = {
@@ -93,42 +79,18 @@
     unstable,
     home-manager,
     home-manager-unstable,
-    llama-cpp,
     jovian,
     nix-darwin,
     nixpkgs-darwin,
     nur,
     stylix,
-    spicetify-nix,
     vpnconfinement,
     nix-rosetta-builder,
-    nixos-apple-silicon,
     nix-cachyos-kernel,
     nixpkgs-citrix,
     ...
   } @ inputs: {
-    # Desktop PC (Currently Unused)
-    # nixosConfigurations.jacob-singapore = nixpkgs.lib.nixosSystem {
-    #   system = "x86_64-linux";
-    #   specialArgs = {inherit inputs;};
-    #   modules = [
-    #     nur.modules.nixos.default
-    #     ./systems/nixos/configuration.nix
-    #     ./systems/nixos/singapore/configuration.nix
-    #     stylix.nixosModules.stylix
-    #     ./systems/stylix.nix
-    #     home-manager.nixosModules.home-manager
-    #     {
-    #       home-manager.users.jacobpyke = import ./systems/nixos/singapore/home.nix;
-    #       home-manager.backupFileExtension = "backup";
-    #       home-manager.extraSpecialArgs = {
-    #         inherit inputs;
-    #         system = "x86_64-linux";
-    #       };
-    #     }
-    #   ];
-    # };
-    # ASUS ROG Laptop (CachyOS Migration)
+    # ASUS ROG Laptop
     nixosConfigurations.jacob-norway = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {inherit inputs;};
@@ -160,28 +122,6 @@
         })
       ];
     };
-    # Asahi Linux (Deprecated - no longer active)
-    # nixosConfigurations.jacob-austria = unstable.lib.nixosSystem {
-    #   system = "aarch64-linux";
-    #   specialArgs = {inherit inputs;};
-    #   modules = [
-    #     nur.modules.nixos.default
-    #     ./systems/nixos/configuration.nix
-    #     ./systems/nixos/austria/configuration.nix
-    #     nixos-apple-silicon.nixosModules.default
-    #     stylix.nixosModules.stylix
-    #     ./systems/stylix.nix
-    #     home-manager-unstable.nixosModules.home-manager
-    #     {
-    #       home-manager.users.jacobpyke = import ./systems/nixos/austria/home.nix;
-    #       home-manager.backupFileExtension = "backup";
-    #       home-manager.extraSpecialArgs = {
-    #         inherit inputs;
-    #         system = "aarch64-linux";
-    #       };
-    #     }
-    #   ];
-    # };
     # Steam Deck OLED
     nixosConfigurations.jacob-japan = unstable.lib.nixosSystem {
       system = "x86_64-linux";

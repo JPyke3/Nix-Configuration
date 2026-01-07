@@ -131,7 +131,6 @@
     parallel
     nom
     nvd
-    # oterm  # Temporarily disabled - fastmcp build failure upstream
     nh
     attic-client
   ];

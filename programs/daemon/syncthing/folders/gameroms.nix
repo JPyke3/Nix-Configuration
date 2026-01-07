@@ -1,6 +1,6 @@
 {...}: {
   services.syncthing.settings.folders."Game Roms" = {
     path = "/home/jacobpyke/data/Games/Roms";
-    devices = ["singapore" "germany" "japan"];
+    devices = ["norway" "germany" "japan"];
   };
 }
