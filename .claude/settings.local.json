@@ -8,7 +8,10 @@
       "Bash(attic --help:*)",
       "Bash(journalctl:*)",
       "Bash(systemctl list-units:*)",
-      "Bash(mount:*)"
+      "Bash(mount:*)",
+      "Bash(curl:*)",
+      "Bash(/nix/store/lkyl93ljwfy2kfkkklmqi17vnpd5395k-attic-0-unstable-2025-09-24/bin/atticadm:*)",
+      "Bash(cat:*)"
     ]
   }
 }

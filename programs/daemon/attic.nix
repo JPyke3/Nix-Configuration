@@ -80,12 +80,10 @@ in {
     wants = ["network-online.target"];
     requires = ["nix\\x2dcache.mount"];
 
-    environment = {
-      ATTIC_SERVER_TOKEN_HS256_SECRET_BASE64_FILE = config.sops.secrets."attic/server-token".path;
-    };
-
     serviceConfig = {
       ExecStart = "${pkgs.attic-server}/bin/atticd --config ${atticConfigFile}";
+      # Load the secret from file into environment variable
+      EnvironmentFile = config.sops.secrets."attic/server-token".path;
       User = "atticd";
       Group = "atticd";
       StateDirectory = "atticd";
