@@ -4,7 +4,7 @@
   nixConfig = {
     extra-substituters = [
       "http://jacob-china:5000/main" # Self-hosted Attic cache (via Tailscale)
-      "https://jpyke3.cachix.org"
+      "https://jpyke3.cachix.org?priority=100" # Low priority fallback (corrupted kernel modules)
     ];
     extra-trusted-public-keys = [
       "main:MSXfvgfEcXOP3P3Mw50yV8KZtv5xRkcQnxAnd1kiYtc="

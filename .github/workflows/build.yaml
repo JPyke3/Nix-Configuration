@@ -71,19 +71,11 @@ jobs:
             experimental-features = nix-command flakes
             accept-flake-config = true
 
-      - name: Setup Cachix (low priority fallback)
+      - name: Setup Cachix
         uses: cachix/cachix-action@v14
         with:
           name: jpyke3
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-          # Set Cachix to low priority (100) so cache.nixos.org (40) and Attic are preferred
-          # This avoids corrupted modules-shrunk entries in Cachix
-          extraPullNames: ""
-
-      - name: Configure cache priorities
-        run: |
-          # Ensure Cachix has lowest priority to avoid corrupted kernel modules
-          echo "extra-substituters = https://jpyke3.cachix.org?priority=100" >> ~/.config/nix/nix.conf
 
       - name: Setup Magic Nix Cache
         uses: DeterminateSystems/magic-nix-cache-action@v2
