@@ -7,7 +7,7 @@
       "https://jpyke3.cachix.org" # Cachix fallback
     ];
     extra-trusted-public-keys = [
-      "main:MSXfvgfEcXOP3P3Mw50yV8KZtv5xRkcQnxAnd1kiYtc="
+      "main:cTGyR3LMgVRA9oIu0U65WPKezuI9zl4EAlVb6y6I2kk="
       "jpyke3.cachix.org-1:SkUkQoQ6WbhSs7SGsMZ22H/DyJ7VNpT4/BaEvTCEQZY="
     ];
     trusted-users = [
