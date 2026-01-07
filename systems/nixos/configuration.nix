@@ -10,14 +10,6 @@
 }: {
   nixpkgs.config.allowUnfree = true;
 
-  # Workaround for nixpkgs bug #447074 - modules-shrunk derivation fails
-  # https://github.com/nixos/nixpkgs/issues/447074
-  nixpkgs.overlays = [
-    (final: prev: {
-      makeModulesClosure = x: prev.makeModulesClosure (x // { allowMissing = true; });
-    })
-  ];
-
   imports = [
     inputs.sops-nix.nixosModules.sops
     ../../programs/daemon/tailscale.nix
