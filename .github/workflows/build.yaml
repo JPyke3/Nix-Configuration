@@ -132,8 +132,10 @@ jobs:
       - name: Build ${{ matrix.config }} (${{ matrix.description }})
         run: |
           echo "Building ${{ matrix.config }}..."
+          # Use --rebuild to force rebuilding kernel modules (workaround for modules-shrunk cache corruption)
+          # See: https://discourse.nixos.org/t/updating-linux-kernel-results-in-modules-shrunk-not-in-nix-store/62343
           nix build .#nixosConfigurations.${{ matrix.config }}.config.system.build.toplevel \
-            --no-link --print-out-paths > build-paths.txt
+            --no-link --print-out-paths --rebuild > build-paths.txt
           echo "Build complete"
           cat build-paths.txt
 
