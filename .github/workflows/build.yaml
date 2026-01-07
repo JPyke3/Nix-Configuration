@@ -73,6 +73,15 @@ jobs:
             experimental-features = nix-command flakes
             accept-flake-config = true
 
+      - name: Setup Cachix
+        uses: cachix/cachix-action@v14
+        with:
+          name: jpyke3
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+
+      - name: Setup Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@v2
+
       - name: Connect to Tailscale
         uses: tailscale/github-action@v2
         with:
@@ -146,13 +155,14 @@ jobs:
           fi
 
           # Push closure with error tracking
+          # Use : $((var++)) to avoid exit code 1 when var is 0
           failed=0
           pushed=0
           while read -r path; do
             if attic push main "$path" 2>/dev/null; then
-              ((pushed++))
+              : $((pushed++))
             else
-              ((failed++))
+              : $((failed++))
             fi
           done < closure-paths.txt
 
