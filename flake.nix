@@ -17,14 +17,14 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-24.11-darwin";
+    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
     nur = {
       url = "github:nix-community/nur";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager-unstable = {
@@ -32,7 +32,7 @@
       inputs.nixpkgs.follows = "unstable";
     };
     nix-darwin = {
-      url = "github:LnL7/nix-darwin/nix-darwin-24.11";
+      url = "github:LnL7/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-colors = {
@@ -60,7 +60,7 @@
       url = "github:SenchoPens/base16.nix";
     };
     stylix = {
-      url = "github:danth/stylix/release-24.11";
+      url = "github:danth/stylix/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     spicetify-nix = {
@@ -76,6 +76,10 @@
     };
     nixos-apple-silicon = {
       url = "github:oliverbestmann/nixos-apple-silicon";
+    };
+    # CachyOS optimized kernel
+    nix-cachyos-kernel = {
+      url = "github:xddxdd/nix-cachyos-kernel/release";
     };
   };
 
@@ -95,6 +99,7 @@
     vpnconfinement,
     nix-rosetta-builder,
     nixos-apple-silicon,
+    nix-cachyos-kernel,
     ...
   } @ inputs: {
     # Desktop PC (Currently Unused)
@@ -118,6 +123,27 @@
     #     }
     #   ];
     # };
+    # ASUS ROG Laptop (CachyOS Migration)
+    nixosConfigurations.jacob-norway = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = {inherit inputs;};
+      modules = [
+        nur.modules.nixos.default
+        ./systems/nixos/configuration.nix
+        ./systems/nixos/norway/configuration.nix
+        stylix.nixosModules.stylix
+        ./systems/stylix.nix
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.users.jacobpyke = import ./systems/nixos/norway/home.nix;
+          home-manager.backupFileExtension = "backup";
+          home-manager.extraSpecialArgs = {
+            inherit inputs;
+            system = "x86_64-linux";
+          };
+        }
+      ];
+    };
     # Asahi Linux
     nixosConfigurations.jacob-austria = unstable.lib.nixosSystem {
       system = "aarch64-linux";
