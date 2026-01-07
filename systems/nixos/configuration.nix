@@ -84,9 +84,18 @@
   };
 
   nix.settings.experimental-features = "nix-command flakes";
-  nix.settings.substituters = ["https://jpyke3.cachix.org/"];
-  nix.settings.trusted-substituters = ["https://jpyke3.cachix.org/"];
-  nix.settings.trusted-public-keys = ["jpyke3.cachix.org-1:SkUkQoQ6WbhSs7SGsMZ22H/DyJ7VNpT4/BaEvTCEQZY="];
+  nix.settings.substituters = [
+    "http://jacob-china:5000/main" # Self-hosted Attic cache (via Tailscale)
+    "https://jpyke3.cachix.org/" # Cachix fallback
+  ];
+  nix.settings.trusted-substituters = [
+    "http://jacob-china:5000/main"
+    "https://jpyke3.cachix.org/"
+  ];
+  nix.settings.trusted-public-keys = [
+    "main:ATTIC_PUBLIC_KEY_PLACEHOLDER" # Replace after Attic setup
+    "jpyke3.cachix.org-1:SkUkQoQ6WbhSs7SGsMZ22H/DyJ7VNpT4/BaEvTCEQZY="
+  ];
 
   programs.zsh.enable = true;
 

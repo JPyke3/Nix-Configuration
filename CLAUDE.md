@@ -283,6 +283,47 @@ darwin-rebuild switch --flake .#jacob-germany
 | **Syncthing** | File synchronization across devices |
 | **Tailscale** | Mesh VPN for secure inter-machine networking |
 | **Home Manager** | User environment and dotfile management |
+| **Attic** | Self-hosted Nix binary cache (runs on china, stores on Synology NAS) |
+
+---
+
+## Binary Cache Infrastructure
+
+### Architecture
+
+```
+GitHub Actions (EC2) → Build → Push via Tailscale → Attic (china:5000) → Synology NAS
+                                                           ↑
+                                            All systems fetch from here
+```
+
+### Components
+
+| Component | Location | Purpose |
+|-----------|----------|---------|
+| **Attic Server** | `jacob-china:5000` | Binary cache server (Tailscale only) |
+| **Storage** | Synology NAS `/volume1/nix-cache` | NFS-mounted NAR file storage |
+| **Cache name** | `main` | Default Attic cache |
+| **Garbage Collection** | 30-day retention | Runs daily |
+
+### Cache URLs (Priority Order)
+
+1. `http://jacob-china:5000/main` - Self-hosted Attic (via Tailscale)
+2. `https://jpyke3.cachix.org` - Cachix fallback
+3. `https://cache.nixos.org` - Official NixOS cache
+
+### Attic Management
+
+```bash
+# Login to Attic (on any Tailscale-connected machine)
+attic login main http://jacob-china:5000 <token>
+
+# Push a build manually
+attic push main /nix/store/<path>
+
+# Check cache status
+attic cache info main
+```
 
 ---
 
@@ -326,9 +367,11 @@ sops.secrets."path/to/secret" = {
 
 ### china (Home Server)
 - Media stack: Jellyfin, Sonarr, Radarr, Lidarr, etc.
-- NFS mounts for media storage
+- NFS mounts for media storage (Synology NAS)
 - Nginx reverse proxy for services
 - User groups for permission management
+- **Attic binary cache server** (port 5000, Tailscale only)
+- NFS mount `/nix-cache` for Attic storage on Synology
 
 ### darwin (Mac Mini)
 - Yabai window manager
@@ -340,9 +383,19 @@ sops.secrets."path/to/secret" = {
 ## CI/CD
 
 GitHub Actions workflows in `.github/workflows/`:
-- `build.yaml` - Build validation
-- `build-japan.yaml` - Steam Deck specific builds
+- `build.yaml` - Unified build for all systems (norway, china, japan), pushes to Attic + Cachix
+- `main.yaml` - Daily flake.lock updates
 - `deadnix.yml` - Dead code detection
+- `claude.yml` / `claude-code-review.yml` - Claude Code automation
+
+### Build Pipeline
+
+1. **EC2 Spot Runner** starts (c6i.4xlarge, 100GB disk)
+2. **Nix** installed with flake support
+3. **Cachix** + **Magic Nix Cache** for CI acceleration
+4. **Tailscale** connects to home network
+5. **Builds** all systems: `jacob-norway`, `jacob-china`, `jacob-japan`
+6. **Pushes** to both Cachix (public) and Attic (self-hosted)
 
 ---
 
