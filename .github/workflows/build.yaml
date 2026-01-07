@@ -8,12 +8,16 @@ on:
   workflow_dispatch:
 
 jobs:
-  start-runner:
+  # Start EC2 runners for each system in parallel
+  start-runners:
     timeout-minutes: 5
-    name: Start self-hosted EC2 runner
+    name: Start EC2 runner (${{ matrix.system }})
     runs-on: ubuntu-latest
     permissions:
       actions: write
+    strategy:
+      matrix:
+        system: [norway, china, japan]
     steps:
       - name: Start EC2 runner
         id: start-ec2-runner
@@ -31,11 +35,25 @@ jobs:
           ec2_instance_ttl: 60
           ec2_spot_instance_strategy: BestEffort
 
-  build-and-cache:
-    timeout-minutes: 120
-    needs:
-      - start-runner
+  # Build each system in parallel on separate runners
+  build:
+    timeout-minutes: 90
+    name: Build ${{ matrix.system }}
+    needs: start-runners
     runs-on: ${{ github.run_id }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - system: norway
+            config: jacob-norway
+            description: "Primary Laptop"
+          - system: china
+            config: jacob-china
+            description: "Home Server"
+          - system: japan
+            config: jacob-japan
+            description: "Steam Deck"
     steps:
       - name: Setup runner environment
         run: |
@@ -74,50 +92,27 @@ jobs:
           nix profile install nixpkgs#attic-client
           attic login main http://jacob-china:5000 ${{ secrets.ATTIC_TOKEN }}
 
-      - name: Build jacob-norway (Primary Laptop)
+      - name: Build ${{ matrix.config }} (${{ matrix.description }})
         run: |
-          echo "Building jacob-norway..."
-          nix build .#nixosConfigurations.jacob-norway.config.system.build.toplevel --no-link --print-out-paths > norway-paths.txt
-          echo "jacob-norway build complete"
+          echo "Building ${{ matrix.config }}..."
+          nix build .#nixosConfigurations.${{ matrix.config }}.config.system.build.toplevel \
+            --no-link --print-out-paths > build-paths.txt
+          echo "Build complete"
+          cat build-paths.txt
 
-      - name: Build jacob-china (Home Server)
+      - name: Push to Attic cache
         run: |
-          echo "Building jacob-china..."
-          nix build .#nixosConfigurations.jacob-china.config.system.build.toplevel --no-link --print-out-paths > china-paths.txt
-          echo "jacob-china build complete"
+          echo "Pushing ${{ matrix.config }} to Attic cache..."
+          while read -r path; do
+            echo "Pushing $path"
+            attic push main "$path" || echo "Warning: Failed to push $path"
+          done < build-paths.txt
+          echo "Push complete"
 
-      - name: Build jacob-japan (Steam Deck)
-        run: |
-          echo "Building jacob-japan..."
-          nix build .#nixosConfigurations.jacob-japan.config.system.build.toplevel --no-link --print-out-paths > japan-paths.txt
-          echo "jacob-japan build complete"
-
-      - name: Push all builds to Attic cache
-        run: |
-          echo "Pushing builds to Attic cache..."
-
-          # Push each system's closure
-          for paths_file in norway-paths.txt china-paths.txt japan-paths.txt; do
-            if [ -f "$paths_file" ]; then
-              system_name=$(basename "$paths_file" -paths.txt)
-              echo "Pushing $system_name closure..."
-              while read -r path; do
-                attic push main "$path" || echo "Warning: Failed to push $path"
-              done < "$paths_file"
-            fi
-          done
-
-          echo "All builds pushed to Attic cache"
-
-      - name: Cache statistics
+      - name: Build summary
         if: always()
         run: |
-          echo "=== Build Summary ==="
-          echo "Norway paths:"
-          cat norway-paths.txt 2>/dev/null || echo "No paths"
-          echo ""
-          echo "China paths:"
-          cat china-paths.txt 2>/dev/null || echo "No paths"
-          echo ""
-          echo "Japan paths:"
-          cat japan-paths.txt 2>/dev/null || echo "No paths"
+          echo "=== Build Summary for ${{ matrix.config }} ==="
+          echo "System: ${{ matrix.description }}"
+          echo "Paths built:"
+          cat build-paths.txt 2>/dev/null || echo "No paths (build may have failed)"
