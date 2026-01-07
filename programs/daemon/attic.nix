@@ -75,9 +75,10 @@ in {
   systemd.services.atticd = {
     description = "Attic Binary Cache Server";
     wantedBy = ["multi-user.target"];
-    after = ["network-online.target" "nix-cache.mount"];
+    # Note: systemd escapes hyphens in mount paths as \x2d
+    after = ["network-online.target" "nix\\x2dcache.mount"];
     wants = ["network-online.target"];
-    requires = ["nix-cache.mount"];
+    requires = ["nix\\x2dcache.mount"];
 
     environment = {
       ATTIC_SERVER_TOKEN_HS256_SECRET_BASE64_FILE = config.sops.secrets."attic/server-token".path;
