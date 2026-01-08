@@ -23,8 +23,10 @@ in {
       name = "Noto Serif CJK";
     };
     sizes = {
+      applications = 11;
+      desktop = 10;
       terminal = fontSize;
-      desktop = 5;
+      popups = 10;
     };
   };
 }
