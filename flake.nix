@@ -5,10 +5,12 @@
     extra-substituters = [
       "http://jacob-china:5000/main" # Self-hosted Attic cache (via Tailscale)
       "https://jpyke3.cachix.org" # Cachix fallback
+      "https://claude-code.cachix.org" # Claude Code pre-built binaries
     ];
     extra-trusted-public-keys = [
       "main:cTGyR3LMgVRA9oIu0U65WPKezuI9zl4EAlVb6y6I2kk="
       "jpyke3.cachix.org-1:SkUkQoQ6WbhSs7SGsMZ22H/DyJ7VNpT4/BaEvTCEQZY="
+      "claude-code.cachix.org-1:YeXf2aNu7UTX8Vwrze0za1WEDS+4DuI2kVeWEE4fsRk="
     ];
     trusted-users = [
       "root"
@@ -85,6 +87,10 @@
     nixpkgs-citrix = {
       url = "github:nixos/nixpkgs/nixos-24.11";
     };
+    # Claude Code CLI
+    claude-code = {
+      url = "github:sadjow/claude-code-nix";
+    };
   };
 
   outputs = {
@@ -105,6 +111,7 @@
     nixos-apple-silicon,
     nix-cachyos-kernel,
     nixpkgs-citrix,
+    claude-code,
     ...
   } @ inputs: {
     # Desktop PC (Currently Unused)
