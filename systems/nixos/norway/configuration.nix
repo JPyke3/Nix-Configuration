@@ -14,6 +14,69 @@
   networking.networkmanager.wifi.powersave = false;
   networking.networkmanager.wifi.backend = "iwd";
 
+  # =============================================================================
+  # SLEEP/SUSPEND FIX FOR ASUS G14 2025 (AMD HX 370 + RTX 5070 Ti)
+  # =============================================================================
+  # This laptop only supports s2idle (Modern Standby), not S3 deep sleep.
+  # Multiple kernel parameters and services are required to make it work properly.
+
+  boot.kernelParams = [
+    # AMD Power Management - Critical for s2idle to reach deepest state
+    # Note: enable_stb=1 not supported on G14 2025 firmware (causes probe failure)
+    "amd_pmc.disable_workarounds=0" # Enable all PMC workarounds
+
+    # ACPI fixes for Modern Standby
+    "acpi.ec_no_wakeup=1" # Prevent EC from waking system
+    "acpi_osi=Linux" # Better ACPI compatibility
+
+    # AMD GPU - Disable VPE (Video Processing Engine) which crashes on suspend
+    # Error: "VPE queue reset failed" and "IB test failed on vpe (-110)"
+    # VPE is for hardware video encoding - not critical for normal use
+    "amdgpu.vpe=0"
+
+    # NVIDIA power management (RTX 50 series specific)
+    # NVreg_PreserveVideoMemoryAllocations is already set by hardware.nvidia.powerManagement.enable
+    "nvidia.NVreg_TemporaryFilePath=/var/tmp" # Temp storage for VRAM during suspend
+    "nvidia_drm.fbdev=1" # Required for RTX 50 series framebuffer
+
+    # USB wakeup prevention (common cause of immediate wake)
+    # Remove this param once suspend is working if you want USB wake
+    "usbcore.autosuspend=-1"
+  ];
+
+  # =============================================================================
+  # WIFI SUSPEND FIX - MediaTek MT7925 has suspend bugs (error -110 timeout)
+  # =============================================================================
+  # Unload the WiFi driver before suspend, reload after resume
+  powerManagement.powerDownCommands = ''
+    ${pkgs.kmod}/bin/modprobe -r mt7925e mt792x_lib mt76_connac_lib mt76 || true
+  '';
+  powerManagement.resumeCommands = ''
+    ${pkgs.kmod}/bin/modprobe mt7925e || true
+  '';
+
+  # NVIDIA suspend/resume/hibernate services are automatically created by
+  # hardware.nvidia.powerManagement.enable = true (already set below)
+
+  # Workaround for systemd freezing issues with NVIDIA proprietary drivers
+  # See: https://github.com/NixOS/nixpkgs/issues/371058
+  systemd.services.systemd-suspend.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
+
+  # Systemd sleep configuration
+  # Note: SuspendMode/SuspendState/HibernateState removed in newer systemd
+  # The system will use s2idle automatically since that's all the hardware supports
+  systemd.sleep.extraConfig = ''
+    # Allow suspend even without swap (hibernate won't work without disk swap)
+    AllowSuspend=yes
+    AllowHibernation=no
+    AllowSuspendThenHibernate=no
+    AllowHybridSleep=no
+  '';
+
+  # Disable nvidia-powerd on battery - it can prevent dGPU from suspending
+  # See: https://asus-linux.org/faq/
+  systemd.services.nvidia-powerd.enable = lib.mkForce false;
+
   # iwd for better wifi performance
   networking.wireless.iwd = {
     enable = true;
