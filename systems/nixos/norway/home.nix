@@ -53,4 +53,21 @@
     ../../../programs/desktop/waybar/main.nix
     ../../../programs/desktop/kitty/kitty.nix
   ];
+
+  # Ensure KDE portal starts for Wayland screen sharing
+  systemd.user.services.plasma-xdg-desktop-portal-kde = {
+    Unit = {
+      Description = "Portal service (KDE implementation)";
+      PartOf = ["graphical-session.target"];
+    };
+    Service = {
+      Type = "dbus";
+      BusName = "org.freedesktop.impl.portal.desktop.kde";
+      ExecStart = "${pkgs.kdePackages.xdg-desktop-portal-kde}/libexec/xdg-desktop-portal-kde";
+      Restart = "on-failure";
+    };
+    Install = {
+      WantedBy = ["graphical-session.target"];
+    };
+  };
 }
