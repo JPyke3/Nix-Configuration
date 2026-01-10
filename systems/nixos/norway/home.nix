@@ -7,6 +7,9 @@
   ...
 }: {
   home.packages = with pkgs; [
+    # Portal for KDE Wayland screen sharing (must be in user profile)
+    kdePackages.xdg-desktop-portal-kde
+
     # Desktop apps
     swaynotificationcenter
     swww
