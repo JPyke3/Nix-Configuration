@@ -205,7 +205,6 @@
 
     # Desktop utilities
     kitty
-    swaynotificationcenter
     swww
     waybar
     wl-clipboard

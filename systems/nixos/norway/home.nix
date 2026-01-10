@@ -11,7 +11,6 @@
     kdePackages.xdg-desktop-portal-kde
 
     # Desktop apps
-    swaynotificationcenter
     swww
     waybar
     vesktop # Discord client with Vencord (better Wayland support than legcord)

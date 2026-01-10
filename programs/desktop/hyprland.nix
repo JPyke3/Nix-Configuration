@@ -7,6 +7,18 @@
   imports = [
     ./hyprlock.nix
   ];
+
+  # Swaync notification center - only for Hyprland sessions
+  # The D-Bus service is masked to prevent auto-activation in KDE.
+  # Hyprland's exec-once starts swaync manually instead.
+  home.packages = [pkgs.swaynotificationcenter];
+
+  # Mask swaync's D-Bus auto-activation so KDE uses its native notifications
+  xdg.dataFile."dbus-1/services/org.erikreider.swaync.service".text = ''
+    # Masked - swaync is started by Hyprland's exec-once instead
+    # This prevents swaync from auto-activating in KDE sessions
+  '';
+
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
