@@ -11,7 +11,7 @@
     swaynotificationcenter
     swww
     waybar
-    legcord
+    vesktop # Discord client with Vencord (better Wayland support than legcord)
     runelite
     obsidian
     slack

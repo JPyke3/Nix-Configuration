@@ -132,6 +132,12 @@
   };
   services.desktopManager.plasma6.enable = true;
 
+  # XDG Portal for screen sharing on Wayland
+  xdg.portal = {
+    enable = true;
+    extraPortals = [pkgs.kdePackages.xdg-desktop-portal-kde];
+  };
+
   # Hyprland (alternative WM)
   programs.hyprland = {
     enable = true;
@@ -203,6 +209,7 @@
     swww
     waybar
     wl-clipboard
+    kdePackages.kpipewire # Required for KDE Wayland screen sharing
 
     # Development
     android-studio
