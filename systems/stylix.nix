@@ -6,8 +6,26 @@
 in {
   stylix.enable = true;
 
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-frappe.yaml";
-  stylix.image = ../wallpapers/nixos-wallpaper.png;
+  # Custom Outer Wilds theme - pure black for OLED, campfire warmth
+  stylix.base16Scheme = {
+    base00 = "000000"; # Pure black (OLED)
+    base01 = "0d1a1d"; # Dark atmosphere
+    base02 = "1a3338"; # Forest silhouette
+    base03 = "3d5a5e"; # Teal mist (comments)
+    base04 = "5a7a7e"; # Medium teal
+    base05 = "c5d5d8"; # Main text
+    base06 = "dae8ea"; # Light text
+    base07 = "f0f8f9"; # Brightest
+    base08 = "e86a50"; # Ember red
+    base09 = "ea8c38"; # Campfire orange
+    base0A = "f5b83a"; # Golden sparks
+    base0B = "7ec98a"; # Forest green
+    base0C = "4fbdbd"; # Atmosphere cyan
+    base0D = "6ab8d4"; # Sky blue
+    base0E = "b48ead"; # Twilight purple
+    base0F = "c27d5a"; # Wood brown
+  };
+  stylix.image = ../wallpapers/outer-wilds.png;
 
   stylix.fonts = {
     monospace = {

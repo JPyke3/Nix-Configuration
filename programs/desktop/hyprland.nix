@@ -39,7 +39,7 @@
           "workspace 9 silent, class:^([Ss]team)$"
           "workspace 10, class:^(mpv)$"
         ];
-        exec = "swww img ~/Pictures/Wallpapers/catppuccin-japan.png";
+        exec = "swww img ${config.stylix.image}";
         "col.active_border" = lib.mkForce "rgba(${base0E}ff) rgba(${base09}ff) 60deg";
         "col.inactive_border" = lib.mkForce "rgba(${base00}ff)";
         gaps_in = 0;
