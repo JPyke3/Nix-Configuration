@@ -188,6 +188,7 @@
 
   # Flatpak (for OpenBubbles and other apps not in nixpkgs)
   services.flatpak.enable = true;
+  services.flatpak.update.onActivation = true;
   services.flatpak.remotes = [
     {
       name = "flathub";
