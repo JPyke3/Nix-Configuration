@@ -16,6 +16,6 @@ palette:
   base0A: "#e8a045" # Warm amber
   base0B: "#7ec98a" # Forest green
   base0C: "#6ab8d4" # Sky blue (functions, support)
-  base0D: "#e88a30" # Campfire orange (accent)
+  base0D: "#ff6b35" # Hot ember orange (accent)
   base0E: "#b48ead" # Twilight purple
   base0F: "#c27d5a" # Wood brown
