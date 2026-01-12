@@ -20,7 +20,7 @@ in {
       font.size = fontSize;
       font.normal.family = "FiraMono Nerd Font";
       env.TERM = "xterm-256color";
-      colors = with config.colorScheme.palette; {
+      colors = with config.lib.stylix.colors; {
         bright = {
           black = "0x${base00}";
           blue = "0x${base0D}";

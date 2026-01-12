@@ -37,8 +37,11 @@
       url = "github:LnL7/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-colors = {
-      url = "github:misterio77/nix-colors";
+    # Nix-on-Droid for Android (Samsung Galaxy Z Fold 5)
+    nix-on-droid = {
+      url = "github:nix-community/nix-on-droid/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
     };
     nixpkgs-firefox-darwin = {
       url = "github:bandithedoge/nixpkgs-firefox-darwin";
@@ -117,6 +120,7 @@
     nixpkgs-citrix,
     claude-code,
     nix-flatpak,
+    nix-on-droid,
     ...
   } @ inputs: {
     # Desktop PC (Currently Unused)
@@ -203,6 +207,8 @@
         nur.modules.nixos.default
         ./systems/nixos/configuration.nix
         ./systems/nixos/japan/configuration.nix
+        stylix.nixosModules.stylix
+        ./systems/stylix.nix
         home-manager-unstable.nixosModules.home-manager
         {
           home-manager.users.jacobpyke = import ./systems/nixos/japan/home.nix;
@@ -220,6 +226,8 @@
         nur.modules.nixos.default
         ./systems/nixos/configuration.nix
         ./systems/nixos/china/configuration.nix
+        stylix.nixosModules.stylix
+        ./systems/stylix.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.users.jacobpyke = import ./systems/nixos/china/home.nix;
@@ -251,6 +259,19 @@
           };
         }
       ];
+    };
+    # Nix-on-Droid Samsung Galaxy Z Fold 5
+    nixOnDroidConfigurations.jacob-vietnam = nix-on-droid.lib.nixOnDroidConfiguration {
+      pkgs = import nixpkgs {
+        system = "aarch64-linux";
+        config.allowUnfree = true;
+      };
+      modules = [
+        ./systems/nix-on-droid/vietnam/nix-on-droid.nix
+        stylix.nixOnDroidModules.stylix
+        ./systems/stylix.nix
+      ];
+      extraSpecialArgs = {inherit inputs;};
     };
   };
 }

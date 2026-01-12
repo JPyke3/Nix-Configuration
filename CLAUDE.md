@@ -13,7 +13,8 @@ Machines are named after **geographic locations** (countries/regions):
 | **japan** | NixOS (x86_64) | Steam Deck OLED - Jovian, gaming-focused |
 | **china** | NixOS (x86_64) | Home server - Media stack, self-hosted services |
 | **singapore** | NixOS (x86_64) | **[DEPRECATED]** Gaming desktop, VR development |
-| **darwin** | nix-darwin (aarch64) | Mac Mini - Yabai WM, Tdarr transcoding |
+| **germany** | nix-darwin (aarch64) | Mac Mini - Yabai WM, Tdarr transcoding |
+| **vietnam** | Nix-on-Droid (aarch64) | Samsung Galaxy Z Fold 5 - Mobile development with Claude Code |
 
 ---
 
@@ -31,6 +32,9 @@ Machines are named after **geographic locations** (countries/regions):
 │   │   ├── zsh.nix              # Zsh with oh-my-zsh, Pure prompt
 │   │   ├── nvim/                # Neovim configuration
 │   │   ├── tmux.nix             # Terminal multiplexer
+│   │   ├── zellij.nix           # Modern terminal multiplexer (all machines)
+│   │   ├── mosh.nix             # Mobile shell (all machines)
+│   │   ├── fastfetch.nix        # System info display (all machines)
 │   │   ├── git.nix              # Git with diff-so-fancy
 │   │   ├── lf.nix               # File manager
 │   │   ├── ollama.nix           # Local LLM
@@ -104,7 +108,12 @@ Machines are named after **geographic locations** (countries/regions):
 │   │   ├── mac-defaults.nix
 │   │   └── kmonad.nix
 │   │
-│   └── stylix.nix               # Global theming (Catppuccin Frappe)
+│   ├── nix-on-droid/            # Android (Samsung Galaxy Z Fold 5)
+│   │   └── vietnam/
+│   │       ├── nix-on-droid.nix
+│   │       └── home.nix
+│   │
+│   └── stylix.nix               # Global theming (Outer Wilds - custom OLED theme)
 │
 ├── users/jacob/
 │   └── common-home.nix          # Shared user config (packages, shell, secrets)
@@ -127,10 +136,12 @@ Machines are named after **geographic locations** (countries/regions):
 | `unstable` | latest | Bleeding-edge packages |
 | `home-manager` | 25.11 | User environment management |
 | `nix-darwin` | 25.11 | macOS system configuration |
+| `nix-on-droid` | 24.05 | Android Nix environment |
 | `stylix` | 25.11 | Consistent theming across systems |
 | `sops-nix` | - | Secrets management (age encryption) |
 | `jovian` | - | Steam Deck support |
 | `nixos-apple-silicon` | - | Asahi Linux support |
+| `claude-code` | - | Claude Code CLI integration |
 
 ---
 
@@ -272,13 +283,23 @@ alejandra .
 darwin-rebuild switch --flake .#jacob-germany
 ```
 
+### Nix-on-Droid (Android)
+
+```bash
+# On the phone (after installing Nix-on-Droid app)
+nix-on-droid switch --flake .#jacob-vietnam
+
+# Update from Git
+cd ~/.config/nix-on-droid && git pull && nix-on-droid switch --flake .#jacob-vietnam
+```
+
 ---
 
 ## Key Technologies
 
 | Technology | Purpose |
 |------------|---------|
-| **Stylix** | Consistent theming (Catppuccin Frappe) across all systems |
+| **Stylix** | Consistent theming (Outer Wilds custom OLED theme) across all systems |
 | **SOPS-nix** | Secrets management with age encryption |
 | **Syncthing** | File synchronization across devices |
 | **Tailscale** | Mesh VPN for secure inter-machine networking |
@@ -376,10 +397,17 @@ sops.secrets."path/to/secret" = {
 - **Attic binary cache server** (port 5000, Tailscale only)
 - NFS mount `/nix-cache` for Attic storage on Synology
 
-### darwin (Mac Mini)
+### germany (Mac Mini)
 - Yabai window manager
 - Rclone mounts for media
 - Tdarr transcoding node
+
+### vietnam (Samsung Galaxy Z Fold 5)
+- Nix-on-Droid (proot-based, no root required)
+- Claude Code for mobile AI development
+- Zellij + Mosh for persistent remote sessions
+- Syncthing (manual start via `sync-start` alias)
+- Outer Wilds theme (pure black OLED)
 
 ---
 

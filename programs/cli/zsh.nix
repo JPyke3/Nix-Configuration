@@ -43,6 +43,12 @@
       }
     ];
     initContent = lib.mkMerge [
+      # Fastfetch on terminal open (skip in nested shells/tmux/zellij)
+      (lib.mkOrder 100 ''
+        if [[ -z "$TMUX" && -z "$ZELLIJ" && $SHLVL -eq 1 ]]; then
+          fastfetch
+        fi
+      '')
       # Before compinit (order 550)
       (lib.mkOrder 550 ''
         fpath+=($HOME/.zsh/pure)

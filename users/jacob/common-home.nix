@@ -3,9 +3,7 @@
   pkgs,
   inputs,
   ...
-}: let
-  nix-colors = import <nix-colors> {};
-in {
+}: {
   nixpkgs.config.allowUnfree = true;
 
   home.packages = [
@@ -40,12 +38,8 @@ in {
     inputs.nur.overlays.default
   ];
 
-  colorScheme = inputs.nix-colors.colorSchemes.catppuccin-frappe;
-
   imports = [
-    inputs.nix-colors.homeManagerModules.default
     inputs.sops-nix.homeManagerModules.sops
-    # inputs.spicetify-nix.homeManagerModules.default
 
     ../../programs/cli/zsh.nix
     ../../programs/cli/tmux.nix
@@ -54,6 +48,9 @@ in {
     ../../programs/cli/lf.nix
     ../../programs/cli/nix-index.nix
     ../../programs/cli/aria2.nix
+    ../../programs/cli/zellij.nix
+    ../../programs/cli/mosh.nix
+    ../../programs/cli/fastfetch.nix
   ];
 
   sops = {

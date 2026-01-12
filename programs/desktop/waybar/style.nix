@@ -6,7 +6,7 @@
   };
   inherit (config) x;
 in
-  with config.colorScheme.palette; ''
+  with config.lib.stylix.colors; ''
     * {
       /* `otf-font-awesome` is required to be installed for icons */
       font-family: Noto Sans CJK JP, Material Design Icons, Lexend, Iosevka Nerd Font;

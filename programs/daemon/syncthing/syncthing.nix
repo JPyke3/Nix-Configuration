@@ -34,6 +34,13 @@
 
           # MacBook Pro
           "germany" = {id = "H233TH5-BV5EEES-ERKRY5R-WKMO53V-PIQRUEA-JJULILI-HOZBFWC-GJPKFQX";};
+
+          # Samsung Galaxy Z Fold 5 (Nix-on-Droid)
+          # TODO: Get device ID from phone after first Syncthing run: syncthing --device-id
+          # "vietnam" = {
+          #   id = "<DEVICE_ID>";
+          #   autoAcceptFolders = true;
+          # };
         };
       };
     };

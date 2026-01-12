@@ -1,13 +1,14 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   # aria2 download manager with RPC for Firefox integration
   home.packages = [pkgs.aria2];
 
-  # User-level systemd service (runs as your user, can write to ~/Downloads)
-  systemd.user.services.aria2 = {
+  # User-level systemd service (Linux only - won't break Darwin/Nix-On-Droid)
+  systemd.user.services.aria2 = lib.mkIf pkgs.stdenv.isLinux {
     Unit = {
       Description = "aria2 Download Manager";
       After = ["network.target"];
