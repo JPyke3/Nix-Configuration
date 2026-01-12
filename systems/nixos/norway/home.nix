@@ -43,7 +43,7 @@
 
   # Stylix Firefox profile configuration
   stylix.targets.firefox.profileNames = ["default"];
-  stylix.targets.firefox.colorTheme.enable = true; # Enable Firefox Color theming
+  stylix.targets.firefox.firefoxGnomeTheme.enable = true; # Use Firefox GNOME theme with Stylix colors
 
   # Override for Obsidian if needed
   nixpkgs.config.permittedInsecurePackages =
