@@ -163,6 +163,9 @@
   # Printing
   services.printing.enable = true;
 
+  # KDE Connect (clipboard sharing, file transfer with phone)
+  programs.kdeconnect.enable = true;
+
   # Gaming
   programs.steam = {
     enable = true;

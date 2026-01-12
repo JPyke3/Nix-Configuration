@@ -286,10 +286,19 @@ darwin-rebuild switch --flake .#jacob-germany
 ### Nix-on-Droid (Android)
 
 ```bash
-# On the phone (after installing Nix-on-Droid app)
+# Initial setup (after installing Nix-on-Droid app from F-Droid)
+# Download tarball directly (faster than evaluating nixpkgs for git)
+curl -L https://github.com/JPyke3/Nix-Configuration/archive/main.tar.gz | tar xz
+mv Nix-Configuration-main ~/.config/nix-on-droid
+cd ~/.config/nix-on-droid
 nix-on-droid switch --flake .#jacob-vietnam
 
-# Update from Git
+# After first switch, git is installed - init repo for future updates
+cd ~/.config/nix-on-droid
+git init && git remote add origin https://github.com/JPyke3/Nix-Configuration.git
+git fetch && git reset --hard origin/main
+
+# Update from Git (after repo is initialized)
 cd ~/.config/nix-on-droid && git pull && nix-on-droid switch --flake .#jacob-vietnam
 ```
 
