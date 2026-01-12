@@ -91,6 +91,10 @@
     claude-code = {
       url = "github:sadjow/claude-code-nix";
     };
+    # Declarative Flatpak management
+    nix-flatpak = {
+      url = "github:gmodena/nix-flatpak";
+    };
   };
 
   outputs = {
@@ -112,6 +116,7 @@
     nix-cachyos-kernel,
     nixpkgs-citrix,
     claude-code,
+    nix-flatpak,
     ...
   } @ inputs: {
     # Desktop PC (Currently Unused)
@@ -145,6 +150,7 @@
         ./systems/nixos/norway/configuration.nix
         stylix.nixosModules.stylix
         ./systems/stylix.nix
+        nix-flatpak.nixosModules.nix-flatpak
         home-manager.nixosModules.home-manager
         ({...}: let
           pkgs_unstable = import unstable {

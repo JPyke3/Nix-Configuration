@@ -513,6 +513,21 @@
         "type": "github"
       }
     },
+    "nix-flatpak": {
+      "locked": {
+        "lastModified": 1768119771,
+        "narHash": "sha256-kbbmAfCXcgjdShTDDEn/pCoC5rKQMTd1BksXANn8D2A=",
+        "owner": "gmodena",
+        "repo": "nix-flatpak",
+        "rev": "2e49028cb29c76c8553c6099b19f11879db2cbd1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gmodena",
+        "repo": "nix-flatpak",
+        "type": "github"
+      }
+    },
     "nix-github-actions": {
       "inputs": {
         "nixpkgs": [
@@ -872,6 +887,7 @@
         "nix-cachyos-kernel": "nix-cachyos-kernel",
         "nix-colors": "nix-colors",
         "nix-darwin": "nix-darwin",
+        "nix-flatpak": "nix-flatpak",
         "nix-rosetta-builder": "nix-rosetta-builder",
         "nixos-apple-silicon": "nixos-apple-silicon",
         "nixpkgs": "nixpkgs_5",

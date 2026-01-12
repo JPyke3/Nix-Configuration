@@ -27,6 +27,7 @@
     lutris
     heroic
     prismlauncher
+    vintagestory
 
     # Development
     vscode

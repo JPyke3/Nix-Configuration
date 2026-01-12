@@ -186,6 +186,18 @@
   # Firmware updates
   services.fwupd.enable = true;
 
+  # Flatpak (for OpenBubbles and other apps not in nixpkgs)
+  services.flatpak.enable = true;
+  services.flatpak.remotes = [
+    {
+      name = "flathub";
+      location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+    }
+  ];
+  services.flatpak.packages = [
+    "app.openbubbles.OpenBubbles"
+  ];
+
   # System packages specific to this host
   environment.systemPackages = with pkgs; [
     # GPU tools
