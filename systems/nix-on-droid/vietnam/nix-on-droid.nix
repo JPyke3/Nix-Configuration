@@ -68,6 +68,9 @@
     useUserPackages = true;
     backupFileExtension = "backup";
     config = ./home.nix;
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = {
+      inherit inputs;
+      isNixOnDroid = true; # Flag to disable incompatible options in common-home.nix
+    };
   };
 }

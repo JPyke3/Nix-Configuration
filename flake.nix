@@ -173,6 +173,7 @@
           home-manager.backupFileExtension = "backup";
           home-manager.extraSpecialArgs = {
             inherit inputs pkgs_unstable pkgs_citrix;
+            isNixOnDroid = false;
           };
         })
       ];
@@ -214,6 +215,7 @@
           home-manager.users.jacobpyke = import ./systems/nixos/japan/home.nix;
           home-manager.extraSpecialArgs = {
             inherit inputs;
+            isNixOnDroid = false;
           };
         }
       ];
@@ -233,6 +235,7 @@
           home-manager.users.jacobpyke = import ./systems/nixos/china/home.nix;
           home-manager.extraSpecialArgs = {
             inherit inputs;
+            isNixOnDroid = false;
           };
         }
       ];
@@ -256,6 +259,7 @@
           ];
           home-manager.extraSpecialArgs = {
             inherit inputs;
+            isNixOnDroid = false;
           };
         }
       ];
