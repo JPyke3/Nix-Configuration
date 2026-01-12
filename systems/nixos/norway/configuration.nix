@@ -8,7 +8,6 @@
   imports = [
     ./hardware-configuration.nix
     ../../../programs/daemon/docker.nix
-    ../../../programs/daemon/aria2.nix
   ];
 
   networking.hostName = "jacob-norway";

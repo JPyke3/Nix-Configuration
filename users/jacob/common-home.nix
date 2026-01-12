@@ -11,7 +11,6 @@ in {
   home.packages = [
     pkgs.lf
     pkgs.neovim
-    pkgs.aria2
     pkgs.tmux
     pkgs.direnv
     pkgs.git
@@ -54,6 +53,7 @@ in {
     ../../programs/cli/nvim/nvim.nix
     ../../programs/cli/lf.nix
     ../../programs/cli/nix-index.nix
+    ../../programs/cli/aria2.nix
   ];
 
   sops = {
