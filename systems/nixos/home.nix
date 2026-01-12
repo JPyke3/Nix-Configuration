@@ -45,4 +45,31 @@ in {
     ../../programs/desktop/firefox.nix
     ../../programs/desktop/kitty/kitty.nix
   ];
+
+  # Downloads cleanup - delete files older than 30 days weekly
+  systemd.user.services.clean-downloads = {
+    Unit.Description = "Clean old files from Downloads folder";
+    Service = {
+      Type = "oneshot";
+      ExecStart = toString (pkgs.writeShellScript "clean-downloads" ''
+        DOWNLOADS="$HOME/Downloads"
+        if [ -d "$DOWNLOADS" ]; then
+          ${pkgs.findutils}/bin/find "$DOWNLOADS" -type f \
+            -not -path "*/.stfolder/*" \
+            -not -path "*/.stignore/*" \
+            -mtime +30 -delete
+          ${pkgs.findutils}/bin/find "$DOWNLOADS" -type d -empty -delete 2>/dev/null || true
+        fi
+      '');
+    };
+  };
+
+  systemd.user.timers.clean-downloads = {
+    Unit.Description = "Weekly cleanup of Downloads folder";
+    Timer = {
+      OnCalendar = "Sun *-*-* 00:00:00";
+      Persistent = true;
+    };
+    Install.WantedBy = ["timers.target"];
+  };
 }
