@@ -21,6 +21,7 @@
           buster-captcha-solver
           privacy-redirect
         ];
+        extensions.force = true; # Allow Stylix to manage extension settings for Firefox Color
         settings = {
           "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
           "media.ffmpeg.vaapi.enabled" = true;
