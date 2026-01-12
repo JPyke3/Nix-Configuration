@@ -9,6 +9,15 @@
 
     # Install extensions via policies - always gets latest from AMO
     policies = {
+      # Disable built-in password manager (use Bitwarden instead)
+      PasswordManagerEnabled = false;
+      OfferToSaveLogins = false;
+
+      # Disable Firefox Relay email masks
+      FirefoxRelay = {
+        Enabled = false;
+      };
+
       ExtensionSettings = {
         # Bitwarden - Password Manager
         "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
