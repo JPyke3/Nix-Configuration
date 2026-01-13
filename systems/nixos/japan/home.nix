@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  inputs,
   ...
 }: {
   home.packages = [
@@ -8,6 +9,7 @@
     pkgs.legcord
     pkgs.moonlight-qt
     pkgs.owocr
+    inputs.hytale-launcher.packages.x86_64-linux.default
   ];
 
   imports = [

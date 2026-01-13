@@ -135,7 +135,10 @@
   # XDG Portal for screen sharing on Wayland
   xdg.portal = {
     enable = true;
-    extraPortals = [pkgs.kdePackages.xdg-desktop-portal-kde];
+    extraPortals = [
+      pkgs.kdePackages.xdg-desktop-portal-kde
+      pkgs.xdg-desktop-portal-gtk # Required for GTK-based Flatpak apps
+    ];
   };
 
   # Hyprland (alternative WM)

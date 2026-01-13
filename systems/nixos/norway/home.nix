@@ -28,6 +28,7 @@
     heroic
     prismlauncher
     vintagestory
+    inputs.hytale-launcher.packages.x86_64-linux.default
 
     # Development
     vscode
@@ -41,6 +42,12 @@
   ];
 
   home.stateVersion = "25.11";
+
+  # Add Flatpak exports to XDG_DATA_DIRS so apps appear in launchers
+  xdg.systemDirs.data = [
+    "/var/lib/flatpak/exports/share"
+    "/home/jacobpyke/.local/share/flatpak/exports/share"
+  ];
 
   # Stylix Firefox profile configuration
   stylix.targets.firefox.profileNames = ["default"];

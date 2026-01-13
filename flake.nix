@@ -98,6 +98,10 @@
     nix-flatpak = {
       url = "github:gmodena/nix-flatpak";
     };
+    # Hytale Launcher
+    hytale-launcher = {
+      url = "github:JPyke3/hytale-launcher-nix";
+    };
   };
 
   outputs = {
