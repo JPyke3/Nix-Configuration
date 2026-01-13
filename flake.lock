@@ -396,11 +396,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1768341979,
-        "narHash": "sha256-HJj0eH72nz+riBEbgWmX4rcIg3lEvtUVfmWzsFfcC4I=",
+        "lastModified": 1768346273,
+        "narHash": "sha256-1q+vzqjnjj6/uZm6RTZnjoOGsiA/OFVMvn9UaIaLeHk=",
         "owner": "JPyke3",
         "repo": "hytale-launcher-nix",
-        "rev": "a58c84e5109a85ec4f8601ba8f4ae282b0228d08",
+        "rev": "226c36b20aa9450193241133735af51b1c43bfad",
         "type": "github"
       },
       "original": {
