@@ -64,6 +64,7 @@
     ../../../programs/desktop/hyprland.nix
     ../../../programs/desktop/waybar/main.nix
     ../../../programs/desktop/kitty/kitty.nix
+    ../../../programs/desktop/chrome.nix
   ];
 
   # Wrap HytaleClient to use NVIDIA GPU (runs after home-manager switch)
