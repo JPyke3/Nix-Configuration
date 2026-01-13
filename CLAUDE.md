@@ -116,7 +116,8 @@ Machines are named after **geographic locations** (countries/regions):
 │   └── stylix.nix               # Global theming (Outer Wilds - custom OLED theme)
 │
 ├── users/jacob/
-│   └── common-home.nix          # Shared user config (packages, shell, secrets)
+│   ├── common-home.nix          # CLI tools, shell, secrets (all platforms)
+│   └── common-home-desktop.nix  # GUI apps, Stylix themes (desktop only)
 │
 ├── secrets/                     # SOPS encrypted secrets
 │   └── secrets.yaml
@@ -145,6 +146,34 @@ Machines are named after **geographic locations** (countries/regions):
 
 ---
 
+## Home-Manager Architecture
+
+User configuration is split into two layers for cross-platform compatibility:
+
+### common-home.nix (All Platforms)
+CLI tools and configuration that works everywhere:
+- **Platforms**: NixOS, nix-darwin, Nix-on-Droid, headless servers
+- **Contents**: Shell (zsh), git, neovim, tmux, zellij, mosh, fastfetch, direnv, SOPS secrets
+- **Imports**: `programs/cli/*.nix` modules
+
+### common-home-desktop.nix (Desktop Only)
+GUI applications and Stylix-dependent theming:
+- **Platforms**: Desktop machines with Stylix enabled (norway, japan, germany)
+- **Contents**: GUI packages (spotify-player, zathura, gimp), Neovim Stylix theme files
+- **Requires**: Stylix module loaded for `config.lib.stylix.colors`
+
+### Import Pattern by Machine Type
+
+| Machine | Type | Imports |
+|---------|------|---------|
+| norway | Desktop | `common-home.nix` + `common-home-desktop.nix` |
+| japan | Desktop | `common-home.nix` + `common-home-desktop.nix` |
+| germany | Desktop | `common-home.nix` + `common-home-desktop.nix` |
+| china | Headless | `common-home.nix` only |
+| vietnam | Terminal | `common-home.nix` only |
+
+---
+
 ## Common Tasks
 
 ### Adding a New CLI Program
@@ -160,7 +189,7 @@ Machines are named after **geographic locations** (countries/regions):
 }
 ```
 
-2. Import in `users/jacob/common-home.nix`:
+2. Import in `users/jacob/common-home.nix` (available on all platforms):
 ```nix
 imports = [
   # ...existing imports
@@ -200,7 +229,15 @@ imports = [
 }
 ```
 
-2. Import in the relevant system's `home.nix`:
+2. For shared desktop programs, add to `users/jacob/common-home-desktop.nix`:
+```nix
+home.packages = [
+  # ...existing packages
+  pkgs.<program>
+];
+```
+
+3. For machine-specific programs, import in that system's `home.nix`:
 ```nix
 imports = [
   # ...existing imports

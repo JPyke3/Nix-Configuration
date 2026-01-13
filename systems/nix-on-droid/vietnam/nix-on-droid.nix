@@ -64,13 +64,12 @@
 
   # Home-manager integration (built into nix-on-droid)
   home-manager = {
-    useGlobalPkgs = true;
+    useGlobalPkgs = false; # Allow nixpkgs.config and overlays in home-manager
     useUserPackages = true;
     backupFileExtension = "backup";
     config = ./home.nix;
     extraSpecialArgs = {
       inherit inputs;
-      isNixOnDroid = true; # Flag to disable incompatible options in common-home.nix
     };
   };
 }

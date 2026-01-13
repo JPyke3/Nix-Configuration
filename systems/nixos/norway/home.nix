@@ -53,6 +53,7 @@
 
   imports = [
     ../home.nix
+    ../../../users/jacob/common-home-desktop.nix
     ../../../programs/desktop/hyprland.nix
     ../../../programs/desktop/waybar/main.nix
     ../../../programs/desktop/kitty/kitty.nix

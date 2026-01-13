@@ -12,6 +12,7 @@
 
   imports = [
     ../home.nix
+    ../../../users/jacob/common-home-desktop.nix
     ../../../programs/desktop/firefox.nix
   ];
 

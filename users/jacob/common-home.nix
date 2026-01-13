@@ -3,46 +3,37 @@
   pkgs,
   inputs,
   lib,
-  isNixOnDroid ? false, # Flag passed from nix-on-droid to disable incompatible options
   ...
 }: {
-  # These options conflict with useGlobalPkgs in nix-on-droid
-  nixpkgs.config.allowUnfree = lib.mkIf (!isNixOnDroid) true;
+  nixpkgs.config.allowUnfree = true;
 
-  home.packages =
-    [
-      pkgs.lf
-      pkgs.neovim
-      pkgs.tmux
-      pkgs.direnv
-      pkgs.git
-      pkgs.git-lfs
-      pkgs.gh
-      pkgs.fzf
-      pkgs.ripgrep
-      pkgs.tldr
-      pkgs.jq
-      pkgs.fd
-      pkgs.eza
-      pkgs.sops
-      pkgs.nodejs_20
-      pkgs.cargo
-      pkgs.rustc
-      (import ../../scripts/tmux-sessionizer.nix {inherit pkgs;})
-    ]
-    # GUI packages - not available on nix-on-droid
-    ++ lib.optionals (!isNixOnDroid) [
-      pkgs.spotify-player
-      pkgs.zathura
-      pkgs.gimp
-    ];
+  # CLI packages - works on all platforms (NixOS, Darwin, Nix-on-Droid, headless servers)
+  home.packages = [
+    pkgs.lf
+    pkgs.neovim
+    pkgs.tmux
+    pkgs.direnv
+    pkgs.git
+    pkgs.git-lfs
+    pkgs.gh
+    pkgs.fzf
+    pkgs.ripgrep
+    pkgs.tldr
+    pkgs.jq
+    pkgs.fd
+    pkgs.eza
+    pkgs.sops
+    pkgs.nodejs_20
+    pkgs.cargo
+    pkgs.rustc
+    (import ../../scripts/tmux-sessionizer.nix {inherit pkgs;})
+  ];
 
   home.sessionVariables = {
     EDITOR = "nvim";
   };
 
-  # Overlays conflict with useGlobalPkgs in nix-on-droid
-  nixpkgs.overlays = lib.mkIf (!isNixOnDroid) [
+  nixpkgs.overlays = [
     inputs.nur.overlays.default
   ];
 
@@ -61,8 +52,8 @@
     ../../programs/cli/fastfetch.nix
   ];
 
-  # SOPS secrets - disabled on nix-on-droid (no age key setup)
-  sops = lib.mkIf (!isNixOnDroid) {
+  # SOPS secrets
+  sops = {
     defaultSopsFile = ../../secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
     age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";

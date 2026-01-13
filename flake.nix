@@ -173,7 +173,6 @@
           home-manager.backupFileExtension = "backup";
           home-manager.extraSpecialArgs = {
             inherit inputs pkgs_unstable pkgs_citrix;
-            isNixOnDroid = false;
           };
         })
       ];
@@ -215,7 +214,6 @@
           home-manager.users.jacobpyke = import ./systems/nixos/japan/home.nix;
           home-manager.extraSpecialArgs = {
             inherit inputs;
-            isNixOnDroid = false;
           };
         }
       ];
@@ -235,7 +233,6 @@
           home-manager.users.jacobpyke = import ./systems/nixos/china/home.nix;
           home-manager.extraSpecialArgs = {
             inherit inputs;
-            isNixOnDroid = false;
           };
         }
       ];
@@ -259,12 +256,12 @@
           ];
           home-manager.extraSpecialArgs = {
             inherit inputs;
-            isNixOnDroid = false;
           };
         }
       ];
     };
     # Nix-on-Droid Samsung Galaxy Z Fold 5
+    # Note: Stylix not used here - its home-manager integration requires osConfig which doesn't exist in nix-on-droid
     nixOnDroidConfigurations.jacob-vietnam = nix-on-droid.lib.nixOnDroidConfiguration {
       pkgs = import nixpkgs {
         system = "aarch64-linux";
@@ -272,8 +269,6 @@
       };
       modules = [
         ./systems/nix-on-droid/vietnam/nix-on-droid.nix
-        stylix.nixOnDroidModules.stylix
-        ./systems/stylix.nix
       ];
       extraSpecialArgs = {inherit inputs;};
     };

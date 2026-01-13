@@ -3,9 +3,7 @@
   pkgs,
   inputs,
   ...
-}: let
-  nix-colors = import <nix-colors> {};
-in {
+}: {
   home.stateVersion = "23.11";
 
   home.packages = with pkgs; [
@@ -30,6 +28,7 @@ in {
 
   imports = [
     ../../users/jacob/common-home.nix
+    ../../users/jacob/common-home-desktop.nix
     ../../programs/desktop/firefox.nix
     ../../programs/desktop/kitty/kitty.nix
     ../../programs/daemon/sketchybar/plugins.nix
