@@ -69,20 +69,20 @@
 
   # Wrap HytaleClient to use NVIDIA GPU (runs after home-manager switch)
   home.activation.wrapHytaleClient = lib.hm.dag.entryAfter ["writeBoundary"] ''
-        HYTALE_CLIENT="$HOME/.local/share/Hytale/install/release/package/game/latest/Client/HytaleClient"
-        HYTALE_CLIENT_REAL="$HOME/.local/share/Hytale/install/release/package/game/latest/Client/HytaleClient.real"
+            HYTALE_CLIENT="$HOME/.local/share/Hytale/install/release/package/game/latest/Client/HytaleClient"
+            HYTALE_CLIENT_REAL="$HOME/.local/share/Hytale/install/release/package/game/latest/Client/HytaleClient.real"
 
-        if [ -f "$HYTALE_CLIENT" ] && [ ! -L "$HYTALE_CLIENT" ]; then
-          # Move original binary if not already wrapped
-          if [ ! -f "$HYTALE_CLIENT_REAL" ]; then
-            $DRY_RUN_CMD mv "$HYTALE_CLIENT" "$HYTALE_CLIENT_REAL"
-          else
-            # Game was updated, replace the .real file
-            $DRY_RUN_CMD mv "$HYTALE_CLIENT" "$HYTALE_CLIENT_REAL"
-          fi
-
-          # Create wrapper script with NVIDIA PRIME offload
-          $DRY_RUN_CMD cat > "$HYTALE_CLIENT" << 'WRAPPER'
+            if [ -f "$HYTALE_CLIENT" ]; then
+              # Check if already wrapped (wrapper is a small shell script)
+              if head -c 2 "$HYTALE_CLIENT" | grep -q '#!'; then
+                # Already a wrapper script, skip
+                true
+              elif [ -f "$HYTALE_CLIENT_REAL" ]; then
+                # Real file exists but HytaleClient was replaced (game update)
+                # Replace the .real with the new binary
+                $DRY_RUN_CMD mv "$HYTALE_CLIENT" "$HYTALE_CLIENT_REAL"
+                # Recreate wrapper
+                $DRY_RUN_CMD cat > "$HYTALE_CLIENT" << 'WRAPPER'
     #!/usr/bin/env bash
     export __NV_PRIME_RENDER_OFFLOAD=1
     export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
@@ -90,8 +90,21 @@
     export __VK_LAYER_NV_optimus=NVIDIA_only
     exec "$(dirname "$0")/HytaleClient.real" "$@"
     WRAPPER
-          $DRY_RUN_CMD chmod +x "$HYTALE_CLIENT"
-        fi
+                $DRY_RUN_CMD chmod +x "$HYTALE_CLIENT"
+              else
+                # First time wrapping - move binary and create wrapper
+                $DRY_RUN_CMD mv "$HYTALE_CLIENT" "$HYTALE_CLIENT_REAL"
+                $DRY_RUN_CMD cat > "$HYTALE_CLIENT" << 'WRAPPER'
+    #!/usr/bin/env bash
+    export __NV_PRIME_RENDER_OFFLOAD=1
+    export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+    export __GLX_VENDOR_LIBRARY_NAME=nvidia
+    export __VK_LAYER_NV_optimus=NVIDIA_only
+    exec "$(dirname "$0")/HytaleClient.real" "$@"
+    WRAPPER
+                $DRY_RUN_CMD chmod +x "$HYTALE_CLIENT"
+              fi
+            fi
   '';
 
   # Ensure KDE portal starts for Wayland screen sharing
