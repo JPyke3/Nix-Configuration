@@ -83,6 +83,17 @@
     };
   };
 
+  # Automatic garbage collection - conservative defaults (14 days)
+  # China overrides these with more aggressive settings
+  nix.gc = {
+    automatic = true;
+    dates = "daily";
+    options = "--delete-older-than 14d";
+  };
+
+  # Deduplicate identical files in the store using hardlinks
+  nix.optimise.automatic = true;
+
   nix.settings.experimental-features = "nix-command flakes";
   nix.settings.substituters = [
     "http://jacob-china:5000/main" # Self-hosted Attic cache (via Tailscale)
