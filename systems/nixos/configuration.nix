@@ -42,6 +42,12 @@
   };
 
   i18n.defaultLocale = "en_US.UTF-8";
+  i18n.supportedLocales = ["en_US.UTF-8/UTF-8" "en_AU.UTF-8/UTF-8"];
+  i18n.extraLocaleSettings = {
+    LC_ALL = "en_US.UTF-8";
+    LANG = "en_US.UTF-8";
+    LC_CTYPE = "en_US.UTF-8";
+  };
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
