@@ -14,8 +14,12 @@
     inputs.sops-nix.nixosModules.sops
     ../../programs/daemon/tailscale.nix
     ../../programs/daemon/syncthing/syncthing.nix
+    ../../programs/daemon/usb-gadget-bridge.nix
     ./unstable-packages.nix
   ];
+
+  # USB Gadget Network Bridge - auto-bridges USB devices (R36S, etc.) to internet
+  jpyke3.usbGadgetBridge.enable = true;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
