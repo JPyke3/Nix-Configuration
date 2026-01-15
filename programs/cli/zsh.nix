@@ -69,6 +69,7 @@
           export PATH="$PATH:/Users/jacobpyke/Library/Python/3.9/bin"
         else
           export SECRETS_DIR="$XDG_RUNTIME_DIR/secrets"
+          export PATH="$HOME/.local/bin:$PATH"
           export PATH="$PATH:/home/jacobpyke/bin/local/scripts"
           export PATH="$PATH:/home/jacobpyke/.cargo/bin"
         fi
