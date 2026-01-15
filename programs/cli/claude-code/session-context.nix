@@ -56,10 +56,16 @@
       echo "  Unable to determine"
   '';
 
+  # Hostname binary (inetutils on Linux, system on Darwin)
+  hostnameBin =
+    if isLinux
+    then "${pkgs.inetutils}/bin/hostname"
+    else "/bin/hostname"; # macOS has hostname in /bin
+
   # Host info section (all platforms)
   hostSection = ''
     # System/Hardware
-    echo "Host: $(${coreutils}/hostname)"
+    echo "Host: $(${hostnameBin})"
   '';
 
   # NixOS generation (Linux NixOS only, not nix-on-droid)
@@ -68,13 +74,17 @@
   '';
 
   # Battery section (Linux laptops only - norway, austria)
+  # Check both BAT0 and BAT1 as different laptops use different names
   batterySection = lib.optionalString (isLinux && isDesktop) ''
-    # Battery (laptop)
-    if [ -f /sys/class/power_supply/BAT0/capacity ]; then
-      BAT_PCT=$(${coreutils}/cat /sys/class/power_supply/BAT0/capacity)
-      BAT_STATUS=$(${coreutils}/cat /sys/class/power_supply/BAT0/status)
-      echo "Battery: $BAT_PCT% ($BAT_STATUS)"
-    fi
+    # Battery (laptop) - check BAT0 or BAT1
+    for BAT in /sys/class/power_supply/BAT0 /sys/class/power_supply/BAT1; do
+      if [ -f "$BAT/capacity" ]; then
+        BAT_PCT=$(${coreutils}/cat "$BAT/capacity")
+        BAT_STATUS=$(${coreutils}/cat "$BAT/status")
+        echo "Battery: $BAT_PCT% ($BAT_STATUS)"
+        break
+      fi
+    done
   '';
 
   # Disk space section (all platforms)
