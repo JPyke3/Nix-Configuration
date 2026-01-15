@@ -196,15 +196,30 @@
   # earlyoom kills processes BEFORE the system becomes unresponsive
   services.earlyoom = {
     enable = true;
-    freeMemThreshold = 5; # Kill when free RAM drops below 5%
-    freeSwapThreshold = 10; # Kill when free swap drops below 10%
+    freeMemThreshold = 8; # Kill when free RAM drops below 8% (more aggressive)
+    freeSwapThreshold = 15; # Kill when free swap drops below 15%
     enableNotifications = true; # Desktop notification when killing
     extraArgs = [
+      "-r"
+      "60" # Check every 60ms instead of default 100ms (react faster)
       "--prefer"
-      "^(java|gradle|semgrep|node)$" # Prefer killing these heavy processes first
+      "^(java|gradle|semgrep|node|GradleDaemon)$" # Prefer killing these heavy processes first
       "--avoid"
-      "^(systemd|sddm|kwin|plasmashell|Hyprland)$" # Avoid killing system processes
+      "^(systemd|sddm|kwin|plasmashell|Hyprland|earlyoom)$" # Avoid killing system processes
     ];
+  };
+
+  # =============================================================================
+  # MEMORY PRESSURE PREVENTION - Prevent hard freezes from OOM situations
+  # =============================================================================
+  boot.kernel.sysctl = {
+    # Reduce swappiness to prefer killing processes over heavy swap usage
+    "vm.swappiness" = 10;
+    # Enable Magic SysRq for emergency recovery (Alt+SysRq+REISUB)
+    "kernel.sysrq" = 1;
+    # Reduce dirty page writeback to prevent I/O stalls during memory pressure
+    "vm.dirty_ratio" = 10;
+    "vm.dirty_background_ratio" = 5;
   };
 
   # Firmware updates
