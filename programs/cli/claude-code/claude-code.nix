@@ -43,6 +43,33 @@
   # Installed plugins
   installedPlugins = import ./plugins.nix {inherit config;};
 
+  # Session context script (runs at session start to provide context to Claude)
+  sessionContextScript = import ./session-context.nix {inherit pkgs;};
+
+  # SessionStart hooks - always enabled to provide context
+  contextHooks = {
+    SessionStart = [
+      {
+        matcher = "startup";
+        hooks = [
+          {
+            type = "command";
+            command = "${sessionContextScript}";
+          }
+        ];
+      }
+      {
+        matcher = "compact";
+        hooks = [
+          {
+            type = "command";
+            command = "${sessionContextScript}";
+          }
+        ];
+      }
+    ];
+  };
+
   # Build hooks only when notifications enabled
   notificationHooks = lib.optionalAttrs (notifyCommand != null) {
     Notification = [
@@ -101,7 +128,7 @@ in {
       enable = true;
       package = inputs.claude-code.packages.${pkgs.system}.default;
 
-      # CLAUDE.md generated from Nix with package path interpolation
+      # CLAUDE.md generated from Nix (simplified - core identity only)
       memory.text = claudeMd;
 
       # Settings with platform-aware hooks
@@ -120,8 +147,9 @@ in {
             "frontend-mobile-development@claude-code-workflows" = true;
           };
         }
-        // lib.optionalAttrs (notifyCommand != null) {
-          hooks = notificationHooks;
+        // {
+          # Always include context hooks, optionally merge notification hooks
+          hooks = contextHooks // lib.optionalAttrs (notifyCommand != null) notificationHooks;
         };
     };
 
