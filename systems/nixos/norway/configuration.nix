@@ -189,6 +189,24 @@
   services.power-profiles-daemon.enable = true;
   services.thermald.enable = true;
 
+  # =============================================================================
+  # OOM PREVENTION - earlyoom is more aggressive than systemd-oomd
+  # =============================================================================
+  # Prevents system freezes when memory-intensive tasks (like Gradle builds) run
+  # earlyoom kills processes BEFORE the system becomes unresponsive
+  services.earlyoom = {
+    enable = true;
+    freeMemThreshold = 5; # Kill when free RAM drops below 5%
+    freeSwapThreshold = 10; # Kill when free swap drops below 10%
+    enableNotifications = true; # Desktop notification when killing
+    extraArgs = [
+      "--prefer"
+      "^(java|gradle|semgrep|node)$" # Prefer killing these heavy processes first
+      "--avoid"
+      "^(systemd|sddm|kwin|plasmashell|Hyprland)$" # Avoid killing system processes
+    ];
+  };
+
   # Firmware updates
   services.fwupd.enable = true;
 
