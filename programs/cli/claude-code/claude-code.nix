@@ -44,7 +44,13 @@
   installedPlugins = import ./plugins.nix {inherit config;};
 
   # Session context script (runs at session start to provide context to Claude)
-  sessionContextScript = import ./session-context.nix {inherit pkgs;};
+  # Pass platform flags to conditionally include relevant sections
+  sessionContextScript = import ./session-context.nix {
+    inherit pkgs lib;
+    inherit isLinux isDarwin isDesktop;
+    isHeadless = cfg.headless;
+    isMobile = cfg.mobile;
+  };
 
   # SessionStart hooks - always enabled to provide context
   contextHooks = {
