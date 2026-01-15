@@ -262,6 +262,16 @@
   - Small, focused functions
   - Descriptive variable names
 
+  ### Pre-Existing Issues & Test Failures
+
+  **CRITICAL**: Your work is NOT complete until ALL tests and checks pass.
+
+  - **Fix pre-existing issues first**: If tests, builds, or lint checks fail when you start, you must fix them before your work is considered complete
+  - **Don't leave broken state**: Never commit or declare completion if the codebase is in a failing state
+  - **All targets must pass**: For multi-target projects (like this Nix config with multiple machines), ALL targets must build successfully, not just the one you're working on
+  - **Investigate failures**: If a test or build fails, investigate and fix the root cause rather than ignoring it
+  - **Report blockers**: If you cannot fix a pre-existing issue, clearly report it to the user before proceeding
+
   ---
 
   ## Claude Behavior Preferences
@@ -272,6 +282,40 @@
   3. **Modern Tools**: Use modern CLI tools (eza, bat, rg, fd) over traditional ones
   4. **Functional Style**: Prefer immutability and pure functions
   5. **Expressive Output**: Make responses visually engaging and easy to scan
+
+  ### Background Tasks & Parallel Execution
+
+  **CRITICAL**: Maximize efficiency by running tasks in parallel whenever possible.
+
+  | Scenario | Action |
+  |----------|--------|
+  | Dev servers (`npm run dev`, `./gradlew installDebug`) | Always use `run_in_background: true` |
+  | Watch processes (`npm run watch`, file watchers) | Always background |
+  | Long-running builds | Background if you can do other work meanwhile |
+  | Multiple independent searches | Launch parallel Task agents |
+  | Tests while editing | Background the test runner |
+
+  **Key Principles:**
+  1. **Prefer background execution** - If a command will take >5 seconds and you have other work to do, run it in the background
+  2. **Launch parallel agents** - Use multiple Task tool invocations in a single message for independent operations
+  3. **Check results later** - Use `Read` on output files or `TaskOutput` to retrieve background results
+  4. **Don't block unnecessarily** - Continue working on other tasks while builds/tests run
+
+  **Examples:**
+  ```bash
+  # Start dev server in background, then continue editing
+  Bash: npm run dev (run_in_background: true)
+  # Continue with other work...
+
+  # Run tests in background while writing more code
+  Bash: ./gradlew test (run_in_background: true)
+  # Continue implementing next feature...
+  ```
+
+  **When NOT to background:**
+  - Commands that need immediate output to proceed (e.g., checking if something exists)
+  - Interactive commands requiring input
+  - Quick commands (<5 seconds)
 
   ### Response Formatting Rules
   Use rich formatting to make output readable and visually interesting:

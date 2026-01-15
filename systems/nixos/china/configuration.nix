@@ -3,6 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   pkgs,
+  lib,
   inputs,
   ...
 }: {
@@ -183,6 +184,9 @@
 
   # Enable nftables for newer firewall implementation
   networking.nftables.enable = true;
+
+  # Disable USB gadget bridge - not needed on server and incompatible with nftables
+  jpyke3.usbGadgetBridge.enable = lib.mkForce false;
 
   # Ensure Tailscale is enabled if you're using it
   services.tailscale.enable = true;
