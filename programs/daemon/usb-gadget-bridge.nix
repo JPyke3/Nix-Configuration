@@ -1,13 +1,15 @@
 # USB Gadget Network Bridge
 #
-# Automatically bridges USB gadget devices (like R36S, Raspberry Pi, etc.) to the
-# internet when connected. Provides DHCP so connected devices get auto-configured.
+# Enables internet sharing for USB gadget devices (like R36S, Raspberry Pi, etc.)
+# when connected via USB Ethernet (RNDIS/CDC).
 #
 # How it works:
-# 1. udev detects USB RNDIS/CDC Ethernet devices
-# 2. Triggers a templated systemd service for that interface
-# 3. Service configures IP, starts DHCP server, sets up NAT
-# 4. Device gets IP via DHCP and can reach the internet
+# 1. Device connects and NetworkManager auto-configures the interface
+# 2. NAT masquerade rules (set at boot) forward traffic to the internet
+# 3. Device gets internet access through the host
+#
+# Note: This assumes the USB device provides DHCP to assign IPs (like R36S does).
+# If your device needs the host to provide DHCP, set enableDHCPServer = true.
 {
   config,
   lib,
@@ -16,99 +18,32 @@
 }:
 with lib; let
   cfg = config.jpyke3.usbGadgetBridge;
-
-  # Script to bring up the USB gadget bridge
-  bridgeUpScript = pkgs.writeShellScript "usb-gadget-bridge-up" ''
-    set -euo pipefail
-    IFACE="$1"
-
-    echo "USB Gadget Bridge: Configuring $IFACE"
-
-    # Assign IP to the interface
-    ${pkgs.iproute2}/bin/ip addr add ${cfg.hostIP}/${toString cfg.prefixLength} dev "$IFACE" 2>/dev/null || true
-    ${pkgs.iproute2}/bin/ip link set "$IFACE" up
-
-    # Add NAT masquerade rule if not already present
-    ${pkgs.iptables}/bin/iptables -t nat -C POSTROUTING -s ${cfg.subnet} -j MASQUERADE 2>/dev/null || \
-    ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s ${cfg.subnet} -j MASQUERADE
-
-    # Allow forwarding from this interface
-    ${pkgs.iptables}/bin/iptables -C FORWARD -i "$IFACE" -j ACCEPT 2>/dev/null || \
-    ${pkgs.iptables}/bin/iptables -A FORWARD -i "$IFACE" -j ACCEPT
-
-    ${pkgs.iptables}/bin/iptables -C FORWARD -o "$IFACE" -m state --state RELATED,ESTABLISHED -j ACCEPT 2>/dev/null || \
-    ${pkgs.iptables}/bin/iptables -A FORWARD -o "$IFACE" -m state --state RELATED,ESTABLISHED -j ACCEPT
-
-    # Start DHCP server for this interface
-    ${pkgs.dnsmasq}/bin/dnsmasq \
-      --interface="$IFACE" \
-      --bind-interfaces \
-      --dhcp-range=${cfg.dhcpRangeStart},${cfg.dhcpRangeEnd},${cfg.netmask},12h \
-      --dhcp-option=option:router,${cfg.hostIP} \
-      --dhcp-option=option:dns-server,${concatStringsSep "," cfg.dnsServers} \
-      --pid-file=/run/usb-gadget-dnsmasq-$IFACE.pid \
-      --log-facility=/var/log/usb-gadget-dnsmasq-$IFACE.log \
-      --keep-in-foreground &
-
-    echo "USB Gadget Bridge: $IFACE configured successfully"
-  '';
-
-  # Script to tear down the USB gadget bridge
-  bridgeDownScript = pkgs.writeShellScript "usb-gadget-bridge-down" ''
-    set -euo pipefail
-    IFACE="$1"
-
-    echo "USB Gadget Bridge: Tearing down $IFACE"
-
-    # Stop dnsmasq for this interface
-    if [ -f "/run/usb-gadget-dnsmasq-$IFACE.pid" ]; then
-      kill "$(cat /run/usb-gadget-dnsmasq-$IFACE.pid)" 2>/dev/null || true
-      rm -f "/run/usb-gadget-dnsmasq-$IFACE.pid"
-    fi
-
-    # Remove IP from interface (interface may already be gone)
-    ${pkgs.iproute2}/bin/ip addr del ${cfg.hostIP}/${toString cfg.prefixLength} dev "$IFACE" 2>/dev/null || true
-
-    echo "USB Gadget Bridge: $IFACE torn down"
-  '';
 in {
   options.jpyke3.usbGadgetBridge = {
     enable = mkEnableOption "USB Gadget Network Bridge";
 
-    hostIP = mkOption {
-      type = types.str;
-      default = "10.1.1.1";
-      description = "IP address assigned to the host side of the USB interface";
-    };
-
-    prefixLength = mkOption {
-      type = types.int;
-      default = 30;
-      description = "Network prefix length (30 = /30 subnet with 2 usable IPs)";
-    };
-
     subnet = mkOption {
       type = types.str;
       default = "10.1.1.0/30";
-      description = "Subnet for NAT rules";
+      description = "Subnet to NAT (must match your USB gadget's network)";
     };
 
-    netmask = mkOption {
-      type = types.str;
-      default = "255.255.255.252";
-      description = "Netmask for DHCP";
+    enableDHCPServer = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Enable DHCP server for devices that don't provide their own";
     };
 
-    dhcpRangeStart = mkOption {
+    hostIP = mkOption {
       type = types.str;
-      default = "10.1.1.2";
-      description = "Start of DHCP range (usually the only other IP in a /30)";
+      default = "10.1.1.1";
+      description = "Host IP for DHCP server mode";
     };
 
-    dhcpRangeEnd = mkOption {
+    dhcpRange = mkOption {
       type = types.str;
-      default = "10.1.1.2";
-      description = "End of DHCP range";
+      default = "10.1.1.2,10.1.1.2";
+      description = "DHCP range (start,end) for DHCP server mode";
     };
 
     dnsServers = mkOption {
@@ -120,41 +55,61 @@ in {
 
   config = mkIf cfg.enable {
     # Enable IP forwarding
-    boot.kernel.sysctl = {
-      "net.ipv4.ip_forward" = 1;
-    };
+    boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
 
-    # udev rule to detect USB gadget network devices and trigger the bridge service
-    # Matches common USB Ethernet gadget drivers: RNDIS (Windows compatible) and CDC Ethernet
-    services.udev.extraRules = ''
-      # USB RNDIS devices (Windows-compatible USB Ethernet)
-      SUBSYSTEM=="net", ACTION=="add", DRIVERS=="rndis_host", TAG+="systemd", ENV{SYSTEMD_WANTS}="usb-gadget-bridge@%k.service"
+    # NAT rules - applied at boot, always ready for USB devices
+    networking.firewall.extraCommands = ''
+      # NAT masquerade for USB gadget subnet
+      iptables -t nat -C POSTROUTING -s ${cfg.subnet} -j MASQUERADE 2>/dev/null || \
+      iptables -t nat -A POSTROUTING -s ${cfg.subnet} -j MASQUERADE
 
-      # USB CDC Ethernet devices (Linux native USB Ethernet)
-      SUBSYSTEM=="net", ACTION=="add", DRIVERS=="cdc_ether", TAG+="systemd", ENV{SYSTEMD_WANTS}="usb-gadget-bridge@%k.service"
+      # Allow forwarding for the subnet
+      iptables -C FORWARD -s ${cfg.subnet} -j ACCEPT 2>/dev/null || \
+      iptables -A FORWARD -s ${cfg.subnet} -j ACCEPT
 
-      # USB CDC NCM devices (USB Network Control Model)
-      SUBSYSTEM=="net", ACTION=="add", DRIVERS=="cdc_ncm", TAG+="systemd", ENV{SYSTEMD_WANTS}="usb-gadget-bridge@%k.service"
-
-      # USB CDC ECM devices (USB Ethernet Control Model)
-      SUBSYSTEM=="net", ACTION=="add", DRIVERS=="cdc_ecm", TAG+="systemd", ENV{SYSTEMD_WANTS}="usb-gadget-bridge@%k.service"
+      iptables -C FORWARD -d ${cfg.subnet} -m state --state RELATED,ESTABLISHED -j ACCEPT 2>/dev/null || \
+      iptables -A FORWARD -d ${cfg.subnet} -m state --state RELATED,ESTABLISHED -j ACCEPT
     '';
 
-    # Templated systemd service - %i gets replaced with the interface name
-    systemd.services."usb-gadget-bridge@" = {
-      description = "USB Gadget Network Bridge for %i";
+    # Clean up rules on firewall reload
+    networking.firewall.extraStopCommands = ''
+      iptables -t nat -D POSTROUTING -s ${cfg.subnet} -j MASQUERADE 2>/dev/null || true
+      iptables -D FORWARD -s ${cfg.subnet} -j ACCEPT 2>/dev/null || true
+      iptables -D FORWARD -d ${cfg.subnet} -m state --state RELATED,ESTABLISHED -j ACCEPT 2>/dev/null || true
+    '';
+
+    # Optional: DHCP server for devices that need it (disabled by default)
+    # Triggered by udev when USB network device connects
+    services.udev.extraRules = mkIf cfg.enableDHCPServer ''
+      SUBSYSTEM=="net", ACTION=="add", DRIVERS=="rndis_host", TAG+="systemd", ENV{SYSTEMD_WANTS}="usb-gadget-dhcp@%k.service"
+      SUBSYSTEM=="net", ACTION=="add", DRIVERS=="cdc_ether", TAG+="systemd", ENV{SYSTEMD_WANTS}="usb-gadget-dhcp@%k.service"
+      SUBSYSTEM=="net", ACTION=="add", DRIVERS=="cdc_ncm", TAG+="systemd", ENV{SYSTEMD_WANTS}="usb-gadget-dhcp@%k.service"
+      SUBSYSTEM=="net", ACTION=="add", DRIVERS=="cdc_ecm", TAG+="systemd", ENV{SYSTEMD_WANTS}="usb-gadget-dhcp@%k.service"
+    '';
+
+    systemd.services."usb-gadget-dhcp@" = mkIf cfg.enableDHCPServer {
+      description = "USB Gadget DHCP Server for %i";
       after = ["network.target"];
 
       serviceConfig = {
-        Type = "forking";
-        RemainAfterExit = true;
-        ExecStart = "${bridgeUpScript} %i";
-        ExecStop = "${bridgeDownScript} %i";
+        Type = "simple";
+        ExecStartPre = "${pkgs.iproute2}/bin/ip addr add ${cfg.hostIP}/30 dev %i || true";
+        ExecStart = ''
+          ${pkgs.dnsmasq}/bin/dnsmasq \
+            --interface=%i \
+            --bind-interfaces \
+            --dhcp-range=${cfg.dhcpRange},255.255.255.252,12h \
+            --dhcp-option=option:router,${cfg.hostIP} \
+            --dhcp-option=option:dns-server,${concatStringsSep "," cfg.dnsServers} \
+            --no-daemon \
+            --log-queries \
+            --log-dhcp
+        '';
+        ExecStopPost = "${pkgs.iproute2}/bin/ip addr del ${cfg.hostIP}/30 dev %i || true";
+        Restart = "on-failure";
       };
     };
 
-    # Ensure dnsmasq is available but don't run the global service
-    # (we run per-interface instances instead)
-    environment.systemPackages = [pkgs.dnsmasq];
+    environment.systemPackages = mkIf cfg.enableDHCPServer [pkgs.dnsmasq];
   };
 }
