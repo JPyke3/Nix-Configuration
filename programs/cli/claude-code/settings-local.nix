@@ -170,7 +170,12 @@
       # Claude CLI
       "Bash(claude --version)"
     ];
-    deny = [];
+    deny = [
+      # NEVER use imperative nix profile commands - use nix shell/run instead
+      "Bash(nix profile install:*)"
+      "Bash(nix profile remove:*)"
+      "Bash(nix profile upgrade:*)"
+    ];
     ask = [];
   };
 }

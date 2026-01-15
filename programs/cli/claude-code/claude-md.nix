@@ -7,13 +7,15 @@
   lib,
   ...
 }: ''
-  !date && timedatectl | grep "Time zone"
+  !${pkgs.coreutils}/bin/echo "=== Session Context ===" && ${pkgs.coreutils}/bin/date "+%Y-%m-%d %H:%M:%S %Z" && ${pkgs.systemd}/bin/timedatectl | ${pkgs.gnugrep}/bin/grep "Time zone" && ${pkgs.coreutils}/bin/echo "Location:" && (${pkgs.curl}/bin/curl -s --max-time 3 "https://ipinfo.io/json" 2>/dev/null | ${pkgs.jq}/bin/jq -r '"  \(.city), \(.region), \(.country) (IP: \(.ip))"' 2>/dev/null || ${pkgs.coreutils}/bin/echo "  Unable to determine") && ${pkgs.coreutils}/bin/echo "Host: $(${pkgs.coreutils}/bin/hostname)" && ${pkgs.coreutils}/bin/echo "NixOS:" && (${pkgs.coreutils}/bin/cat /etc/os-release 2>/dev/null | ${pkgs.gnugrep}/bin/grep -E "^(NAME|VERSION)=" | ${pkgs.gnused}/bin/sed 's/^/  /') && ${pkgs.coreutils}/bin/echo "Kernel: $(${pkgs.coreutils}/bin/uname -r)" && ${pkgs.coreutils}/bin/echo "Tailscale: $(${pkgs.tailscale}/bin/tailscale status --self --json 2>/dev/null | ${pkgs.jq}/bin/jq -r '.Self.HostName // "not connected"' 2>/dev/null || ${pkgs.coreutils}/bin/echo "not available")" && ${pkgs.coreutils}/bin/echo "==="
 
-  # Jacob's CachyOS Workstation
+  # Jacob's NixOS Workstation
 
-  > **Home Base**: Brisbane, Australia | **Schedule**: Early bird, flexible hours | **Note**: I travel often, so check the timezone above for current location context.
+  > **Home Base**: Brisbane, Australia | **Schedule**: Early bird, flexible hours | **Note**: I travel often, check the session context above for current location.
   >
   > **This CLAUDE.md is Nix-generated** - edit `claude-md.nix` in the Nix-Configuration repo, not this file!
+  >
+  > **Platform**: NixOS with Nix Flakes - all system configuration is declarative and reproducible.
 
   ---
 
@@ -29,6 +31,12 @@
 
   ## System Overview
 
+  ### Platform
+  - **OS**: NixOS (declarative Linux distribution)
+  - **Configuration**: Nix Flakes with home-manager
+  - **Desktop**: KDE Plasma 6 + Hyprland (Wayland)
+  - **Config Repo**: `~/Development/Nix-Configuration/`
+
   ### Hardware
   | Component | Specification |
   |-----------|---------------|
@@ -37,16 +45,81 @@
   | **RAM** | 30GB + 30GB zram swap |
   | **Storage** | 3.6TB NVMe SSD |
 
-  ### Operating System
-  - **Distro**: CachyOS (Arch-based rolling release)
-  - **Kernel**: 6.18.2-3-cachyos (custom optimized)
-  - **Desktop**: KDE Plasma 6.5.4 + Hyprland (Wayland)
-  - **Dotfiles**: ML4W 2.9.9 framework
-
   ### Peripherals
   - Custom ZMK wireless Corne keyboard (sometimes used)
   - SteelSeries Arctis buds (gaming/calls)
   - Controllers: DualSense, 8BitDo Pro
+
+  ---
+
+  ## NixOS Specifics
+
+  ### Key Concepts
+  - **Declarative**: All system config lives in `~/Development/Nix-Configuration/`
+  - **Reproducible**: Same config = same system on any machine
+  - **Rollback**: Can boot into any previous generation if something breaks
+  - **Flakes**: Modern Nix with locked dependencies via `flake.lock`
+
+  ### Common Nix Commands
+  ```bash
+  # Rebuild system (after editing config)
+  sudo nixos-rebuild switch --flake ~/Development/Nix-Configuration#jacob-norway
+
+  # Update all flake inputs
+  nix flake update
+
+  # Search for packages
+  nix search nixpkgs <package>
+
+  # Run a package without installing (PREFERRED for one-off commands)
+  nix run nixpkgs#<package> -- <args>
+
+  # Enter a dev shell with specific packages (PREFERRED for sessions)
+  nix shell nixpkgs#nodejs nixpkgs#yarn
+
+  # Garbage collect old generations
+  sudo nix-collect-garbage -d
+
+  # Format Nix files
+  ${pkgs.alejandra}/bin/alejandra .
+  ```
+
+  ### CRITICAL: Package Installation Rules
+
+  **NEVER use `nix profile install`** - This creates imperative state that conflicts with declarative NixOS.
+
+  | Scenario | Correct Approach |
+  |----------|------------------|
+  | Need a tool temporarily | `nix shell nixpkgs#<package>` or `nix run nixpkgs#<package>` |
+  | Need a tool permanently | Add to Nix config (`home.nix` or `configuration.nix`) and rebuild |
+  | Command not found | Use `nix shell nixpkgs#<package>` to get it temporarily |
+  | Testing a tool | `nix run nixpkgs#<package> -- --help` |
+
+  **Examples:**
+  ```bash
+  # WRONG - creates imperative state
+  nix profile install nixpkgs#ripgrep
+
+  # CORRECT - temporary shell with ripgrep
+  nix shell nixpkgs#ripgrep
+
+  # CORRECT - run ripgrep once without installing
+  nix run nixpkgs#ripgrep -- "pattern" .
+
+  # CORRECT - add to config for permanent installation
+  # Edit home.nix: home.packages = [ pkgs.ripgrep ];
+  # Then: sudo nixos-rebuild switch --flake .#jacob-norway
+  ```
+
+  ### Machine Names (Geographic Convention)
+  | Name | Platform | Purpose |
+  |------|----------|---------|
+  | **norway** | NixOS x86_64 | Primary ASUS ROG laptop (this machine) |
+  | **austria** | NixOS aarch64 | Apple Silicon MacBook (Asahi) |
+  | **japan** | NixOS x86_64 | Steam Deck OLED |
+  | **china** | NixOS x86_64 | Home server |
+  | **germany** | nix-darwin | Mac Mini |
+  | **vietnam** | Nix-on-Droid | Samsung Galaxy Z Fold 5 |
 
   ---
 
@@ -55,20 +128,20 @@
   ### Languages & Versions
   | Language | Version | Notes |
   |----------|---------|-------|
-  | Node.js | 22.21.1 LTS | Primary for web projects |
-  | Python | 3.13.11 | Use uv/pipx for isolation |
-  | Rust | 1.92.0 | Cargo for packages |
-  | Go | 1.25.5 | System tools |
+  | Node.js | 22.x LTS | Primary for web projects |
+  | Python | 3.13.x | Use uv/pipx for isolation |
+  | Rust | Latest stable | Cargo for packages |
+  | Go | Latest stable | System tools |
   | Kotlin | via Android Studio | Primary for mobile |
   | Java | JDK 17+ | Android development |
 
   ### Editors & IDEs
   - **Primary**: Neovim (set as $EDITOR)
-  - **Android**: Android Studio 2025.2.1.8
+  - **Android**: Android Studio
   - **Config**: `~/.config/nvim/init.vim`
 
   ### Terminal
-  - **Shell**: Zsh + Oh-My-Zsh + Powerlevel10k (Fish also available)
+  - **Shell**: Zsh + Oh-My-Zsh + Pure prompt
   - **Terminal**: Kitty (primary), Alacritty (secondary)
   - **Multiplexer**: Zellij (vim-style navigation)
 
@@ -239,8 +312,12 @@
   - Use Neovim syntax when suggesting file edits
 
   ### System Administration
+  - This is **NixOS** - edit Nix config files, don't use imperative package managers
+  - **NEVER use `nix profile install`** - use `nix shell` or `nix run` for temporary needs
+  - If a command is not found, use `nix shell nixpkgs#<package>` to get it temporarily
   - Use `pkexec` to elevate permissions when root access is needed (not `sudo`)
   - Always download files to `~/Downloads/` (use `${pkgs.aria2}/bin/aria2c -d ~/Downloads/`)
+  - For permanent system changes, edit the Nix configuration and rebuild
 
   ### Git Workflow
   - **Commit Style**: Conventional Commits (`feat:`, `fix:`, `docs:`, `chore:`, `refactor:`, `test:`)
@@ -251,19 +328,27 @@
 
   ## Package Management
 
-  ### Preferences by Ecosystem
+  ### NixOS Package Management
+  | Task | Command |
+  |------|---------|
+  | Search packages | `nix search nixpkgs <package>` |
+  | Run temporarily | `nix run nixpkgs#<package>` |
+  | Dev shell | `nix shell nixpkgs#pkg1 nixpkgs#pkg2` |
+  | Add to system | Edit `configuration.nix` or `home.nix`, then rebuild |
+  | Update inputs | `nix flake update` |
+
+  ### Per-Ecosystem Tools
   | Ecosystem | Preferred Tool | Notes |
   |-----------|----------------|-------|
-  | System (Arch) | `yay` | AUR helper |
+  | System | Nix | Declarative via flake config |
   | Python | `uv` / `pipx` | Isolation over global pip |
   | Node.js | `npm` | Standard npm |
   | Rust | `cargo` | Standard cargo |
 
   ### Common Commands
   ```bash
-  # System packages
-  yay -S <package>
-  yay -Syu  # Full system upgrade
+  # Rebuild NixOS system
+  sudo nixos-rebuild switch --flake ~/Development/Nix-Configuration#jacob-norway
 
   # Python (isolated tools)
   pipx install <tool>
@@ -283,9 +368,10 @@
   1. **NEVER commit secrets** - Use `.env` files, never hardcode credentials
   2. **Pre-commit hooks** - Run security scanners (gitleaks, semgrep) before commits
   3. **Bitwarden** - Use `bw` CLI for credential management when needed
+  4. **SOPS-nix** - System secrets are managed via SOPS encryption in the Nix config
 
   ### Network Awareness
-  - **Tailscale** is installed - internal services may be accessible via Tailscale network
+  - **Tailscale** is installed - internal services accessible via Tailscale network
   - **NordVPN/OpenVPN** available for external VPN needs
   - Home network uses Syncthing for file sync
 
@@ -293,15 +379,16 @@
 
   ## Remote Development
 
-  ### Available Machines
-  | Machine | Purpose | Access |
-  |---------|---------|--------|
-  | Mac Mini | Running various services | SSH via Tailscale |
-  | Home Server | Storage, services | SSH via Tailscale |
+  ### Available Machines (via Tailscale)
+  | Machine | Hostname | Purpose |
+  |---------|----------|---------|
+  | Mac Mini | `jacob-germany` | Running various services |
+  | Home Server | `jacob-china` | Storage, media, binary cache |
+  | Steam Deck | `jacob-japan` | Gaming, portable dev |
 
   ### SSH Patterns
   - Keys: Ed25519 (`~/.ssh/id_ed25519`)
-  - Use Tailscale hostnames when possible
+  - Use Tailscale hostnames: `ssh jacob-china`, `ssh jacob-germany`
   - Config in `~/.ssh/config` if needed
 
   ---
@@ -317,7 +404,7 @@
   The RTX 5070 Ti has plenty of VRAM for this - just needs setup.
 
   ### Gaming
-  - **Launchers**: Steam (Proton CachyOS), Lutris, Heroic
+  - **Launchers**: Steam (Proton), Lutris, Heroic
   - **Games**: Minecraft, Factorio, RuneScape (RuneLite), various Steam games
   - **Controllers**: DualSense, 8BitDo Pro (switch frequently)
 
@@ -332,6 +419,7 @@
 
   ```
   ~/Development/
+  ├── Nix-Configuration/          # THIS MACHINE'S CONFIG (Nix flake)
   ├── Payroll-Standard/           # Main project (monorepo)
   │   ├── PAYS-CMS/               # Next.js + Payload CMS
   │   ├── PAYI-Backend/           # AWS CDK
