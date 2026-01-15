@@ -50,7 +50,11 @@
     ../../programs/cli/zellij.nix
     ../../programs/cli/mosh.nix
     ../../programs/cli/fastfetch.nix
+    ../../programs/cli/claude-code/claude-code.nix
   ];
+
+  # Enable Claude Code with Nix-managed configuration
+  jacob.claude-code.enable = true;
 
   # SOPS secrets
   sops = {

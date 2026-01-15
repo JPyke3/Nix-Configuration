@@ -11,6 +11,9 @@
 
   home.stateVersion = "24.05";
 
+  # Mobile device - disable notification hooks
+  jacob.claude-code.mobile = true;
+
   # Manual Syncthing control (no systemd on nix-on-droid)
   programs.zsh.shellAliases = {
     sync-start = "syncthing serve --no-browser > ~/.syncthing.log 2>&1 &";
