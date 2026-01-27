@@ -11,12 +11,13 @@
     ../../../programs/daemon/clawdbot-node.nix
   ];
 
-  # Clawdbot Node - connects to gateway on Mac Mini (germany)
+  # Clawdbot Node - connects to gateway on Mac Mini via Tailscale serve
   services.clawdbot-node = {
     enable = true;
-    gatewayHost = "100.99.79.19"; # Mac Mini Tailscale IP
-    gatewayPort = 18789;
+    gatewayHost = "jacob-taiwan.tail264a8.ts.net";
+    gatewayPort = 443;
     displayName = "norway";
+    useTls = true;
   };
 
   networking.hostName = "jacob-norway";
