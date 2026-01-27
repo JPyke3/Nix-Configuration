@@ -18,6 +18,7 @@
     gatewayPort = 443;
     displayName = "norway";
     useTls = true;
+    tokenFile = "/var/lib/clawdbot-node/.gateway-token";
   };
 
   networking.hostName = "jacob-norway";
