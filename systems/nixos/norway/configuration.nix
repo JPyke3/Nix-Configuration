@@ -274,5 +274,8 @@
 
     # Development
     android-studio
+
+    # Clawdbot CLI (for browser config, approvals, etc.)
+    inputs.nix-clawdbot.packages.${pkgs.system}.clawdbot
   ];
 }
