@@ -50,7 +50,6 @@
     ../../programs/cli/zellij.nix
     ../../programs/cli/mosh.nix
     ../../programs/cli/fastfetch.nix
-    ../../programs/cli/btop.nix
     ../../programs/cli/claude-code/claude-code.nix
   ];
 
