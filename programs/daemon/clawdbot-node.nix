@@ -4,20 +4,29 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 with lib; let
   cfg = config.services.clawdbot-node;
   
-  # Simple wrapper that uses npx to run clawdbot
-  # This avoids needing to package clawdbot as a proper Nix derivation
-  clawdbotWrapper = pkgs.writeShellScriptBin "clawdbot" ''
-    export PATH="${pkgs.nodejs}/bin:$PATH"
-    exec ${pkgs.nodejs}/bin/npx -y clawdbot "$@"
-  '';
+  # Get the clawdbot package from nix-clawdbot flake
+  clawdbotPkg = inputs.nix-clawdbot.packages.${pkgs.system}.clawdbot or (
+    # Fallback: npx wrapper if flake package not available
+    pkgs.writeShellScriptBin "clawdbot" ''
+      export PATH="${pkgs.nodejs}/bin:$PATH"
+      exec ${pkgs.nodejs}/bin/npx -y clawdbot "$@"
+    ''
+  );
 in {
   options.services.clawdbot-node = {
     enable = mkEnableOption "Clawdbot node host service";
+    
+    package = mkOption {
+      type = types.package;
+      default = clawdbotPkg;
+      description = "The clawdbot package to use";
+    };
     
     gatewayHost = mkOption {
       type = types.str;
@@ -101,6 +110,7 @@ in {
         git
         coreutils
         bash
+        cfg.package
       ];
       
       environment = {
@@ -119,7 +129,7 @@ in {
           tlsArgs = optionalString cfg.useTls " --tls";
           fpArgs = optionalString (cfg.tlsFingerprint != null) " --tls-fingerprint ${cfg.tlsFingerprint}";
         in ''
-          ${clawdbotWrapper}/bin/clawdbot node run \
+          ${cfg.package}/bin/clawdbot node run \
             --host ${cfg.gatewayHost} \
             --port ${toString cfg.gatewayPort} \
             --display-name ${cfg.displayName}${tlsArgs}${fpArgs}
