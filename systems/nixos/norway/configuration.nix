@@ -8,17 +8,8 @@
   imports = [
     ./hardware-configuration.nix
     ../../../programs/daemon/docker.nix
-    ../../../programs/daemon/clawdbot-node.nix
+    # clawdbot-node moved to home-manager (see home.nix)
   ];
-
-  # Clawdbot Node - connects to gateway on Mac Mini via Tailscale serve
-  services.clawdbot-node = {
-    enable = true;
-    gatewayHost = "jacob-taiwan.tail264a8.ts.net";
-    gatewayPort = 443;
-    displayName = "norway";
-    useTls = true;
-  };
 
   networking.hostName = "jacob-norway";
   networking.networkmanager.wifi.powersave = false;
@@ -278,7 +269,6 @@
     # Development
     android-studio
 
-    # Clawdbot CLI (for browser config, approvals, etc.)
-    inputs.nix-clawdbot.packages.${pkgs.system}.clawdbot
+    # Clawdbot CLI moved to home-manager (services.clawdbot-node installs it)
   ];
 }

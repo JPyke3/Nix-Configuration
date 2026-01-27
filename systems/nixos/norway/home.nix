@@ -66,7 +66,17 @@
     ../../../programs/desktop/waybar/main.nix
     ../../../programs/desktop/kitty/kitty.nix
     ../../../programs/desktop/chrome.nix
+    ../../../programs/daemon/clawdbot-node-hm.nix
   ];
+
+  # Clawdbot Node - connects to gateway on Mac Mini via Tailscale
+  services.clawdbot-node = {
+    enable = true;
+    gatewayHost = "jacob-taiwan.tail264a8.ts.net";
+    gatewayPort = 443;
+    displayName = "norway";
+    useTls = true;
+  };
 
   # Wrap HytaleClient to use NVIDIA GPU (runs after home-manager switch)
   home.activation.wrapHytaleClient = lib.hm.dag.entryAfter ["writeBoundary"] ''
