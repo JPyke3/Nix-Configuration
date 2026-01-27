@@ -54,8 +54,12 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # Install clawdbot package
-    home.packages = [ cfg.package ];
+    # Create a wrapper script for just the clawdbot binary (avoids git conflicts)
+    home.packages = [
+      (pkgs.writeShellScriptBin "clawdbot" ''
+        exec ${cfg.package}/bin/clawdbot "$@"
+      '')
+    ];
     
     # Systemd user service
     systemd.user.services.clawdbot-node = {
