@@ -21,6 +21,7 @@
     vlc
     mpv
     kdePackages.dolphin
+    google-chrome # For Clawdbot browser relay
 
     # Gaming
     steam
