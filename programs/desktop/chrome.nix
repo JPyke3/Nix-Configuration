@@ -1,6 +1,7 @@
-{...}: {
+{pkgs, ...}: {
   programs.chromium = {
     enable = true;
+    package = pkgs.emptyDirectory; # Use system chromium, just configure extensions
     extensions = [
       {id = "nngceckbapebfimnlniiiahkandclblb";} #Bitwarden
       {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} #uBlock Origin

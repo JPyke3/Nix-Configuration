@@ -272,6 +272,9 @@
     wl-clipboard
     kdePackages.kpipewire # Required for KDE Wayland screen sharing
 
+    # Browser (system-wide so clawdbot service can access it)
+    chromium
+
     # Development
     android-studio
 
