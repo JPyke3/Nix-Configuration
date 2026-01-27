@@ -8,7 +8,16 @@
   imports = [
     ./hardware-configuration.nix
     ../../../programs/daemon/docker.nix
+    ../../../programs/daemon/clawdbot-node.nix
   ];
+
+  # Clawdbot Node - connects to gateway on Mac Mini (germany)
+  services.clawdbot-node = {
+    enable = true;
+    gatewayHost = "100.99.79.19"; # Mac Mini Tailscale IP
+    gatewayPort = 18789;
+    displayName = "norway";
+  };
 
   networking.hostName = "jacob-norway";
   networking.networkmanager.wifi.powersave = false;
