@@ -58,13 +58,6 @@ in {
       description = "Expected TLS fingerprint for gateway (pin to avoid MITM)";
     };
     
-    tokenFile = mkOption {
-      type = types.nullOr types.str;
-      default = null;
-      description = "Path to file containing gateway auth token";
-      example = "/var/lib/clawdbot-node/.gateway-token";
-    };
-    
     stateDir = mkOption {
       type = types.str;
       default = "/var/lib/clawdbot-node";
@@ -135,12 +128,11 @@ in {
         ExecStart = let
           tlsArgs = optionalString cfg.useTls " --tls";
           fpArgs = optionalString (cfg.tlsFingerprint != null) " --tls-fingerprint ${cfg.tlsFingerprint}";
-          tokenArgs = optionalString (cfg.tokenFile != null) " --token $(cat ${cfg.tokenFile})";
         in ''
-          ${pkgs.bash}/bin/bash -c '${cfg.package}/bin/clawdbot node run \
+          ${cfg.package}/bin/clawdbot node run \
             --host ${cfg.gatewayHost} \
             --port ${toString cfg.gatewayPort} \
-            --display-name ${cfg.displayName}${tlsArgs}${fpArgs}${tokenArgs}'
+            --display-name ${cfg.displayName}${tlsArgs}${fpArgs}
         '';
         
         Restart = "always";
