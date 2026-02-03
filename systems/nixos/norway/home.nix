@@ -44,6 +44,12 @@
 
   home.stateVersion = "25.11";
 
+  # Force KWin to use AMD iGPU for compositing (NVIDIA available via nvidia-offload)
+  # card1 = AMD Radeon 890M (iGPU), card0 = NVIDIA RTX 5070 Ti (dGPU)
+  home.sessionVariables = {
+    KWIN_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
+  };
+
   # Add Flatpak exports to XDG_DATA_DIRS so apps appear in launchers
   xdg.systemDirs.data = [
     "/var/lib/flatpak/exports/share"
