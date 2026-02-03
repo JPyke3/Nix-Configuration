@@ -11,6 +11,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../../programs/daemon/distrobox.nix
+    ../../../programs/daemon/usbmuxd.nix
   ];
 
   networking.hostName = "jacob-austria"; # Define your hostname.

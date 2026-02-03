@@ -411,7 +411,7 @@
     "home-manager_2": {
       "inputs": {
         "nixpkgs": [
-          "nix-clawdbot",
+          "nix-openclaw",
           "nixpkgs"
         ]
       },
@@ -533,29 +533,6 @@
         "type": "github"
       }
     },
-    "nix-clawdbot": {
-      "inputs": {
-        "flake-utils": "flake-utils_3",
-        "home-manager": "home-manager_2",
-        "nix-steipete-tools": "nix-steipete-tools",
-        "nixpkgs": [
-          "unstable"
-        ]
-      },
-      "locked": {
-        "lastModified": 1770098642,
-        "narHash": "sha256-KeEaGY5d6pQKCg0UxN36Ei2gexo9DOVIgk5pmEibCnU=",
-        "owner": "clawdbot",
-        "repo": "nix-clawdbot",
-        "rev": "402fe3d239ddf39c860236acde138ee62c6a0ed4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "clawdbot",
-        "repo": "nix-clawdbot",
-        "type": "github"
-      }
-    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -662,6 +639,29 @@
         "owner": "nix-community",
         "ref": "release-24.05",
         "repo": "nix-on-droid",
+        "type": "github"
+      }
+    },
+    "nix-openclaw": {
+      "inputs": {
+        "flake-utils": "flake-utils_3",
+        "home-manager": "home-manager_2",
+        "nix-steipete-tools": "nix-steipete-tools",
+        "nixpkgs": [
+          "unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1770109035,
+        "narHash": "sha256-OQ9921Ex0LBOKPdRdn3x6wDX+TBYJWS22riWOSgKG/I=",
+        "owner": "openclaw",
+        "repo": "nix-openclaw",
+        "rev": "20a1809f1e61e5581c3fe1ea9cd8ec2a3f6fe141",
+        "type": "github"
+      },
+      "original": {
+        "owner": "openclaw",
+        "repo": "nix-openclaw",
         "type": "github"
       }
     },
@@ -1122,10 +1122,10 @@
         "kmonad": "kmonad",
         "llama-cpp": "llama-cpp",
         "nix-cachyos-kernel": "nix-cachyos-kernel",
-        "nix-clawdbot": "nix-clawdbot",
         "nix-darwin": "nix-darwin",
         "nix-flatpak": "nix-flatpak",
         "nix-on-droid": "nix-on-droid",
+        "nix-openclaw": "nix-openclaw",
         "nix-rosetta-builder": "nix-rosetta-builder",
         "nixos-apple-silicon": "nixos-apple-silicon",
         "nixpkgs": "nixpkgs_7",

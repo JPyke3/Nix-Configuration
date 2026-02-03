@@ -102,9 +102,9 @@
     hytale-launcher = {
       url = "github:JPyke3/hytale-launcher-nix";
     };
-    # Clawdbot - AI assistant gateway
-    nix-clawdbot = {
-      url = "github:clawdbot/nix-clawdbot";
+    # OpenClaw - AI assistant gateway (formerly Clawdbot)
+    nix-openclaw = {
+      url = "github:openclaw/nix-openclaw";
       inputs.nixpkgs.follows = "unstable";
     };
   };
@@ -130,7 +130,7 @@
     claude-code,
     nix-flatpak,
     nix-on-droid,
-    nix-clawdbot,
+    nix-openclaw,
     ...
   } @ inputs: {
     # Desktop PC (Currently Unused)
