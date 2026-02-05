@@ -10,6 +10,7 @@
     pkgs.spotify-player
     pkgs.zathura
     pkgs.gimp
+    pkgs.nomachine-client
   ];
 
   # Stylix-dependent nvim theme files (requires Stylix module to be loaded)
