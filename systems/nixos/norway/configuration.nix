@@ -105,7 +105,7 @@
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
-    powerManagement.finegrained = true;
+    powerManagement.finegrained = false; # Disabled - runtime suspend causes GSP unload failures on RTX 50 series
     open = true; # Use open source kernel modules (required for RTX 50 series)
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.beta; # Beta for RTX 50 series support
