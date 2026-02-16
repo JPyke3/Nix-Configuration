@@ -40,6 +40,9 @@
     # Utilities
     bitwarden-desktop
     qbittorrent
+
+    # AI Development
+    pkgs_unstable.opencode-desktop
   ];
 
   home.stateVersion = "25.11";
