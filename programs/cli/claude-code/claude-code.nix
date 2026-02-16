@@ -28,22 +28,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    # LSP server binaries (required for Claude Code's code intelligence plugins)
-    home.packages = [
-      pkgs.clang-tools # clangd (C/C++)
-      pkgs.csharp-ls # csharp-ls (C#)
-      pkgs.gopls # gopls (Go)
-      pkgs.jdt-language-server # jdtls (Java)
-      pkgs.kotlin-language-server # kotlin-language-server (Kotlin)
-      pkgs.lua-language-server # lua-language-server (Lua)
-      pkgs.nodePackages.intelephense # intelephense (PHP)
-      pkgs.pyright # pyright-langserver (Python)
-      pkgs.rust-analyzer # rust-analyzer (Rust)
-      pkgs.sourcekit-lsp # sourcekit-lsp (Swift)
-      pkgs.nodePackages.typescript-language-server # typescript-language-server (TypeScript)
-      pkgs.nixd # nixd (Nix)
-    ];
-
     programs.claude-code = {
       enable = true;
       package = inputs.claude-code.packages.${pkgs.system}.default;
