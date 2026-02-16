@@ -269,6 +269,7 @@
 
     # Development
     android-studio
+    distrobox
 
     # Clawdbot CLI moved to home-manager (services.clawdbot-node installs it)
   ];
