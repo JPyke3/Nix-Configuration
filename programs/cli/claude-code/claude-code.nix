@@ -43,6 +43,85 @@
   # Installed plugins
   installedPlugins = import ./plugins.nix {inherit config;};
 
+  # LSP configuration with full Nix store paths (bypasses FHS discovery bug on NixOS)
+  lspConfig = {
+    nix = {
+      command = "${pkgs.nixd}/bin/nixd";
+      args = [];
+      extensionToLanguage = {".nix" = "nix";};
+    };
+    clangd = {
+      command = "${pkgs.clang-tools}/bin/clangd";
+      args = [];
+      extensionToLanguage = {
+        ".c" = "c";
+        ".h" = "c";
+        ".cpp" = "cpp";
+        ".hpp" = "cpp";
+        ".cc" = "cpp";
+        ".cxx" = "cpp";
+      };
+    };
+    csharp = {
+      command = "${pkgs.csharp-ls}/bin/csharp-ls";
+      args = [];
+      extensionToLanguage = {".cs" = "csharp";};
+    };
+    go = {
+      command = "${pkgs.gopls}/bin/gopls";
+      args = [];
+      extensionToLanguage = {".go" = "go";};
+    };
+    java = {
+      command = "${pkgs.jdt-language-server}/bin/jdtls";
+      args = [];
+      extensionToLanguage = {".java" = "java";};
+    };
+    kotlin = {
+      command = "${pkgs.kotlin-language-server}/bin/kotlin-language-server";
+      args = [];
+      extensionToLanguage = {
+        ".kt" = "kotlin";
+        ".kts" = "kotlin";
+      };
+    };
+    lua = {
+      command = "${pkgs.lua-language-server}/bin/lua-language-server";
+      args = [];
+      extensionToLanguage = {".lua" = "lua";};
+    };
+    php = {
+      command = "${pkgs.nodePackages.intelephense}/bin/intelephense";
+      args = ["--stdio"];
+      extensionToLanguage = {".php" = "php";};
+    };
+    python = {
+      command = "${pkgs.pyright}/bin/pyright-langserver";
+      args = ["--stdio"];
+      extensionToLanguage = {".py" = "python";};
+    };
+    rust = {
+      command = "${pkgs.rust-analyzer}/bin/rust-analyzer";
+      args = [];
+      extensionToLanguage = {".rs" = "rust";};
+    };
+    swift = {
+      command = "${pkgs.sourcekit-lsp}/bin/sourcekit-lsp";
+      args = [];
+      extensionToLanguage = {".swift" = "swift";};
+    };
+    typescript = {
+      command = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server";
+      args = ["--stdio"];
+      extensionToLanguage = {
+        ".ts" = "typescript";
+        ".tsx" = "typescriptreact";
+        ".js" = "javascript";
+        ".jsx" = "javascriptreact";
+      };
+    };
+  };
+
   # Session context script (runs at session start to provide context to Claude)
   # Pass platform flags to conditionally include relevant sections
   sessionContextScript = import ./session-context.nix {
@@ -142,6 +221,7 @@ in {
       pkgs.rust-analyzer # rust-analyzer (Rust)
       pkgs.sourcekit-lsp # sourcekit-lsp (Swift)
       pkgs.nodePackages.typescript-language-server # typescript-language-server (TypeScript)
+      pkgs.nixd # nixd (Nix)
     ];
 
     # Official home-manager module for Claude Code
@@ -194,6 +274,9 @@ in {
           text = statuslineScript;
           executable = true;
         };
+
+        # LSP config with full Nix store paths (workaround for NixOS FHS discovery bug)
+        ".claude/.lsp.json".text = builtins.toJSON lspConfig;
       }
       // lib.optionalAttrs isLinuxDesktop {
         # Icon only needed on Linux (macOS uses system notifications)
