@@ -1,6 +1,6 @@
 # Claude Code configuration module
-# Provides declarative management of Claude Code settings, hooks, and plugins
-# with platform-aware notifications and Nix store path resolution
+# Nix manages: package installation, CLAUDE.md, statusline script, LSP config, icon
+# Seed-once (mutable at runtime): settings.json, settings.local.json, plugins, marketplaces
 {
   config,
   pkgs,
@@ -190,6 +190,36 @@
       }
     ];
   };
+
+  # Settings content — seeded once, then mutable at runtime
+  settingsContent = {
+    "$schema" = "https://json.schemastore.org/claude-code-settings.json";
+    model = "opus";
+    alwaysThinkingEnabled = true;
+    statusLine = {
+      type = "command";
+      command = "${pkgs.bash}/bin/bash $HOME/.claude/statusline.sh";
+    };
+    enabledPlugins = {
+      "frontend-design@claude-code-plugins" = true;
+      "security-guidance@claude-code-plugins" = true;
+      "payload@payload-marketplace" = true;
+      "frontend-mobile-development@claude-code-workflows" = true;
+      # Code intelligence LSP plugins
+      "clangd-lsp" = true;
+      "csharp-lsp" = true;
+      "gopls-lsp" = true;
+      "jdtls-lsp" = true;
+      "kotlin-lsp" = true;
+      "lua-lsp" = true;
+      "php-lsp" = true;
+      "pyright-lsp" = true;
+      "rust-analyzer-lsp" = true;
+      "swift-lsp" = true;
+      "typescript-lsp" = true;
+    };
+    hooks = contextHooks // lib.optionalAttrs (notifyCommand != null) notificationHooks;
+  };
 in {
   options.jacob.claude-code = {
     enable = lib.mkEnableOption "Jacob's Claude Code configuration";
@@ -224,49 +254,16 @@ in {
       pkgs.nixd # nixd (Nix)
     ];
 
-    # Official home-manager module for Claude Code
+    # Package + CLAUDE.md only — no settings (those are seeded as mutable files)
     programs.claude-code = {
       enable = true;
       package = inputs.claude-code.packages.${pkgs.system}.default;
 
-      # CLAUDE.md generated from Nix (simplified - core identity only)
+      # CLAUDE.md generated from Nix (read-only is fine for reference docs)
       memory.text = claudeMd;
-
-      # Settings with platform-aware hooks
-      settings =
-        {
-          model = "opus";
-          alwaysThinkingEnabled = true;
-          statusLine = {
-            type = "command";
-            command = "${pkgs.bash}/bin/bash $HOME/.claude/statusline.sh";
-          };
-          enabledPlugins = {
-            "frontend-design@claude-code-plugins" = true;
-            "security-guidance@claude-code-plugins" = true;
-            "payload@payload-marketplace" = true;
-            "frontend-mobile-development@claude-code-workflows" = true;
-            # Code intelligence LSP plugins
-            "clangd-lsp" = true;
-            "csharp-lsp" = true;
-            "gopls-lsp" = true;
-            "jdtls-lsp" = true;
-            "kotlin-lsp" = true;
-            "lua-lsp" = true;
-            "php-lsp" = true;
-            "pyright-lsp" = true;
-            "rust-analyzer-lsp" = true;
-            "swift-lsp" = true;
-            "typescript-lsp" = true;
-          };
-        }
-        // {
-          # Always include context hooks, optionally merge notification hooks
-          hooks = contextHooks // lib.optionalAttrs (notifyCommand != null) notificationHooks;
-        };
     };
 
-    # Supplementary files via home.file (immutable configs only)
+    # Immutable files — these MUST update on rebuild (contain Nix store paths)
     home.file =
       {
         # Statusline script (generated with Nix paths)
@@ -283,12 +280,22 @@ in {
         ".claude/icons/claude.png".source = claudeIcon;
       };
 
-    # Seed config files ONLY if they don't exist (preserves runtime modifications)
+    # Seed mutable config files — written once, then owned by Claude Code at runtime
     home.activation.seedClaudeConfigs = lib.hm.dag.entryAfter ["writeBoundary"] ''
       ${pkgs.coreutils}/bin/mkdir -p "$HOME/.claude/plugins"
 
+      SETTINGS_FILE="$HOME/.claude/settings.json"
+      if [ ! -f "$SETTINGS_FILE" ] || [ -L "$SETTINGS_FILE" ]; then
+        ${pkgs.coreutils}/bin/rm -f "$SETTINGS_FILE"
+        ${pkgs.coreutils}/bin/cat > "$SETTINGS_FILE" << 'EOF'
+      ${builtins.toJSON settingsContent}
+      EOF
+        echo "Seeded Claude Code settings"
+      fi
+
       CONFIG_FILE="$HOME/.claude/settings.local.json"
-      if [ ! -f "$CONFIG_FILE" ]; then
+      if [ ! -f "$CONFIG_FILE" ] || [ -L "$CONFIG_FILE" ]; then
+        ${pkgs.coreutils}/bin/rm -f "$CONFIG_FILE"
         ${pkgs.coreutils}/bin/cat > "$CONFIG_FILE" << 'EOF'
       ${builtins.toJSON permissionRules}
       EOF
@@ -296,7 +303,8 @@ in {
       fi
 
       MARKETPLACES_FILE="$HOME/.claude/plugins/known_marketplaces.json"
-      if [ ! -f "$MARKETPLACES_FILE" ]; then
+      if [ ! -f "$MARKETPLACES_FILE" ] || [ -L "$MARKETPLACES_FILE" ]; then
+        ${pkgs.coreutils}/bin/rm -f "$MARKETPLACES_FILE"
         ${pkgs.coreutils}/bin/cat > "$MARKETPLACES_FILE" << 'EOF'
       ${builtins.toJSON knownMarketplaces}
       EOF
@@ -304,7 +312,8 @@ in {
       fi
 
       PLUGINS_FILE="$HOME/.claude/plugins/installed_plugins.json"
-      if [ ! -f "$PLUGINS_FILE" ]; then
+      if [ ! -f "$PLUGINS_FILE" ] || [ -L "$PLUGINS_FILE" ]; then
+        ${pkgs.coreutils}/bin/rm -f "$PLUGINS_FILE"
         ${pkgs.coreutils}/bin/cat > "$PLUGINS_FILE" << 'EOF'
       ${builtins.toJSON installedPlugins}
       EOF
