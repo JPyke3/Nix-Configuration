@@ -27,6 +27,11 @@
   #   hour = "03";
   # };
 
+  # In configuration.nix
+  networking.extraHosts = ''
+    192.168.88.11 jacob-nas
+  '';
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
