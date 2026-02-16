@@ -129,6 +129,21 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    # Language server binaries for Claude Code's code intelligence plugins
+    home.packages = [
+      pkgs.clang-tools # clangd (C/C++)
+      pkgs.csharp-ls # csharp-ls (C#)
+      pkgs.gopls # gopls (Go)
+      pkgs.jdt-language-server # jdtls (Java)
+      pkgs.kotlin-language-server # kotlin-language-server (Kotlin)
+      pkgs.lua-language-server # lua-language-server (Lua)
+      pkgs.nodePackages.intelephense # intelephense (PHP)
+      pkgs.pyright # pyright-langserver (Python)
+      pkgs.rust-analyzer # rust-analyzer (Rust)
+      pkgs.sourcekit-lsp # sourcekit-lsp (Swift)
+      pkgs.nodePackages.typescript-language-server # typescript-language-server (TypeScript)
+    ];
+
     # Official home-manager module for Claude Code
     programs.claude-code = {
       enable = true;
@@ -151,6 +166,18 @@ in {
             "security-guidance@claude-code-plugins" = true;
             "payload@payload-marketplace" = true;
             "frontend-mobile-development@claude-code-workflows" = true;
+            # Code intelligence LSP plugins
+            "clangd-lsp" = true;
+            "csharp-lsp" = true;
+            "gopls-lsp" = true;
+            "jdtls-lsp" = true;
+            "kotlin-lsp" = true;
+            "lua-lsp" = true;
+            "php-lsp" = true;
+            "pyright-lsp" = true;
+            "rust-analyzer-lsp" = true;
+            "swift-lsp" = true;
+            "typescript-lsp" = true;
           };
         }
         // {
@@ -167,26 +194,39 @@ in {
           text = statuslineScript;
           executable = true;
         };
-
-        # Plugin config (Claude Code manages plugin cache, we just seed the registry)
-        ".claude/plugins/known_marketplaces.json".text = builtins.toJSON knownMarketplaces;
-        ".claude/plugins/installed_plugins.json".text = builtins.toJSON installedPlugins;
       }
       // lib.optionalAttrs isLinuxDesktop {
         # Icon only needed on Linux (macOS uses system notifications)
         ".claude/icons/claude.png".source = claudeIcon;
       };
 
-    # Seed permissions file ONLY if it doesn't exist (preserves runtime modifications)
-    home.activation.seedClaudePermissions = lib.hm.dag.entryAfter ["writeBoundary"] ''
-            CONFIG_FILE="$HOME/.claude/settings.local.json"
-            if [ ! -f "$CONFIG_FILE" ]; then
-              ${pkgs.coreutils}/bin/mkdir -p "$HOME/.claude"
-              ${pkgs.coreutils}/bin/cat > "$CONFIG_FILE" << 'EOF'
+    # Seed config files ONLY if they don't exist (preserves runtime modifications)
+    home.activation.seedClaudeConfigs = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      ${pkgs.coreutils}/bin/mkdir -p "$HOME/.claude/plugins"
+
+      CONFIG_FILE="$HOME/.claude/settings.local.json"
+      if [ ! -f "$CONFIG_FILE" ]; then
+        ${pkgs.coreutils}/bin/cat > "$CONFIG_FILE" << 'EOF'
       ${builtins.toJSON permissionRules}
       EOF
-              echo "Seeded Claude Code permissions"
-            fi
+        echo "Seeded Claude Code permissions"
+      fi
+
+      MARKETPLACES_FILE="$HOME/.claude/plugins/known_marketplaces.json"
+      if [ ! -f "$MARKETPLACES_FILE" ]; then
+        ${pkgs.coreutils}/bin/cat > "$MARKETPLACES_FILE" << 'EOF'
+      ${builtins.toJSON knownMarketplaces}
+      EOF
+        echo "Seeded Claude Code marketplaces"
+      fi
+
+      PLUGINS_FILE="$HOME/.claude/plugins/installed_plugins.json"
+      if [ ! -f "$PLUGINS_FILE" ]; then
+        ${pkgs.coreutils}/bin/cat > "$PLUGINS_FILE" << 'EOF'
+      ${builtins.toJSON installedPlugins}
+      EOF
+        echo "Seeded Claude Code plugins"
+      fi
     '';
   };
 }
