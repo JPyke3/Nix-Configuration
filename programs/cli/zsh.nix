@@ -72,6 +72,7 @@
           export PATH="$HOME/.local/bin:$PATH"
           export PATH="$PATH:/home/jacobpyke/bin/local/scripts"
           export PATH="$PATH:/home/jacobpyke/.cargo/bin"
+          [[ -d "$HOME/.opencode/bin" ]] && export PATH="$HOME/.opencode/bin:$PATH"
         fi
 
         export OPENAI_API_KEY="$(cat ~/.secrets/llms/openai_api_key)"
