@@ -11,8 +11,6 @@
     kdePackages.xdg-desktop-portal-kde
 
     # Desktop apps
-    swww
-    waybar
     vesktop # Discord client with Vencord (better Wayland support than legcord)
     runelite
     obsidian
@@ -71,8 +69,9 @@
   imports = [
     ../home.nix
     ../../../users/jacob/common-home-desktop.nix
-    ../../../programs/desktop/hyprland.nix
-    ../../../programs/desktop/waybar/main.nix
+    ../../../programs/desktop/hyprland.nix # Fallback session
+    ../../../programs/desktop/niri.nix
+    ../../../programs/desktop/noctalia.nix
     ../../../programs/desktop/kitty/kitty.nix
     ../../../programs/desktop/chrome.nix
     ../../../programs/daemon/clawdbot-node-hm.nix

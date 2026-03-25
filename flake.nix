@@ -6,11 +6,13 @@
       "http://jacob-china:5000/main" # Self-hosted Attic cache (via Tailscale)
       "https://jpyke3.cachix.org" # Cachix fallback
       "https://claude-code.cachix.org" # Claude Code pre-built binaries
+      "https://niri.cachix.org" # Niri compositor pre-built binaries
     ];
     extra-trusted-public-keys = [
       "main:cTGyR3LMgVRA9oIu0U65WPKezuI9zl4EAlVb6y6I2kk="
       "jpyke3.cachix.org-1:SkUkQoQ6WbhSs7SGsMZ22H/DyJ7VNpT4/BaEvTCEQZY="
       "claude-code.cachix.org-1:YeXf2aNu7UTX8Vwrze0za1WEDS+4DuI2kVeWEE4fsRk="
+      "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
     ];
     trusted-users = [
       "root"
@@ -107,6 +109,15 @@
       url = "github:openclaw/nix-openclaw";
       inputs.nixpkgs.follows = "unstable";
     };
+    # Niri compositor (structured config + Stylix integration for home-manager)
+    niri = {
+      url = "github:sodiboo/niri-flake";
+    };
+    # Noctalia Shell (desktop shell — bar, launcher, notifications, lock screen)
+    noctalia-shell = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "unstable";
+    };
   };
 
   outputs = {
@@ -131,6 +142,8 @@
     nix-flatpak,
     nix-on-droid,
     nix-openclaw,
+    niri,
+    noctalia-shell,
     ...
   } @ inputs: {
     # Desktop PC (Currently Unused)

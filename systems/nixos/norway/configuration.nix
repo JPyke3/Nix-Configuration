@@ -148,6 +148,9 @@
     enable = true;
   };
 
+  # Niri (scrolling Wayland compositor)
+  programs.niri.enable = true;
+
   # Audio (Pipewire)
   security.rtkit.enable = true;
   services.pipewire = {
@@ -189,6 +192,7 @@
 
   # Power management
   services.power-profiles-daemon.enable = true;
+  services.upower.enable = true;
   services.thermald.enable = true;
 
   # =============================================================================
@@ -207,7 +211,7 @@
       "--prefer"
       "^(java|gradle|semgrep|node|GradleDaemon)$" # Prefer killing these heavy processes first
       "--avoid"
-      "^(systemd|sddm|kwin|plasmashell|Hyprland|earlyoom)$" # Avoid killing system processes
+      "^(systemd|sddm|kwin|plasmashell|Hyprland|niri|earlyoom)$" # Avoid killing system processes
     ];
   };
 
@@ -262,6 +266,7 @@
     swww
     waybar
     wl-clipboard
+    brightnessctl
     kdePackages.kpipewire # Required for KDE Wayland screen sharing
 
     # Browser (system-wide so clawdbot service can access it)
