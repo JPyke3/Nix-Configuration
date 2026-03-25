@@ -6,7 +6,12 @@
   ...
 }: let
   inir = inputs.inir.packages.${pkgs.system}.default;
-  qs = "${pkgs.quickshell}/bin/qs";
+  qs = "${inir}/bin/inir-shell";
+  # IPC helper — ensures QS_CONFIG_PATH matches the running instance
+  ipc = pkgs.writeShellScript "inir-ipc" ''
+    export QS_CONFIG_PATH="${inir}/share/inir"
+    exec ${qs} "$@"
+  '';
 in {
   imports = [
     inputs.niri.homeModules.niri
@@ -65,7 +70,7 @@ in {
     spawn-at-startup = [
       {command = ["${pkgs.xwayland-satellite}/bin/xwayland-satellite"];}
       {command = ["fcitx5" "-d"];}
-      {command = [qs "-c" "ii"];}
+      {command = [qs];}
     ];
 
     # =========================================================================
@@ -84,6 +89,12 @@ in {
         default-column-width = {fixed = 800;};
         default-window-height = {fixed = 450;};
       }
+      # Quickshell windows (iNiR settings, etc.) → no decorations, floating
+      {
+        matches = [{app-id = "^org\\.quickshell$";}];
+        open-floating = true;
+        draw-border-with-background = false;
+      }
       # xwaylandvideobridge → hidden
       {
         matches = [{app-id = "^xwaylandvideobridge$";}];
@@ -93,9 +104,10 @@ in {
     ];
 
     # =========================================================================
-    # Layer rules (iNiR backdrop visibility during overview)
+    # Layer rules (iNiR backdrop + blur)
     # =========================================================================
     layer-rules = [
+      # Backdrop layers for overview
       {
         matches = [{namespace = "^quickshell:iiBackdrop$";}];
         place-within-backdrop = true;
@@ -118,18 +130,18 @@ in {
       "Mod+Shift+E".action.quit = {};
 
       # --- iNiR Shell IPC ---
-      "Mod+G".action.spawn = [qs "-c" "ii" "ipc" "call" "overlay" "toggle"];
-      "Mod+Space".action.spawn = [qs "-c" "ii" "ipc" "call" "overview" "toggle"];
-      "Mod+D".action.spawn = [qs "-c" "ii" "ipc" "call" "overlay" "toggle"];
-      "Mod+Shift+N".action.spawn = [qs "-c" "ii" "ipc" "call" "notifications" "clearAll"];
-      "Mod+Shift+S".action.spawn = [qs "-c" "ii" "ipc" "call" "region" "screenshot"];
-      "Mod+Shift+X".action.spawn = [qs "-c" "ii" "ipc" "call" "region" "ocr"];
-      "Mod+Slash".action.spawn = [qs "-c" "ii" "ipc" "call" "cheatsheet" "toggle"];
-      "Mod+Shift+W".action.spawn = [qs "-c" "ii" "ipc" "call" "panelFamily" "cycle"];
-      "Mod+Semicolon".action.spawn = [qs "-c" "ii" "ipc" "call" "settings" "open"];
-      "Ctrl+Alt+T".action.spawn = [qs "-c" "ii" "ipc" "call" "wallpaperSelector" "toggle"];
-      "Alt+Tab".action.spawn = [qs "-c" "ii" "ipc" "call" "altSwitcher" "next"];
-      "Alt+Shift+Tab".action.spawn = [qs "-c" "ii" "ipc" "call" "altSwitcher" "previous"];
+      "Mod+G".action.spawn = ["${ipc}" "ipc" "call" "overlay" "toggle"];
+      "Mod+Space".action.spawn = ["${ipc}" "ipc" "call" "overview" "toggle"];
+      "Mod+D".action.spawn = ["${ipc}" "ipc" "call" "overlay" "toggle"];
+      "Mod+Shift+N".action.spawn = ["${ipc}" "ipc" "call" "notifications" "clearAll"];
+      "Mod+Shift+S".action.spawn = ["${ipc}" "ipc" "call" "region" "screenshot"];
+      "Mod+Shift+X".action.spawn = ["${ipc}" "ipc" "call" "region" "ocr"];
+      "Mod+Slash".action.spawn = ["${ipc}" "ipc" "call" "cheatsheet" "toggle"];
+      "Mod+Shift+W".action.spawn = ["${ipc}" "ipc" "call" "panelFamily" "cycle"];
+      "Mod+Semicolon".action.spawn = ["${ipc}" "ipc" "call" "settings" "open"];
+      "Ctrl+Alt+T".action.spawn = ["${ipc}" "ipc" "call" "wallpaperSelector" "toggle"];
+      "Alt+Tab".action.spawn = ["${ipc}" "ipc" "call" "altSwitcher" "next"];
+      "Alt+Shift+Tab".action.spawn = ["${ipc}" "ipc" "call" "altSwitcher" "previous"];
 
       # --- Focus (vim-style) ---
       "Mod+H".action.focus-column-left = [];
@@ -204,35 +216,36 @@ in {
       # --- Media keys (via iNiR IPC for OSD) ---
       "XF86AudioRaiseVolume" = {
         allow-when-locked = true;
-        action.spawn = [qs "-c" "ii" "ipc" "call" "audio" "volumeUp"];
+        action.spawn = ["${ipc}" "ipc" "call" "audio" "volumeUp"];
       };
       "XF86AudioLowerVolume" = {
         allow-when-locked = true;
-        action.spawn = [qs "-c" "ii" "ipc" "call" "audio" "volumeDown"];
+        action.spawn = ["${ipc}" "ipc" "call" "audio" "volumeDown"];
       };
       "XF86AudioMute" = {
         allow-when-locked = true;
-        action.spawn = [qs "-c" "ii" "ipc" "call" "audio" "mute"];
+        action.spawn = ["${ipc}" "ipc" "call" "audio" "mute"];
       };
       "XF86AudioMicMute" = {
         allow-when-locked = true;
-        action.spawn = [qs "-c" "ii" "ipc" "call" "audio" "micMute"];
+        action.spawn = ["${ipc}" "ipc" "call" "audio" "micMute"];
       };
       "XF86MonBrightnessUp" = {
         allow-when-locked = true;
-        action.spawn = [qs "-c" "ii" "ipc" "call" "brightness" "increment"];
+        action.spawn = ["${ipc}" "ipc" "call" "brightness" "increment"];
       };
       "XF86MonBrightnessDown" = {
         allow-when-locked = true;
-        action.spawn = [qs "-c" "ii" "ipc" "call" "brightness" "decrement"];
+        action.spawn = ["${ipc}" "ipc" "call" "brightness" "decrement"];
       };
-      "XF86AudioPlay".action.spawn = [qs "-c" "ii" "ipc" "call" "mpris" "playPause"];
-      "XF86AudioNext".action.spawn = [qs "-c" "ii" "ipc" "call" "mpris" "next"];
-      "XF86AudioPrev".action.spawn = [qs "-c" "ii" "ipc" "call" "mpris" "previous"];
+      "XF86AudioPlay".action.spawn = ["${ipc}" "ipc" "call" "mpris" "playPause"];
+      "XF86AudioNext".action.spawn = ["${ipc}" "ipc" "call" "mpris" "next"];
+      "XF86AudioPrev".action.spawn = ["${ipc}" "ipc" "call" "mpris" "previous"];
 
       # --- Mouse ---
       "Mod+WheelScrollDown".action.focus-workspace-down = [];
       "Mod+WheelScrollUp".action.focus-workspace-up = [];
     };
   };
+
 }
