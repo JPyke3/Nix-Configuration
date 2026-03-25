@@ -118,6 +118,11 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "unstable";
     };
+    # iNiR Shell (feature-rich desktop shell for Niri, built on Quickshell)
+    inir = {
+      url = "github:JPyke3/iNiR/nix-packaging";
+      inputs.nixpkgs.follows = "unstable";
+    };
   };
 
   outputs = {
@@ -144,6 +149,7 @@
     nix-openclaw,
     niri,
     noctalia-shell,
+    inir,
     ...
   } @ inputs: {
     # Desktop PC (Currently Unused)

@@ -5,7 +5,8 @@
   inputs,
   ...
 }: let
-  noctalia = inputs.noctalia-shell.packages.${pkgs.system}.default;
+  inir = inputs.inir.packages.${pkgs.system}.default;
+  qs = "${pkgs.quickshell}/bin/qs";
 in {
   imports = [
     inputs.niri.homeModules.niri
@@ -19,6 +20,8 @@ in {
     environment = {
       "NIXOS_OZONE_WL" = "1";
       "DISPLAY" = ":0";
+      "QT_LOGGING_RULES" = "quickshell.dbus.properties=false";
+      "MALLOC_ARENA_MAX" = "2";
     };
 
     # =========================================================================
@@ -62,7 +65,7 @@ in {
     spawn-at-startup = [
       {command = ["${pkgs.xwayland-satellite}/bin/xwayland-satellite"];}
       {command = ["fcitx5" "-d"];}
-      {command = ["${noctalia}/bin/noctalia-shell"];}
+      {command = [qs "-c" "ii"];}
     ];
 
     # =========================================================================
@@ -90,12 +93,18 @@ in {
     ];
 
     # =========================================================================
-    # Layer rules (Noctalia wallpaper integration)
+    # Layer rules (iNiR backdrop visibility during overview)
     # =========================================================================
     layer-rules = [
       {
-        matches = [{namespace = "^noctalia-wallpaper.*";}];
+        matches = [{namespace = "^quickshell:iiBackdrop$";}];
         place-within-backdrop = true;
+        opacity = 1.0;
+      }
+      {
+        matches = [{namespace = "^quickshell:wBackdrop$";}];
+        place-within-backdrop = true;
+        opacity = 1.0;
       }
     ];
 
@@ -105,10 +114,22 @@ in {
     binds = {
       # --- Applications ---
       "Mod+Return".action.spawn = "kitty";
-      "Mod+D".action.spawn = ["${noctalia}/bin/noctalia-shell" "ipc" "call" "launcher" "toggle"];
       "Mod+Shift+Q".action.close-window = [];
-      "Mod+Shift+N".action.spawn = ["${noctalia}/bin/noctalia-shell" "ipc" "call" "notifications" "toggleHistory"];
       "Mod+Shift+E".action.quit = {};
+
+      # --- iNiR Shell IPC ---
+      "Mod+G".action.spawn = [qs "-c" "ii" "ipc" "call" "overlay" "toggle"];
+      "Mod+Space".action.spawn = [qs "-c" "ii" "ipc" "call" "overview" "toggle"];
+      "Mod+D".action.spawn = [qs "-c" "ii" "ipc" "call" "overlay" "toggle"];
+      "Mod+Shift+N".action.spawn = [qs "-c" "ii" "ipc" "call" "notifications" "clearAll"];
+      "Mod+Shift+S".action.spawn = [qs "-c" "ii" "ipc" "call" "region" "screenshot"];
+      "Mod+Shift+X".action.spawn = [qs "-c" "ii" "ipc" "call" "region" "ocr"];
+      "Mod+Slash".action.spawn = [qs "-c" "ii" "ipc" "call" "cheatsheet" "toggle"];
+      "Mod+Shift+W".action.spawn = [qs "-c" "ii" "ipc" "call" "panelFamily" "cycle"];
+      "Mod+Semicolon".action.spawn = [qs "-c" "ii" "ipc" "call" "settings" "open"];
+      "Ctrl+Alt+T".action.spawn = [qs "-c" "ii" "ipc" "call" "wallpaperSelector" "toggle"];
+      "Alt+Tab".action.spawn = [qs "-c" "ii" "ipc" "call" "altSwitcher" "next"];
+      "Alt+Shift+Tab".action.spawn = [qs "-c" "ii" "ipc" "call" "altSwitcher" "previous"];
 
       # --- Focus (vim-style) ---
       "Mod+H".action.focus-column-left = [];
@@ -180,25 +201,34 @@ in {
       # --- Monitor power ---
       "Mod+Shift+P".action.power-off-monitors = [];
 
-      # --- Media keys ---
+      # --- Media keys (via iNiR IPC for OSD) ---
       "XF86AudioRaiseVolume" = {
         allow-when-locked = true;
-        action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+"];
+        action.spawn = [qs "-c" "ii" "ipc" "call" "audio" "volumeUp"];
       };
       "XF86AudioLowerVolume" = {
         allow-when-locked = true;
-        action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05-"];
+        action.spawn = [qs "-c" "ii" "ipc" "call" "audio" "volumeDown"];
       };
       "XF86AudioMute" = {
         allow-when-locked = true;
-        action.spawn = ["wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"];
+        action.spawn = [qs "-c" "ii" "ipc" "call" "audio" "mute"];
       };
       "XF86AudioMicMute" = {
         allow-when-locked = true;
-        action.spawn = ["wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"];
+        action.spawn = [qs "-c" "ii" "ipc" "call" "audio" "micMute"];
       };
-      "XF86MonBrightnessUp".action.spawn = ["brightnessctl" "set" "+5%"];
-      "XF86MonBrightnessDown".action.spawn = ["brightnessctl" "set" "5%-"];
+      "XF86MonBrightnessUp" = {
+        allow-when-locked = true;
+        action.spawn = [qs "-c" "ii" "ipc" "call" "brightness" "increment"];
+      };
+      "XF86MonBrightnessDown" = {
+        allow-when-locked = true;
+        action.spawn = [qs "-c" "ii" "ipc" "call" "brightness" "decrement"];
+      };
+      "XF86AudioPlay".action.spawn = [qs "-c" "ii" "ipc" "call" "mpris" "playPause"];
+      "XF86AudioNext".action.spawn = [qs "-c" "ii" "ipc" "call" "mpris" "next"];
+      "XF86AudioPrev".action.spawn = [qs "-c" "ii" "ipc" "call" "mpris" "previous"];
 
       # --- Mouse ---
       "Mod+WheelScrollDown".action.focus-workspace-down = [];

@@ -429,6 +429,27 @@
         "type": "github"
       }
     },
+    "inir": {
+      "inputs": {
+        "nixpkgs": [
+          "unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1774417753,
+        "narHash": "sha256-JZLN3Jp34X9+4abwxtUjms8XiqpmvsjNeWpFAjdB0GY=",
+        "owner": "JPyke3",
+        "repo": "iNiR",
+        "rev": "a721ef79ddffe6f442f1eda51ddc5db4a1b86ceb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "JPyke3",
+        "ref": "nix-packaging",
+        "repo": "iNiR",
+        "type": "github"
+      }
+    },
     "jovian": {
       "inputs": {
         "nix-github-actions": "nix-github-actions",
@@ -1209,6 +1230,7 @@
         "home-manager": "home-manager",
         "home-manager-unstable": "home-manager-unstable",
         "hytale-launcher": "hytale-launcher",
+        "inir": "inir",
         "jovian": "jovian",
         "kmonad": "kmonad",
         "llama-cpp": "llama-cpp",
