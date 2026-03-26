@@ -8,23 +8,12 @@
     ./hyprlock.nix
   ];
 
-  # Swaync notification center - only for Hyprland sessions
-  # The D-Bus service is masked to prevent auto-activation in KDE.
-  # Hyprland's exec-once starts swaync manually instead.
-  home.packages = [pkgs.swaynotificationcenter];
-
-  # Mask swaync's D-Bus auto-activation so KDE uses its native notifications
-  xdg.dataFile."dbus-1/services/org.erikreider.swaync.service".text = ''
-    # Masked - swaync is started by Hyprland's exec-once instead
-    # This prevents swaync from auto-activating in KDE sessions
-  '';
-
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
       general = with config.lib.stylix.colors; {
         monitor = "eDP-1, 3024x1890@60, 0x0, 2";
-        exec-once = ["waybar" "swww init" "swaync" "fcitx5 -d" "jellyfin-mpv-shim" "[workspace 1 silent] firefox" "[workspace 2 silent] firefox" "[workspace 3 silent] kitty tmux" "[workspace 4 silent] obsidian" "[workspace 5 silent] slack" "[workspace 6 silent] kitty spotify_player" "[workspace 7 silent] armcord" "[workspace 9 silent] steam" "/usr/lib/polkit-kde-authentication-agent-1"];
+        exec-once = ["waybar" "swww init" "fcitx5 -d" "jellyfin-mpv-shim" "[workspace 1 silent] firefox" "[workspace 2 silent] firefox" "[workspace 3 silent] kitty tmux" "[workspace 4 silent] obsidian" "[workspace 5 silent] slack" "[workspace 6 silent] kitty spotify_player" "[workspace 7 silent] armcord" "[workspace 9 silent] steam" "/usr/lib/polkit-kde-authentication-agent-1"];
         windowrulev2 = [
           "float, title:^(Picture-in-Picture|Firefox)$"
           "size 800 450, title:^(Picture-in-Picture|Firefox)$"
@@ -60,7 +49,7 @@
           "$mod, F, fullscreen"
           "$mod, RETURN, exec, kitty"
           "$mod SHIFT, Q, killactive"
-          "$mod SHIFT, N, exec, swaync-client -t -sw"
+          # Notifications handled by iNiR shell
           "$mod, $left, movefocus, l"
           "$mod, $down, movefocus, d"
           "$mod, $up, movefocus, u"

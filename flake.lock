@@ -437,11 +437,11 @@
         "quickshell": "quickshell"
       },
       "locked": {
-        "lastModified": 1774433522,
-        "narHash": "sha256-VbOiFxHtiZR44tCZ323aMPZLD1exe4ifvK6Wmk+kbAM=",
+        "lastModified": 1774438203,
+        "narHash": "sha256-jaoIbYguYO3Mkr2OTVX8m5B5neBRhDerXNG5t68K14s=",
         "owner": "JPyke3",
         "repo": "iNiR",
-        "rev": "b44e7d937e291a1ffbb5eff8677ad6a9fa6dbe39",
+        "rev": "bebcfa6f1100dd07104118ad010269535b4ae434",
         "type": "github"
       },
       "original": {

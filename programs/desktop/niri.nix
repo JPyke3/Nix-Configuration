@@ -20,12 +20,23 @@ in {
 
   programs.niri.settings = {
     # =========================================================================
-    # Environment
+    # Top-level settings (from iNiR defaults)
+    # =========================================================================
+    prefer-no-csd = true;
+    hotkey-overlay.skip-at-startup = true;
+
+    # =========================================================================
+    # Environment (aligned with iNiR defaults/niri/config.kdl)
     # =========================================================================
     environment = {
       "NIXOS_OZONE_WL" = "1";
       "DISPLAY" = ":0";
+      "XDG_CURRENT_DESKTOP" = "niri";
+      "QT_QPA_PLATFORM" = "wayland";
+      "QT_QPA_PLATFORMTHEME" = "kde";
+      "QT_STYLE_OVERRIDE" = "Darkly";
       "QT_LOGGING_RULES" = "quickshell.dbus.properties=false";
+      "ELECTRON_OZONE_PLATFORM_HINT" = "auto";
       "MALLOC_ARENA_MAX" = "2";
     };
 
@@ -40,28 +51,85 @@ in {
     };
 
     # =========================================================================
-    # Layout
+    # Cursor
+    # =========================================================================
+    cursor = {
+      hide-when-typing = true;
+    };
+
+    # =========================================================================
+    # Overview
+    # =========================================================================
+    overview.zoom = 0.75;
+
+    # =========================================================================
+    # Layout (background-color transparent is CRITICAL for iNiR transparency)
     # =========================================================================
     layout = {
-      gaps = 0;
+      gaps = 16;
+      background-color = "transparent";
       border = {
-        enable = true;
-        width = 2;
-        active.gradient = {
-          from = "#${config.lib.stylix.colors.base0E}";
-          to = "#${config.lib.stylix.colors.base09}";
-          angle = 60;
-        };
-        inactive.color = "#${config.lib.stylix.colors.base00}";
+        enable = false;
       };
       focus-ring.enable = false;
-      shadow.enable = false;
+      shadow = {
+        enable = true;
+        softness = 30;
+        spread = 5;
+        offset = {
+          x = 0;
+          y = 5;
+        };
+        color = "#0007";
+      };
       preset-column-widths = [
         {proportion = 1.0 / 3.0;}
         {proportion = 1.0 / 2.0;}
         {proportion = 2.0 / 3.0;}
         {proportion = 1.0;}
       ];
+      default-column-width = {proportion = 0.5;};
+    };
+
+    # =========================================================================
+    # Animations (tuned for iNiR's Material motion curves)
+    # =========================================================================
+    animations = {
+      workspace-switch.spring = {
+        damping-ratio = 0.78;
+        stiffness = 600;
+        epsilon = 0.0001;
+      };
+      window-open.spring = {
+        damping-ratio = 0.82;
+        stiffness = 500;
+        epsilon = 0.0001;
+      };
+      window-close.spring = {
+        damping-ratio = 0.88;
+        stiffness = 900;
+        epsilon = 0.0001;
+      };
+      horizontal-view-movement.spring = {
+        damping-ratio = 0.80;
+        stiffness = 550;
+        epsilon = 0.0001;
+      };
+      window-movement.spring = {
+        damping-ratio = 0.85;
+        stiffness = 650;
+        epsilon = 0.0001;
+      };
+      window-resize.spring = {
+        damping-ratio = 0.88;
+        stiffness = 700;
+        epsilon = 0.0001;
+      };
+      config-notification-open-close.spring = {
+        damping-ratio = 0.90;
+        stiffness = 800;
+        epsilon = 0.0001;
+      };
     };
 
     # =========================================================================
@@ -70,6 +138,7 @@ in {
     spawn-at-startup = [
       {command = ["${pkgs.xwayland-satellite}/bin/xwayland-satellite"];}
       {command = ["fcitx5" "-d"];}
+      {command = ["bash" "-c" "${pkgs.wl-clipboard}/bin/wl-paste --watch ${pkgs.cliphist}/bin/cliphist store &"];}
       {command = [qs];}
     ];
 
@@ -77,6 +146,23 @@ in {
     # Window rules
     # =========================================================================
     window-rules = [
+      # Global: rounded corners + clip
+      {
+        geometry-corner-radius = let
+          r = 16.0;
+        in {
+          top-left = r;
+          top-right = r;
+          bottom-left = r;
+          bottom-right = r;
+        };
+        clip-to-geometry = true;
+      }
+      # Inactive windows slightly transparent
+      {
+        matches = [{is-active = false;}];
+        opacity = 0.9;
+      }
       # Firefox Picture-in-Picture → floating
       {
         matches = [
@@ -104,10 +190,9 @@ in {
     ];
 
     # =========================================================================
-    # Layer rules (iNiR backdrop + blur)
+    # Layer rules (iNiR backdrop visibility during overview)
     # =========================================================================
     layer-rules = [
-      # Backdrop layers for overview
       {
         matches = [{namespace = "^quickshell:iiBackdrop$";}];
         place-within-backdrop = true;
@@ -142,6 +227,10 @@ in {
       "Ctrl+Alt+T".action.spawn = ["${ipc}" "ipc" "call" "wallpaperSelector" "toggle"];
       "Alt+Tab".action.spawn = ["${ipc}" "ipc" "call" "altSwitcher" "next"];
       "Alt+Shift+Tab".action.spawn = ["${ipc}" "ipc" "call" "altSwitcher" "previous"];
+      "Ctrl+Alt+L" = {
+        allow-when-locked = true;
+        action.spawn = ["${ipc}" "ipc" "call" "lock" "activate"];
+      };
 
       # --- Focus (vim-style) ---
       "Mod+H".action.focus-column-left = [];
@@ -247,5 +336,4 @@ in {
       "Mod+WheelScrollUp".action.focus-workspace-up = [];
     };
   };
-
 }
