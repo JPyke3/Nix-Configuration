@@ -71,7 +71,8 @@
     ../../../users/jacob/common-home-desktop.nix
     ../../../programs/desktop/hyprland.nix # Fallback session
     ../../../programs/desktop/niri.nix
-    ../../../programs/desktop/noctalia.nix
+    ../../../programs/desktop/inir.nix
+    # ../../../programs/desktop/noctalia.nix  # Replaced by iNiR
     ../../../programs/desktop/kitty/kitty.nix
     ../../../programs/desktop/chrome.nix
     ../../../programs/daemon/clawdbot-node-hm.nix

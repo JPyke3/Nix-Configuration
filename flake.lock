@@ -429,6 +429,28 @@
         "type": "github"
       }
     },
+    "inir": {
+      "inputs": {
+        "nixpkgs": [
+          "unstable"
+        ],
+        "quickshell": "quickshell"
+      },
+      "locked": {
+        "lastModified": 1774438203,
+        "narHash": "sha256-jaoIbYguYO3Mkr2OTVX8m5B5neBRhDerXNG5t68K14s=",
+        "owner": "JPyke3",
+        "repo": "iNiR",
+        "rev": "bebcfa6f1100dd07104118ad010269535b4ae434",
+        "type": "github"
+      },
+      "original": {
+        "owner": "JPyke3",
+        "ref": "nix-packaging",
+        "repo": "iNiR",
+        "type": "github"
+      }
+    },
     "jovian": {
       "inputs": {
         "nix-github-actions": "nix-github-actions",
@@ -1202,6 +1224,27 @@
         "type": "github"
       }
     },
+    "quickshell": {
+      "inputs": {
+        "nixpkgs": [
+          "inir",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1774422996,
+        "narHash": "sha256-mWjBJIbiMPCpljAQDk8RYf+92/lYZ5npHe2r2SJ+QWc=",
+        "owner": "quickshell-mirror",
+        "repo": "quickshell",
+        "rev": "08058326f04e9b5e55c903b3702405a8d3556ac6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "quickshell-mirror",
+        "repo": "quickshell",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "base16": "base16",
@@ -1209,6 +1252,7 @@
         "home-manager": "home-manager",
         "home-manager-unstable": "home-manager-unstable",
         "hytale-launcher": "hytale-launcher",
+        "inir": "inir",
         "jovian": "jovian",
         "kmonad": "kmonad",
         "llama-cpp": "llama-cpp",

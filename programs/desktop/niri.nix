@@ -5,7 +5,13 @@
   inputs,
   ...
 }: let
-  noctalia = inputs.noctalia-shell.packages.${pkgs.system}.default;
+  inir = inputs.inir.packages.${pkgs.system}.default;
+  qs = "${inir}/bin/inir-shell";
+  # IPC helper — ensures QS_CONFIG_PATH matches the running instance
+  ipc = pkgs.writeShellScript "inir-ipc" ''
+    export QS_CONFIG_PATH="${inir}/share/inir"
+    exec ${qs} "$@"
+  '';
 in {
   imports = [
     inputs.niri.homeModules.niri
@@ -14,11 +20,24 @@ in {
 
   programs.niri.settings = {
     # =========================================================================
-    # Environment
+    # Top-level settings (from iNiR defaults)
+    # =========================================================================
+    prefer-no-csd = true;
+    hotkey-overlay.skip-at-startup = true;
+
+    # =========================================================================
+    # Environment (aligned with iNiR defaults/niri/config.kdl)
     # =========================================================================
     environment = {
       "NIXOS_OZONE_WL" = "1";
       "DISPLAY" = ":0";
+      "XDG_CURRENT_DESKTOP" = "niri";
+      "QT_QPA_PLATFORM" = "wayland";
+      "QT_QPA_PLATFORMTHEME" = "kde";
+      "QT_STYLE_OVERRIDE" = "Darkly";
+      "QT_LOGGING_RULES" = "quickshell.dbus.properties=false";
+      "ELECTRON_OZONE_PLATFORM_HINT" = "auto";
+      "MALLOC_ARENA_MAX" = "2";
     };
 
     # =========================================================================
@@ -32,28 +51,85 @@ in {
     };
 
     # =========================================================================
-    # Layout
+    # Cursor
+    # =========================================================================
+    cursor = {
+      hide-when-typing = true;
+    };
+
+    # =========================================================================
+    # Overview
+    # =========================================================================
+    overview.zoom = 0.75;
+
+    # =========================================================================
+    # Layout (background-color transparent is CRITICAL for iNiR transparency)
     # =========================================================================
     layout = {
-      gaps = 0;
+      gaps = 16;
+      background-color = "transparent";
       border = {
-        enable = true;
-        width = 2;
-        active.gradient = {
-          from = "#${config.lib.stylix.colors.base0E}";
-          to = "#${config.lib.stylix.colors.base09}";
-          angle = 60;
-        };
-        inactive.color = "#${config.lib.stylix.colors.base00}";
+        enable = false;
       };
       focus-ring.enable = false;
-      shadow.enable = false;
+      shadow = {
+        enable = true;
+        softness = 30;
+        spread = 5;
+        offset = {
+          x = 0;
+          y = 5;
+        };
+        color = "#0007";
+      };
       preset-column-widths = [
         {proportion = 1.0 / 3.0;}
         {proportion = 1.0 / 2.0;}
         {proportion = 2.0 / 3.0;}
         {proportion = 1.0;}
       ];
+      default-column-width = {proportion = 0.5;};
+    };
+
+    # =========================================================================
+    # Animations (tuned for iNiR's Material motion curves)
+    # =========================================================================
+    animations = {
+      workspace-switch.spring = {
+        damping-ratio = 0.78;
+        stiffness = 600;
+        epsilon = 0.0001;
+      };
+      window-open.spring = {
+        damping-ratio = 0.82;
+        stiffness = 500;
+        epsilon = 0.0001;
+      };
+      window-close.spring = {
+        damping-ratio = 0.88;
+        stiffness = 900;
+        epsilon = 0.0001;
+      };
+      horizontal-view-movement.spring = {
+        damping-ratio = 0.80;
+        stiffness = 550;
+        epsilon = 0.0001;
+      };
+      window-movement.spring = {
+        damping-ratio = 0.85;
+        stiffness = 650;
+        epsilon = 0.0001;
+      };
+      window-resize.spring = {
+        damping-ratio = 0.88;
+        stiffness = 700;
+        epsilon = 0.0001;
+      };
+      config-notification-open-close.spring = {
+        damping-ratio = 0.90;
+        stiffness = 800;
+        epsilon = 0.0001;
+      };
     };
 
     # =========================================================================
@@ -62,13 +138,31 @@ in {
     spawn-at-startup = [
       {command = ["${pkgs.xwayland-satellite}/bin/xwayland-satellite"];}
       {command = ["fcitx5" "-d"];}
-      {command = ["${noctalia}/bin/noctalia-shell"];}
+      {command = ["bash" "-c" "${pkgs.wl-clipboard}/bin/wl-paste --watch ${pkgs.cliphist}/bin/cliphist store &"];}
+      {command = [qs];}
     ];
 
     # =========================================================================
     # Window rules
     # =========================================================================
     window-rules = [
+      # Global: rounded corners + clip
+      {
+        geometry-corner-radius = let
+          r = 16.0;
+        in {
+          top-left = r;
+          top-right = r;
+          bottom-left = r;
+          bottom-right = r;
+        };
+        clip-to-geometry = true;
+      }
+      # Inactive windows slightly transparent
+      {
+        matches = [{is-active = false;}];
+        opacity = 0.9;
+      }
       # Firefox Picture-in-Picture → floating
       {
         matches = [
@@ -81,6 +175,12 @@ in {
         default-column-width = {fixed = 800;};
         default-window-height = {fixed = 450;};
       }
+      # Quickshell windows (iNiR settings, etc.) → no decorations, floating
+      {
+        matches = [{app-id = "^org\\.quickshell$";}];
+        open-floating = true;
+        draw-border-with-background = false;
+      }
       # xwaylandvideobridge → hidden
       {
         matches = [{app-id = "^xwaylandvideobridge$";}];
@@ -90,12 +190,18 @@ in {
     ];
 
     # =========================================================================
-    # Layer rules (Noctalia wallpaper integration)
+    # Layer rules (iNiR backdrop visibility during overview)
     # =========================================================================
     layer-rules = [
       {
-        matches = [{namespace = "^noctalia-wallpaper.*";}];
+        matches = [{namespace = "^quickshell:iiBackdrop$";}];
         place-within-backdrop = true;
+        opacity = 1.0;
+      }
+      {
+        matches = [{namespace = "^quickshell:wBackdrop$";}];
+        place-within-backdrop = true;
+        opacity = 1.0;
       }
     ];
 
@@ -105,10 +211,26 @@ in {
     binds = {
       # --- Applications ---
       "Mod+Return".action.spawn = "kitty";
-      "Mod+D".action.spawn = ["${noctalia}/bin/noctalia-shell" "ipc" "call" "launcher" "toggle"];
       "Mod+Shift+Q".action.close-window = [];
-      "Mod+Shift+N".action.spawn = ["${noctalia}/bin/noctalia-shell" "ipc" "call" "notifications" "toggleHistory"];
       "Mod+Shift+E".action.quit = {};
+
+      # --- iNiR Shell IPC ---
+      "Mod+G".action.spawn = ["${ipc}" "ipc" "call" "overlay" "toggle"];
+      "Mod+Space".action.spawn = ["${ipc}" "ipc" "call" "overview" "toggle"];
+      "Mod+D".action.spawn = ["${ipc}" "ipc" "call" "overlay" "toggle"];
+      "Mod+Shift+N".action.spawn = ["${ipc}" "ipc" "call" "notifications" "clearAll"];
+      "Mod+Shift+S".action.spawn = ["${ipc}" "ipc" "call" "region" "screenshot"];
+      "Mod+Shift+X".action.spawn = ["${ipc}" "ipc" "call" "region" "ocr"];
+      "Mod+Slash".action.spawn = ["${ipc}" "ipc" "call" "cheatsheet" "toggle"];
+      "Mod+Shift+W".action.spawn = ["${ipc}" "ipc" "call" "panelFamily" "cycle"];
+      "Mod+Semicolon".action.spawn = ["${ipc}" "ipc" "call" "settings" "open"];
+      "Ctrl+Alt+T".action.spawn = ["${ipc}" "ipc" "call" "wallpaperSelector" "toggle"];
+      "Alt+Tab".action.spawn = ["${ipc}" "ipc" "call" "altSwitcher" "next"];
+      "Alt+Shift+Tab".action.spawn = ["${ipc}" "ipc" "call" "altSwitcher" "previous"];
+      "Ctrl+Alt+L" = {
+        allow-when-locked = true;
+        action.spawn = ["${ipc}" "ipc" "call" "lock" "activate"];
+      };
 
       # --- Focus (vim-style) ---
       "Mod+H".action.focus-column-left = [];
@@ -180,25 +302,34 @@ in {
       # --- Monitor power ---
       "Mod+Shift+P".action.power-off-monitors = [];
 
-      # --- Media keys ---
+      # --- Media keys (via iNiR IPC for OSD) ---
       "XF86AudioRaiseVolume" = {
         allow-when-locked = true;
-        action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+"];
+        action.spawn = ["${ipc}" "ipc" "call" "audio" "volumeUp"];
       };
       "XF86AudioLowerVolume" = {
         allow-when-locked = true;
-        action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05-"];
+        action.spawn = ["${ipc}" "ipc" "call" "audio" "volumeDown"];
       };
       "XF86AudioMute" = {
         allow-when-locked = true;
-        action.spawn = ["wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"];
+        action.spawn = ["${ipc}" "ipc" "call" "audio" "mute"];
       };
       "XF86AudioMicMute" = {
         allow-when-locked = true;
-        action.spawn = ["wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"];
+        action.spawn = ["${ipc}" "ipc" "call" "audio" "micMute"];
       };
-      "XF86MonBrightnessUp".action.spawn = ["brightnessctl" "set" "+5%"];
-      "XF86MonBrightnessDown".action.spawn = ["brightnessctl" "set" "5%-"];
+      "XF86MonBrightnessUp" = {
+        allow-when-locked = true;
+        action.spawn = ["${ipc}" "ipc" "call" "brightness" "increment"];
+      };
+      "XF86MonBrightnessDown" = {
+        allow-when-locked = true;
+        action.spawn = ["${ipc}" "ipc" "call" "brightness" "decrement"];
+      };
+      "XF86AudioPlay".action.spawn = ["${ipc}" "ipc" "call" "mpris" "playPause"];
+      "XF86AudioNext".action.spawn = ["${ipc}" "ipc" "call" "mpris" "next"];
+      "XF86AudioPrev".action.spawn = ["${ipc}" "ipc" "call" "mpris" "previous"];
 
       # --- Mouse ---
       "Mod+WheelScrollDown".action.focus-workspace-down = [];
