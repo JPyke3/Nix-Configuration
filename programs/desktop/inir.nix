@@ -10,11 +10,6 @@
 
   programs.inir.enable = true;
 
-  home.packages = [
-    pkgs.darkly # Qt dark theme (QT_STYLE_OVERRIDE)
-    pkgs.adwaita-icon-theme # Fallback icons
-  ];
-
   # Override Stylix's Adwaita icon theme (has no app icons) with Papirus-Dark
   home.activation.fixIconTheme = lib.hm.dag.entryAfter ["writeBoundary"] ''
     if [ -f "$HOME/.config/kdeglobals" ]; then
