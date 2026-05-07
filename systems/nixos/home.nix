@@ -13,7 +13,7 @@
 
   home.packages = [
     pkgs.firefox-unwrapped
-    pkgs.signal
+    pkgs.signal-desktop
   ];
 
   # Japanese Language Support (Ctrl+Space to toggle EN/JP)
