@@ -9,7 +9,6 @@
     ./hardware-configuration.nix
     ../../../programs/daemon/docker.nix
     ../../../programs/daemon/usbmuxd.nix
-    ../../../programs/daemon/innioasis-y1.nix
     # clawdbot-node moved to home-manager (see home.nix)
   ];
 
