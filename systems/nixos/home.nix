@@ -13,6 +13,7 @@
 
   home.packages = [
     pkgs.firefox-unwrapped
+    pkgs.signal
   ];
 
   # Japanese Language Support (Ctrl+Space to toggle EN/JP)

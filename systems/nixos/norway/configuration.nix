@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     ../../../programs/daemon/docker.nix
     ../../../programs/daemon/usbmuxd.nix
+    ../../../programs/daemon/innioasis-y1.nix
     # clawdbot-node moved to home-manager (see home.nix)
   ];
 
@@ -125,7 +126,18 @@
     enable = true;
     enableUserService = true;
   };
-  services.supergfxd.enable = true;
+  services.supergfxd = {
+    enable = true;
+    settings = {
+      mode = "Hybrid";
+      vfio_enable = false;
+      vfio_save = false;
+      always_reboot = false;
+      no_logind = false;
+      logout_timeout_s = 180;
+      hotplug_type = "Std";
+    };
+  };
 
   # KDE Plasma 6 Desktop
   services.displayManager.sddm = {

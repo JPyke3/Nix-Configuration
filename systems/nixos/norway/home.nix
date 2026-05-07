@@ -38,6 +38,8 @@
     # Utilities
     bitwarden-desktop
     qbittorrent
+    libreoffice
+    gpodder
 
     # AI Development
     pkgs_unstable.opencode-desktop

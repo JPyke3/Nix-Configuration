@@ -18,6 +18,7 @@ in {
     inputs.niri.homeModules.stylix
   ];
 
+  programs.niri.enable = true;
   programs.niri.settings = {
     # =========================================================================
     # Top-level settings (from iNiR defaults)
