@@ -29,6 +29,7 @@
   networking.nameservers = ["1.1.1.1" "1.0.0.1"]; # Cloudflare DNS
   networking.networkmanager.dns = "none";
   networking.dhcpcd.extraConfig = "nohook resolv.conf";
+  services.avahi.enable = true;
 
   # Set your time zone.
   time.timeZone = "Australia/Brisbane";
